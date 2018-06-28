@@ -1,0 +1,11 @@
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\Debug\TownsEBMSystem.exe.config
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\Debug\TownsEBMSystem.exe
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\Debug\TownsEBMSystem.pdb
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\Debug\CSkin.dll
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\Debug\CSkin.xml
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\Debug\TownsEBMSystem.csprojResolveAssemblyReference.cache
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\Debug\TownsEBMSystem.Properties.Resources.resources
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\Debug\TownsEBMSystem.csproj.GenerateResource.Cache
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\Debug\TownsEBMSystem.exe
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\Debug\TownsEBMSystem.pdb
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\Debug\TownsEBMSystem.MainForm.resources
