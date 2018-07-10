@@ -96,6 +96,8 @@ namespace TownsEBMSystem
 
         public string name { get; set; }
 
+        public string resource { get { return "0612"+gb_code+"00"; } }
+
     }
 
 
@@ -181,5 +183,12 @@ namespace TownsEBMSystem
         /// 播放用户
         /// </summary>
         public string userName { get; set; }
+    }
+
+    public class SendPlayInfo
+    {
+        public List<organizationdata> organization_List { get; set; }
+        public string broadcastType { get; set; }
+
     }
 }

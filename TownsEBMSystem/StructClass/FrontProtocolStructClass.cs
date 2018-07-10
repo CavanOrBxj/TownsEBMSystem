@@ -65,8 +65,94 @@ namespace TownsEBMSystem
 
     public class OnorOFFResponse
     {
+        public string front_code { get; set; }
+        public string ebm_id { get; set; }
+
+        //0表示成功  1表示失败
+        public int result_code { get; set; }
+        public int result_desc_length { get; set; }
+
+        public string result_desc { get; set; }
+
+        public int accept_stream_address_length { get; set; }
+
+        public string accept_stream_address { get; set; }
+    }
+
+    public class PlayRecord_tcp_ts
+    {
+        public string resource_code { get; set; }
+
+        public string IndexItemID { get; set; }
+
+        public string prAreaName { get; set; }
+
+        public string prEvnType { get; set; }
 
     }
+
+
+
+    /// <summary>
+    /// 通用回传周期设置
+    /// </summary>
+    public class RebackPeriod
+    {
+        public string reback_cycle { get; set; }
+
+        public string resource_code_type { get; set; }
+
+
+        public List<string> resource_codeList;
+
+    }
+
+
+
+    public class GeneralResponse
+    {
+        public string return_code { get; set; }
+        public int return_data_length { get; set; }
+        public string return_data { get; set; }
+
+    }
+
+    /// <summary>
+    /// 功放开关
+    /// </summary>
+    public class SwitchAmplifier
+    {
+        public string switch_option { get; set; }
+        public string resource_code_type { get; set; }
+
+        public List<string> resource_codeList;
+
+    }
+
+
+    /// <summary>
+    /// 白名单更新
+    /// </summary>
+    public class WhiteListUpdate
+    {
+        public List<WhiteListInfo> white_list;
+
+    }
+
+    public class WhiteListInfo
+    {
+        public string oper_type { get; set; }
+
+        public string phone_number { get; set; }
+
+        public string user_name { get; set; }
+
+        public string permission_type { get; set; }
+
+        public List<string> permission_area_codeList;
+
+    }
+
 
 
 }

@@ -14,9 +14,10 @@ namespace TownsEBMSystem
 
         public Socket newclient;
         public Thread myThread;
-        public byte[]  SendTCPCommnand( object o, byte protocol_type)
+        public object  SendTCPCommnand( object o, byte protocol_type)
         {
             byte[] backdata = null;
+            object rebackobj = new object();
             switch (protocol_type)
             {
                 case 0x01:
@@ -28,7 +29,7 @@ namespace TownsEBMSystem
                 case 0x04:
                     OnorOFFBroadcast onoroff = (OnorOFFBroadcast)o;
                     backdata = OnorOFFBroadcastCommnand(onoroff);
-
+                    rebackobj = DealOnorOFFResponse(SendTcpData(backdata)); 
                     break;
                 case 0x05:
                     break;
@@ -43,8 +44,15 @@ namespace TownsEBMSystem
                 case 0x0A:
                     break;
                 case 0x0B:
+                    RebackPeriod rebackperiod = (RebackPeriod)o;
+                    backdata = RebackPeriodCommand(rebackperiod);
+                    rebackobj = GeneralResponse(SendTcpData(backdata));
                     break;
                 case 0x0C:
+                    WhiteListUpdate whiteList = (WhiteListUpdate)o;
+                    backdata = WhiteListUpdateCommand(whiteList);
+                    rebackobj = GeneralResponse(SendTcpData(backdata));
+
                     break;
                 case 0x0D:
                     break;
@@ -69,13 +77,56 @@ namespace TownsEBMSystem
                 case 0x40:
                     break;
                 case 0x3F:
+                    SwitchAmplifier switchAmplifier = (SwitchAmplifier)o;
+                    backdata = SwitchAmplifierCommand(switchAmplifier);
+                    rebackobj = GeneralResponse(SendTcpData(backdata));
                     break;
             }
 
          
-            return SendTcpData(backdata);
+            return rebackobj;
         }
 
+
+        #region 解析方法
+        public OnorOFFResponse DealOnorOFFResponse(byte[] inputdata)
+        {
+            OnorOFFResponse tmp = new OnorOFFResponse(); ;
+            if (inputdata == null || inputdata.Length <= 0)
+            {
+                LogHelper.WriteLog(typeof(TcpHelper), "适配器数据返回异常");
+            }
+            else
+            {
+                tmp.front_code= bcd2Str(inputdata.Skip(9).Take(12).ToArray()).Substring(1); 
+                tmp.ebm_id= bcd2Str(inputdata.Skip(21).Take(18).ToArray()).Substring(1);
+                tmp.result_code = inputdata.Skip(39).Take(1).ToArray()[0];
+                tmp.result_desc_length = GetDataLenth(inputdata.Skip(40).Take(4).ToArray());
+
+                tmp.result_desc = System.Text.Encoding.UTF8.GetString(inputdata.Skip(44).Take(tmp.result_desc_length).ToArray());
+                tmp.accept_stream_address_length = Byte2int(inputdata.Skip(44+ tmp.result_desc_length).Take(2).ToArray());
+                tmp.accept_stream_address = System.Text.Encoding.UTF8.GetString(inputdata.Skip(44 + tmp.result_desc_length + 2).Take(tmp.accept_stream_address_length).ToArray()); 
+            }
+            return tmp;
+        }
+
+        public GeneralResponse GeneralResponse(byte[] inputdata)
+        {
+            GeneralResponse tmp = new GeneralResponse(); ;
+            if (inputdata == null || inputdata.Length <= 0)
+            {
+                LogHelper.WriteLog(typeof(TcpHelper), "适配器数据返回异常");
+            }
+            else
+            {
+                tmp.return_code = GetDataLenth(inputdata.Skip(9).Take(4).ToArray()).ToString(); 
+                tmp.return_data_length= GetDataLenth(inputdata.Skip(13).Take(4).ToArray());
+                tmp.return_data= System.Text.Encoding.UTF8.GetString(inputdata.Skip(17).Take(tmp.return_data_length).ToArray());
+            }
+            return tmp;
+        }
+
+        #endregion
 
         public byte[] SendTCPCommnand(string inputdata)
         {
@@ -288,7 +339,22 @@ namespace TownsEBMSystem
             return BitConverter.ToInt32(input, 0);
         }
 
-    
+
+        /// <summary>
+        /// BCD码转为10进制串(阿拉伯数据)   不支持0开头
+        /// </summary>
+        /// <param name="bytes">BCD码 </param>
+        /// <returns>10进制串 </returns>
+        public String bcd2Str(byte[] bytes)
+        {
+            string str = "";
+            foreach (byte item in bytes)
+            {
+                str += Convert.ToString(item, 16).PadLeft(2, '0');
+            }
+            return str;
+        }
+
 
         /// <summary>
         /// DateTime string 转4字节byte[]
@@ -309,6 +375,24 @@ namespace TownsEBMSystem
             return time;
         }
 
+
+        /// <summary>
+        /// 把 2字节的byte[] 转int  高位在前 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public int Byte2int(byte[] input)
+        {
+            string strlen = "";
+            foreach (byte item in input)
+            {
+                strlen += Convert.ToString(item, 16).PadLeft(2, '0');
+            }
+            int datalen = Convert.ToInt32(strlen, 16);
+
+            return datalen;
+
+        }
         /// <summary>
         /// 产生头部数据
         /// </summary>
@@ -329,7 +413,7 @@ namespace TownsEBMSystem
         public byte[] Buidsenddata(List<byte> obj,byte protocoltype)
         {
             List<byte> senddata = new List<byte>();
-            senddata.AddRange(Headdata(0x04));
+            senddata.AddRange(Headdata(protocoltype));
             senddata.AddRange(Int32toByte(obj.Count));
             senddata.AddRange(obj);
             int signaturelen = 4 + 6 + 64;
@@ -344,6 +428,11 @@ namespace TownsEBMSystem
             byte[] crcdata = CRC32.GetCRC32(senddata.ToArray());
             senddata.AddRange(crcdata);
 
+            string data = "";
+            foreach (byte item in senddata.ToArray())
+            {
+                data += item.ToString("X2").PadLeft(2, '0').ToUpper() + " ";
+            }
             return senddata.ToArray();
         }
 
@@ -361,6 +450,8 @@ namespace TownsEBMSystem
 
             classdata.Add((byte)Convert.ToInt32(onoroff.power_switch));
 
+
+
             classdata.Add((byte)Convert.ToInt32(onoroff.ebm_class));
 
             classdata.AddRange(Str2ASCII(onoroff.ebm_type));
@@ -373,6 +464,7 @@ namespace TownsEBMSystem
             classdata.AddRange(DatetimeStr2Byte(onoroff.end_time));
 
             classdata.Add((byte)Convert.ToInt32(onoroff.volume));
+
 
             classdata.Add((byte)Convert.ToInt32(onoroff.resource_code_type));
 
@@ -393,6 +485,7 @@ namespace TownsEBMSystem
             {
                 classdata.AddRange(BCD2Byte("F" + resourcecode));
             }
+
 
             int multilingual_content_number = 0;
             if (onoroff.multilingual_contentList != null)
@@ -430,14 +523,14 @@ namespace TownsEBMSystem
                             classdata.AddRange(Str2ASCII(auxiliary.auxiliary_data));
                         }
                     }
-               
+
                 }
             }
             int input_channel_id = 0;
             input_channel_id = onoroff.input_channel_id;
             classdata.Add((byte)input_channel_id);
             int output_channel_number = 0;
-            if (onoroff.OutPut_Channel_IdList!=null)
+            if (onoroff.OutPut_Channel_IdList != null)
             {
                 output_channel_number = onoroff.OutPut_Channel_IdList.Count;
 
@@ -451,7 +544,103 @@ namespace TownsEBMSystem
                     classdata.Add((byte)output_channel_id);
                 }
             }
+
+
             return Buidsenddata(classdata, 0x04);
+        }
+
+
+        public byte[] WhiteListUpdateCommand(WhiteListUpdate whiteList)
+        {
+
+            List<byte> classdata = new List<byte>();
+
+            int white_list_length = whiteList.white_list.Count;
+            classdata.Add((byte)white_list_length);
+
+            for (int i = 0; i < white_list_length; i++)
+            {
+                classdata.Add((byte)Convert.ToInt32(whiteList.white_list[i].oper_type));
+                int phone_number_length = Encoding.ASCII.GetBytes(whiteList.white_list[i].phone_number).Length;
+                classdata.Add((byte)phone_number_length);
+                classdata.AddRange(Encoding.ASCII.GetBytes(whiteList.white_list[i].phone_number));
+
+                int user_name_length = Encoding.UTF8.GetBytes(whiteList.white_list[i].user_name).Length;
+                classdata.Add((byte)user_name_length);
+                classdata.AddRange(Encoding.UTF8.GetBytes(whiteList.white_list[i].user_name));
+                classdata.Add((byte)Convert.ToInt32(whiteList.white_list[i].permission_type));
+
+                int permission_area_number = whiteList.white_list[i].permission_area_codeList.Count;
+                classdata.Add((byte)permission_area_number);
+
+                int permission_area_length = BCD2Byte(whiteList.white_list[i].permission_area_codeList[0]).Length;
+                classdata.Add((byte)permission_area_length);
+
+                for (int j = 0; j < permission_area_number; j++)
+                {
+                    classdata.AddRange(BCD2Byte(whiteList.white_list[i].permission_area_codeList[j]));
+                }
+            }
+            return Buidsenddata(classdata, 0x0C);
+        }
+
+
+        public byte[] RebackPeriodCommand(RebackPeriod rebackperiod)
+        {
+
+            List<byte> classdata = new List<byte>();
+
+
+            classdata.AddRange(Int32toByte(Convert.ToInt32(rebackperiod.reback_cycle))); 
+            classdata.Add((byte)Convert.ToInt32(rebackperiod.resource_code_type));
+
+            int resource_code_number = rebackperiod.resource_codeList.Count;
+
+            classdata.Add((byte)resource_code_number);
+
+
+            int resource_code_length = 0;
+            if (resource_code_number > 0)
+            {
+                byte[] dsadas = BCD2Byte("F" + rebackperiod.resource_codeList[0]);//特别注意 这个resource_code_length是指所占字节的长度  并非实际字符长度
+                resource_code_length = dsadas.Length;
+            }
+
+            classdata.Add((byte)resource_code_length);
+            foreach (string resourcecode in rebackperiod.resource_codeList)
+            {
+                classdata.AddRange(BCD2Byte("F" + resourcecode));
+            }
+            return Buidsenddata(classdata, 0x0B);
+        }
+
+        public byte[] SwitchAmplifierCommand(SwitchAmplifier switchamplifier)
+        {
+
+            List<byte> classdata = new List<byte>();
+
+
+            classdata.Add((byte)Convert.ToInt32(switchamplifier.switch_option));
+            classdata.Add((byte)Convert.ToInt32(switchamplifier.resource_code_type));
+
+            int resource_code_number = switchamplifier.resource_codeList.Count;
+
+            classdata.Add((byte)resource_code_number);
+
+
+            int resource_code_length = 0;
+            if (resource_code_number > 0)
+            {
+                byte[] dsadas = BCD2Byte("F" + switchamplifier.resource_codeList[0]);//特别注意 这个resource_code_length是指所占字节的长度  并非实际字符长度
+                resource_code_length = dsadas.Length;
+            }
+
+            classdata.Add((byte)resource_code_length);
+            foreach (string resourcecode in switchamplifier.resource_codeList)
+            {
+                classdata.AddRange(BCD2Byte("F" + resourcecode));
+            }
+            return Buidsenddata(classdata, 0x3F);
         }
 
     }

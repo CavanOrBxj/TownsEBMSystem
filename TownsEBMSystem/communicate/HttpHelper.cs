@@ -53,11 +53,11 @@ namespace TownsEBMSystem
                     break;
 
                 case "播放":
-                    List<string> organization_id_List = (List<string>)o;
+                    SendPlayInfo playInfo = (SendPlayInfo)o;
                     string id = "";
-                    foreach (var item in organization_id_List)
+                    foreach (var item in playInfo.organization_List)
                     {
-                        id += "," + item;
+                        id += "," + item.id;
                     }
 
                     id = id.Substring(1, id.Length-1);
@@ -69,7 +69,7 @@ namespace TownsEBMSystem
                     paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(id);
 
                     paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("broadcastType");
-                    paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode("0");//暂时先填0
+                    paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(playInfo.broadcastType);
 
                     paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("creditCode");
                     paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(SingletonInfo.GetInstance().creditCode);

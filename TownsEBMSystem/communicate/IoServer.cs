@@ -109,9 +109,7 @@ namespace TownsEBMSystem
 
 
                         //数据接收到 准备处理流程  20180416
-                        //     byte[] data = mainForm.dataHelper.HandleReceiveData(e.Buffer, e.BytesTransferred);  //////注释于20180630
-                        byte[] data = new byte[] { };
-
+                        byte[] data = mainForm.dataHelper.HandleReceiveData(e.Buffer, e.BytesTransferred);  //////注释于20180630
                         if (data != null)
                         {
                             // 设置发送数据

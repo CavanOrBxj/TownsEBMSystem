@@ -57,6 +57,9 @@
     <Reference Include="CSkin">
       <HintPath>cskin\CSkin.dll</HintPath>
     </Reference>
+    <Reference Include="EBMTableLib">
+      <HintPath>EBMTableLib\EBMTableLib.dll</HintPath>
+    </Reference>
     <Reference Include="Geckofx-Core">
       <HintPath>..\..\GeckoFx-Windows-33.0-0.9\Geckofx-Core.dll</HintPath>
     </Reference>
@@ -87,13 +90,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoSizeFormClass.cs" />
+    <Compile Include="Calcle.cs" />
     <Compile Include="communicate\TcpHelper.cs" />
     <Compile Include="communicate\IoContextPool.cs" />
     <Compile Include="communicate\IoServer.cs" />
     <Compile Include="datadeal\CRC16CITT.cs" />
     <Compile Include="datadeal\CRC32.cs" />
+    <Compile Include="datadeal\DataDealHelper.cs" />
+    <Compile Include="datadeal\DataHelper.cs" />
     <Compile Include="datadeal\TableDataHelper.cs" />
     <Compile Include="datadeal\UtcHelper.cs" />
+    <Compile Include="Enums\DailyCmdTag.cs" />
+    <Compile Include="Enums\DeviceOrderType.cs" />
+    <Compile Include="Enums\OperateType.cs" />
+    <Compile Include="Enums\PageType.cs" />
+    <Compile Include="Enums\ParamType.cs" />
     <Compile Include="Enums\TableType.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -109,10 +120,14 @@
     <Compile Include="SendFileHttpPost.cs" />
     <Compile Include="SingletonInfo.cs" />
     <Compile Include="StructClass\FrontProtocolStructClass.cs" />
-    <Compile Include="StructClass\StructClass.cs" />
+    <Compile Include="StructClass\HttpStructClass.cs" />
+    <Compile Include="StructClass\TSStructClass.cs" />
     <Compile Include="SwitchImage.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Utils\ArrayHelper.cs" />
+    <Compile Include="Utils\ComboBoxHelper.cs" />
+    <Compile Include="Utils\NumberHelper.cs" />
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -178,6 +193,9 @@
     <None Include="ico\ooopic_1498198713.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ico\Login.png" />
+    <None Include="ico\online.png" />
+    <None Include="ico\offline.png" />
     <Content Include="LogLib\log4net.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

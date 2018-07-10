@@ -98,6 +98,10 @@ namespace TownsEBMSystem
                     case TableType.Content:
                         path = ConfigurationManager.AppSettings["EBMContentPath"];
                         break;
+
+                    case TableType.Organization:
+                        path = ConfigurationManager.AppSettings["OrganizationConfigurePath"];
+                        break;
                 }
                 if (path == string.Empty)
                 {
