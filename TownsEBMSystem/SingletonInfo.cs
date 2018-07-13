@@ -16,6 +16,7 @@ namespace TownsEBMSystem
         public string HttpServer;
         public string creditCode;
         public List<organizationdata> Organization;
+        public List<WhiteListRecord> WhiteListRecordList;
         public string pid;
         public bool loginstatus;//表示系统有没有登录到县平台
 
@@ -57,6 +58,10 @@ namespace TownsEBMSystem
 
         public int IndexItemID;//全局唯一的索引表识别位
 
+        public int inter_cut_IndexItemID;//插播时的IndexItemID
+
+        public string inter_cut_prlId;//插播记录id
+
         private SingletonInfo()                                                                 
         {
 
@@ -69,6 +74,8 @@ namespace TownsEBMSystem
             HttpServer = "";
             creditCode = "";
             Organization = new List<organizationdata>();
+            WhiteListRecordList = new List<WhiteListRecord>();
+
             pid = "";
             loginstatus = false;
             SendTCPdataIP = "";
@@ -105,6 +112,9 @@ namespace TownsEBMSystem
 
             ts_pid = "";
             IndexItemID = 0;
+
+            inter_cut_prlId = "";
+            inter_cut_IndexItemID = 0;
 
         }
         public static SingletonInfo GetInstance()

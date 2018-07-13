@@ -102,6 +102,17 @@ namespace TownsEBMSystem
                     case TableType.Organization:
                         path = ConfigurationManager.AppSettings["OrganizationConfigurePath"];
                         break;
+                    case TableType.WhiteList:
+                        path = ConfigurationManager.AppSettings["WhiteListConfigurePath"];
+                        break;
+
+                    case TableType.RebackCycle:
+                        path = ConfigurationManager.AppSettings["RebackCycleConfigurePath"];
+                        break;
+
+                    case TableType.RebackParam:
+                        path = ConfigurationManager.AppSettings["RebackParamConfigurePath"];
+                        break;
                 }
                 if (path == string.Empty)
                 {
@@ -146,6 +157,15 @@ namespace TownsEBMSystem
                         break;
                     case TableType.Organization:
                         path = ConfigurationManager.AppSettings["OrganizationConfigurePath"];
+                        break;
+                    case TableType.WhiteList:
+                        path = ConfigurationManager.AppSettings["WhiteListConfigurePath"];
+                        break;
+                    case TableType.RebackCycle:
+                        path = ConfigurationManager.AppSettings["RebackCycleConfigurePath"];
+                        break;
+                    case TableType.RebackParam:
+                        path = ConfigurationManager.AppSettings["RebackParamConfigurePath"];
                         break;
                 }
                 if (path == string.Empty) return false;

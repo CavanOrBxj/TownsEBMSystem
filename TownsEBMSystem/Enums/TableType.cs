@@ -8,5 +8,8 @@
         Configure = 3,
         CertAuth = 4,
         Organization=5,
+        WhiteList = 6,
+        RebackCycle = 7,
+        RebackParam = 8,
     }
 }

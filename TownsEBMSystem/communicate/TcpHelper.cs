@@ -36,6 +36,9 @@ namespace TownsEBMSystem
                 case 0x06:
                     break;
                 case 0x07:
+                    GeneralRebackParam rebackparam = (GeneralRebackParam)o;
+                    backdata = RebackParamCommand(rebackparam);
+                    rebackobj = GeneralResponse(SendTcpData(backdata));
                     break;
                 case 0x08:
                     break;
@@ -44,7 +47,7 @@ namespace TownsEBMSystem
                 case 0x0A:
                     break;
                 case 0x0B:
-                    RebackPeriod rebackperiod = (RebackPeriod)o;
+                    GeneralRebackCycle rebackperiod = (GeneralRebackCycle)o;
                     backdata = RebackPeriodCommand(rebackperiod);
                     rebackobj = GeneralResponse(SendTcpData(backdata));
                     break;
@@ -476,14 +479,14 @@ namespace TownsEBMSystem
             int resource_code_length = 0;
             if (resource_code_number > 0)
             {
-                byte[] dsadas = BCD2Byte("F" + onoroff.resource_codeList[0]);//特别注意 这个resource_code_length是指所占字节的长度  并非实际字符长度
+                byte[] dsadas = BCD2Byte("FF" + onoroff.resource_codeList[0]);//特别注意 这个resource_code_length是指所占字节的长度  并非实际字符长度
                 resource_code_length = dsadas.Length;
             }
 
             classdata.Add((byte)resource_code_length);
             foreach (string resourcecode in onoroff.resource_codeList)
             {
-                classdata.AddRange(BCD2Byte("F" + resourcecode));
+                classdata.AddRange(BCD2Byte("FF" + resourcecode));
             }
 
 
@@ -585,7 +588,53 @@ namespace TownsEBMSystem
         }
 
 
-        public byte[] RebackPeriodCommand(RebackPeriod rebackperiod)
+
+        public byte[] RebackParamCommand(GeneralRebackParam rebackparam)
+        {
+
+            List<byte> classdata = new List<byte>();
+
+
+            classdata.Add((byte)Convert.ToInt32(rebackparam.reback_type));
+            int reback_address_length = 0;
+            switch (rebackparam.reback_type)
+            {
+                case "1":
+                    reback_address_length = 11;
+                    break;
+                case "2":
+                case "3":
+                    reback_address_length=System.Text.Encoding.ASCII.GetBytes(rebackparam.reback_address).Length;
+                    break;
+            }
+            classdata.Add((byte)reback_address_length);
+            classdata.AddRange(System.Text.Encoding.ASCII.GetBytes(rebackparam.reback_address));
+
+
+            classdata.Add((byte)Convert.ToInt32(rebackparam.resource_code_type));
+
+            int resource_code_number = rebackparam.resource_codeList.Count;
+
+            classdata.Add((byte)resource_code_number);
+
+
+            int resource_code_length = 0;
+            if (resource_code_number > 0)
+            {
+                byte[] dsadas = BCD2Byte("FF" + rebackparam.resource_codeList[0]);//特别注意 这个resource_code_length是指所占字节的长度  并非实际字符长度
+                resource_code_length = dsadas.Length;
+            }
+
+            classdata.Add((byte)resource_code_length);
+            foreach (string resourcecode in rebackparam.resource_codeList)
+            {
+                classdata.AddRange(BCD2Byte("FF" + resourcecode));
+            }
+            return Buidsenddata(classdata, 0x07);
+        }
+
+
+        public byte[] RebackPeriodCommand(GeneralRebackCycle rebackperiod)
         {
 
             List<byte> classdata = new List<byte>();
@@ -602,14 +651,14 @@ namespace TownsEBMSystem
             int resource_code_length = 0;
             if (resource_code_number > 0)
             {
-                byte[] dsadas = BCD2Byte("F" + rebackperiod.resource_codeList[0]);//特别注意 这个resource_code_length是指所占字节的长度  并非实际字符长度
+                byte[] dsadas = BCD2Byte("FF" + rebackperiod.resource_codeList[0]);//特别注意 这个resource_code_length是指所占字节的长度  并非实际字符长度
                 resource_code_length = dsadas.Length;
             }
 
             classdata.Add((byte)resource_code_length);
             foreach (string resourcecode in rebackperiod.resource_codeList)
             {
-                classdata.AddRange(BCD2Byte("F" + resourcecode));
+                classdata.AddRange(BCD2Byte("FF" + resourcecode));
             }
             return Buidsenddata(classdata, 0x0B);
         }
@@ -631,14 +680,14 @@ namespace TownsEBMSystem
             int resource_code_length = 0;
             if (resource_code_number > 0)
             {
-                byte[] dsadas = BCD2Byte("F" + switchamplifier.resource_codeList[0]);//特别注意 这个resource_code_length是指所占字节的长度  并非实际字符长度
+                byte[] dsadas = BCD2Byte("FF" + switchamplifier.resource_codeList[0]);//特别注意 这个resource_code_length是指所占字节的长度  并非实际字符长度
                 resource_code_length = dsadas.Length;
             }
 
             classdata.Add((byte)resource_code_length);
             foreach (string resourcecode in switchamplifier.resource_codeList)
             {
-                classdata.AddRange(BCD2Byte("F" + resourcecode));
+                classdata.AddRange(BCD2Byte("FF" + resourcecode));
             }
             return Buidsenddata(classdata, 0x3F);
         }

@@ -1,0 +1,1635 @@
+
+ 
+记录时间：2018-07-12 13:14:31,206 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-07-12 13:15:21,483 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 727
+
+ 
+记录时间：2018-07-12 13:19:44,311 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 727
+
+ 
+记录时间：2018-07-12 13:24:40,964 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 727
+
+ 
+记录时间：2018-07-12 13:25:45,803 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 727
+
+ 
+记录时间：2018-07-12 13:26:08,290 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 727
+
+ 
+记录时间：2018-07-12 13:33:08,757 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 725
+
+ 
+记录时间：2018-07-12 13:34:48,020 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 725
+
+ 
+记录时间：2018-07-12 13:36:00,153 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 725
+
+ 
+记录时间：2018-07-12 13:39:41,044 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 725
+
+ 
+记录时间：2018-07-12 13:40:53,755 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 725
+
+ 
+记录时间：2018-07-12 13:41:40,492 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 725
+
+ 
+记录时间：2018-07-12 13:43:35,277 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 725
+
+ 
+记录时间：2018-07-12 13:47:43,057 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：获取配置文件失败
+ 
+
+ 
+记录时间：2018-07-12 13:47:46,635 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 725
+
+ 
+记录时间：2018-07-12 13:49:44,796 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：获取配置文件失败
+ 
+
+ 
+记录时间：2018-07-12 13:49:47,450 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 725
+
+ 
+记录时间：2018-07-12 13:51:18,386 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：获取配置文件失败
+ 
+
+ 
+记录时间：2018-07-12 13:51:32,319 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：获取配置文件失败
+ 
+
+ 
+记录时间：2018-07-12 13:51:35,235 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 725
+
+ 
+记录时间：2018-07-12 13:52:07,526 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TCP客户端初始化失败
+ 
+
+ 
+记录时间：2018-07-12 13:52:07,553 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：播放失败
+ 
+
+ 
+记录时间：2018-07-12 13:52:14,192 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：获取配置文件失败
+ 
+
+ 
+记录时间：2018-07-12 13:52:16,949 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 725
+
+ 
+记录时间：2018-07-12 13:53:38,028 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：获取配置文件失败
+ 
+
+ 
+记录时间：2018-07-12 13:53:40,771 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 725
+
+ 
+记录时间：2018-07-12 13:53:47,207 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 13:53:46
+47 40 21 10 00 FD 80 94 00 00 05 00 00 FF 01 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 4A 00 00 
+00 02 00 00 00 00 00 07 59 FB E2 1A 0A 20 00 A3 
+B2 C2 8E 14 2C B3 5B 76 10 30 AF F4 2B 52 BF B5 
+EF 96 00 59 70 DC DE F5 EF 2C C5 62 8B CD DF DB 
+B5 BB 90 FE 63 9B 15 15 2B 80 77 15 A9 FB 47 AD 
+95 1F EC 00 CB E4 3C 7E 08 A4 71 97 FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 13:53:48,011 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 13:53:47
+47 40 21 10 00 FD 80 D1 00 00 07 00 00 FF 02 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 3B 05 14 
+23 00 00 00 01 03 01 01 01 20 18 07 06 00 01 00 
+00 00 00 00 00 00 00 00 00 30 30 30 30 30 42 01 
+06 12 45 14 02 10 42 06 00 01 00 16 00 01 1F FF 
+00 00 00 05 04 00 31 00 00 00 4A 00 00 00 03 00 
+00 00 00 00 07 0B 3B FA 42 24 5F 30 F0 07 DE 63 
+81 68 1C 31 F1 5F B7 D6 F3 7A 73 52 A5 F7 31 51 
+79 B4 A7 94 07 24 76 24 26 10 AC 5F 47 00 21 11 
+59 D8 02 D0 FF 68 09 B3 69 56 2F 63 F5 4D 28 49 
+A1 FF 10 8D 61 02 8D 78 47 4C DB C6 F2 FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 13:54:03,771 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 13:54:02
+47 40 21 10 00 FD 80 57 00 00 09 00 00 FF 00 00 
+4A 00 00 00 04 00 00 00 00 00 07 C7 1C 5D 43 59 
+A2 3D D2 00 F3 63 ED 82 9F D1 D0 8D 3C 32 72 34 
+EF 15 30 79 38 AB 16 0A 4E 1F FB A1 79 C2 34 83 
+BC 3F 32 1A 81 E7 77 7E 5D 8B 9B C3 A9 A0 1B 26 
+57 49 EF FC FF 0A F3 15 7B 89 66 24 04 B0 32 FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 13:54:38,023 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 13:54:37
+47 40 21 10 00 FD 80 94 00 00 0B 00 00 FF 01 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 4A 00 00 
+00 05 00 00 00 00 00 07 2E A5 98 13 7B BA 33 D8 
+FC 93 5D 7A E5 2C 05 FB 99 EC FC 5F A7 BF 76 69 
+63 C5 47 E7 4E 6E 8B EF 7E D0 BC B0 33 F7 08 39 
+81 C6 96 11 4C E8 A1 DE 5B CD 95 84 C1 EB 93 FC 
+E2 08 B6 38 07 1A B1 B9 F2 A2 33 39 FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 13:54:38,827 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 13:54:38
+47 40 21 10 00 FD 80 D1 00 00 0D 00 00 FF 02 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 3B 05 14 
+23 00 00 00 01 03 01 01 01 20 18 07 06 00 01 00 
+00 00 00 00 00 00 00 00 00 30 30 30 30 30 42 01 
+06 12 45 14 02 10 42 06 00 01 00 16 00 01 1F FF 
+00 00 00 05 04 00 31 00 00 00 4A 00 00 00 06 00 
+00 00 00 00 07 92 6F 02 90 0E AD 7B 2A 4C 5B 87 
+A4 2F F6 CE 82 0E DD 4D B1 D7 33 95 0B 49 E6 53 
+E8 00 28 2B 68 52 58 CC C5 1E 27 AB 47 00 21 11 
+72 7B 5A AE 3A D3 8E 7D C8 1D C3 54 CD AB 64 27 
+CD 9C 58 3E 20 A5 0A A8 55 CF 70 2F 83 FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 13:59:35,968 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：获取配置文件失败
+ 
+
+ 
+记录时间：2018-07-12 14:00:58,455 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 725
+
+ 
+记录时间：2018-07-12 14:01:05,131 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 14:01:04
+47 40 21 10 00 FD 80 94 00 00 05 00 00 FF 01 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 4A 00 00 
+00 02 00 00 00 00 00 07 A2 25 86 BC C1 C0 DF CA 
+18 A7 99 EE BC 6A 9B DA AE 1C 0A 67 2F 5E 49 66 
+2C 4B 49 0B F4 77 4A 07 D3 0D 75 91 4B 53 4C 83 
+43 B4 74 76 AE 58 EA D8 36 77 6E C3 38 4B 51 69 
+52 1D CD BB DE 78 C0 9D FB 0D C9 67 FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 14:01:05,936 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 14:01:05
+47 40 21 10 00 FD 80 D1 00 00 07 00 00 FF 02 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 3B 05 14 
+23 00 00 00 01 03 01 01 01 20 18 07 06 00 01 00 
+00 00 00 00 00 00 00 00 00 30 30 30 30 30 42 01 
+06 12 45 14 02 10 42 06 00 01 00 16 00 01 1F FF 
+00 00 00 05 04 00 31 00 00 00 4A 00 00 00 03 00 
+00 00 00 00 07 18 97 D1 35 7E 2A CB 5D D2 D9 C5 
+5E D7 26 B4 81 15 C3 19 B3 78 97 62 1E 02 34 79 
+BA B9 10 F4 3D 29 B5 49 FB E8 3E 64 47 00 21 11 
+5B 3B B3 DE 34 5B E7 E3 10 24 88 BF EB 93 DD 0F 
+24 2F A2 39 E1 F0 D0 77 97 24 69 64 64 FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 14:16:03,429 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：获取配置文件失败
+ 
+
+ 
+记录时间：2018-07-12 14:16:07,122 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 737
+
+ 
+记录时间：2018-07-12 14:16:58,612 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：获取配置文件失败
+ 
+
+ 
+记录时间：2018-07-12 14:17:01,385 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 737
+
+ 
+记录时间：2018-07-12 14:17:07,282 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 14:17:06
+47 40 21 10 00 FD 80 94 00 00 05 00 00 FF 01 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 4A 00 00 
+00 02 00 00 00 00 00 07 8B 18 1A ED 93 60 42 1D 
+73 9C 97 BE 1A 2F 3C 0D C8 B1 58 CD B7 AB 30 2F 
+E4 7F 9F 66 FA 12 2E 13 8D F5 E5 D7 A0 1B 23 C5 
+03 2D FB ED C4 67 0F AA A1 AA 2F BD 77 74 21 78 
+C9 C0 A0 8E 96 FC 51 D8 CD D0 7B DC FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 14:17:08,087 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 14:17:07
+47 40 21 10 00 FD 80 D1 00 00 07 00 00 FF 02 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 3B 05 14 
+23 00 00 00 01 03 01 01 01 20 18 07 06 00 01 00 
+00 00 00 00 00 00 00 00 00 30 30 30 30 30 42 01 
+06 12 45 14 02 10 42 06 00 01 00 16 00 01 1F FF 
+00 00 00 05 04 00 31 00 00 00 4A 00 00 00 03 00 
+00 00 00 00 07 E0 8D A3 34 D9 46 6E 38 AE 87 BE 
+90 3C 40 54 71 0B 48 F7 68 5F BC 8E CA 6F F9 59 
+B4 01 69 80 C5 9F 6C 08 B9 CF 0B 8E 47 00 21 11 
+86 F0 D5 12 14 9A 03 85 58 6E C1 E6 5F 65 60 4C 
+E1 08 D2 7F 6F AC FE 0F 59 7C 22 48 A4 FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 14:17:43,712 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：获取配置文件失败
+ 
+
+ 
+记录时间：2018-07-12 14:17:47,471 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 737
+
+ 
+记录时间：2018-07-12 14:22:38,928 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：获取配置文件失败
+ 
+
+ 
+记录时间：2018-07-12 14:22:42,869 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 741
+
+ 
+记录时间：2018-07-12 14:25:52,527 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：获取配置文件失败
+ 
+
+ 
+记录时间：2018-07-12 14:25:56,425 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 745
+
+ 
+记录时间：2018-07-12 14:33:43,715 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 738
+
+ 
+记录时间：2018-07-12 14:34:53,827 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：获取配置文件失败
+ 
+
+ 
+记录时间：2018-07-12 14:34:56,814 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 738
+
+ 
+记录时间：2018-07-12 14:37:17,341 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 738
+
+ 
+记录时间：2018-07-12 14:39:03,536 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 738
+
+ 
+记录时间：2018-07-12 14:45:34,937 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 739
+
+ 
+记录时间：2018-07-12 14:54:50,376 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 750
+
+ 
+记录时间：2018-07-12 14:54:55,927 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 14:54:55
+47 40 21 10 00 FD 80 94 00 00 05 00 00 FF 01 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 4A 00 00 
+00 02 00 00 00 00 00 07 17 84 C5 27 D8 D5 32 D9 
+EB FF EC F3 65 95 A2 B4 59 51 A3 F5 FE 96 FE 26 
+77 93 36 0A DC B6 A8 40 DC A9 69 37 13 0B 9D CE 
+5B BD 5D 8D C0 3C F4 C6 6C 1F E7 A2 1E C3 EB AA 
+7D B8 8F E9 F0 32 83 6A 1F E6 70 6C FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 14:54:56,733 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 14:54:55
+47 40 21 10 00 FD 80 D1 00 00 07 00 00 FF 02 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 3B 05 14 
+23 00 00 00 01 03 01 01 01 20 18 07 06 00 01 00 
+00 00 00 00 00 00 00 00 00 30 30 30 30 30 42 01 
+06 12 45 14 02 10 42 06 00 01 00 16 00 01 1F FF 
+00 00 00 05 04 00 31 00 00 00 4A 00 00 00 03 00 
+00 00 00 00 07 12 EF 09 D1 5B 95 37 B7 4A F5 7D 
+80 1B DD 3F FE 07 53 41 F4 66 14 B3 22 55 A7 43 
+B1 7E A6 F1 8D 32 43 6D CA AF 71 7E 47 00 21 11 
+4C 10 E3 F9 D9 8C C2 6B A6 3F 2A 5B 40 45 7F 95 
+B6 F2 9D E3 74 2A 50 57 DB 96 3D AF 3B FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 14:55:09,416 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 14:55:08
+47 40 21 10 00 FD 80 57 00 00 09 00 00 FF 00 00 
+4A 00 00 00 04 00 00 00 00 00 07 70 DD 76 29 84 
+92 49 D7 00 1C A3 54 E8 DA 16 68 27 B6 34 9C 43 
+4A DA 93 20 00 5A 6A 39 6E 9D A4 D3 38 0A D5 40 
+B7 8D F9 DF 25 4F 97 6B E3 47 A7 00 CB 2F 36 8C 
+9B B7 4D 7F 83 F8 F0 70 CB 5C DD 05 87 79 D5 FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 14:55:09,449 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：停止播放失败
+ 
+
+ 
+记录时间：2018-07-12 15:01:29,605 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 757
+
+ 
+记录时间：2018-07-12 15:02:46,374 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 757
+
+ 
+记录时间：2018-07-12 15:02:51,867 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 15:02:51
+47 40 21 10 00 FD 80 94 00 00 05 00 00 FF 01 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 4A 00 00 
+00 02 00 00 00 00 00 07 DE DE 11 41 E1 4A 6B 87 
+DE 3E 8C AF 50 1B 20 48 30 29 48 85 45 98 20 89 
+84 5E F8 9F 51 08 CA 69 47 B8 C9 F7 62 B5 FC 45 
+32 8E ED 53 45 B6 22 41 CD D6 C6 E1 5C 16 AB 12 
+C2 D9 39 FB 1E 11 F6 68 B1 58 72 DD FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 15:02:52,673 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 15:02:51
+47 40 21 10 00 FD 80 D1 00 00 07 00 00 FF 02 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 3B 05 14 
+23 00 00 00 01 03 01 01 01 20 18 07 06 00 01 00 
+00 00 00 00 00 00 00 00 00 30 30 30 30 30 42 01 
+06 12 45 14 02 10 42 06 00 01 00 16 00 01 1F FF 
+00 00 00 05 04 00 31 00 00 00 4A 00 00 00 03 00 
+00 00 00 00 07 C2 CC 34 1D 28 9B 86 39 D4 FB 13 
+AC E6 86 60 50 A3 82 69 68 24 24 46 E5 3B C7 87 
+FC 3A EB BE D4 F5 67 36 8D 6E D8 F8 47 00 21 11 
+2C C1 F4 3A B7 26 86 5C 4B F9 B6 2E 4A 2F A4 84 
+8E CB 25 F9 B0 BD FC B9 26 AD 11 01 24 FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 15:02:57,831 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 15:02:57
+47 40 21 10 00 FD 80 57 00 00 09 00 00 FF 00 00 
+4A 00 00 00 04 00 00 00 00 00 07 3B 29 28 9E B4 
+A3 0E AE FE 95 D4 46 3A 83 0A 7B BA 87 8A C6 59 
+65 18 6D CB 7D 95 44 2E 8B 13 7E 0D 63 6C E1 7D 
+12 62 E1 FB 88 31 BA 7C 04 D0 B8 42 FA 6D 79 FC 
+4E 02 79 34 0F 73 88 B7 A0 5F 12 AB 48 79 46 FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 15:05:57,809 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 743
+
+ 
+记录时间：2018-07-12 15:07:14,350 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 15:07:13
+47 40 21 10 00 FD 80 94 00 00 05 00 00 FF 01 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 4A 00 00 
+00 02 00 00 00 00 00 07 EB D1 D2 BE 5F AF B6 FB 
+6A 88 B6 B8 89 C2 17 A6 80 6E FF F5 68 A7 77 97 
+F4 0D 83 91 B2 6B 4C D2 0F 68 AE 9A 70 7C BA 21 
+1F 16 7F C8 3A 60 ED 32 C8 89 AE 08 89 BC 66 AE 
+28 B3 F5 A0 3C 66 B0 58 BC D6 4A EF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 15:07:15,155 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 15:07:14
+47 40 21 10 00 FD 80 D1 00 00 07 00 00 FF 02 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 3B 05 14 
+23 00 00 00 01 03 01 01 01 20 18 07 06 00 01 00 
+00 00 00 00 00 00 00 00 00 30 30 30 30 30 42 01 
+06 12 45 14 02 10 42 06 00 01 00 16 00 01 1F FF 
+00 00 00 05 04 00 31 00 00 00 4A 00 00 00 03 00 
+00 00 00 00 07 31 F8 9A 6C FF 24 FD 16 AC 6E 9E 
+1D 4B B6 27 4A 97 C4 28 A4 62 F8 7B F4 5D D1 66 
+66 9A 0D 7B EA 3B 7E F3 E2 4B 77 C6 47 00 21 11 
+9D 77 BE 5D 86 0A 79 F4 84 F4 A8 65 51 4E 79 7F 
+7C 39 D9 D0 F0 97 BD 99 41 E0 FC 13 94 FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 15:07:24,208 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 15:07:23
+47 40 21 10 00 FD 80 57 00 00 09 00 00 FF 00 00 
+4A 00 00 00 04 00 00 00 00 00 07 B0 B2 C9 43 6F 
+EE 90 33 1D F9 2E DB 85 27 F9 4C 5D 34 BD B1 DF 
+FD DA 91 5D 2D D5 C4 72 02 C7 75 F1 A2 46 D2 EE 
+6D 9F 77 21 4E 02 BB 5D A0 EF 63 AF 63 70 B8 12 
+EB E1 26 67 63 DE 8A 3D 07 DF 7C E3 E4 DF 6F FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 16:30:15,595 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 743
+
+ 
+记录时间：2018-07-12 16:31:16,922 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 743
+
+ 
+记录时间：2018-07-12 16:32:58,058 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 743
+
+ 
+记录时间：2018-07-12 16:34:13,858 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 743
+
+ 
+记录时间：2018-07-12 16:35:47,761 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 743
+
+ 
+记录时间：2018-07-12 16:36:53,468 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 743
+
+ 
+记录时间：2018-07-12 16:38:09,726 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 743
+
+ 
+记录时间：2018-07-12 16:38:16,785 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 16:38:15
+47 40 21 10 00 FD 80 94 00 00 05 00 00 FF 01 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 4A 00 00 
+00 02 00 00 00 00 00 07 DB 79 C3 28 15 49 A3 77 
+B1 2B 7E 73 D1 22 B4 83 43 90 FE E2 47 7E AA 65 
+29 0C 53 F4 6D F3 5B 56 DD 3F 84 2D E1 E2 22 B8 
+87 10 81 82 3D F0 D2 0B 9E FA BF 28 8D 84 CE AC 
+16 C0 F6 16 C1 9B 04 25 BC 70 7A F7 FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 16:38:17,590 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 16:38:16
+47 40 21 10 00 FD 80 D1 00 00 07 00 00 FF 02 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 3B 05 14 
+23 00 00 00 01 03 01 01 01 20 18 07 06 00 01 00 
+00 00 00 00 00 00 00 00 00 30 30 30 30 30 42 01 
+06 12 45 14 02 10 42 06 00 01 00 16 00 01 1F FF 
+00 00 00 05 04 00 31 00 00 00 4A 00 00 00 03 00 
+00 00 00 00 07 BF 67 E6 03 5C 9A BE 29 A7 E8 05 
+71 67 8D F4 8B B6 EA 1F C5 26 0A D0 C0 E0 74 E3 
+51 57 D6 4F C1 8A ED F0 C4 EE 05 1E 47 00 21 11 
+A0 16 75 CE E6 1E C1 0C 16 58 D6 47 26 3F 4C A2 
+FC CB 51 C1 C3 27 B0 85 C0 7F EF 03 30 FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 16:38:23,882 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 16:38:23
+47 40 21 10 00 FD 80 94 00 00 09 00 00 FF 01 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 4A 00 00 
+00 04 00 00 00 00 00 07 C1 63 4A AD E1 3F C8 B1 
+3B B4 6A D2 0E 51 49 AF 16 95 5A AA 7F 96 85 7D 
+75 AA 81 7B 68 24 82 FD 8C 5E 5B F4 C3 74 F1 A2 
+E2 52 A1 70 7D E1 3E B4 76 4A 04 F8 4F 08 05 2B 
+E5 2F 8A DF 28 DA D7 12 D5 6D EE 41 FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 16:40:40,743 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 743
+
+ 
+记录时间：2018-07-12 16:50:01,575 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 743
+
+ 
+记录时间：2018-07-12 16:54:50,915 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：获取配置文件失败
+ 
+
+ 
+记录时间：2018-07-12 16:54:55,599 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 743
+
+ 
+记录时间：2018-07-12 16:55:55,387 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 743
+
+ 
+记录时间：2018-07-12 16:58:37,765 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 16:58:36
+47 40 21 10 00 FD 80 94 00 00 05 00 00 FF 01 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 4A 00 00 
+00 02 00 00 00 00 00 07 C0 97 5A 2B 86 CC 4D 37 
+B3 A4 DE 56 F8 0F F3 8D DF 49 E8 6E 5B DD 94 44 
+0B 7E 25 48 EA 85 53 B1 39 F7 1B D4 BE D1 BA C2 
+C9 58 FF 84 88 9E DD 69 85 9B 9C 12 C8 94 DC FE 
+2A 44 D6 56 45 DE 4C 50 7F 54 3D 27 FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 16:58:38,571 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 16:58:37
+47 40 21 10 00 FD 80 D1 00 00 07 00 00 FF 02 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 3B 05 14 
+23 00 00 00 01 03 01 01 01 20 18 07 06 00 01 00 
+00 00 00 00 00 00 00 00 00 30 30 30 30 30 42 01 
+06 12 45 14 02 10 42 06 00 01 00 16 00 01 1F FF 
+00 00 00 05 04 00 31 00 00 00 4A 00 00 00 03 00 
+00 00 00 00 07 25 22 16 72 12 62 50 4C 00 89 9E 
+9B 79 DB C3 11 AD 13 D6 59 E8 9A 22 63 1A 96 9C 
+16 EB F5 50 5F 92 ED 64 2C 3E EC 3F 47 00 21 11 
+85 64 B1 B8 18 FA 8C FC 54 C3 BD C6 2D 09 57 D8 
+E3 2A 1C E1 F5 1E 87 3D B0 53 84 18 48 FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 16:58:39,375 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 16:58:38
+47 40 21 10 00 FD 81 0E 00 00 09 00 00 FF 03 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 3B 05 14 
+23 00 00 00 01 03 01 01 01 20 18 07 06 00 01 00 
+00 00 00 00 00 00 00 00 00 30 30 30 30 30 42 01 
+06 12 45 14 02 10 42 06 00 01 00 16 00 01 1F FF 
+00 00 00 05 04 00 31 00 00 00 3B 05 14 23 00 00 
+00 01 03 01 01 01 20 18 07 06 00 01 00 00 00 00 
+00 00 00 00 00 00 30 30 30 30 30 42 01 06 12 45 
+14 02 10 42 07 00 01 00 16 00 01 1F 47 00 21 11 
+FF 00 00 00 05 04 00 31 00 00 00 4A 00 00 00 04 
+00 00 00 00 00 07 5B 13 2A 7B AD 2F 72 11 41 74 
+00 49 B3 28 4B 3B 86 EE 8A F6 65 1F 8F A1 16 D4 
+7B 12 1D 22 57 F9 8C 51 DE EA D4 AD 78 24 B4 61 
+E2 D6 1B 8A 90 83 37 6A 47 A3 0C A8 6F F4 AB B3 
+37 D8 BB 15 11 78 AA 19 6F C9 FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 17:15:07,649 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 743
+
+ 
+记录时间：2018-07-12 17:15:30,796 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 17:15:29
+47 40 21 10 00 FD 80 94 00 00 05 00 00 FF 01 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 4A 00 00 
+00 02 00 00 00 00 00 07 C3 6B E3 83 43 5E 91 82 
+7A 93 55 E4 78 CB 75 B7 8C 22 D7 B3 64 60 0B 9B 
+C0 4D EC F3 CF 4C 11 B7 56 B7 A7 7B 8C 27 D3 35 
+0C BB F7 B9 DE 61 03 CA 71 41 EB 3F E2 5A D0 48 
+5E 76 92 A1 97 85 56 BA 59 50 E0 04 FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 17:15:31,600 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 17:15:30
+47 40 21 10 00 FD 80 D1 00 00 07 00 00 FF 02 00 
+3B 05 14 23 00 00 00 01 03 01 01 01 20 18 07 06 
+00 01 00 00 00 00 00 00 00 00 00 00 30 30 30 30 
+30 42 01 06 12 45 14 02 10 42 05 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 31 00 00 00 3B 05 14 
+23 00 00 00 01 03 01 01 01 20 18 07 06 00 01 00 
+00 00 00 00 00 00 00 00 00 30 30 30 30 30 42 01 
+06 12 45 14 02 10 42 06 00 01 00 16 00 01 1F FF 
+00 00 00 05 04 00 31 00 00 00 4A 00 00 00 03 00 
+00 00 00 00 07 A7 5A 06 5E 8A AF AC 34 71 4F DC 
+E2 0F 36 B5 BF FF 7B F8 96 42 EC 31 F7 77 B6 7C 
+50 B9 2F 06 22 04 66 14 12 98 4A CF 47 00 21 11 
+1C 9C 21 45 1D BF 31 3D D5 2B 1D 73 3D 94 22 A4 
+99 13 07 5E 4D FD 9A D8 55 0E 94 6D 22 FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 17:15:36,178 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/12 17:15:35
+47 40 21 10 00 FD 80 57 00 00 09 00 00 FF 00 00 
+4A 00 00 00 04 00 00 00 00 00 07 4B 4C BB E5 B6 
+61 41 79 DA 57 44 11 33 DB 61 4E 93 87 D6 91 F9 
+1D A8 BE 00 17 8C 25 7C 7F 55 57 9A C1 85 0E F3 
+79 DF 59 EE 88 02 C9 49 72 33 17 43 2A 0C 11 C7 
+95 8A A2 F1 50 36 8B CB 88 FB 28 98 2E 43 0A FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
+
+ 
+记录时间：2018-07-12 17:18:45,934 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.88:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 743

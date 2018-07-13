@@ -93,22 +93,6 @@ namespace TownsEBMSystem
 
 
 
-    /// <summary>
-    /// 通用回传周期设置
-    /// </summary>
-    public class RebackPeriod
-    {
-        public string reback_cycle { get; set; }
-
-        public string resource_code_type { get; set; }
-
-
-        public List<string> resource_codeList;
-
-    }
-
-
-
     public class GeneralResponse
     {
         public string return_code { get; set; }
@@ -153,6 +137,76 @@ namespace TownsEBMSystem
 
     }
 
+    public class WhiteListRecord
+    {
+        public string username { get; set; }
+
+        public string phone_number { get; set; }
+        public string Organizations { get; set; }
+
+        public string gb_codes { get; set; }
+    }
 
 
+
+    #region  任务开始上报
+    public class TaskUploadBegin
+    {
+        public string front_code { get; set; }
+        public string ebm_id { get; set; }
+
+        public string program_resource { get; set; }
+        public string ebm_class { get; set; }
+        public string ebm_level { get; set; }
+
+        public string ebm_type { get; set; }
+
+        public string input_channel_id { get; set; }
+
+        public List<output_channel_struct> utput_channel_structList;
+        public string tel_length { get; set; }
+        public string tel_number { get; set; }
+
+        public string volume { get; set; }
+
+        public List<string> volumeList;
+
+    }
+
+    public class output_channel_struct
+    {
+        public string output_channel_type { get; set; }
+        public string output_channel_id { get; set; }
+    }
+
+    public class TaskUploadOver
+    {
+        public string front_code { get; set; }
+        public string ebm_id { get; set; }
+    }
+
+
+    #endregion
+
+
+    public class GeneralRebackParam
+    {
+        public string reback_type { get; set; }
+        public string reback_address { get; set; }
+
+        public string resource_code_type { get; set; }
+
+        public List<string> resource_codeList;//资源码信息  默认所有资源码都是同一长度
+
+    }
+
+    public class GeneralRebackCycle
+    {
+        public string reback_cycle { get; set; }
+
+        public string resource_code_type { get; set; }
+
+        public List<string> resource_codeList;//资源码信息  默认所有资源码都是同一长度
+
+    }
 }

@@ -12,8 +12,14 @@ using System.Threading;
 
 namespace TownsEBMSystem
 {
-    public class DataHelper
-    {     
+    public class DataHelper: IDisposable
+    {
+
+        public delegate void MyDelegate(object data);
+
+        public static event MyDelegate MyEvent; //注意须关键字 static 
+
+
         public byte[] HandleReceiveData(byte[] receivedata, int datalenth)
         {
             List<byte> dataList = new List<byte>();
@@ -136,80 +142,11 @@ namespace TownsEBMSystem
             byte[] datareal = receivedata.Skip(9).Take(datalenth).ToArray();
             switch (protocol_type)
             {
-                case 0x01:
-
-                    byte configure_cmd_tag = datareal.Skip(5).Take(1).ToArray()[0];
-
-                    switch (configure_cmd_tag)
-                    {
-                        case    0x04:
-
-                          //  backdata = BuildBackData(LockFrequencyGeneralDeal(datareal));
-                            break;
-                    }
-                    break;
-                case 0x02:
-                    break;
-                case 0x03:
-                    break;
-                case 0x04:
-                 //   backdata = BuildBackData(OnorOFFBroadcastGeneralDeal(datareal),0x17);
-                    break;
-                case 0x05:
-                   // backdata = BuildBackData(AreaCodeGeneralDeal(datareal));
-                    break;
-                case 0x06:
-                  //  backdata = BuildBackData(VolumeSetGeneralDeal(datareal));//
-                    break;
-                case 0x07:
-                 //   backdata = BuildBackData(BackParametersGeneralDeal(datareal));//
-                    break;
-                case 0x08:
-                 //   backdata = BuildBackData(PassiveBackGeneralDeal(datareal));//
-                    break;
-                case 0x09:
-                 //   backdata = BuildBackData(ClockCalibrationGeneralDeal(datareal));
-                    break;
-                case 0x0A:
-                 //   backdata = BuildBackData(TerminalIPSetGeneralDeal(datareal));//
-                    break;
-                case 0x0B:
-                 //   backdata = BuildBackData(RebackPeriodGeneralDeal(datareal));
-                    break;
-                case 0x0C:
-                 //   backdata = BuildBackData(WhiteListUpdateGeneralDeal(datareal));
-                    break;
-                case 0x0D:
-                 //   backdata = BuildBackData(RebackParamGeneralDeal(datareal));//
-                    break;
-                case 0x0E:
-                  //  backdata = BuildBackData(output_channel_queryDeal(datareal),0x13);//输出通道查询 因没有对应协议功能 未发送到刘工处
-                    break;
-                case 0x0F:
-                 //   backdata = BuildBackData(input_channel_queryDeal(datareal), 0x14);
-                    break;
-                case 0x10:
-                  //  backdata = BuildBackData(BroadcastRecordsQueryUpdateDeal(datareal),0x15);
-                    break;
-                case 0x11:
-                 //   backdata = BuildBackData(faultqueryDeal(datareal), 0x16);
-                    break;
                 case 0x18:
-                    break;
-                case 0x19:
+                    backdata = BuildBackData(TaskBeginUpdataDeal(datareal), 0x22);
                     break;
                 case 0x20:
                     backdata = BuildBackData(0);
-                    break;
-                case 0x21:
-                    break;
-                case 0x22:
-                    break;
-                case 0x40:
-                 //   backdata = BuildBackData(CertUpdateGeneralDeal(datareal));
-                    break;
-                case 0x3F:
-                   //  backdata = BuildBackData(TerminalSwitchGeneralDeal(datareal));
                     break;
 
             }
@@ -411,6 +348,32 @@ namespace TownsEBMSystem
 
         }
 
+
+       
+        public byte[] TaskBeginUpdataDeal(byte[] input)
+        {
+            TaskUploadBegin tmp = new TaskUploadBegin();
+            tmp.program_resource = input.Skip(30). Take(1).ToArray()[0].ToString();
+
+            if (tmp.program_resource=="3"|| tmp.program_resource == "4")
+            {
+                tmp.ebm_class= input.Skip(31).Take(1).ToArray()[0].ToString();
+            }
+
+            #region 线程通知县平台  或者事件触发
+            DataHelper.MyEvent(tmp);
+            #endregion
+
+
+            #region  构建回复数据
+            List<byte> rebackdata = new List<byte>();
+            rebackdata.Add(0);//0表示成功 1表示失败
+            byte[] reserved = new byte[6];
+            rebackdata.AddRange(reserved);
+            return rebackdata.ToArray();
+            #endregion
+        }
+
         #region  格式转换
 
         /// <summary>
@@ -609,6 +572,11 @@ namespace TownsEBMSystem
                 bb.Add((byte)Convert.ToInt32(item, 16));
             }
             return bb.ToArray();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

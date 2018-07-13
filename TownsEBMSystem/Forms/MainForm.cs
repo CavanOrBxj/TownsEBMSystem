@@ -16,6 +16,7 @@ using System.Net;
 using EBMTable;
 using EBSignature;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace TownsEBMSystem
 {
@@ -83,6 +84,7 @@ namespace TownsEBMSystem
             _EBMIndexGlobal = new EBMIndexGlobal_();
             dataDealHelper = new DataDealHelper();
             dataHelper = new DataHelper();
+            DataHelper.MyEvent += new DataHelper.MyDelegate(GlobalDataDeal);
             ProcessBegin();
         }
 
@@ -123,9 +125,100 @@ namespace TownsEBMSystem
         }
 
 
-        public void NetErrorDeal()
+        private void GlobalDataDeal(object obj)
         {
-      
+            try
+            {
+                TaskUploadBegin op = (TaskUploadBegin)obj;
+                if (SingletonInfo.GetInstance().loginstatus)
+                {
+                    if (op.ebm_class == "6")
+                    {
+                        //关闭指令
+                        List<string> IDList = new List<string>();
+                        IDList.Add(SingletonInfo.GetInstance().inter_cut_prlId);
+                        Generalresponse stopresponse = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(IDList, "停止");
+                        if (stopresponse.code == 0)
+                        {
+                            List<broadcastrecorddata> Listdata = (List<broadcastrecorddata>)dgv_broadcastrecord.DataSource;
+                            foreach (string item in IDList)
+                            {
+                                broadcastrecorddata tmp = Listdata.Find(s => s.prlId.Equals(Convert.ToInt32(item)));
+                                Listdata.Remove(tmp);
+                            }
+                            dgv_broadcastrecord.DataSource = null;
+                            dgv_broadcastrecord.DataSource = Listdata;
+
+                        }
+                    }
+                    else
+                    {
+                        //开启指令
+                        SendPlayInfo palyinfo = new SendPlayInfo();
+                        palyinfo.organization_List = new List<organizationdata>();
+                        palyinfo.organization_List = SingletonInfo.GetInstance().Organization;
+                        palyinfo.broadcastType = "1";//表示应急
+                        Generalresponse response = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(palyinfo, "播放");
+                        if (response.code == 0)
+                        {
+                            broadcastrecord broadcastrecordresponse = (broadcastrecord)SingletonInfo.GetInstance().post.PostCommnand(null, "直播列表");
+                            broadcastrecorddata sing = broadcastrecordresponse.data.Find(s => s.prAreaName.Equals(SingletonInfo.GetInstance().Organization[0].name));
+                            SingletonInfo.GetInstance().inter_cut_prlId = sing.prlId.ToString();
+                            Showdgv_broadcastrecord(broadcastrecordresponse.data);
+
+                        }
+                    }
+                }
+                else
+                {
+                    //未登录的情况下
+                    if (op.ebm_class == "6")
+                    {
+                        //关闭指令
+
+                        DelEBMIndex2Global(SingletonInfo.GetInstance().inter_cut_IndexItemID.ToString());
+                        List<PlayRecord_tcp_ts> Listdata = (List<PlayRecord_tcp_ts>)dgv_broadcastrecord.DataSource;
+                        PlayRecord_tcp_ts pp = Listdata.Find(s=>s.IndexItemID.Equals(SingletonInfo.GetInstance().inter_cut_IndexItemID.ToString()));
+                        Listdata.Remove(pp);
+                        Showdgv_broadcastrecord(Listdata);
+
+
+                    }
+                    else
+                    {
+                        //开启指令
+                        #region  TS指令 播发
+                        List<string> IndexItemIDList = TSBroadcastcommand(SingletonInfo.GetInstance().Organization, "应急", SingletonInfo.GetInstance().ts_pid, "0100");
+
+
+                        SingletonInfo.GetInstance().inter_cut_IndexItemID = Convert.ToInt32(IndexItemIDList[0]); 
+                        List<PlayRecord_tcp_ts> datasource = (List<PlayRecord_tcp_ts>)dgv_broadcastrecord.DataSource;
+
+                        PlayRecord_tcp_ts pp = new PlayRecord_tcp_ts();
+                        pp.IndexItemID = IndexItemIDList[0];
+                        pp.prAreaName = SingletonInfo.GetInstance().Organization[0].name;
+                        pp.prEvnType = "应急";
+                        pp.resource_code = SingletonInfo.GetInstance().Organization[0].resource;
+
+                        if (datasource == null)
+                        {
+                            datasource = new List<PlayRecord_tcp_ts>();
+                        }
+                        datasource.Add(pp);
+                        Showdgv_broadcastrecord(datasource);
+                        #endregion
+                    }
+
+                }
+            
+            }
+            catch (Exception ex)
+            {
+
+                LogHelper.WriteLog(typeof(MainForm), ex.ToString());
+            }
+
+
         }
 
         private void InitConfig()
@@ -172,6 +265,10 @@ namespace TownsEBMSystem
 
                 SingletonInfo.GetInstance().IndexItemID = Convert.ToInt32(ini.ReadValue("EBM", "IndexItemID"));
 
+
+                var jo = TableDataHelper.ReadTable(Enums.TableType.WhiteList);
+
+                SingletonInfo.GetInstance().WhiteListRecordList = JsonConvert.DeserializeObject<List<WhiteListRecord>>(jo["0"].ToString());
             }
             catch (Exception ex)
             {
@@ -289,6 +386,55 @@ namespace TownsEBMSystem
             }));
         }
 
+
+        private void ShowtreeViewOrganization_WhiteList(List<organizationdata> inputdata)
+        {
+            this.Invoke(new Action(() =>
+            {
+                treeViewOrganization_WhiteList.Nodes.Clear();
+                foreach (organizationdata item in inputdata)
+                {
+                    TreeNode node = new TreeNode();
+                    node.Text = item.name;
+                    node.Tag = item;
+                    subnode(node, item.children);
+                    treeViewOrganization_WhiteList.Nodes.Add(node);
+                }
+            }));
+        }
+
+        private void ShowtreeViewOrganization_RebackCycle(List<organizationdata> inputdata)
+        {
+            this.Invoke(new Action(() =>
+            {
+                treeViewOrganization_RebackCycle.Nodes.Clear();
+                foreach (organizationdata item in inputdata)
+                {
+                    TreeNode node = new TreeNode();
+                    node.Text = item.name;
+                    node.Tag = item;
+                    subnode(node, item.children);
+                    treeViewOrganization_RebackCycle.Nodes.Add(node);
+                }
+            }));
+        }
+        private void ShowtreeViewOrganization_RebackParam(List<organizationdata> inputdata)
+        {
+            this.Invoke(new Action(() =>
+            {
+                treeViewOrganization_RebackParam.Nodes.Clear();
+                foreach (organizationdata item in inputdata)
+                {
+                    TreeNode node = new TreeNode();
+                    node.Text = item.name;
+                    node.Tag = item;
+                    subnode(node, item.children);
+                    treeViewOrganization_RebackParam.Nodes.Add(node);
+                }
+            }));
+        }
+
+
         private void InitTimer()
         {
              t.Elapsed += new System.Timers.ElapsedEventHandler(SendHeartBeat);//到达时间的时候执行事件；
@@ -315,6 +461,9 @@ namespace TownsEBMSystem
             {
                SingletonInfo.GetInstance().Organization =((organizationInfo)SingletonInfo.GetInstance().post.PostCommnand(null, "获取区域")).data;
                 ShowtreeViewOrganization(SingletonInfo.GetInstance().Organization);
+                ShowtreeViewOrganization_WhiteList(SingletonInfo.GetInstance().Organization);
+
+
             }
             catch (Exception ex)
             {
@@ -359,32 +508,42 @@ namespace TownsEBMSystem
         {
             this.Invoke(new Action(() =>
             {
-                dgv_broadcastrecord.DataSource = null;
-                if (Listdata.Count > 0)
+                BindingList<broadcastrecorddata> tmpList = new BindingList<broadcastrecorddata>();
+                foreach (var item in Listdata)
                 {
-                    dgv_broadcastrecord.DataSource = Listdata;
+                    tmpList.Add(item);
                 }
+                dgv_broadcastrecord.DataSource = tmpList;
+
             }));
         }
-
 
         private void Showdgv_broadcastrecord(List<PlayRecord_tcp_ts> Listdata)
         {
             this.Invoke(new Action(() =>
             {
-
-                if (Listdata.Count>0)
+                BindingList<PlayRecord_tcp_ts> tmpList = new BindingList<PlayRecord_tcp_ts>();
+                foreach (var item in Listdata)
                 {
-                    dgv_broadcastrecord.DataSource = null;
-                    if (Listdata.Count > 0)
-                    {
-                        dgv_broadcastrecord.DataSource = Listdata;
-                    }
+                    tmpList.Add(item);
                 }
-              
+                dgv_broadcastrecord.DataSource = tmpList;
             }));
         }
 
+
+        private void Showdgv_WhiteList(List<WhiteListRecord> Listdata)
+        {
+            this.Invoke(new Action(() =>
+            {
+                BindingList<WhiteListRecord> tmpList = new BindingList<WhiteListRecord>();
+                foreach (var item in Listdata)
+                {
+                    tmpList.Add(item);
+                }
+                dgv_WhiteList.DataSource = tmpList;
+            }));
+        }
 
         /// <summary>
         /// 遍历树 找到勾选节点
@@ -397,6 +556,9 @@ namespace TownsEBMSystem
             TreeNode node = parent;
             if (node != null)
             {
+
+                if (node.Checked == true && node.Parent == null)
+                    checkednodes.Add(((organizationdata)node.Tag));
                 if (node.Checked == true && node.FirstNode == null)
                     checkednodes.Add(((organizationdata)node.Tag));
 
@@ -440,13 +602,9 @@ namespace TownsEBMSystem
                                     broadcastrecorddata tmp = Listdata.Find(s => s.prlId.Equals(Convert.ToInt32(item)));
                                     Listdata.Remove(tmp);
                                 }
-                                dgv_broadcastrecord.DataSource = null;
-                                dgv_broadcastrecord.DataSource = Listdata;
-
+                                Showdgv_broadcastrecord(Listdata);
                             }
-
                         }
-
                     }
                 }
                 else
@@ -467,22 +625,28 @@ namespace TownsEBMSystem
                         }
                         if (IDList.Count > 0)
                         {
-                            OnorOFFResponse stopresponse = TCPBroadcastcommand(IDList,"2");
-                            if (stopresponse.result_code == 0)
-                            {
+                          //  OnorOFFResponse stopresponse = TCPBroadcastcommand(IDList,"2");  20180711经商议 停播不发前端协议 
+                          //  if (stopresponse.result_code == 0)
+                           // {
 
                                 IndexItemIDstr = IndexItemIDstr.Substring(0, IndexItemIDstr.Length - 1);
 
                                 DelEBMIndex2Global(IndexItemIDstr);
-                                List<PlayRecord_tcp_ts> Listdata = (List<PlayRecord_tcp_ts>)dgv_broadcastrecord.DataSource;
-                                foreach (PlayRecord_tcp_ts item in IDList)
-                                {
-                                    Listdata.Remove(item);
-                                }
-                                dgv_broadcastrecord.DataSource = null;
-                                dgv_broadcastrecord.DataSource = Listdata;
+                            List<PlayRecord_tcp_ts> Listdata = new List<PlayRecord_tcp_ts>();
 
+                            BindingList<PlayRecord_tcp_ts>  dgvdatasouceList= (BindingList<PlayRecord_tcp_ts>)dgv_broadcastrecord.DataSource;
+                            foreach (PlayRecord_tcp_ts item in IDList)
+                            {
+                                dgvdatasouceList.Remove(item);
                             }
+
+                            foreach (var item in dgvdatasouceList)
+                            {
+                                Listdata.Add(item);
+                            }
+                                Showdgv_broadcastrecord(Listdata);
+
+                           // }
 
                         }
 
@@ -597,6 +761,9 @@ namespace TownsEBMSystem
                                 #endregion
 
                                 ShowtreeViewOrganization(reback1.data);
+                                ShowtreeViewOrganization_WhiteList(reback1.data);
+                                ShowtreeViewOrganization_RebackCycle(reback1.data);
+                                ShowtreeViewOrganization_RebackParam(reback1.data);
 
                             }
                             #endregion
@@ -632,6 +799,9 @@ namespace TownsEBMSystem
                         SingletonInfo.GetInstance().Organization = JsonConvert.DeserializeObject<List<organizationdata>>(jo["0"].ToString());
                     }
                     ShowtreeViewOrganization(SingletonInfo.GetInstance().Organization);
+                    ShowtreeViewOrganization_WhiteList(SingletonInfo.GetInstance().Organization);
+                    ShowtreeViewOrganization_RebackCycle(SingletonInfo.GetInstance().Organization);
+                    ShowtreeViewOrganization_RebackParam(SingletonInfo.GetInstance().Organization);
 
                 }
 
@@ -662,18 +832,18 @@ namespace TownsEBMSystem
         }
 
 
-        private GeneralResponse TCPRebackPeriod(List<organizationdata> organization_List,string cycle)
+        private GeneralResponse TCPGeneralRebackParam(GeneralRebackParam tt)
         {
-            RebackPeriod tt = new RebackPeriod();
+           
+            GeneralResponse resopnse = (GeneralResponse)SingletonInfo.GetInstance().tcpsend.SendTCPCommnand(tt, 0x07);
+            return resopnse;
+        }
 
-            tt.reback_cycle = cycle;
-            tt.resource_code_type = "1";
-            tt.resource_codeList = new List<string>();
-            foreach (var item in organization_List)
-            {
-                tt.resource_codeList.Add(item.resource);
-            }
-            GeneralResponse resopnse = (GeneralResponse)SingletonInfo.GetInstance().tcpsend.SendTCPCommnand(tt,0x0B);
+
+        private GeneralResponse TCPRebackPeriod(GeneralRebackCycle tmp)
+        {
+            
+            GeneralResponse resopnse = (GeneralResponse)SingletonInfo.GetInstance().tcpsend.SendTCPCommnand(tmp, 0x0B);
             return resopnse;
         }
 
@@ -764,13 +934,15 @@ namespace TownsEBMSystem
                 tmp.S_EBM_start_time = SingletonInfo.GetInstance().starttime;//
                 tmp.S_EBM_type = "00000";//
 
-                string List_EBM_resource_code = "";
-                foreach (organizationdata org in organization_List)
-                {
-                    List_EBM_resource_code +=","+ org.resource;
-                }
-                List_EBM_resource_code = List_EBM_resource_code.Substring(1, List_EBM_resource_code.Length-1);
-                tmp.List_EBM_resource_code = List_EBM_resource_code;
+              //  string List_EBM_resource_code = "";
+              //  foreach (organizationdata org in organization_List)
+              //  {
+              //      List_EBM_resource_code +=","+ org.resource;
+               // }
+
+              //  List_EBM_resource_code=
+              //  List_EBM_resource_code = List_EBM_resource_code.Substring(1, List_EBM_resource_code.Length-1);
+                tmp.List_EBM_resource_code = item.resource;
 
                 tmp.BL_details_channel_indicate = "true";
                 tmp.S_details_channel_transport_stream_id = SingletonInfo.GetInstance().S_details_channel_transport_stream_id;
@@ -827,16 +999,21 @@ namespace TownsEBMSystem
                     //离线状态 发送TS数据  同时也要发前端协议  内容和TS一样   资源码"0612"+12位区域码+"00"
                     if (organization_List.Count > 0)
                     {
-                        #region 前端协议播发
-                        OnorOFFResponse res = TCPBroadcastcommand(organization_List, "1", "4");//"1"表示开播
+                        #region 前端协议播发   20180711  商议结果  播放停止的时候  前端协议不发
+                      // OnorOFFResponse res = TCPBroadcastcommand(organization_List, "1", "4");//"1"表示开播
 
-                        SingletonInfo.GetInstance().ts_pid = res.result_desc;
+                      //  SingletonInfo.GetInstance().ts_pid = res.result_desc;
                         #endregion
 
                         #region  TS指令 播发
                         List<string> IndexItemIDList = TSBroadcastcommand(organization_List, "应急", SingletonInfo.GetInstance().ts_pid, "0100");//此时的res.result_desc中存放的是pid数据
 
-                        List<PlayRecord_tcp_ts> datasource = new List<PlayRecord_tcp_ts>();
+                        List<PlayRecord_tcp_ts> datasource = (List<PlayRecord_tcp_ts>)dgv_broadcastrecord.DataSource;
+
+                        if (datasource==null)
+                        {
+                            datasource = new List<PlayRecord_tcp_ts>();
+                        }
                         for (int i = 0; i < organization_List.Count; i++)
                         {
                             PlayRecord_tcp_ts pp = new PlayRecord_tcp_ts();
@@ -846,14 +1023,12 @@ namespace TownsEBMSystem
                             pp.resource_code = organization_List[i].resource;
                             datasource.Add(pp);
                         }
-
-
                           Showdgv_broadcastrecord(datasource); 
                         #endregion
-                        if (res.result_code == 1)
-                        {
-                            MessageBox.Show("播放失败：");
-                        }
+                        //if (res.result_code == 1)
+                        //{
+                        //    MessageBox.Show("播放失败：");
+                        //}
 
                     }
                 }
@@ -903,19 +1078,19 @@ namespace TownsEBMSystem
                     //离线状态 发送TS数据  同时也要发前端协议  内容和TS一样   资源码"0612"+12位区域码+"00"
                     if (organization_List.Count > 0)
                     {
-                        #region 前端协议播发
-                        OnorOFFResponse res = TCPBroadcastcommand(organization_List, "1","5");//"1"表示开播
+                        #region 前端协议播发  20180711 商议结果 播放停止的时候 前端协议不发
+                      //  OnorOFFResponse res = TCPBroadcastcommand(organization_List, "1","5");//"1"表示开播
 
-                        SingletonInfo.GetInstance().ts_pid = res.result_desc;
+                      //  SingletonInfo.GetInstance().ts_pid = res.result_desc;
                         #endregion
 
                         #region  TS指令 播发
                         TSBroadcastcommand(organization_List, "日常", SingletonInfo.GetInstance().ts_pid,"0101");//此时的res.result_desc中存放的是pid数据
                         #endregion
-                        if (res.result_code == 1)
-                        {
-                            MessageBox.Show("播放失败：");
-                        }
+                        //if (res.result_code == 1)
+                        //{
+                        //    MessageBox.Show("播放失败：");
+                        //}
 
                     }
                 }
@@ -931,14 +1106,11 @@ namespace TownsEBMSystem
         {
             try
             {
-
                 skinTabControl_Organization.Location = new System.Drawing.Point(436, 179);
                 skinTabControl_Organization.Size = new System.Drawing.Size(1038, 659);
                 skinTabControl_Organization.Visible = true;
                 skinTabControl_parameterset.Visible = false;
                 btn_Home1.Visible = true;
-
-
 
                 skinButton1.Text = "话筒";
                 skinButton3.Text = "U盘";
@@ -991,6 +1163,8 @@ namespace TownsEBMSystem
             skinButton8.Text = "网络设置";
             skinButton7.Text = "U盘播放";
             skinButton6.Text = "系统设置";
+
+            Showdgv_WhiteList(SingletonInfo.GetInstance().WhiteListRecordList);
         }
 
         private void btn_Home1_Click(object sender, EventArgs e)
@@ -1017,6 +1191,9 @@ namespace TownsEBMSystem
                 ini.WriteValue("EBM", "ebm_id_count", SingletonInfo.GetInstance().ebm_id_count.ToString());
                 ini.WriteValue("EBM", "input_channel_id", SingletonInfo.GetInstance().input_channel_id);
                 ini.WriteValue("EBM", "IndexItemID", SingletonInfo.GetInstance().IndexItemID.ToString());
+
+
+                TableDataHelper.WriteTable(Enums.TableType.WhiteList, SingletonInfo.GetInstance().WhiteListRecordList);
                 if (EbmStream != null && IsStartStream)
                 {
                     EbmStream.StopStreaming();
@@ -1035,6 +1212,7 @@ namespace TownsEBMSystem
                 ini.WriteValue("EBM", "input_channel_id", SingletonInfo.GetInstance().input_channel_id);
                 ini.WriteValue("EBM", "IndexItemID", SingletonInfo.GetInstance().IndexItemID.ToString());
 
+                TableDataHelper.WriteTable(Enums.TableType.WhiteList, SingletonInfo.GetInstance().WhiteListRecordList);
                 if (EbmStream != null && IsStartStream)
                 {
                     EbmStream.StopStreaming();
@@ -1131,15 +1309,17 @@ namespace TownsEBMSystem
             {
                 if (skinButton4.Text == "DVB-C")
                 {
-                    OnorOFFResponse res = SwitchChannel(3);//DVB-C目前定为3
-                    if (res.result_code == 1)  //0代表成功1代表失败
-                    {
-                        MessageBox.Show("切换到DVB-C失败");
-                    }
-                    else
-                    {
-                        SingletonInfo.GetInstance().input_channel_id = "3";
-                    }
+                    //OnorOFFResponse res = SwitchChannel(3);//DVB-C目前定为3
+                    //if (res.result_code == 1)  //0代表成功1代表失败
+                    //{
+                    //    MessageBox.Show("切换到DVB-C失败");
+                    //}
+                    //else
+                    //{
+                    //    SingletonInfo.GetInstance().input_channel_id = "3";
+                    //}
+
+                    MessageBox.Show("暂不支持该线路切换");
                 }
                 else
                 {
@@ -1159,15 +1339,16 @@ namespace TownsEBMSystem
             {
                 if (skinButton5.Text == "DTMB")
                 {
-                    OnorOFFResponse res = SwitchChannel(4);//DTMB目前定为4
-                    if (res.result_code == 1)  //0代表成功1代表失败
-                    {
-                        MessageBox.Show("切换到DVB-C失败");
-                    }
-                    else
-                    {
-                        SingletonInfo.GetInstance().input_channel_id = "4";
-                    }
+                    //OnorOFFResponse res = SwitchChannel(4);//DTMB目前定为4
+                    //if (res.result_code == 1)  //0代表成功1代表失败
+                    //{
+                    //    MessageBox.Show("切换到DVB-C失败");
+                    //}
+                    //else
+                    //{
+                    //    SingletonInfo.GetInstance().input_channel_id = "4";
+                    //}
+                    MessageBox.Show("暂不支持该线路切换");
                 }
                 else
                 {
@@ -1568,14 +1749,6 @@ namespace TownsEBMSystem
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            List<organizationdata> organization_List = new List<organizationdata>();
-            organization_List = CheckedNodes(treeViewOrganization.TopNode, organization_List);
-            GeneralResponse res = TCPRebackPeriod(organization_List, "60");
-            
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             List<organizationdata> organization_List = new List<organizationdata>();
@@ -1608,6 +1781,263 @@ namespace TownsEBMSystem
 
             senddata.white_list.Add(pp);
            GeneralResponse res = TCPWhiteListUpdate(senddata);
+        }
+
+        private void btn_AddWhiteList_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                btn_AddWhiteList.Visible = false;
+                btn_DelWhiteList.Visible = false;
+                dgv_WhiteList.Visible = false;
+            }
+            catch (Exception)
+            {
+
+               
+            }
+        }
+
+
+
+
+        private void btn_OK_AddWhiteList_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (txt_username.Text == "")
+                {
+                    MessageBox.Show("请输入用户名！");
+                    txt_username.Focus();
+                    return;
+                }
+
+                if (txt_phonenumber.Text == "")
+                {
+                    MessageBox.Show("请输入手机号码！");
+                    txt_phonenumber.Focus();
+                    return;
+                }
+                btn_AddWhiteList.Visible = true;
+                btn_DelWhiteList.Visible = true;
+                dgv_WhiteList.Visible = true;
+
+                WhiteListRecord tmpAdd = new WhiteListRecord();
+                tmpAdd.username = txt_username.Text;
+                tmpAdd.phone_number = txt_phonenumber.Text;
+
+
+
+                WhiteListUpdate senddata = new WhiteListUpdate();
+                senddata.white_list = new List<WhiteListInfo>();
+                WhiteListInfo pp = new WhiteListInfo();
+                List<organizationdata> organization_List = new List<organizationdata>();
+                organization_List = CheckedNodes(treeViewOrganization_WhiteList.TopNode, organization_List);
+
+                pp.oper_type = "1"; //操纵类型 1：增加 2：修改 3：删除
+                pp.phone_number = txt_phonenumber.Text;
+                pp.user_name = txt_username.Text;
+                pp.permission_type = "2";//许可类型1:代表短信;2:代表电话;3代表短信和电话
+                pp.permission_area_codeList = new List<string>();
+
+
+                if (organization_List.Count > 0)
+                {
+                    foreach (var item in organization_List)
+                    {
+                        tmpAdd.Organizations += item.name + ",";
+                        tmpAdd.gb_codes += item.gb_code + ",";
+                        pp.permission_area_codeList.Add(item.gb_code);
+                    }
+                    senddata.white_list.Add(pp);
+                    tmpAdd.gb_codes = tmpAdd.gb_codes.Substring(0, tmpAdd.gb_codes.Length - 1);
+                    tmpAdd.Organizations = tmpAdd.Organizations.Substring(0, tmpAdd.Organizations.Length - 1);
+
+                    SingletonInfo.GetInstance().WhiteListRecordList.Add(tmpAdd);
+                    Showdgv_WhiteList(SingletonInfo.GetInstance().WhiteListRecordList);
+              //      GeneralResponse res = TCPWhiteListUpdate(senddata); // 暂时先注释20180711
+
+                }
+
+
+                txt_username.Text = "";
+                txt_phonenumber.Text = "";
+            }
+            catch (Exception)
+            {
+
+
+            }
+        }
+
+    
+
+        private void btn_RebackCycle_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txt_RebackCycle.Text == "")
+                {
+                    MessageBox.Show("请输入周期！");
+                    txt_RebackCycle.Focus();
+                    return;
+                }
+               
+                List<organizationdata> organization_List = new List<organizationdata>();
+                organization_List = CheckedNodes(treeViewOrganization_RebackCycle.TopNode, organization_List);
+                GeneralRebackCycle Addtmp = new GeneralRebackCycle();
+                Addtmp.reback_cycle = txt_RebackCycle.Text.Trim();
+                Addtmp.resource_code_type = "1";
+                Addtmp.resource_codeList = new List<string>();
+                foreach (var item in organization_List)
+                {
+                    Addtmp.resource_codeList.Add(item.resource);
+                }
+                //  GeneralResponse res = TCPRebackPeriod(Addtmp); //暂时先注释20180711
+
+                MessageBox.Show("设置成功");
+
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+     
+
+        private void btn_DelWhiteList_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgv_WhiteList.Rows.Count > 0)
+                {
+                    List<WhiteListRecord> IDList = new List<WhiteListRecord>();
+                   
+                    for (int i = 0; i < dgv_WhiteList.Rows.Count; i++)
+                    {
+                        if ((bool)dgv_WhiteList.Rows[i].Cells[0].EditedFormattedValue == true)
+                        {
+                            WhiteListRecord tmp = (WhiteListRecord)dgv_WhiteList.Rows[i].DataBoundItem;
+
+                            IDList.Add(tmp);
+                        }
+                    }
+                    if (IDList.Count > 0)
+                    {
+
+                        BindingList<WhiteListRecord> dgvwhiteList = (BindingList<WhiteListRecord>)dgv_WhiteList.DataSource;
+                        List<WhiteListRecord> Listdata = new List<WhiteListRecord>();
+
+                        WhiteListUpdate DelWhiteList = new WhiteListUpdate();
+                        DelWhiteList.white_list = new List<WhiteListInfo>();
+
+                        foreach (var item in IDList)
+                        {
+                            WhiteListInfo selctone = new WhiteListInfo();
+                            selctone.user_name = item.username;
+                            selctone.oper_type = "3";//表示删除
+                            selctone.phone_number = item.phone_number;
+                            selctone.permission_type = "2";//当前只能当做电话
+                            selctone.permission_area_codeList = new List<string>();
+                            string[] gb_code = item.gb_codes.Split(',');
+                            foreach (var code in gb_code)
+                            {
+                                selctone.permission_area_codeList.Add(code);
+                            }
+                            DelWhiteList.white_list.Add(selctone);
+
+                            dgvwhiteList.Remove(item);
+                        }
+
+                      //  GeneralResponse res = TCPWhiteListUpdate(DelWhiteList); // 暂时先注释20180711
+                        foreach (WhiteListRecord item in dgvwhiteList)
+                        {
+                            Listdata.Add(item);
+                        }
+
+                        SingletonInfo.GetInstance().WhiteListRecordList = Listdata;
+                        Showdgv_WhiteList(Listdata);
+
+                        // }
+
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+
+                
+            }
+        }
+
+        private void btn_RebackParam_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txt_reback_address.Text == "")
+                {
+                    MessageBox.Show("请输入地址信息！");
+                    txt_reback_address.Focus();
+                    return;
+                }
+
+                GeneralRebackParam addtmp = new GeneralRebackParam();
+                addtmp.reback_type = "";
+                if (radioBtn_Message.Checked)
+                {
+                    addtmp.reback_type = "1";
+                }
+                if (radioBtn_IPandPort.Checked)
+                {
+                    addtmp.reback_type = "2";
+                }
+
+                if (radioBtn_DomainandPort.Checked)
+                {
+                    addtmp.reback_type = "3";
+                }
+
+                addtmp.reback_address = txt_reback_address.Text.Trim();
+
+                addtmp.resource_code_type = "1";
+                addtmp.resource_codeList = new List<string>();
+                List<organizationdata> organization_List = new List<organizationdata>();
+                organization_List = CheckedNodes(treeViewOrganization_RebackCycle.TopNode, organization_List);
+                foreach (var item in organization_List)
+                {
+                    addtmp.resource_codeList.Add(item.resource);
+                }
+
+            //    GeneralResponse res = TCPGeneralRebackParam(addtmp);// 暂时先注释20180711
+
+                MessageBox.Show("设置成功");
+            }
+            catch (Exception)
+            {
+
+              
+            }
+        }
+
+        private void btn_Cancel_AddWhiteList_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                btn_AddWhiteList.Visible = true;
+                btn_DelWhiteList.Visible = true;
+                dgv_WhiteList.Visible = true;
+                txt_username.Text = "";
+                txt_phonenumber.Text = "";
+            }
+            catch (Exception)
+            {
+
+                
+            }
         }
     }
 }
