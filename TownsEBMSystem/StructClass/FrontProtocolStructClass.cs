@@ -209,4 +209,28 @@ namespace TownsEBMSystem
         public List<string> resource_codeList;//资源码信息  默认所有资源码都是同一长度
 
     }
+
+    public class GeneralVolumn
+    {
+        public string volume { get; set; }
+
+        public string resource_code_type { get; set; }
+
+        public List<string> resource_codeList;//资源码信息  默认所有资源码都是同一长度
+
+    }
+
+    /// <summary>
+    /// 通用网络参数设置
+    /// </summary>
+    public class GeneralNetworkParam
+    {
+        public string ip { get; set; }
+        public string subnet_mask { get; set; }
+        public string gateway { get; set; }
+        public string resource_code_type { get; set; }
+        public string resource_code { get; set; }
+
+    }
+         
 }

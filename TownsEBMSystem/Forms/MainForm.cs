@@ -188,7 +188,7 @@ namespace TownsEBMSystem
                     {
                         //开启指令
                         #region  TS指令 播发
-                        List<string> IndexItemIDList = TSBroadcastcommand(SingletonInfo.GetInstance().Organization, "应急", SingletonInfo.GetInstance().ts_pid, "0100");
+                        List<string> IndexItemIDList = TSBroadcastcommand(SingletonInfo.GetInstance().Organization, SingletonInfo.GetInstance().ts_pid, "0100");
 
 
                         SingletonInfo.GetInstance().inter_cut_IndexItemID = Convert.ToInt32(IndexItemIDList[0]); 
@@ -434,6 +434,38 @@ namespace TownsEBMSystem
             }));
         }
 
+        private void ShowtreeViewOrganization_volumn(List<organizationdata> inputdata)
+        {
+            this.Invoke(new Action(() =>
+            {
+                treeViewOrganization_volumn.Nodes.Clear();
+                foreach (organizationdata item in inputdata)
+                {
+                    TreeNode node = new TreeNode();
+                    node.Text = item.name;
+                    node.Tag = item;
+                    subnode(node, item.children);
+                    treeViewOrganization_volumn.Nodes.Add(node);
+                }
+            }));
+        }
+
+
+        private void ShowtreeViewOrganization_SwitchAmplifier(List<organizationdata> inputdata)
+        {
+            this.Invoke(new Action(() =>
+            {
+                treeViewOrganization_SwitchAmplifier.Nodes.Clear();
+                foreach (organizationdata item in inputdata)
+                {
+                    TreeNode node = new TreeNode();
+                    node.Text = item.name;
+                    node.Tag = item;
+                    subnode(node, item.children);
+                    treeViewOrganization_SwitchAmplifier.Nodes.Add(node);
+                }
+            }));
+        }
 
         private void InitTimer()
         {
@@ -514,7 +546,12 @@ namespace TownsEBMSystem
                     tmpList.Add(item);
                 }
                 dgv_broadcastrecord.DataSource = tmpList;
-
+                dgv_broadcastrecord.Columns[1].Visible = false;
+                dgv_broadcastrecord.Columns[2].HeaderText= "播出区域";
+                dgv_broadcastrecord.Columns[3].Visible = false;
+                dgv_broadcastrecord.Columns[4].HeaderText = "播放类型";
+                dgv_broadcastrecord.Columns[5].Visible = false;
+                dgv_broadcastrecord.Columns[6].Visible = false;
             }));
         }
 
@@ -528,6 +565,10 @@ namespace TownsEBMSystem
                     tmpList.Add(item);
                 }
                 dgv_broadcastrecord.DataSource = tmpList;
+                dgv_broadcastrecord.Columns[1].Visible = false;
+                dgv_broadcastrecord.Columns[2].Visible = false;
+                dgv_broadcastrecord.Columns[3].HeaderText = "播出区域";
+                dgv_broadcastrecord.Columns[4].HeaderText = "播放类型";
             }));
         }
 
@@ -557,7 +598,7 @@ namespace TownsEBMSystem
             if (node != null)
             {
 
-                if (node.Checked == true && node.Parent == null)
+                if (node.Checked == true && node.Parent == null)///首节点
                     checkednodes.Add(((organizationdata)node.Tag));
                 if (node.Checked == true && node.FirstNode == null)
                     checkednodes.Add(((organizationdata)node.Tag));
@@ -764,6 +805,8 @@ namespace TownsEBMSystem
                                 ShowtreeViewOrganization_WhiteList(reback1.data);
                                 ShowtreeViewOrganization_RebackCycle(reback1.data);
                                 ShowtreeViewOrganization_RebackParam(reback1.data);
+                                ShowtreeViewOrganization_SwitchAmplifier(reback1.data);
+                                ShowtreeViewOrganization_volumn(reback1.data);
 
                             }
                             #endregion
@@ -802,11 +845,30 @@ namespace TownsEBMSystem
                     ShowtreeViewOrganization_WhiteList(SingletonInfo.GetInstance().Organization);
                     ShowtreeViewOrganization_RebackCycle(SingletonInfo.GetInstance().Organization);
                     ShowtreeViewOrganization_RebackParam(SingletonInfo.GetInstance().Organization);
+                    ShowtreeViewOrganization_SwitchAmplifier(SingletonInfo.GetInstance().Organization);
+                    ShowtreeViewOrganization_volumn(SingletonInfo.GetInstance().Organization);
 
                 }
 
             }
         }
+
+
+        private GeneralResponse TCPGeneralVolumn(List<organizationdata> organization_List, string volumn)
+        {
+            GeneralVolumn tt = new GeneralVolumn();
+
+            tt.volume = volumn;
+            tt.resource_code_type = "1";
+            tt.resource_codeList = new List<string>();
+            foreach (var item in organization_List)
+            {
+                tt.resource_codeList.Add(item.resource);
+            }
+            GeneralResponse resopnse = (GeneralResponse)SingletonInfo.GetInstance().tcpsend.SendTCPCommnand(tt, 0x06);
+            return resopnse;
+        }
+
 
 
         private GeneralResponse TCPWhiteListUpdate(WhiteListUpdate whitelist)
@@ -907,7 +969,7 @@ namespace TownsEBMSystem
 
 
 
-        private List<string> TSBroadcastcommand(List<organizationdata> organization_List,string broadcasttype,string pid,string ebm_class)
+        private List<string> TSBroadcastcommand(List<organizationdata> organization_List,string pid,string ebm_class)
         {
             List<string> IndexItemIDList = new List<string>();
 
@@ -1006,7 +1068,7 @@ namespace TownsEBMSystem
                         #endregion
 
                         #region  TS指令 播发
-                        List<string> IndexItemIDList = TSBroadcastcommand(organization_List, "应急", SingletonInfo.GetInstance().ts_pid, "0100");//此时的res.result_desc中存放的是pid数据
+                        List<string> IndexItemIDList = TSBroadcastcommand(organization_List, SingletonInfo.GetInstance().ts_pid, "0100");//此时的res.result_desc中存放的是pid数据
 
                         List<PlayRecord_tcp_ts> datasource = (List<PlayRecord_tcp_ts>)dgv_broadcastrecord.DataSource;
 
@@ -1078,14 +1140,31 @@ namespace TownsEBMSystem
                     //离线状态 发送TS数据  同时也要发前端协议  内容和TS一样   资源码"0612"+12位区域码+"00"
                     if (organization_List.Count > 0)
                     {
-                        #region 前端协议播发  20180711 商议结果 播放停止的时候 前端协议不发
-                      //  OnorOFFResponse res = TCPBroadcastcommand(organization_List, "1","5");//"1"表示开播
+                        #region 前端协议播发   20180711  商议结果  播放停止的时候  前端协议不发
+                        // OnorOFFResponse res = TCPBroadcastcommand(organization_List, "1", "4");//"1"表示开播
 
-                      //  SingletonInfo.GetInstance().ts_pid = res.result_desc;
+                        //  SingletonInfo.GetInstance().ts_pid = res.result_desc;
                         #endregion
 
                         #region  TS指令 播发
-                        TSBroadcastcommand(organization_List, "日常", SingletonInfo.GetInstance().ts_pid,"0101");//此时的res.result_desc中存放的是pid数据
+                        List<string> IndexItemIDList = TSBroadcastcommand(organization_List, SingletonInfo.GetInstance().ts_pid, "0101");//此时的res.result_desc中存放的是pid数据
+
+                        List<PlayRecord_tcp_ts> datasource = (List<PlayRecord_tcp_ts>)dgv_broadcastrecord.DataSource;
+
+                        if (datasource == null)
+                        {
+                            datasource = new List<PlayRecord_tcp_ts>();
+                        }
+                        for (int i = 0; i < organization_List.Count; i++)
+                        {
+                            PlayRecord_tcp_ts pp = new PlayRecord_tcp_ts();
+                            pp.IndexItemID = IndexItemIDList[i];
+                            pp.prAreaName = organization_List[i].name;
+                            pp.prEvnType = "日常";
+                            pp.resource_code = organization_List[i].resource;
+                            datasource.Add(pp);
+                        }
+                        Showdgv_broadcastrecord(datasource);
                         #endregion
                         //if (res.result_code == 1)
                         //{
@@ -1126,13 +1205,11 @@ namespace TownsEBMSystem
                 if (SingletonInfo.GetInstance().loginstatus)
                 {
                     Generalresponse stopresponse = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(null, "地图");
-
-                    Thread.Sleep(500);
                     testUrl = SingletonInfo.GetInstance().HttpServer + stopresponse.data;
                     #region  调用火狐浏览器
                     Browser = new Gecko.GeckoWebBrowser();
-                    Browser.Dock = DockStyle.Fill;
                     skinTabControl_Organization.TabPages["skinTabPage3"].Controls.Add(Browser);
+                    Browser.Dock = DockStyle.Fill;
                     Browser.Navigate(testUrl);
                     #endregion
                 }
@@ -1748,40 +1825,7 @@ namespace TownsEBMSystem
                 return false;
             }
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            List<organizationdata> organization_List = new List<organizationdata>();
-            organization_List = CheckedNodes(treeViewOrganization.TopNode, organization_List);
-            GeneralResponse res = TCPSwitchAmplifier(organization_List, "1");//1表示关闭喇叭  2表示打开喇叭
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            List<organizationdata> organization_List = new List<organizationdata>();
-            organization_List = CheckedNodes(treeViewOrganization.TopNode, organization_List);
-
-            WhiteListUpdate senddata = new WhiteListUpdate();
-         
-
-            senddata.white_list = new List<WhiteListInfo>();
-
-
-            WhiteListInfo pp = new WhiteListInfo();
-
-            pp.oper_type = "1"; //操纵类型 1：增加 2：修改 3：删除
-            pp.phone_number = "15158108008";
-            pp.user_name = "老司机";
-            pp.permission_type = "3";//许可类型1:代表短信;2:代表电话;3代表短信和电话
-            pp.permission_area_codeList = new List<string>();
-            foreach (var item in organization_List)
-            {
-                pp.permission_area_codeList.Add(item.gb_code);
-            }
-
-            senddata.white_list.Add(pp);
-           GeneralResponse res = TCPWhiteListUpdate(senddata);
-        }
+        
 
         private void btn_AddWhiteList_Click(object sender, EventArgs e)
         {
@@ -1797,9 +1841,6 @@ namespace TownsEBMSystem
                
             }
         }
-
-
-
 
         private void btn_OK_AddWhiteList_Click(object sender, EventArgs e)
         {
@@ -1859,8 +1900,6 @@ namespace TownsEBMSystem
               //      GeneralResponse res = TCPWhiteListUpdate(senddata); // 暂时先注释20180711
 
                 }
-
-
                 txt_username.Text = "";
                 txt_phonenumber.Text = "";
             }
@@ -2037,6 +2076,58 @@ namespace TownsEBMSystem
             {
 
                 
+            }
+        }
+
+        private void btn_SwitchAmplifier_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<organizationdata> organization_List = new List<organizationdata>();
+                organization_List = CheckedNodes(treeViewOrganization_SwitchAmplifier.TopNode, organization_List);
+                string switchstatus = "";
+                if (radioButton_Amplifier_On.Checked)
+                {
+                    switchstatus = "2";
+                }
+
+                if (radioButton_Amplifier_Off.Checked)
+                {
+                    switchstatus = "1";
+                }
+               // GeneralResponse res = TCPSwitchAmplifier(organization_List, switchstatus);//1表示关闭喇叭  2表示打开喇叭
+
+                MessageBox.Show("设置成功");
+            }
+            catch (Exception)
+            {
+
+              
+            }
+        }
+
+        private void btn_volumn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txt_volumn.Text=="")
+                {
+                    MessageBox.Show("请输入音量值");
+                    txt_volumn.Focus();
+                    return;
+                }
+                List<organizationdata> organization_List = new List<organizationdata>();
+                organization_List = CheckedNodes(treeViewOrganization_volumn.TopNode, organization_List);
+                string volumn = txt_volumn.Text.Trim();
+          
+               // GeneralResponse res = TCPGeneralVolumn(organization_List, volumn);
+
+                MessageBox.Show("设置成功");
+            }
+            catch (Exception)
+            {
+
+               
             }
         }
     }

@@ -93,6 +93,16 @@ namespace TownsEBMSystem.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap _85cccab3gw1etdn3bxisvg20dw0jg1kx {
+            get {
+                object obj = ResourceManager.GetObject("85cccab3gw1etdn3bxisvg20dw0jg1kx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Login {
             get {
                 object obj = ResourceManager.GetObject("Login", resourceCulture);

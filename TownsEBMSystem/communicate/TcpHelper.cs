@@ -34,6 +34,9 @@ namespace TownsEBMSystem
                 case 0x05:
                     break;
                 case 0x06:
+                    GeneralVolumn generalvolumn = (GeneralVolumn)o;
+                    backdata = GeneraVolumnCommand(generalvolumn);
+                    rebackobj = GeneralResponse(SendTcpData(backdata));
                     break;
                 case 0x07:
                     GeneralRebackParam rebackparam = (GeneralRebackParam)o;
@@ -588,6 +591,35 @@ namespace TownsEBMSystem
         }
 
 
+        public byte[] GeneraVolumnCommand(GeneralVolumn generalvolumn)
+        {
+
+            List<byte> classdata = new List<byte>();
+
+
+            classdata.Add((byte)Convert.ToInt32(generalvolumn.volume));
+
+            classdata.Add((byte)Convert.ToInt32(generalvolumn.resource_code_type));
+
+            int resource_code_number = generalvolumn.resource_codeList.Count;
+
+            classdata.Add((byte)resource_code_number);
+
+
+            int resource_code_length = 0;
+            if (resource_code_number > 0)
+            {
+                byte[] dsadas = BCD2Byte("FF" + generalvolumn.resource_codeList[0]);//特别注意 这个resource_code_length是指所占字节的长度  并非实际字符长度
+                resource_code_length = dsadas.Length;
+            }
+
+            classdata.Add((byte)resource_code_length);
+            foreach (string resourcecode in generalvolumn.resource_codeList)
+            {
+                classdata.AddRange(BCD2Byte("FF" + resourcecode));
+            }
+            return Buidsenddata(classdata, 0x06);
+        }
 
         public byte[] RebackParamCommand(GeneralRebackParam rebackparam)
         {
