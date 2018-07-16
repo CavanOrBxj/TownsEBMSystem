@@ -1933,7 +1933,7 @@ namespace TownsEBMSystem
                 {
                     Addtmp.resource_codeList.Add(item.resource);
                 }
-                //  GeneralResponse res = TCPRebackPeriod(Addtmp); //暂时先注释20180711
+                  GeneralResponse res = TCPRebackPeriod(Addtmp); //暂时先注释20180711
 
                 MessageBox.Show("设置成功");
 

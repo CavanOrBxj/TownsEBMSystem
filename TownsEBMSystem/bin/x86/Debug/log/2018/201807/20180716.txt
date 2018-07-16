@@ -1,0 +1,109 @@
+
+ 
+记录时间：2018-07-16 10:10:21,702 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.147:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 d:\GitHub\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 d:\GitHub\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 d:\GitHub\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 784
+
+ 
+记录时间：2018-07-16 10:10:25,544 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TCP客户端初始化失败
+ 
+
+ 
+记录时间：2018-07-16 10:10:40,438 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TCP客户端初始化失败
+ 
+
+ 
+记录时间：2018-07-16 10:11:37,618 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.147:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 d:\GitHub\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 d:\GitHub\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 d:\GitHub\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 784
+
+ 
+记录时间：2018-07-16 10:11:55,250 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TCP客户端初始化失败
+ 
+
+ 
+记录时间：2018-07-16 10:25:11,187 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.147:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 d:\GitHub\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 d:\GitHub\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 d:\GitHub\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 784
+
+ 
+记录时间：2018-07-16 10:29:27,146 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.4.147:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 d:\GitHub\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 d:\GitHub\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 d:\GitHub\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 784
+
+ 
+记录时间：2018-07-16 10:53:34,905 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：Error
+ 
+System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 192.168.4.147:8090
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   在 System.Net.HttpWebRequest.GetRequestStream()
+   在 TownsEBMSystem.HttpHelper.SendHttpData(String url, String para) 位置 d:\GitHub\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 176
+   在 TownsEBMSystem.HttpHelper.PostCommnand(Object o, String requesttype) 位置 d:\GitHub\TownsEBMSystem\TownsEBMSystem\communicate\HttpHelper.cs:行号 33
+   在 TownsEBMSystem.MainForm.pictureBox_Login_Click(Object sender, EventArgs e) 位置 d:\GitHub\TownsEBMSystem\TownsEBMSystem\Forms\MainForm.cs:行号 784

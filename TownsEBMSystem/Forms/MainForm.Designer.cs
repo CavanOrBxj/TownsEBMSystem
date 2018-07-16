@@ -216,8 +216,8 @@
             this.skinTabControl_parameterset.PageNormlTxtColor = System.Drawing.Color.White;
             this.skinTabControl_parameterset.PageTextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.skinTabControl_parameterset.Radius = 14;
-            this.skinTabControl_parameterset.SelectedIndex = 5;
-            this.skinTabControl_parameterset.Size = new System.Drawing.Size(600, 552);
+            this.skinTabControl_parameterset.SelectedIndex = 1;
+            this.skinTabControl_parameterset.Size = new System.Drawing.Size(928, 552);
             this.skinTabControl_parameterset.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.skinTabControl_parameterset.TabIndex = 79;
             this.skinTabControl_parameterset.Visible = false;
@@ -531,7 +531,7 @@
             this.skinTabPage4.ImageIndex = 8;
             this.skinTabPage4.Location = new System.Drawing.Point(0, 75);
             this.skinTabPage4.Name = "skinTabPage4";
-            this.skinTabPage4.Size = new System.Drawing.Size(600, 477);
+            this.skinTabPage4.Size = new System.Drawing.Size(928, 477);
             this.skinTabPage4.TabIndex = 1;
             this.skinTabPage4.TabItemImage = null;
             this.skinTabPage4.Text = "回传周期";
@@ -872,7 +872,7 @@
             this.skinTabPage5.ImageIndex = 15;
             this.skinTabPage5.Location = new System.Drawing.Point(0, 75);
             this.skinTabPage5.Name = "skinTabPage5";
-            this.skinTabPage5.Size = new System.Drawing.Size(600, 477);
+            this.skinTabPage5.Size = new System.Drawing.Size(928, 477);
             this.skinTabPage5.TabIndex = 4;
             this.skinTabPage5.TabItemImage = null;
             this.skinTabPage5.Text = "音量设置";
