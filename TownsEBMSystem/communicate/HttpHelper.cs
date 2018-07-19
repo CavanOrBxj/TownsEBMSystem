@@ -51,7 +51,6 @@ namespace TownsEBMSystem
                         reback = OrgInfo;
                     }
                     break;
-
                 case "播放":
                     SendPlayInfo playInfo = (SendPlayInfo)o;
                     string id = "";
@@ -80,8 +79,31 @@ namespace TownsEBMSystem
                         Generalresponse  response = Serializer.Deserialize<Generalresponse>(sReturnString);
                         reback = response;
                     }
+                    break;
 
+                case "图标播放":
 
+                    SendPlayInfoNew sendPlayInfoNew = (SendPlayInfoNew)o;
+
+                    string selectedID = sendPlayInfoNew.Id_List[0];
+                    string broadcasttype = sendPlayInfoNew.broadcastType;
+                    paraUrlCoded = "pidValue";
+                    paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(SingletonInfo.GetInstance().pid);
+                    paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("organization_id");
+                    paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(selectedID);
+
+                    paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("broadcastType");
+                    paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(broadcasttype);
+
+                    paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("creditCode");
+                    paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(SingletonInfo.GetInstance().creditCode);
+                    strURL = SingletonInfo.GetInstance().HttpServer + "broadcast/program/play.htm";
+                    sReturnString = SendHttpData(strURL, paraUrlCoded);
+                    if (sReturnString!="")
+                    {
+                        Generalresponse  response = Serializer.Deserialize<Generalresponse>(sReturnString);
+                        reback = response;
+                    }
                     break;
                 case "直播列表":
                     strURL = SingletonInfo.GetInstance().HttpServer + "broadcast/program/record.htm";

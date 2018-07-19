@@ -61,6 +61,8 @@ namespace TownsEBMSystem
         public int inter_cut_IndexItemID;//插播时的IndexItemID
 
         public string inter_cut_prlId;//插播记录id
+        public string EndtimeDelay;//TS指令结束时间延时
+        public List<Datagridviewmainitem> dgvMainData; //只包含村信息
 
         private SingletonInfo()                                                                 
         {
@@ -115,7 +117,9 @@ namespace TownsEBMSystem
 
             inter_cut_prlId = "";
             inter_cut_IndexItemID = 0;
+            EndtimeDelay = "";
 
+            dgvMainData = new List<Datagridviewmainitem>();
         }
         public static SingletonInfo GetInstance()
         {

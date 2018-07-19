@@ -189,6 +189,20 @@ namespace TownsEBMSystem
     #endregion
 
 
+    #region  心跳结构类
+    public class RecvHeartBeat
+    {
+        public string front_code { get; set; }
+        public string front_State { get; set; }
+        /// <summary>
+        /// 辅助数据  此项由包能胜于20180717 15：00添加
+        /// </summary>
+        public string auxiliarydata { get; set; }
+        public string connection_time { get; set; }
+    }
+  
+    #endregion
+
     public class GeneralRebackParam
     {
         public string reback_type { get; set; }
@@ -230,6 +244,53 @@ namespace TownsEBMSystem
         public string gateway { get; set; }
         public string resource_code_type { get; set; }
         public string resource_code { get; set; }
+
+    }
+
+    /// <summary>
+    /// 传递参数载体
+    /// </summary>
+    public class ParamObject
+    {
+        public byte commandcode { get; set; }
+
+        public object paramobj { get; set; }
+    
+    }
+
+    public class Datagridviewmainitem
+    {  
+         /// <summary>
+         /// 界面勾选状态
+         /// </summary>
+        public bool checkstate { get; set; }
+        /// <summary>
+        /// 区域信息
+        /// </summary>
+        public organizationdata areadata { get; set; }
+        /// <summary>
+        /// 操作类型  1播放  0停止
+        /// </summary>
+        public string deviceoperate { get; set; }
+
+        /// <summary>
+        /// http播放记录id   未播放为-1
+        /// </summary>
+        public string prlId { get; set; }
+        /// <summary>
+        /// 播放类型   日常 应急  未播放
+        /// </summary>
+        public string prEvnType { get; set; }
+        /// <summary>
+        /// TS播放后生成的ID  未启用时为"-1"
+        /// </summary>s
+        public string IndexItemID { get; set; }  
+
+        
+        public string areaname {
+            get { return areadata.name; }
+            set{} 
+        }
 
     }
          

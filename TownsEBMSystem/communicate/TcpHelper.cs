@@ -625,22 +625,38 @@ namespace TownsEBMSystem
         {
 
             List<byte> classdata = new List<byte>();
-
-
             classdata.Add((byte)Convert.ToInt32(rebackparam.reback_type));
             int reback_address_length = 0;
             switch (rebackparam.reback_type)
             {
                 case "1":
                     reback_address_length = 11;
+                    classdata.Add((byte)reback_address_length);
+                    classdata.AddRange(System.Text.Encoding.ASCII.GetBytes(rebackparam.reback_address));  
                     break;
                 case "2":
+                    reback_address_length = 6;
+                    classdata.Add((byte)reback_address_length);
+                    string[] addressstr = rebackparam.reback_address.Split(':')[0].Split('.');
+                    string portstr = rebackparam.reback_address.Split(':')[1];
+
+                    List<byte> addr = new List<byte>();
+                    byte[] port = Int2ByteArray(Convert.ToInt32(portstr));
+
+                    foreach (var item in addressstr)
+                    {
+                        addr.Add((byte)Convert.ToInt32(item)); 
+                    }
+                    classdata.AddRange(addr.ToArray());
+                    classdata.AddRange(port);
+                    break;
                 case "3":
-                    reback_address_length=System.Text.Encoding.ASCII.GetBytes(rebackparam.reback_address).Length;
+                    reback_address_length = System.Text.Encoding.ASCII.GetBytes(rebackparam.reback_address).Length;
+                    classdata.Add((byte)reback_address_length);
+                    classdata.AddRange(System.Text.Encoding.ASCII.GetBytes(rebackparam.reback_address));
                     break;
             }
-            classdata.Add((byte)reback_address_length);
-            classdata.AddRange(System.Text.Encoding.ASCII.GetBytes(rebackparam.reback_address));
+         
 
 
             classdata.Add((byte)Convert.ToInt32(rebackparam.resource_code_type));

@@ -66,7 +66,6 @@ namespace TownsEBMSystem
 
         public MainForm()
         {
-           
             InitializeComponent();
             this.ShowInTaskbar = false;
             Load += MainForm_Load;
@@ -100,6 +99,8 @@ namespace TownsEBMSystem
             {
                 switchImage1.AddImageItems(item, Pictxt, Color.Transparent);
             }
+
+            pictureBox_Login_Click(null,null);
        
         }
 
@@ -129,88 +130,183 @@ namespace TownsEBMSystem
         {
             try
             {
-                TaskUploadBegin op = (TaskUploadBegin)obj;
-                if (SingletonInfo.GetInstance().loginstatus)
+                ParamObject ReceiveObject = (ParamObject)obj;
+                switch (ReceiveObject.commandcode)
                 {
-                    if (op.ebm_class == "6")
-                    {
-                        //关闭指令
-                        List<string> IDList = new List<string>();
-                        IDList.Add(SingletonInfo.GetInstance().inter_cut_prlId);
-                        Generalresponse stopresponse = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(IDList, "停止");
-                        if (stopresponse.code == 0)
+                    case 0x18: //任务上报
+
+                        TaskUploadBegin op = (TaskUploadBegin)ReceiveObject.paramobj;
+                        if (SingletonInfo.GetInstance().loginstatus)
                         {
-                            List<broadcastrecorddata> Listdata = (List<broadcastrecorddata>)dgv_broadcastrecord.DataSource;
-                            foreach (string item in IDList)
+                            if (op.ebm_class == "6")
                             {
-                                broadcastrecorddata tmp = Listdata.Find(s => s.prlId.Equals(Convert.ToInt32(item)));
-                                Listdata.Remove(tmp);
+                                OnlineAllStop();
                             }
-                            dgv_broadcastrecord.DataSource = null;
-                            dgv_broadcastrecord.DataSource = Listdata;
-
+                            else
+                            {
+                                OnlineAllStart("1");
+                            }
                         }
-                    }
-                    else
-                    {
-                        //开启指令
-                        SendPlayInfo palyinfo = new SendPlayInfo();
-                        palyinfo.organization_List = new List<organizationdata>();
-                        palyinfo.organization_List = SingletonInfo.GetInstance().Organization;
-                        palyinfo.broadcastType = "1";//表示应急
-                        Generalresponse response = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(palyinfo, "播放");
-                        if (response.code == 0)
+                        else
                         {
-                            broadcastrecord broadcastrecordresponse = (broadcastrecord)SingletonInfo.GetInstance().post.PostCommnand(null, "直播列表");
-                            broadcastrecorddata sing = broadcastrecordresponse.data.Find(s => s.prAreaName.Equals(SingletonInfo.GetInstance().Organization[0].name));
-                            SingletonInfo.GetInstance().inter_cut_prlId = sing.prlId.ToString();
-                            Showdgv_broadcastrecord(broadcastrecordresponse.data);
+                            //未登录的情况下
+                            if (op.ebm_class == "6")
+                            {
+                                //关闭指令
+                                OfflineAllStop();
+                            }
+                            else
+                            {
+                                //开启指令
+                                OfflineAllStart("应急");
+                            }
 
                         }
-                    }
-                }
-                else
-                {
-                    //未登录的情况下
-                    if (op.ebm_class == "6")
-                    {
-                        //关闭指令
+                        break;
+                    case 0x20:
 
-                        DelEBMIndex2Global(SingletonInfo.GetInstance().inter_cut_IndexItemID.ToString());
-                        List<PlayRecord_tcp_ts> Listdata = (List<PlayRecord_tcp_ts>)dgv_broadcastrecord.DataSource;
-                        PlayRecord_tcp_ts pp = Listdata.Find(s=>s.IndexItemID.Equals(SingletonInfo.GetInstance().inter_cut_IndexItemID.ToString()));
-                        Listdata.Remove(pp);
-                        Showdgv_broadcastrecord(Listdata);
-
-
-                    }
-                    else
-                    {
-                        //开启指令
-                        #region  TS指令 播发
-                        List<string> IndexItemIDList = TSBroadcastcommand(SingletonInfo.GetInstance().Organization, SingletonInfo.GetInstance().ts_pid, "0100");
-
-
-                        SingletonInfo.GetInstance().inter_cut_IndexItemID = Convert.ToInt32(IndexItemIDList[0]); 
-                        List<PlayRecord_tcp_ts> datasource = (List<PlayRecord_tcp_ts>)dgv_broadcastrecord.DataSource;
-
-                        PlayRecord_tcp_ts pp = new PlayRecord_tcp_ts();
-                        pp.IndexItemID = IndexItemIDList[0];
-                        pp.prAreaName = SingletonInfo.GetInstance().Organization[0].name;
-                        pp.prEvnType = "应急";
-                        pp.resource_code = SingletonInfo.GetInstance().Organization[0].resource;
-
-                        if (datasource == null)
+                        RecvHeartBeat receiveheartbeat = (RecvHeartBeat)ReceiveObject.paramobj;
+                        if (receiveheartbeat.auxiliarydata != null)
                         {
-                            datasource = new List<PlayRecord_tcp_ts>();
-                        }
-                        datasource.Add(pp);
-                        Showdgv_broadcastrecord(datasource);
-                        #endregion
-                    }
+                            switch (receiveheartbeat.auxiliarydata)
+                            {
+                                case "1":
+                                    //话筒
+                                    this.Invoke(new Action(() =>
+                                    {
+                                        skinButton1.ForeColor = System.Drawing.Color.Lime;
+                                        skinButton3.ForeColor = System.Drawing.Color.White;
+                                        skinButton4.ForeColor = System.Drawing.Color.White;
+                                        skinButton5.ForeColor = System.Drawing.Color.White;
 
+                                        skinButton9.ForeColor = System.Drawing.Color.White;
+                                        skinButton8.ForeColor = System.Drawing.Color.White;
+                                        skinButton7.ForeColor = System.Drawing.Color.White;
+                                        skinButton6.ForeColor = System.Drawing.Color.White;
+
+                                    }));
+                                    break;
+                                case "2":
+                                    //USB
+                                    this.Invoke(new Action(() =>
+                                    {
+                                        skinButton1.ForeColor = System.Drawing.Color.White;
+                                        skinButton3.ForeColor = System.Drawing.Color.Lime;
+                                        skinButton4.ForeColor = System.Drawing.Color.White;
+                                        skinButton5.ForeColor = System.Drawing.Color.White;
+
+                                        skinButton9.ForeColor = System.Drawing.Color.White;
+                                        skinButton8.ForeColor = System.Drawing.Color.White;
+                                        skinButton7.ForeColor = System.Drawing.Color.White;
+                                        skinButton6.ForeColor = System.Drawing.Color.White;
+
+                                    }));
+
+                                    break;
+                                case "3":
+                                    //DVB
+                                    this.Invoke(new Action(() =>
+                                    {
+                                        skinButton1.ForeColor = System.Drawing.Color.White;
+                                        skinButton3.ForeColor = System.Drawing.Color.White;
+                                        skinButton4.ForeColor = System.Drawing.Color.Lime;
+                                        skinButton5.ForeColor = System.Drawing.Color.White;
+
+                                        skinButton9.ForeColor = System.Drawing.Color.White;
+                                        skinButton8.ForeColor = System.Drawing.Color.White;
+                                        skinButton7.ForeColor = System.Drawing.Color.White;
+                                        skinButton6.ForeColor = System.Drawing.Color.White;
+
+                                    }));
+                                    break;
+                                case "4":
+                                    //DTMB
+                                    this.Invoke(new Action(() =>
+                                    {
+                                        skinButton1.ForeColor = System.Drawing.Color.White;
+                                        skinButton3.ForeColor = System.Drawing.Color.White;
+                                        skinButton4.ForeColor = System.Drawing.Color.White;
+                                        skinButton5.ForeColor = System.Drawing.Color.Lime;
+
+                                        skinButton9.ForeColor = System.Drawing.Color.White;
+                                        skinButton8.ForeColor = System.Drawing.Color.White;
+                                        skinButton7.ForeColor = System.Drawing.Color.White;
+                                        skinButton6.ForeColor = System.Drawing.Color.White;
+
+                                    }));
+                                    break;
+                                case "5":
+                                    //线路一
+                                    this.Invoke(new Action(() =>
+                                    {
+                                        skinButton1.ForeColor = System.Drawing.Color.White;
+                                        skinButton3.ForeColor = System.Drawing.Color.White;
+                                        skinButton4.ForeColor = System.Drawing.Color.White;
+                                        skinButton5.ForeColor = System.Drawing.Color.White;
+
+                                        skinButton9.ForeColor = System.Drawing.Color.Lime;
+                                        skinButton8.ForeColor = System.Drawing.Color.White;
+                                        skinButton7.ForeColor = System.Drawing.Color.White;
+                                        skinButton6.ForeColor = System.Drawing.Color.White;
+
+                                    }));
+                                    break;
+                                case "6":
+                                    //线路二
+                                    this.Invoke(new Action(() =>
+                                    {
+                                        skinButton1.ForeColor = System.Drawing.Color.White;
+                                        skinButton3.ForeColor = System.Drawing.Color.White;
+                                        skinButton4.ForeColor = System.Drawing.Color.White;
+                                        skinButton5.ForeColor = System.Drawing.Color.White;
+
+                                        skinButton9.ForeColor = System.Drawing.Color.White;
+                                        skinButton8.ForeColor = System.Drawing.Color.Lime;
+                                        skinButton7.ForeColor = System.Drawing.Color.White;
+                                        skinButton6.ForeColor = System.Drawing.Color.White;
+
+                                    }));
+                                    break;
+                                case "7":
+                                    //调频一
+                                    this.Invoke(new Action(() =>
+                                    {
+                                        skinButton1.ForeColor = System.Drawing.Color.White;
+                                        skinButton3.ForeColor = System.Drawing.Color.White;
+                                        skinButton4.ForeColor = System.Drawing.Color.White;
+                                        skinButton5.ForeColor = System.Drawing.Color.White;
+
+                                        skinButton9.ForeColor = System.Drawing.Color.White;
+                                        skinButton8.ForeColor = System.Drawing.Color.White;
+                                        skinButton7.ForeColor = System.Drawing.Color.Lime;
+                                        skinButton6.ForeColor = System.Drawing.Color.White;
+
+                                    }));
+                                    break;
+                                case "8":
+                                    //调频二
+                                    this.Invoke(new Action(() =>
+                                    {
+                                        skinButton1.ForeColor = System.Drawing.Color.White;
+                                        skinButton3.ForeColor = System.Drawing.Color.White;
+                                        skinButton4.ForeColor = System.Drawing.Color.White;
+                                        skinButton5.ForeColor = System.Drawing.Color.White;
+
+                                        skinButton9.ForeColor = System.Drawing.Color.White;
+                                        skinButton8.ForeColor = System.Drawing.Color.White;
+                                        skinButton7.ForeColor = System.Drawing.Color.White;
+                                        skinButton6.ForeColor = System.Drawing.Color.Lime;
+
+                                    }));
+                                    break;
+                            }
+                        }
+                        break;
                 }
-            
+
+
+
+
             }
             catch (Exception ex)
             {
@@ -269,6 +365,7 @@ namespace TownsEBMSystem
                 var jo = TableDataHelper.ReadTable(Enums.TableType.WhiteList);
 
                 SingletonInfo.GetInstance().WhiteListRecordList = JsonConvert.DeserializeObject<List<WhiteListRecord>>(jo["0"].ToString());
+                SingletonInfo.GetInstance().EndtimeDelay = ini.ReadValue("EBM", "EndtimeDelay");
             }
             catch (Exception ex)
             {
@@ -535,6 +632,60 @@ namespace TownsEBMSystem
             }
         }
 
+        private void ShowskinDataGridView_Main(List<Datagridviewmainitem> dgvMainData)
+        {
+            this.Invoke(new Action(() =>
+            {
+                skinDataGridView_Main.Rows.Clear();
+                foreach (Datagridviewmainitem dataRow in dgvMainData)
+                {
+                    DataGridViewRow dgvR = new DataGridViewRow();
+                    dgvR.CreateCells(skinDataGridView_Main);
+
+                    if (dataRow.checkstate)
+                    {
+                        dgvR.Cells[0].Value = imageList1.Images[0];
+                    }
+                    else
+                    {
+                        dgvR.Cells[0].Value = imageList1.Images[1];
+                    }
+
+                    
+                    dgvR.Cells[1].Value = dataRow.areadata.name; //播放区域
+
+                    switch (dataRow.prEvnType)
+                    {
+                        case "日常":
+
+                            dgvR.Cells[2].Value = imageList1.Images[2];
+                            dgvR.Cells[3].Value = imageList1.Images[3];
+                            dgvR.Cells[2].ReadOnly = false;
+                            dgvR.Cells[3].ReadOnly = true;
+                            break;
+
+                        case "应急":
+                            dgvR.Cells[2].Value = imageList1.Images[3];
+                            dgvR.Cells[3].Value = imageList1.Images[2];
+                            dgvR.Cells[2].ReadOnly = true;
+                            dgvR.Cells[3].ReadOnly = false;
+                            break;
+
+                        case "未播放":
+                            dgvR.Cells[2].Value = imageList1.Images[3];
+                            dgvR.Cells[3].Value = imageList1.Images[3];
+                            dgvR.Cells[2].ReadOnly = false;
+                            dgvR.Cells[3].ReadOnly = false;
+                            break;
+                    
+                    }
+                    dgvR.Height = 80;
+                    dgvR.Tag = dataRow;
+                    skinDataGridView_Main.Rows.Add(dgvR);
+                }
+               
+            }));
+        }
 
         private void Showdgv_broadcastrecord(List<broadcastrecorddata> Listdata)
         {
@@ -811,6 +962,44 @@ namespace TownsEBMSystem
                             }
                             #endregion
 
+                            #region   生成显示信息
+                            //获取HTTP播放列表
+                            broadcastrecord broadcastrecordresponse = (broadcastrecord)SingletonInfo.GetInstance().post.PostCommnand(null, "直播列表");
+                            //生成显示数据
+                            foreach (var item in SingletonInfo.GetInstance().Organization)
+                            {
+                                if (item.children.Count>0)
+                                {
+                                    foreach (var ite in item.children)
+                                    {
+                                        //非镇级                  
+                                        Datagridviewmainitem addone = new Datagridviewmainitem();
+                                        addone.areadata = ite;
+                                        addone.checkstate = true;//其实默认勾选
+                                        broadcastrecorddata playrecord = broadcastrecordresponse.data.Find(s => s.prAreaName.Equals(ite.name));
+                                        if (playrecord != null)
+                                        {
+                                            addone.deviceoperate = "1";
+                                            addone.prEvnType = playrecord.prEvnType;
+                                            addone.prlId = playrecord.prlId.ToString();
+                                        }
+                                        else
+                                        {
+                                            addone.deviceoperate = "0";
+                                            addone.prEvnType = "未播放";
+                                            addone.prlId = "-1";
+                                        }
+                                        addone.IndexItemID = "-1";
+
+                                        SingletonInfo.GetInstance().dgvMainData.Add(addone); 
+                                    }
+                                 
+                                }
+                            }
+
+                            ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
+                            #endregion
+
                             #region 启动心跳及其他线程
                             threadHeart = new Thread(InitTimer);
                             threadHeart.IsBackground = true;
@@ -824,7 +1013,7 @@ namespace TownsEBMSystem
             }
             catch (Exception ex)
             {
-                LogHelper.WriteLog(typeof(MainForm), ex);
+                LogHelper.WriteLog(typeof(MainForm), "登录到县平台失败！");
             }
             finally
             {
@@ -841,13 +1030,36 @@ namespace TownsEBMSystem
                     {
                         SingletonInfo.GetInstance().Organization = JsonConvert.DeserializeObject<List<organizationdata>>(jo["0"].ToString());
                     }
+
+                    #region   生成skinDataGridView_Main的显示数据
+                    //生成显示数据
+                    foreach (var item in SingletonInfo.GetInstance().Organization)
+                    {
+                        if (item.children.Count > 0)
+                        {
+                            foreach (var ite in item.children)
+                            {
+                                //非镇级
+                                Datagridviewmainitem addone = new Datagridviewmainitem();
+                                addone.areadata = ite;
+                                addone.checkstate = true;//起始默认勾选
+                                //先默认都没有播放
+                                addone.deviceoperate = "0";
+                                addone.prEvnType = "未播放";
+                                addone.prlId = "-1";
+                                addone.IndexItemID = "-1";
+                                SingletonInfo.GetInstance().dgvMainData.Add(addone);  //不包含镇信息
+                            }
+                        }
+                    }
+                    #endregion
                     ShowtreeViewOrganization(SingletonInfo.GetInstance().Organization);
                     ShowtreeViewOrganization_WhiteList(SingletonInfo.GetInstance().Organization);
                     ShowtreeViewOrganization_RebackCycle(SingletonInfo.GetInstance().Organization);
                     ShowtreeViewOrganization_RebackParam(SingletonInfo.GetInstance().Organization);
                     ShowtreeViewOrganization_SwitchAmplifier(SingletonInfo.GetInstance().Organization);
                     ShowtreeViewOrganization_volumn(SingletonInfo.GetInstance().Organization);
-
+                    ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
                 }
 
             }
@@ -965,11 +1177,45 @@ namespace TownsEBMSystem
             return resopnse;
         }
 
+        private Dictionary<string, string> TSBroadcastcommand(List<string> organization_List, string pid, string ebm_class)
+        {
+            Dictionary<string, string> IndexItemIDic = new Dictionary<string, string>();
+
+            foreach (var item in organization_List)
+            {
+                EBMIndexTmp tmp = new EBMIndexTmp();
+
+                SingletonInfo.GetInstance().IndexItemID += 1;
+                tmp.IndexItemID = SingletonInfo.GetInstance().IndexItemID.ToString();
+                IndexItemIDic.Add(item,tmp.IndexItemID);
+                tmp.S_EBM_class = ebm_class;//
+                string ebm_id_tmp = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
+                tmp.S_EBM_id = ebm_id_tmp.Substring(5, ebm_id_tmp.Length - 5); 
+                tmp.S_EBM_start_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                int delay = Convert.ToInt32(SingletonInfo.GetInstance().EndtimeDelay);
+                tmp.S_EBM_end_time = DateTime.Now.AddMinutes(delay).ToString("yyyy-MM-dd HH:mm:ss");
+                tmp.S_EBM_level = "2";//
+                tmp.S_EBM_original_network_id = "1";
+               // tmp.S_EBM_start_time = SingletonInfo.GetInstance().starttime;//
+                tmp.S_EBM_type = "00000";//
+            //    tmp.List_EBM_resource_code = "061245142310000100";
+                tmp.List_EBM_resource_code = "061200000000000000";
+                tmp.BL_details_channel_indicate = "true";
+                tmp.S_details_channel_transport_stream_id = SingletonInfo.GetInstance().S_details_channel_transport_stream_id;
+                tmp.S_details_channel_program_number = SingletonInfo.GetInstance().S_details_channel_program_number;
+                tmp.S_details_channel_PCR_PID= SingletonInfo.GetInstance().S_details_channel_PCR_PID;
+                tmp.List_ProgramStreamInfo = new List<ProgramStreamInfotmp>();
+                ProgramStreamInfotmp pp = new ProgramStreamInfotmp();
+                pp.B_stream_type = "4";
+                pp.S_elementary_PID = SingletonInfo.GetInstance().pid;
+                tmp.List_ProgramStreamInfo.Add(pp);
+                DealEBMIndex2Global(tmp);
+            }
+            return IndexItemIDic;
+        }
 
 
-
-
-        private List<string> TSBroadcastcommand(List<organizationdata> organization_List,string pid,string ebm_class)
+        private List<string> TSBroadcastcommand(List<organizationdata> organization_List, string pid, string ebm_class)
         {
             List<string> IndexItemIDList = new List<string>();
 
@@ -981,47 +1227,30 @@ namespace TownsEBMSystem
                 tmp.IndexItemID = SingletonInfo.GetInstance().IndexItemID.ToString();
                 IndexItemIDList.Add(tmp.IndexItemID);
                 tmp.S_EBM_class = ebm_class;//
-
-
-                string ebm_id_tmp= SingletonInfo.GetInstance().ebm_id;//
-
-                ebm_id_tmp = "5451423000000010301010120180706";
-
-                tmp.S_EBM_id = ebm_id_tmp.Substring(2, ebm_id_tmp.Length - 2);
-
-                tmp.S_EBM_start_time = SingletonInfo.GetInstance().starttime;
-                tmp.S_EBM_end_time = SingletonInfo.GetInstance().endtime;
+                string ebm_id_tmp = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
+                tmp.S_EBM_id = ebm_id_tmp.Substring(5, ebm_id_tmp.Length - 5);
+                tmp.S_EBM_start_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                int delay = Convert.ToInt32(SingletonInfo.GetInstance().EndtimeDelay);
+                tmp.S_EBM_end_time = DateTime.Now.AddMinutes(delay).ToString("yyyy-MM-dd HH:mm:ss");
                 tmp.S_EBM_level = "2";//
                 tmp.S_EBM_original_network_id = "1";
-                tmp.S_EBM_start_time = SingletonInfo.GetInstance().starttime;//
+                // tmp.S_EBM_start_time = SingletonInfo.GetInstance().starttime;//
                 tmp.S_EBM_type = "00000";//
-
-              //  string List_EBM_resource_code = "";
-              //  foreach (organizationdata org in organization_List)
-              //  {
-              //      List_EBM_resource_code +=","+ org.resource;
-               // }
-
-              //  List_EBM_resource_code=
-              //  List_EBM_resource_code = List_EBM_resource_code.Substring(1, List_EBM_resource_code.Length-1);
-                tmp.List_EBM_resource_code = item.resource;
-
+                tmp.List_EBM_resource_code = "061245142310000101";
                 tmp.BL_details_channel_indicate = "true";
                 tmp.S_details_channel_transport_stream_id = SingletonInfo.GetInstance().S_details_channel_transport_stream_id;
                 tmp.S_details_channel_program_number = SingletonInfo.GetInstance().S_details_channel_program_number;
-                tmp.S_details_channel_PCR_PID= SingletonInfo.GetInstance().S_details_channel_PCR_PID;
+                tmp.S_details_channel_PCR_PID = SingletonInfo.GetInstance().S_details_channel_PCR_PID;
                 tmp.List_ProgramStreamInfo = new List<ProgramStreamInfotmp>();
                 ProgramStreamInfotmp pp = new ProgramStreamInfotmp();
                 pp.B_stream_type = "4";
                 pp.S_elementary_PID = SingletonInfo.GetInstance().pid;
                 tmp.List_ProgramStreamInfo.Add(pp);
-
                 DealEBMIndex2Global(tmp);
-
             }
-
             return IndexItemIDList;
         }
+
 
         /// <summary>
         /// 应急广播播发
@@ -1070,11 +1299,11 @@ namespace TownsEBMSystem
                         #region  TS指令 播发
                         List<string> IndexItemIDList = TSBroadcastcommand(organization_List, SingletonInfo.GetInstance().ts_pid, "0100");//此时的res.result_desc中存放的是pid数据
 
-                        List<PlayRecord_tcp_ts> datasource = (List<PlayRecord_tcp_ts>)dgv_broadcastrecord.DataSource;
+                        BindingList<PlayRecord_tcp_ts> datasource_BindList = (BindingList<PlayRecord_tcp_ts>)dgv_broadcastrecord.DataSource;
 
-                        if (datasource==null)
+                        if (datasource_BindList == null)
                         {
-                            datasource = new List<PlayRecord_tcp_ts>();
+                            datasource_BindList = new BindingList<PlayRecord_tcp_ts>();
                         }
                         for (int i = 0; i < organization_List.Count; i++)
                         {
@@ -1083,7 +1312,12 @@ namespace TownsEBMSystem
                             pp.prAreaName = organization_List[i].name;
                             pp.prEvnType = "应急";
                             pp.resource_code = organization_List[i].resource;
-                            datasource.Add(pp);
+                            datasource_BindList.Add(pp);
+                        }
+                        List<PlayRecord_tcp_ts> datasource = new List<PlayRecord_tcp_ts>();
+                        foreach (var item in datasource_BindList)
+                        {
+                            datasource.Add(item);
                         }
                           Showdgv_broadcastrecord(datasource); 
                         #endregion
@@ -1149,11 +1383,11 @@ namespace TownsEBMSystem
                         #region  TS指令 播发
                         List<string> IndexItemIDList = TSBroadcastcommand(organization_List, SingletonInfo.GetInstance().ts_pid, "0101");//此时的res.result_desc中存放的是pid数据
 
-                        List<PlayRecord_tcp_ts> datasource = (List<PlayRecord_tcp_ts>)dgv_broadcastrecord.DataSource;
+                        BindingList<PlayRecord_tcp_ts> datasource_BindList = (BindingList<PlayRecord_tcp_ts>)dgv_broadcastrecord.DataSource;
 
-                        if (datasource == null)
+                        if (datasource_BindList == null)
                         {
-                            datasource = new List<PlayRecord_tcp_ts>();
+                            datasource_BindList = new BindingList<PlayRecord_tcp_ts>();
                         }
                         for (int i = 0; i < organization_List.Count; i++)
                         {
@@ -1162,7 +1396,12 @@ namespace TownsEBMSystem
                             pp.prAreaName = organization_List[i].name;
                             pp.prEvnType = "日常";
                             pp.resource_code = organization_List[i].resource;
-                            datasource.Add(pp);
+                            datasource_BindList.Add(pp);
+                        }
+                        List<PlayRecord_tcp_ts> datasource = new List<PlayRecord_tcp_ts>();
+                        foreach (var item in datasource_BindList)
+                        {
+                            datasource.Add(item);
                         }
                         Showdgv_broadcastrecord(datasource);
                         #endregion
@@ -1185,15 +1424,19 @@ namespace TownsEBMSystem
         {
             try
             {
-                skinTabControl_Organization.Location = new System.Drawing.Point(436, 179);
-                skinTabControl_Organization.Size = new System.Drawing.Size(1038, 659);
-                skinTabControl_Organization.Visible = true;
+                skinDataGridView_Main.Location = new System.Drawing.Point(515, 212);
+                skinDataGridView_Main.Size = new System.Drawing.Size(889, 635);
+                skinDataGridView_Main.Visible = true;
+               
+                //skinTabControl_Organization.Location = new System.Drawing.Point(436, 179);
+                //skinTabControl_Organization.Size = new System.Drawing.Size(1038, 659);
+                //skinTabControl_Organization.Visible = false;
                 skinTabControl_parameterset.Visible = false;
                 btn_Home1.Visible = true;
 
                 skinButton1.Text = "话筒";
-                skinButton3.Text = "U盘";
-                skinButton4.Text = "DVB-C";
+                skinButton3.Text = "USB";
+                skinButton4.Text = "DVB";
                 skinButton5.Text = "DTMB";
 
                 skinButton9.Text = "线路一";
@@ -1250,54 +1493,60 @@ namespace TownsEBMSystem
             skinTabControl_Organization.Visible = false;
             skinTabControl_parameterset.Visible = false;
             skinButton1.Text = "话筒";
-            skinButton3.Text = "U盘";
-            skinButton4.Text = "DVB-C";
+            skinButton3.Text = "USB";
+            skinButton4.Text = "DVB";
             skinButton5.Text = "DTMB";
 
             skinButton9.Text = "线路一";
             skinButton8.Text = "线路二";
             skinButton7.Text = "调频一";
             skinButton6.Text = "调频二";
+
+            skinDataGridView_Main.Visible = false;
+
         }
 
         private void pictureBox_offline_DoubleClick(object sender, EventArgs e)
         {
-            if (MessageBox.Show("确定关闭？", "确定关闭", MessageBoxButtons.OKCancel) == DialogResult.OK)
-            {
-                ini.WriteValue("EBM", "ebm_id_behind", SingletonInfo.GetInstance().ebm_id_behind);
-                ini.WriteValue("EBM", "ebm_id_count", SingletonInfo.GetInstance().ebm_id_count.ToString());
-                ini.WriteValue("EBM", "input_channel_id", SingletonInfo.GetInstance().input_channel_id);
-                ini.WriteValue("EBM", "IndexItemID", SingletonInfo.GetInstance().IndexItemID.ToString());
+            var dr = new MessageBoxEx.MessageBox { text = "确定关闭？" }.ShowDialog();
+              if (dr == DialogResult.OK)
+              {
+                  ini.WriteValue("EBM", "ebm_id_behind", SingletonInfo.GetInstance().ebm_id_behind);
+                  ini.WriteValue("EBM", "ebm_id_count", SingletonInfo.GetInstance().ebm_id_count.ToString());
+                  ini.WriteValue("EBM", "input_channel_id", SingletonInfo.GetInstance().input_channel_id);
+                  ini.WriteValue("EBM", "IndexItemID", SingletonInfo.GetInstance().IndexItemID.ToString());
 
 
-                TableDataHelper.WriteTable(Enums.TableType.WhiteList, SingletonInfo.GetInstance().WhiteListRecordList);
-                if (EbmStream != null && IsStartStream)
-                {
-                    EbmStream.StopStreaming();
-                    IsStartStream = false;
-                }
-                Close();
-            }
+                  TableDataHelper.WriteTable(Enums.TableType.WhiteList, SingletonInfo.GetInstance().WhiteListRecordList);
+                  if (EbmStream != null && IsStartStream)
+                  {
+                      EbmStream.StopStreaming();
+                      IsStartStream = false;
+                  }
+                  Close();
+              }
         }
 
         private void pictureBox_online_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("确定关闭？", "确定关闭", MessageBoxButtons.OKCancel) == DialogResult.OK)
-            {
-                ini.WriteValue("EBM", "ebm_id_behind", SingletonInfo.GetInstance().ebm_id_behind);
-                ini.WriteValue("EBM", "ebm_id_count", SingletonInfo.GetInstance().ebm_id_count.ToString());
-                ini.WriteValue("EBM", "input_channel_id", SingletonInfo.GetInstance().input_channel_id);
-                ini.WriteValue("EBM", "IndexItemID", SingletonInfo.GetInstance().IndexItemID.ToString());
 
-                TableDataHelper.WriteTable(Enums.TableType.WhiteList, SingletonInfo.GetInstance().WhiteListRecordList);
-                if (EbmStream != null && IsStartStream)
-                {
-                    EbmStream.StopStreaming();
-                    IsStartStream = false;
-                }
+              var dr = new MessageBoxEx.MessageBox { text = "确定关闭？" }.ShowDialog();
+              if (dr == DialogResult.OK)
+              {
+                  ini.WriteValue("EBM", "ebm_id_behind", SingletonInfo.GetInstance().ebm_id_behind);
+                  ini.WriteValue("EBM", "ebm_id_count", SingletonInfo.GetInstance().ebm_id_count.ToString());
+                  ini.WriteValue("EBM", "input_channel_id", SingletonInfo.GetInstance().input_channel_id);
+                  ini.WriteValue("EBM", "IndexItemID", SingletonInfo.GetInstance().IndexItemID.ToString());
 
-                Close();
-            }
+                  TableDataHelper.WriteTable(Enums.TableType.WhiteList, SingletonInfo.GetInstance().WhiteListRecordList);
+                  if (EbmStream != null && IsStartStream)
+                  {
+                      EbmStream.StopStreaming();
+                      IsStartStream = false;
+                  }
+
+                  Close();
+              }
         }
 
 
@@ -1328,20 +1577,40 @@ namespace TownsEBMSystem
             {
                 if (skinButton1.Text == "话筒")
                 {
-                    OnorOFFResponse res= SwitchChannel(1);//话筒目前定为1
-                    if (res.result_code == 1)  //0代表成功1代表失败
+
+                    var dr = new MessageBoxEx.MessageBox { text = "确定切换到话筒？" }.ShowDialog();
+                    if (dr == DialogResult.OK)
                     {
-                        
-                        MessageBox.Show("切换到话筒失败");
+                        OnorOFFResponse res = SwitchChannel(1);//话筒目前定为1
+                        if (res.result_code == 1)  //0代表成功1代表失败
+                        {
+
+                            MessageBox.Show("切换到话筒失败");
+                        }
+                        else
+                        {
+                            SingletonInfo.GetInstance().input_channel_id = "1";
+                        }
+
+                        skinButton1.ForeColor = System.Drawing.Color.Lime;
+                        skinButton3.ForeColor = System.Drawing.Color.White;
+                        skinButton4.ForeColor = System.Drawing.Color.White;
+                        skinButton5.ForeColor = System.Drawing.Color.White;
+
+
+                        skinButton9.ForeColor = System.Drawing.Color.White;
+                        skinButton8.ForeColor = System.Drawing.Color.White;
+                        skinButton7.ForeColor = System.Drawing.Color.White;
+                        skinButton6.ForeColor = System.Drawing.Color.White;
                     }
                     else
                     {
-                        SingletonInfo.GetInstance().input_channel_id = "1";
+                        return;
                     }
                 }
                 else
                 {
-
+                    //todo
                 }
             }
             catch (Exception)
@@ -1355,17 +1624,33 @@ namespace TownsEBMSystem
         {
             try
             {
-                if (skinButton3.Text == "U盘")
+                if (skinButton3.Text == "USB")
                 {
-                    OnorOFFResponse res = SwitchChannel(2);//U盘目前定为2
-                    if (res.result_code == 1)  //0代表成功1代表失败
+
+                    var dr = new MessageBoxEx.MessageBox { text = "确定切换到USB？" }.ShowDialog();
+                    if (dr == DialogResult.OK)
                     {
-                      
-                        MessageBox.Show("切换到U盘失败");
-                    }
-                    else
-                    {
-                        SingletonInfo.GetInstance().input_channel_id = "2";
+                        OnorOFFResponse res = SwitchChannel(2);//U盘目前定为2
+                        if (res.result_code == 1)  //0代表成功1代表失败
+                        {
+
+                            MessageBox.Show("切换到USB失败");
+                        }
+                        else
+                        {
+                            SingletonInfo.GetInstance().input_channel_id = "2";
+                        }
+
+                        skinButton1.ForeColor = System.Drawing.Color.White;
+                        skinButton3.ForeColor = System.Drawing.Color.Lime;
+                        skinButton4.ForeColor = System.Drawing.Color.White;
+                        skinButton5.ForeColor = System.Drawing.Color.White;
+
+
+                        skinButton9.ForeColor = System.Drawing.Color.White;
+                        skinButton8.ForeColor = System.Drawing.Color.White;
+                        skinButton7.ForeColor = System.Drawing.Color.White;
+                        skinButton6.ForeColor = System.Drawing.Color.White;
                     }
                 }
                 else
@@ -1373,10 +1658,10 @@ namespace TownsEBMSystem
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-               
+
             }
         }
 
@@ -1384,19 +1669,37 @@ namespace TownsEBMSystem
         {
             try
             {
-                if (skinButton4.Text == "DVB-C")
+                if (skinButton4.Text == "DVB")
                 {
-                    //OnorOFFResponse res = SwitchChannel(3);//DVB-C目前定为3
-                    //if (res.result_code == 1)  //0代表成功1代表失败
-                    //{
-                    //    MessageBox.Show("切换到DVB-C失败");
-                    //}
-                    //else
-                    //{
-                    //    SingletonInfo.GetInstance().input_channel_id = "3";
-                    //}
+                    var dt = new MessageBoxEx.MessageBox { text = "确定切换到DVB？" }.ShowDialog();
+                    if (dt == DialogResult.OK)
+                    {
+                        ///适配器暂不支持
+                        //OnorOFFResponse res = SwitchChannel(3);//DVB-C目前定为3
+                        //if (res.result_code == 1)  //0代表成功1代表失败
+                        //{
+                        //    MessageBox.Show("切换到DVB-C失败");
+                        //}
+                        //else
+                        //{
+                        //    SingletonInfo.GetInstance().input_channel_id = "3";
+                        //}
 
-                    MessageBox.Show("暂不支持该线路切换");
+                        skinButton1.ForeColor = System.Drawing.Color.White;
+                        skinButton3.ForeColor = System.Drawing.Color.White;
+                        skinButton4.ForeColor = System.Drawing.Color.Lime;
+                        skinButton5.ForeColor = System.Drawing.Color.White;
+
+
+                        skinButton9.ForeColor = System.Drawing.Color.White;
+                        skinButton8.ForeColor = System.Drawing.Color.White;
+                        skinButton7.ForeColor = System.Drawing.Color.White;
+                        skinButton6.ForeColor = System.Drawing.Color.White;
+                    }
+                    else
+                    { 
+                    
+                    }
                 }
                 else
                 {
@@ -1425,7 +1728,16 @@ namespace TownsEBMSystem
                     //{
                     //    SingletonInfo.GetInstance().input_channel_id = "4";
                     //}
-                    MessageBox.Show("暂不支持该线路切换");
+                    skinButton1.ForeColor = System.Drawing.Color.White;
+                    skinButton3.ForeColor = System.Drawing.Color.White;
+                    skinButton4.ForeColor = System.Drawing.Color.White;
+                    skinButton5.ForeColor = System.Drawing.Color.Lime;
+
+
+                    skinButton9.ForeColor = System.Drawing.Color.White;
+                    skinButton8.ForeColor = System.Drawing.Color.White;
+                    skinButton7.ForeColor = System.Drawing.Color.White;
+                    skinButton6.ForeColor = System.Drawing.Color.White;
                 }
                 else
                 {
@@ -1454,6 +1766,17 @@ namespace TownsEBMSystem
                     {
                         SingletonInfo.GetInstance().input_channel_id = "5";
                     }
+
+                    skinButton1.ForeColor = System.Drawing.Color.White;
+                    skinButton3.ForeColor = System.Drawing.Color.White;
+                    skinButton4.ForeColor = System.Drawing.Color.White;
+                    skinButton5.ForeColor = System.Drawing.Color.White;
+
+
+                    skinButton9.ForeColor = System.Drawing.Color.Lime;
+                    skinButton8.ForeColor = System.Drawing.Color.White;
+                    skinButton7.ForeColor = System.Drawing.Color.White;
+                    skinButton6.ForeColor = System.Drawing.Color.White;
                 }
                 else
                 {
@@ -1482,6 +1805,17 @@ namespace TownsEBMSystem
                     {
                         SingletonInfo.GetInstance().input_channel_id = "6";
                     }
+
+                    skinButton1.ForeColor = System.Drawing.Color.White;
+                    skinButton3.ForeColor = System.Drawing.Color.White;
+                    skinButton4.ForeColor = System.Drawing.Color.White;
+                    skinButton5.ForeColor = System.Drawing.Color.White;
+
+
+                    skinButton9.ForeColor = System.Drawing.Color.White;
+                    skinButton8.ForeColor = System.Drawing.Color.Lime;
+                    skinButton7.ForeColor = System.Drawing.Color.White;
+                    skinButton6.ForeColor = System.Drawing.Color.White;
                 }
                 else
                 {
@@ -1511,6 +1845,17 @@ namespace TownsEBMSystem
 
                         SingletonInfo.GetInstance().input_channel_id = "7";
                     }
+
+                    skinButton1.ForeColor = System.Drawing.Color.White;
+                    skinButton3.ForeColor = System.Drawing.Color.White;
+                    skinButton4.ForeColor = System.Drawing.Color.White;
+                    skinButton5.ForeColor = System.Drawing.Color.White;
+
+
+                    skinButton9.ForeColor = System.Drawing.Color.White;
+                    skinButton8.ForeColor = System.Drawing.Color.White;
+                    skinButton7.ForeColor = System.Drawing.Color.Lime;
+                    skinButton6.ForeColor = System.Drawing.Color.White;
                 }
                 else
                 {
@@ -1539,6 +1884,17 @@ namespace TownsEBMSystem
                     {
                         SingletonInfo.GetInstance().input_channel_id = "8";
                     }
+
+                    skinButton1.ForeColor = System.Drawing.Color.White;
+                    skinButton3.ForeColor = System.Drawing.Color.White;
+                    skinButton4.ForeColor = System.Drawing.Color.White;
+                    skinButton5.ForeColor = System.Drawing.Color.White;
+
+
+                    skinButton9.ForeColor = System.Drawing.Color.White;
+                    skinButton8.ForeColor = System.Drawing.Color.White;
+                    skinButton7.ForeColor = System.Drawing.Color.White;
+                    skinButton6.ForeColor = System.Drawing.Color.Lime;
                 }
                 else
                 {
@@ -1707,7 +2063,7 @@ namespace TownsEBMSystem
                     EbmStream.EB_Index_Table = GetEBIndexTable(ref EB_Index_Table) ? EB_Index_Table : null;
                     EbMStream.Initialization();
                 }
-                UpdateDataTextNew((object)1);
+                UpdateDataTextNew((object)1); // 暂时去除打印
                 GC.Collect();
             }
             catch (Exception ex)
@@ -1939,7 +2295,7 @@ namespace TownsEBMSystem
 
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -2051,7 +2407,7 @@ namespace TownsEBMSystem
                     addtmp.resource_codeList.Add(item.resource);
                 }
 
-            //    GeneralResponse res = TCPGeneralRebackParam(addtmp);// 暂时先注释20180711
+                GeneralResponse res = TCPGeneralRebackParam(addtmp);// 暂时先注释20180711
 
                 MessageBox.Show("设置成功");
             }
@@ -2130,5 +2486,402 @@ namespace TownsEBMSystem
                
             }
         }
+        /// <summary>
+        /// 操作主表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void skinDataGridView_Main_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == RecordSelect.Index && e.RowIndex >= 0 && !skinDataGridView_Main.Rows[e.RowIndex].Cells[e.ColumnIndex].ReadOnly)
+            {
+                CheckboxSelected(e);
+            }
+            if (e.ColumnIndex == Emergency.Index && e.RowIndex >= 0 &&
+                !skinDataGridView_Main.Rows[e.RowIndex].Cells[e.ColumnIndex].ReadOnly)
+            {
+                OperatesingleDevice(e,"应急");
+            }
+
+            if (e.ColumnIndex == Daily.Index && e.RowIndex >= 0 &&
+         !skinDataGridView_Main.Rows[e.RowIndex].Cells[e.ColumnIndex].ReadOnly)
+            {
+                OperatesingleDevice(e,"日常");
+            }
+        }
+
+        private void CheckboxSelected(DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow selectedRow = skinDataGridView_Main.Rows[e.RowIndex];
+            Datagridviewmainitem Item = (Datagridviewmainitem)selectedRow.Tag;
+            if (Item.checkstate)
+            {
+                Item.checkstate = false;
+            }
+            else
+            {
+                Item.checkstate = true;
+            }
+
+            selectedRow.Tag = Item;
+
+            Datagridviewmainitem Item_Global = SingletonInfo.GetInstance().dgvMainData.Find(s => s.areaname.Equals(Item.areaname));
+            Item_Global.checkstate = Item.checkstate;
+            if (Item.checkstate)
+            {
+                skinDataGridView_Main.Rows[e.RowIndex].Cells[e.ColumnIndex].Value=imageList1.Images[0];
+            }
+            else
+            {
+                skinDataGridView_Main.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = imageList1.Images[1];
+            }
+           
+        }
+
+        private void OperatesingleDevice(DataGridViewCellEventArgs e, string broadcastType)
+        {
+            DataGridViewRow selectedRow = skinDataGridView_Main.Rows[e.RowIndex];
+            Datagridviewmainitem Item = (Datagridviewmainitem)selectedRow.Tag;
+
+            if (Item.deviceoperate == "0")  // 1播放  0停止
+            {
+                #region  发开机指令
+                //判断与县平台是否联通
+                if (SingletonInfo.GetInstance().loginstatus)
+                {
+                    string id = Item.areadata.id.ToString();
+
+                    SendPlayInfoNew SendPlayInfosingle = new SendPlayInfoNew();
+                    SendPlayInfosingle.broadcastType = broadcastType == "日常" ? "0" : "1";     // 0：日常      //1：应急
+                    SendPlayInfosingle.Id_List = new List<string>();
+                    SendPlayInfosingle.Id_List.Add(id);
+                    Generalresponse response = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(SendPlayInfosingle, "图标播放");
+
+                    Thread.Sleep(3000);
+                    broadcastrecord broadcastrecordresponse = (broadcastrecord)SingletonInfo.GetInstance().post.PostCommnand(null, "直播列表");
+                    broadcastrecorddata selectedone = broadcastrecordresponse.data.Find(s => s.prAreaName.Equals(Item.areaname));
+                    Item.prlId = selectedone.prlId.ToString();
+                    Item.prEvnType = selectedone.prEvnType;
+                }
+                else
+                {
+                    #region  TS指令 播发
+                    List<string> ResourceList = new List<string>();
+                    ResourceList.Add(Item.areadata.resource);
+                    string ebm_class = broadcastType == "日常" ? "0101" : "0100";
+                    Dictionary<string, string> IndexItemIDic = TSBroadcastcommand(ResourceList, SingletonInfo.GetInstance().ts_pid, ebm_class);//此时的res.result_desc中存放的是pid数据
+                    Item.IndexItemID = IndexItemIDic[ResourceList[0]];
+                    Item.prEvnType = broadcastType;
+                    #endregion
+                }
+                Item.deviceoperate = "1";
+                selectedRow.Tag = Item;
+                Datagridviewmainitem Item_Global = SingletonInfo.GetInstance().dgvMainData.Find(s => s.areaname.Equals(Item.areaname));
+                Item_Global = Item;
+                if (Item.prEvnType=="日常")
+                {
+                    skinDataGridView_Main.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = imageList1.Images[2];
+                    skinDataGridView_Main.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].ReadOnly = true;
+                }
+                if (Item.prEvnType == "应急")
+                {
+                    skinDataGridView_Main.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = imageList1.Images[2];
+                    skinDataGridView_Main.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].ReadOnly = true;
+                }
+                #endregion
+            }
+            else
+            {
+                #region  发关机指令
+                //判断与县平台是否联通
+                if (SingletonInfo.GetInstance().loginstatus)
+                {
+                    List<string> IDList = new List<string>();
+                    IDList.Add(Item.prlId);
+                    Generalresponse stopresponse = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(IDList, "停止");
+                    Item.prlId = "-1";
+                }
+                else
+                {
+                    #region  TS指令 停止
+                    string IndexItemIDstr = Item.IndexItemID;
+                    DelEBMIndex2Global(IndexItemIDstr);
+                    Item.IndexItemID = "-1";
+                    #endregion
+                }
+                Item.deviceoperate = "0";
+                Item.prEvnType="未播放";
+                selectedRow.Tag = Item;
+                Datagridviewmainitem Item_Global = SingletonInfo.GetInstance().dgvMainData.Find(s => s.areaname.Equals(Item.areaname));
+                Item_Global = Item;
+                if (Item.prEvnType == "未播放")
+                {
+                    skinDataGridView_Main.Rows[e.RowIndex].Cells[2].Value = imageList1.Images[3];
+                    skinDataGridView_Main.Rows[e.RowIndex].Cells[3].Value = imageList1.Images[3];
+                    skinDataGridView_Main.Rows[e.RowIndex].Cells[2].ReadOnly = false;
+                    skinDataGridView_Main.Rows[e.RowIndex].Cells[3].ReadOnly = false;
+                }
+                #endregion
+            }
+           
+        
+        }
+
+        private void skinDataGridView_Main_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+
+        private void btn_input_channel_Update_Click(object sender, EventArgs e)
+        {
+            try
+            {
+               
+                skinDataGridView_Main.Visible = false;
+                skinTabControl_parameterset.Location = new System.Drawing.Point(436, 179);
+                skinTabControl_parameterset.Size = new System.Drawing.Size(1038, 659);
+                skinTabControl_parameterset.Visible = true;
+                btn_Home1.Visible = true;
+                if (SingletonInfo.GetInstance().loginstatus)
+                {
+                    Generalresponse stopresponse = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(null, "地图");
+                    testUrl = SingletonInfo.GetInstance().HttpServer + stopresponse.data;
+                    #region  调用火狐浏览器
+                    Browser = new Gecko.GeckoWebBrowser();
+                    skinTabControl_parameterset.TabPages["skinTabPage6"].Controls.Add(Browser);
+                    Browser.Dock = DockStyle.Fill;
+                    Browser.Navigate(testUrl);
+                    #endregion
+                }
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        private void btn_Organization_Update_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }                                                            
+        }
+
+        private void OnlineAllStart(object obj)
+        {
+            string broadcastType = (string)obj;
+            SendPlayInfo palyinfo = new SendPlayInfo();
+            palyinfo.broadcastType = broadcastType;//0：日常  1：应急
+            palyinfo.organization_List = new List<organizationdata>();
+
+            foreach (var item in SingletonInfo.GetInstance().dgvMainData)
+            {
+                palyinfo.organization_List.Add(item.areadata);
+            }
+
+            Generalresponse response = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(palyinfo, "播放");
+            if (response.code == 0)
+            {
+                broadcastrecord broadcastrecordresponse = (broadcastrecord)SingletonInfo.GetInstance().post.PostCommnand(null, "直播列表");
+                if (broadcastrecordresponse.data.Count > 0)
+                {
+                    foreach (var item in broadcastrecordresponse.data)
+                    {
+                        Datagridviewmainitem selected = SingletonInfo.GetInstance().dgvMainData.Find(s => s.areaname.Equals(item.prAreaName));
+                        selected.checkstate = true;
+                        selected.deviceoperate = "1";
+                        selected.prEvnType = item.prEvnType;
+                        selected.prlId = item.prlId.ToString();
+                    }
+                }
+            }
+            ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
+        }
+
+        private void OfflineAllStart(object obj)
+        {
+            //没有与县平台联通的情况下 全开日常广播
+            #region  TS指令 播发
+            string broadcasttype = (string)obj; 
+
+            foreach (var item in SingletonInfo.GetInstance().dgvMainData)
+            {
+                List<string> ResourceList = new List<string>();
+                ResourceList.Add(item.areadata.resource);
+                Dictionary<string, string> dic = TSBroadcastcommand(ResourceList, SingletonInfo.GetInstance().ts_pid, "0101");
+                item.IndexItemID = dic[item.areadata.resource];
+                item.prEvnType = broadcasttype;
+                item.checkstate = true;
+                item.deviceoperate = "1";
+            }
+            ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
+            #endregion
+        }
+
+        private void OnlineAllStop()
+        {
+             List<string> STOP_ID_List=new List<string>();
+            foreach (var item in SingletonInfo.GetInstance().dgvMainData)
+            {
+                  STOP_ID_List.Add(item.prlId);
+                  item.checkstate = true;
+                  item.deviceoperate = "0";
+                  item.prEvnType = "未播放";
+                  item.prlId = "-1";
+            }
+            Generalresponse stopresponse = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(STOP_ID_List, "停止");
+            ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
+            
+        }
+
+        private void OfflineAllStop()
+        {
+            string IndexItemIDstr = "";
+            foreach (var item in SingletonInfo.GetInstance().dgvMainData)
+            {
+                IndexItemIDstr += "," + item.IndexItemID;
+                item.checkstate = true;
+                item.deviceoperate = "0";
+                item.IndexItemID = "-1";
+                item.prEvnType = "未播放";
+            }
+            IndexItemIDstr = IndexItemIDstr.Substring(1, IndexItemIDstr.Length-1);
+            DelEBMIndex2Global(IndexItemIDstr);
+            ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
+        }
+
+        private void btn_Daily_Main_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (skinDataGridView_Main.Visible)
+                {
+
+                }
+                else
+                {
+                    btn_Emergency_Main.Enabled = false;
+                    if (btn_Daily_Main.Text == "日常广播")
+                    {
+                        btn_Emergency_Main.Enabled = false;
+                        //开
+                        btn_Daily_Main.Text = "日常停播";
+                        btn_Daily_Main.BaseColor = System.Drawing.Color.Lime;
+                        if (SingletonInfo.GetInstance().loginstatus)
+                        {
+                            Thread thread = new Thread(new ParameterizedThreadStart(OnlineAllStart));
+                            thread.IsBackground = true;
+                            thread.Start("0");
+                           
+                        }
+                        else
+                        {
+                            Thread thread = new Thread(new ParameterizedThreadStart(OfflineAllStart));
+                            thread.IsBackground = true;
+                            thread.Start("日常");
+                        }
+                    }
+                    else
+                    {
+                        btn_Emergency_Main.Enabled = true;
+                        //关
+                        btn_Daily_Main.Text = "日常广播";
+                        btn_Daily_Main.BaseColor = System.Drawing.Color.DarkGreen;
+                        if (SingletonInfo.GetInstance().loginstatus)
+                        {
+                            Thread thread = new Thread(new ThreadStart(OnlineAllStop));
+                            thread.IsBackground = true;
+                            thread.Start();
+                        }
+                        else
+                        {
+                            Thread thread = new Thread(new ThreadStart(OfflineAllStop));
+                            thread.IsBackground = true;
+                            thread.Start();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void btn_Emergency_Main_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (skinDataGridView_Main.Visible)
+                {
+
+                }
+                else
+                {
+                  
+                    if (btn_Emergency_Main.Text == "应急广播")
+                    {
+                        btn_Daily_Main.Enabled = false;
+                        //开
+                        btn_Emergency_Main.Text = "应急停播";
+                        btn_Emergency_Main.BaseColor = System.Drawing.Color.Red;
+                        if (SingletonInfo.GetInstance().loginstatus)
+                        {
+                            Thread thread = new Thread(new ParameterizedThreadStart(OnlineAllStart));
+                            thread.IsBackground = true;
+                            thread.Start("1");
+
+                        }
+                        else
+                        {
+                            Thread thread = new Thread(new ParameterizedThreadStart(OfflineAllStart));
+                            thread.IsBackground = true;
+                            thread.Start("应急");
+                        }
+                    }
+                    else
+                    {
+                        btn_Daily_Main.Enabled = true;
+                        //关
+                        btn_Emergency_Main.Text = "应急广播";
+                        btn_Emergency_Main.BaseColor = System.Drawing.Color.Maroon;
+                        if (SingletonInfo.GetInstance().loginstatus)
+                        {
+                            Thread thread = new Thread(new ThreadStart(OnlineAllStop));
+                            thread.IsBackground = true;
+                            thread.Start();
+                        }
+                        else
+                        {
+                            Thread thread = new Thread(new ThreadStart(OfflineAllStop));
+                            thread.IsBackground = true;
+                            thread.Start();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+   
+
+   
+
+     
     }
 }

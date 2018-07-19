@@ -191,4 +191,11 @@ namespace TownsEBMSystem
         public string broadcastType { get; set; }
 
     }
+
+    public class SendPlayInfoNew
+    {
+        public List<string> Id_List { get; set; }
+        public string broadcastType { get; set; }
+
+    }
 }

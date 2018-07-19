@@ -69,6 +69,9 @@
     <Reference Include="log4net">
       <HintPath>LogLib\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MessageBoxEx">
+      <HintPath>..\MessageBoxEx\bin\Debug\MessageBoxEx.exe</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>

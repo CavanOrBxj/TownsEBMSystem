@@ -9,3 +9,6 @@ E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\Debug
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\Debug\TownsEBMSystem.exe
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\Debug\TownsEBMSystem.pdb
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\Debug\TownsEBMSystem.MainForm.resources
+D:\GitHub\TownsEBMSystem\TownsEBMSystem\bin\Debug\TownsEBMSystem.exe.config
+D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\Debug\TownsEBMSystem.exe
+D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\Debug\TownsEBMSystem.pdb

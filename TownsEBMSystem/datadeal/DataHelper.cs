@@ -146,7 +146,7 @@ namespace TownsEBMSystem
                     backdata = BuildBackData(TaskBeginUpdataDeal(datareal), 0x22);
                     break;
                 case 0x20:
-                    backdata = BuildBackData(0);
+                    backdata = BuildBackData(HeartBeatDeal(datareal),0x21);      
                     break;
 
             }
@@ -361,7 +361,10 @@ namespace TownsEBMSystem
             }
 
             #region 线程通知县平台  或者事件触发
-            DataHelper.MyEvent(tmp);
+            ParamObject eventparam = new ParamObject();
+            eventparam.commandcode = 0x18;
+            eventparam.paramobj = tmp;
+            DataHelper.MyEvent(eventparam);
             #endregion
 
 
@@ -373,6 +376,40 @@ namespace TownsEBMSystem
             return rebackdata.ToArray();
             #endregion
         }
+
+
+        public byte[] HeartBeatDeal(byte[] input)
+        {
+            RecvHeartBeat tmp = new RecvHeartBeat();
+            int front_code_length=(int)input.Take(1).ToArray()[0];
+            tmp.front_code = bcd2Str(input.Skip(1).Take(front_code_length).ToArray());
+            tmp.front_State = input.Skip(1 + front_code_length).Take(1).ToArray()[0].ToString();
+            tmp.auxiliarydata = input.Skip(2 + front_code_length).Take(1).ToArray()[0].ToString();
+            tmp.connection_time = Byte2DatetimeStr(input.Skip(3 + front_code_length).Take(4).ToArray()); 
+
+
+
+     
+
+            #region 事件触发通知UI适配器当前的通道号是什么
+            ParamObject eventparam = new ParamObject();
+            eventparam.commandcode = 0x20;
+            eventparam.paramobj = tmp;
+            DataHelper.MyEvent(eventparam);
+            #endregion
+
+
+            #region  构建回复数据
+            List<byte> rebackdata = new List<byte>();
+            int BackCode = 0;
+            int BackData_Len = 0;
+
+            rebackdata.AddRange(Int32toByte(BackCode));
+            rebackdata.AddRange(Int32toByte(BackData_Len));
+            return rebackdata.ToArray();
+            #endregion
+        }
+
 
         #region  格式转换
 
