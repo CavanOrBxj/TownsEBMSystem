@@ -54,6 +54,8 @@ namespace TownsEBMSystem
 
         private EBMIndexGlobal_ _EBMIndexGlobal;
 
+        MessageShowForm MessageShowDlg;
+
 
         public EBMStream EbMStream
         {
@@ -1424,8 +1426,8 @@ namespace TownsEBMSystem
         {
             try
             {
-                skinDataGridView_Main.Location = new System.Drawing.Point(515, 212);
-                skinDataGridView_Main.Size = new System.Drawing.Size(889, 635);
+                skinDataGridView_Main.Location = new System.Drawing.Point(509, 212);
+                skinDataGridView_Main.Size = new System.Drawing.Size(908, 635);
                 skinDataGridView_Main.Visible = true;
                
                 //skinTabControl_Organization.Location = new System.Drawing.Point(436, 179);
@@ -1442,20 +1444,7 @@ namespace TownsEBMSystem
                 skinButton9.Text = "线路一";
                 skinButton8.Text = "线路二";
                 skinButton7.Text = "调频一";
-                skinButton6.Text = "调频二";
-
-
-                if (SingletonInfo.GetInstance().loginstatus)
-                {
-                    Generalresponse stopresponse = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(null, "地图");
-                    testUrl = SingletonInfo.GetInstance().HttpServer + stopresponse.data;
-                    #region  调用火狐浏览器
-                    Browser = new Gecko.GeckoWebBrowser();
-                    skinTabControl_Organization.TabPages["skinTabPage3"].Controls.Add(Browser);
-                    Browser.Dock = DockStyle.Fill;
-                    Browser.Navigate(testUrl);
-                    #endregion
-                }
+                skinButton6.Text = "调频二";  
 
             }
             catch (Exception)
@@ -1508,9 +1497,10 @@ namespace TownsEBMSystem
 
         private void pictureBox_offline_DoubleClick(object sender, EventArgs e)
         {
-            var dr = new MessageBoxEx.MessageBox { text = "确定关闭？" }.ShowDialog();
-              if (dr == DialogResult.OK)
-              {
+            MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定关闭？" } };
+            MessageShowDlg.ShowDialog();
+            if (MessageShowDlg.IsSure)
+            {
                   ini.WriteValue("EBM", "ebm_id_behind", SingletonInfo.GetInstance().ebm_id_behind);
                   ini.WriteValue("EBM", "ebm_id_count", SingletonInfo.GetInstance().ebm_id_count.ToString());
                   ini.WriteValue("EBM", "input_channel_id", SingletonInfo.GetInstance().input_channel_id);
@@ -1525,14 +1515,16 @@ namespace TownsEBMSystem
                   }
                   Close();
               }
+              GC.Collect();
         }
 
         private void pictureBox_online_Click(object sender, EventArgs e)
         {
 
-              var dr = new MessageBoxEx.MessageBox { text = "确定关闭？" }.ShowDialog();
-              if (dr == DialogResult.OK)
-              {
+            MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定关闭？" } };
+            MessageShowDlg.ShowDialog();
+            if (MessageShowDlg.IsSure)
+            {
                   ini.WriteValue("EBM", "ebm_id_behind", SingletonInfo.GetInstance().ebm_id_behind);
                   ini.WriteValue("EBM", "ebm_id_count", SingletonInfo.GetInstance().ebm_id_count.ToString());
                   ini.WriteValue("EBM", "input_channel_id", SingletonInfo.GetInstance().input_channel_id);
@@ -1547,6 +1539,7 @@ namespace TownsEBMSystem
 
                   Close();
               }
+              GC.Collect();
         }
 
 
@@ -1577,9 +1570,9 @@ namespace TownsEBMSystem
             {
                 if (skinButton1.Text == "话筒")
                 {
-
-                    var dr = new MessageBoxEx.MessageBox { text = "确定切换到话筒？" }.ShowDialog();
-                    if (dr == DialogResult.OK)
+                    MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定切换到话筒？" } };
+                    MessageShowDlg.ShowDialog();
+                    if (MessageShowDlg.IsSure)
                     {
                         OnorOFFResponse res = SwitchChannel(1);//话筒目前定为1
                         if (res.result_code == 1)  //0代表成功1代表失败
@@ -1603,10 +1596,36 @@ namespace TownsEBMSystem
                         skinButton7.ForeColor = System.Drawing.Color.White;
                         skinButton6.ForeColor = System.Drawing.Color.White;
                     }
-                    else
-                    {
-                        return;
-                    }
+
+                    //var dr = new MessageBoxEx.MessageBox { text = "确定切换到话筒？" }.ShowDialog();
+                    //if (dr == DialogResult.OK)
+                    //{
+                    //    OnorOFFResponse res = SwitchChannel(1);//话筒目前定为1
+                    //    if (res.result_code == 1)  //0代表成功1代表失败
+                    //    {
+
+                    //        MessageBox.Show("切换到话筒失败");
+                    //    }
+                    //    else
+                    //    {
+                    //        SingletonInfo.GetInstance().input_channel_id = "1";
+                    //    }
+
+                    //    skinButton1.ForeColor = System.Drawing.Color.Lime;
+                    //    skinButton3.ForeColor = System.Drawing.Color.White;
+                    //    skinButton4.ForeColor = System.Drawing.Color.White;
+                    //    skinButton5.ForeColor = System.Drawing.Color.White;
+
+
+                    //    skinButton9.ForeColor = System.Drawing.Color.White;
+                    //    skinButton8.ForeColor = System.Drawing.Color.White;
+                    //    skinButton7.ForeColor = System.Drawing.Color.White;
+                    //    skinButton6.ForeColor = System.Drawing.Color.White;
+                    //}
+                    //else
+                    //{
+                    //    return;
+                    //}
                 }
                 else
                 {
@@ -1627,8 +1646,9 @@ namespace TownsEBMSystem
                 if (skinButton3.Text == "USB")
                 {
 
-                    var dr = new MessageBoxEx.MessageBox { text = "确定切换到USB？" }.ShowDialog();
-                    if (dr == DialogResult.OK)
+                    MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定切换到USB？" } };
+                    MessageShowDlg.ShowDialog();
+                    if (MessageShowDlg.IsSure)
                     {
                         OnorOFFResponse res = SwitchChannel(2);//U盘目前定为2
                         if (res.result_code == 1)  //0代表成功1代表失败
@@ -1645,7 +1665,6 @@ namespace TownsEBMSystem
                         skinButton3.ForeColor = System.Drawing.Color.Lime;
                         skinButton4.ForeColor = System.Drawing.Color.White;
                         skinButton5.ForeColor = System.Drawing.Color.White;
-
 
                         skinButton9.ForeColor = System.Drawing.Color.White;
                         skinButton8.ForeColor = System.Drawing.Color.White;
@@ -1671,8 +1690,9 @@ namespace TownsEBMSystem
             {
                 if (skinButton4.Text == "DVB")
                 {
-                    var dt = new MessageBoxEx.MessageBox { text = "确定切换到DVB？" }.ShowDialog();
-                    if (dt == DialogResult.OK)
+                    MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定切换到DVC？" } };
+                    MessageShowDlg.ShowDialog();
+                    if (MessageShowDlg.IsSure)
                     {
                         ///适配器暂不支持
                         //OnorOFFResponse res = SwitchChannel(3);//DVB-C目前定为3
@@ -1728,16 +1748,23 @@ namespace TownsEBMSystem
                     //{
                     //    SingletonInfo.GetInstance().input_channel_id = "4";
                     //}
-                    skinButton1.ForeColor = System.Drawing.Color.White;
-                    skinButton3.ForeColor = System.Drawing.Color.White;
-                    skinButton4.ForeColor = System.Drawing.Color.White;
-                    skinButton5.ForeColor = System.Drawing.Color.Lime;
+
+                      MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定切换到DTMB？" } };
+                    MessageShowDlg.ShowDialog();
+                    if (MessageShowDlg.IsSure)
+                    {
+                        skinButton1.ForeColor = System.Drawing.Color.White;
+                        skinButton3.ForeColor = System.Drawing.Color.White;
+                        skinButton4.ForeColor = System.Drawing.Color.White;
+                        skinButton5.ForeColor = System.Drawing.Color.Lime;
 
 
-                    skinButton9.ForeColor = System.Drawing.Color.White;
-                    skinButton8.ForeColor = System.Drawing.Color.White;
-                    skinButton7.ForeColor = System.Drawing.Color.White;
-                    skinButton6.ForeColor = System.Drawing.Color.White;
+                        skinButton9.ForeColor = System.Drawing.Color.White;
+                        skinButton8.ForeColor = System.Drawing.Color.White;
+                        skinButton7.ForeColor = System.Drawing.Color.White;
+                        skinButton6.ForeColor = System.Drawing.Color.White;
+                    }
+                 
                 }
                 else
                 {
@@ -1757,26 +1784,33 @@ namespace TownsEBMSystem
             {
                 if (skinButton9.Text == "线路一")
                 {
-                    OnorOFFResponse res = SwitchChannel(5);//线路一目前定为5
-                    if (res.result_code == 1)  //0代表成功1代表失败
+
+                    MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定切换到线路一？" } };
+                    MessageShowDlg.ShowDialog();
+                    if (MessageShowDlg.IsSure)
                     {
-                        MessageBox.Show("切换到线路一失败");
+                        OnorOFFResponse res = SwitchChannel(5);//线路一目前定为5
+                        if (res.result_code == 1)  //0代表成功1代表失败
+                        {
+                            MessageBox.Show("切换到线路一失败");
+                        }
+                        else
+                        {
+                            SingletonInfo.GetInstance().input_channel_id = "5";
+                        }
+
+                        skinButton1.ForeColor = System.Drawing.Color.White;
+                        skinButton3.ForeColor = System.Drawing.Color.White;
+                        skinButton4.ForeColor = System.Drawing.Color.White;
+                        skinButton5.ForeColor = System.Drawing.Color.White;
+
+
+                        skinButton9.ForeColor = System.Drawing.Color.Lime;
+                        skinButton8.ForeColor = System.Drawing.Color.White;
+                        skinButton7.ForeColor = System.Drawing.Color.White;
+                        skinButton6.ForeColor = System.Drawing.Color.White;
                     }
-                    else
-                    {
-                        SingletonInfo.GetInstance().input_channel_id = "5";
-                    }
 
-                    skinButton1.ForeColor = System.Drawing.Color.White;
-                    skinButton3.ForeColor = System.Drawing.Color.White;
-                    skinButton4.ForeColor = System.Drawing.Color.White;
-                    skinButton5.ForeColor = System.Drawing.Color.White;
-
-
-                    skinButton9.ForeColor = System.Drawing.Color.Lime;
-                    skinButton8.ForeColor = System.Drawing.Color.White;
-                    skinButton7.ForeColor = System.Drawing.Color.White;
-                    skinButton6.ForeColor = System.Drawing.Color.White;
                 }
                 else
                 {
@@ -1786,7 +1820,7 @@ namespace TownsEBMSystem
             catch (Exception)
             {
 
-              
+
             }
         }
 
@@ -1796,26 +1830,32 @@ namespace TownsEBMSystem
             {
                 if (skinButton8.Text == "线路二")
                 {
-                    OnorOFFResponse res = SwitchChannel(6);//线路二目前定为6
-                    if (res.result_code == 1)  //0代表成功1代表失败
+                      MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定切换到线路二？" } };
+                    MessageShowDlg.ShowDialog();
+                    if (MessageShowDlg.IsSure)
                     {
-                        MessageBox.Show("切换到线路二失败");
+                        OnorOFFResponse res = SwitchChannel(6);//线路二目前定为6
+                        if (res.result_code == 1)  //0代表成功1代表失败
+                        {
+                            MessageBox.Show("切换到线路二失败");
+                        }
+                        else
+                        {
+                            SingletonInfo.GetInstance().input_channel_id = "6";
+                        }
+
+                        skinButton1.ForeColor = System.Drawing.Color.White;
+                        skinButton3.ForeColor = System.Drawing.Color.White;
+                        skinButton4.ForeColor = System.Drawing.Color.White;
+                        skinButton5.ForeColor = System.Drawing.Color.White;
+
+
+                        skinButton9.ForeColor = System.Drawing.Color.White;
+                        skinButton8.ForeColor = System.Drawing.Color.Lime;
+                        skinButton7.ForeColor = System.Drawing.Color.White;
+                        skinButton6.ForeColor = System.Drawing.Color.White;
                     }
-                    else
-                    {
-                        SingletonInfo.GetInstance().input_channel_id = "6";
-                    }
-
-                    skinButton1.ForeColor = System.Drawing.Color.White;
-                    skinButton3.ForeColor = System.Drawing.Color.White;
-                    skinButton4.ForeColor = System.Drawing.Color.White;
-                    skinButton5.ForeColor = System.Drawing.Color.White;
-
-
-                    skinButton9.ForeColor = System.Drawing.Color.White;
-                    skinButton8.ForeColor = System.Drawing.Color.Lime;
-                    skinButton7.ForeColor = System.Drawing.Color.White;
-                    skinButton6.ForeColor = System.Drawing.Color.White;
+            
                 }
                 else
                 {
@@ -1835,27 +1875,33 @@ namespace TownsEBMSystem
             {
                 if (skinButton7.Text == "调频一")
                 {
-                    OnorOFFResponse res = SwitchChannel(7);//调频一目前定为7
-                    if (res.result_code == 1)  //0代表成功1代表失败
+                      MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定切换到调频一？" } };
+                    MessageShowDlg.ShowDialog();
+                    if (MessageShowDlg.IsSure)
                     {
-                        MessageBox.Show("切换到调频一失败");
+                        OnorOFFResponse res = SwitchChannel(7);//调频一目前定为7
+                        if (res.result_code == 1)  //0代表成功1代表失败
+                        {
+                            MessageBox.Show("切换到调频一失败");
+                        }
+                        else
+                        {
+
+                            SingletonInfo.GetInstance().input_channel_id = "7";
+                        }
+
+                        skinButton1.ForeColor = System.Drawing.Color.White;
+                        skinButton3.ForeColor = System.Drawing.Color.White;
+                        skinButton4.ForeColor = System.Drawing.Color.White;
+                        skinButton5.ForeColor = System.Drawing.Color.White;
+
+
+                        skinButton9.ForeColor = System.Drawing.Color.White;
+                        skinButton8.ForeColor = System.Drawing.Color.White;
+                        skinButton7.ForeColor = System.Drawing.Color.Lime;
+                        skinButton6.ForeColor = System.Drawing.Color.White;
                     }
-                    else
-                    {
-
-                        SingletonInfo.GetInstance().input_channel_id = "7";
-                    }
-
-                    skinButton1.ForeColor = System.Drawing.Color.White;
-                    skinButton3.ForeColor = System.Drawing.Color.White;
-                    skinButton4.ForeColor = System.Drawing.Color.White;
-                    skinButton5.ForeColor = System.Drawing.Color.White;
-
-
-                    skinButton9.ForeColor = System.Drawing.Color.White;
-                    skinButton8.ForeColor = System.Drawing.Color.White;
-                    skinButton7.ForeColor = System.Drawing.Color.Lime;
-                    skinButton6.ForeColor = System.Drawing.Color.White;
+                  
                 }
                 else
                 {
@@ -1875,26 +1921,32 @@ namespace TownsEBMSystem
             {
                 if (skinButton6.Text == "调频二")
                 {
-                    OnorOFFResponse res = SwitchChannel(8);//调频二目前定为8
-                    if (res.result_code == 1)  //0代表成功1代表失败
+                      MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定切换到调频二？" } };
+                    MessageShowDlg.ShowDialog();
+                    if (MessageShowDlg.IsSure)
                     {
-                        MessageBox.Show("切换到调频二失败");
+                        OnorOFFResponse res = SwitchChannel(8);//调频二目前定为8
+                        if (res.result_code == 1)  //0代表成功1代表失败
+                        {
+                            MessageBox.Show("切换到调频二失败");
+                        }
+                        else
+                        {
+                            SingletonInfo.GetInstance().input_channel_id = "8";
+                        }
+
+                        skinButton1.ForeColor = System.Drawing.Color.White;
+                        skinButton3.ForeColor = System.Drawing.Color.White;
+                        skinButton4.ForeColor = System.Drawing.Color.White;
+                        skinButton5.ForeColor = System.Drawing.Color.White;
+
+
+                        skinButton9.ForeColor = System.Drawing.Color.White;
+                        skinButton8.ForeColor = System.Drawing.Color.White;
+                        skinButton7.ForeColor = System.Drawing.Color.White;
+                        skinButton6.ForeColor = System.Drawing.Color.Lime;
                     }
-                    else
-                    {
-                        SingletonInfo.GetInstance().input_channel_id = "8";
-                    }
-
-                    skinButton1.ForeColor = System.Drawing.Color.White;
-                    skinButton3.ForeColor = System.Drawing.Color.White;
-                    skinButton4.ForeColor = System.Drawing.Color.White;
-                    skinButton5.ForeColor = System.Drawing.Color.White;
-
-
-                    skinButton9.ForeColor = System.Drawing.Color.White;
-                    skinButton8.ForeColor = System.Drawing.Color.White;
-                    skinButton7.ForeColor = System.Drawing.Color.White;
-                    skinButton6.ForeColor = System.Drawing.Color.Lime;
+                  
                 }
                 else
                 {
@@ -1925,7 +1977,6 @@ namespace TownsEBMSystem
                             {
                                 _EBMIndexGlobal.ListEbIndex.Remove(ite);
                             }
-
                         }
                     }
                 }
@@ -2666,7 +2717,76 @@ namespace TownsEBMSystem
         {
             try
             {
+                if (SingletonInfo.GetInstance().loginstatus)
+                {
+                    MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定区域信息？" } };
+                    MessageShowDlg.ShowDialog();
+                    if (MessageShowDlg.IsSure)
+                    {
+                        #region 获取区域信息
+                        organizationInfo reback1 = (organizationInfo)SingletonInfo.GetInstance().post.PostCommnand(null, "获取区域");
 
+                        if (reback1 != null)
+                        {
+                            SingletonInfo.GetInstance().Organization = reback1.data;
+                            #region 保存区域信息
+                            TableDataHelper.WriteTable(Enums.TableType.Organization, reback1.data);
+                            #endregion
+
+                            ShowtreeViewOrganization(reback1.data);
+                            ShowtreeViewOrganization_WhiteList(reback1.data);
+                            ShowtreeViewOrganization_RebackCycle(reback1.data);
+                            ShowtreeViewOrganization_RebackParam(reback1.data);
+                            ShowtreeViewOrganization_SwitchAmplifier(reback1.data);
+                            ShowtreeViewOrganization_volumn(reback1.data);
+
+                        }
+                        #endregion
+
+                        #region   生成显示信息
+                        //获取HTTP播放列表
+                        broadcastrecord broadcastrecordresponse = (broadcastrecord)SingletonInfo.GetInstance().post.PostCommnand(null, "直播列表");
+                        //生成显示数据
+                        foreach (var item in SingletonInfo.GetInstance().Organization)
+                        {
+                            if (item.children.Count > 0)
+                            {
+                                foreach (var ite in item.children)
+                                {
+                                    //非镇级                  
+                                    Datagridviewmainitem addone = new Datagridviewmainitem();
+                                    addone.areadata = ite;
+                                    addone.checkstate = true;//其实默认勾选
+                                    broadcastrecorddata playrecord = broadcastrecordresponse.data.Find(s => s.prAreaName.Equals(ite.name));
+                                    if (playrecord != null)
+                                    {
+                                        addone.deviceoperate = "1";
+                                        addone.prEvnType = playrecord.prEvnType;
+                                        addone.prlId = playrecord.prlId.ToString();
+                                    }
+                                    else
+                                    {
+                                        addone.deviceoperate = "0";
+                                        addone.prEvnType = "未播放";
+                                        addone.prlId = "-1";
+                                    }
+                                    addone.IndexItemID = "-1";
+
+                                    SingletonInfo.GetInstance().dgvMainData.Add(addone);
+                                }
+
+                            }
+                        }
+
+                        ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
+                        #endregion
+                    
+                    }
+                }
+                else
+                {
+                    return;
+                }
             }
             catch (Exception)
             {
@@ -2768,48 +2888,60 @@ namespace TownsEBMSystem
                 }
                 else
                 {
-                    btn_Emergency_Main.Enabled = false;
                     if (btn_Daily_Main.Text == "日常广播")
                     {
-                        btn_Emergency_Main.Enabled = false;
-                        //开
-                        btn_Daily_Main.Text = "日常停播";
-                        btn_Daily_Main.BaseColor = System.Drawing.Color.Lime;
-                        if (SingletonInfo.GetInstance().loginstatus)
+                        MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定开启全部应急广播？" } };
+                        MessageShowDlg.ShowDialog();
+                        if (MessageShowDlg.IsSure)
                         {
-                            Thread thread = new Thread(new ParameterizedThreadStart(OnlineAllStart));
-                            thread.IsBackground = true;
-                            thread.Start("0");
-                           
+                            btn_Emergency_Main.Enabled = false;
+                            //开
+                            btn_Daily_Main.Text = "日常停播";
+                            btn_Daily_Main.BaseColor = System.Drawing.Color.Lime;
+                            if (SingletonInfo.GetInstance().loginstatus)
+                            {
+                                Thread thread = new Thread(new ParameterizedThreadStart(OnlineAllStart));
+                                thread.IsBackground = true;
+                                thread.Start("0");
+
+                            }
+                            else
+                            {
+                                Thread thread = new Thread(new ParameterizedThreadStart(OfflineAllStart));
+                                thread.IsBackground = true;
+                                thread.Start("日常");
+                            }
                         }
-                        else
-                        {
-                            Thread thread = new Thread(new ParameterizedThreadStart(OfflineAllStart));
-                            thread.IsBackground = true;
-                            thread.Start("日常");
-                        }
+
                     }
                     else
                     {
-                        btn_Emergency_Main.Enabled = true;
-                        //关
-                        btn_Daily_Main.Text = "日常广播";
-                        btn_Daily_Main.BaseColor = System.Drawing.Color.DarkGreen;
-                        if (SingletonInfo.GetInstance().loginstatus)
+                        MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定关闭所有日常广播？" } };
+                        MessageShowDlg.ShowDialog();
+                        if (MessageShowDlg.IsSure)
                         {
-                            Thread thread = new Thread(new ThreadStart(OnlineAllStop));
-                            thread.IsBackground = true;
-                            thread.Start();
-                        }
-                        else
-                        {
-                            Thread thread = new Thread(new ThreadStart(OfflineAllStop));
-                            thread.IsBackground = true;
-                            thread.Start();
-                        }
-                    }
+                            btn_Emergency_Main.Enabled = true;
+                            //关
+                            btn_Daily_Main.Text = "日常广播";
+                            btn_Daily_Main.BaseColor = System.Drawing.Color.DarkGreen;
+                            if (SingletonInfo.GetInstance().loginstatus)
+                            {
+                                Thread thread = new Thread(new ThreadStart(OnlineAllStop));
+                                thread.IsBackground = true;
+                                thread.Start();
+                            }
+                            else
+                            {
+                                Thread thread = new Thread(new ThreadStart(OfflineAllStop));
+                                thread.IsBackground = true;
+                                thread.Start();
+                            }
 
+                        }
+
+                    }
                 }
+
             }
             catch (Exception)
             {
@@ -2828,45 +2960,59 @@ namespace TownsEBMSystem
                 }
                 else
                 {
-                  
                     if (btn_Emergency_Main.Text == "应急广播")
                     {
-                        btn_Daily_Main.Enabled = false;
-                        //开
-                        btn_Emergency_Main.Text = "应急停播";
-                        btn_Emergency_Main.BaseColor = System.Drawing.Color.Red;
-                        if (SingletonInfo.GetInstance().loginstatus)
-                        {
-                            Thread thread = new Thread(new ParameterizedThreadStart(OnlineAllStart));
-                            thread.IsBackground = true;
-                            thread.Start("1");
 
-                        }
-                        else
+                        MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定开启全部应急广播？" } };
+                        MessageShowDlg.ShowDialog();
+                        if (MessageShowDlg.IsSure)
                         {
-                            Thread thread = new Thread(new ParameterizedThreadStart(OfflineAllStart));
-                            thread.IsBackground = true;
-                            thread.Start("应急");
+
+                            btn_Daily_Main.Enabled = false;
+                            //开
+                            btn_Emergency_Main.Text = "应急停播";
+                            btn_Emergency_Main.BaseColor = System.Drawing.Color.Red;
+                            if (SingletonInfo.GetInstance().loginstatus)
+                            {
+                                Thread thread = new Thread(new ParameterizedThreadStart(OnlineAllStart));
+                                thread.IsBackground = true;
+                                thread.Start("1");
+
+                            }
+                            else
+                            {
+                                Thread thread = new Thread(new ParameterizedThreadStart(OfflineAllStart));
+                                thread.IsBackground = true;
+                                thread.Start("应急");
+                            }
                         }
+
                     }
                     else
                     {
-                        btn_Daily_Main.Enabled = true;
-                        //关
-                        btn_Emergency_Main.Text = "应急广播";
-                        btn_Emergency_Main.BaseColor = System.Drawing.Color.Maroon;
-                        if (SingletonInfo.GetInstance().loginstatus)
+
+                        MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定关闭所有应急广播？" } };
+                        MessageShowDlg.ShowDialog();
+                        if (MessageShowDlg.IsSure)
                         {
-                            Thread thread = new Thread(new ThreadStart(OnlineAllStop));
-                            thread.IsBackground = true;
-                            thread.Start();
+                            btn_Daily_Main.Enabled = true;
+                            //关
+                            btn_Emergency_Main.Text = "应急广播";
+                            btn_Emergency_Main.BaseColor = System.Drawing.Color.Maroon;
+                            if (SingletonInfo.GetInstance().loginstatus)
+                            {
+                                Thread thread = new Thread(new ThreadStart(OnlineAllStop));
+                                thread.IsBackground = true;
+                                thread.Start();
+                            }
+                            else
+                            {
+                                Thread thread = new Thread(new ThreadStart(OfflineAllStop));
+                                thread.IsBackground = true;
+                                thread.Start();
+                            }
                         }
-                        else
-                        {
-                            Thread thread = new Thread(new ThreadStart(OfflineAllStop));
-                            thread.IsBackground = true;
-                            thread.Start();
-                        }
+
                     }
 
                 }

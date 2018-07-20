@@ -38991,3 +38991,57 @@ FF FF FF FF FF FF FF FF FF FF FF FF
 出错类：TownsEBMSystem.MainForm property: [(null)] - 
 错误描述：登录到县平台失败！
  
+
+ 
+记录时间：2018-07-19 22:11:15,043 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：登录到县平台失败！
+ 
+
+ 
+记录时间：2018-07-19 22:12:28,204 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TCP客户端初始化失败
+ 
+
+ 
+记录时间：2018-07-19 22:12:49,396 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TCP客户端初始化失败
+ 
+
+ 
+记录时间：2018-07-19 22:13:10,511 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TCP客户端初始化失败
+ 
+
+ 
+记录时间：2018-07-19 22:13:11,430 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS发送指令:(开机/停机指令):2018/7/19 星期四 下午 10:13:10
+47 40 22 10 00 FD 80 94 00 00 05 00 00 FF 01 00 
+3B 23 00 00 00 01 03 01 01 01 20 18 07 19 05 18 
+00 01 E3 CE 22 13 10 E3 CE 23 13 10 30 30 30 30 
+30 52 01 06 12 00 00 00 00 00 00 00 01 00 16 00 
+01 1F FF 00 00 00 05 04 00 32 00 00 00 4A 00 00 
+00 02 00 00 00 00 00 07 52 3F A2 AF B9 F0 62 86 
+A8 BE 15 F7 4E BB 05 28 F4 DD 49 2A 1C A8 51 15 
+08 F9 44 2E 1B 9A 44 C0 7C D4 A6 65 4E B8 93 0A 
+E9 6D CD 84 BE EE 00 10 C3 38 52 6B F7 EF 6B 71 
+93 58 69 AA 08 26 23 62 41 4C 1B 65 FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF 
+
+
+ 
