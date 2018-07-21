@@ -64,6 +64,9 @@ namespace TownsEBMSystem
         public string EndtimeDelay;//TS指令结束时间延时
         public List<Datagridviewmainitem> dgvMainData; //只包含村信息
 
+
+        public string LocalHost;//本机IP
+
         private SingletonInfo()                                                                 
         {
 
@@ -120,6 +123,7 @@ namespace TownsEBMSystem
             EndtimeDelay = "";
 
             dgvMainData = new List<Datagridviewmainitem>();
+            LocalHost = "";
         }
         public static SingletonInfo GetInstance()
         {

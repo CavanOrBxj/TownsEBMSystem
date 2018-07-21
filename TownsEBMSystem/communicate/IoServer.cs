@@ -312,7 +312,7 @@ namespace TownsEBMSystem
 
             //   IPAddress ip = System.Net.IPAddress.Parse(SingletonInfo.GetInstance().LoaclIP);
 
-            IPAddress ip = System.Net.IPAddress.Parse("192.168.4.109");
+            IPAddress ip = System.Net.IPAddress.Parse(SingletonInfo.GetInstance().LocalHost);
             IPEndPoint localEndPoint = new IPEndPoint(ip, port);
 
             // 创建监听socket
