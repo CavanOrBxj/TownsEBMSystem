@@ -63,9 +63,9 @@ namespace TownsEBMSystem.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap _1 {
+        internal static System.Drawing.Bitmap bg {
             get {
-                object obj = ResourceManager.GetObject("1", resourceCulture);
+                object obj = ResourceManager.GetObject("bg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace TownsEBMSystem.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap _2 {
+        internal static System.Drawing.Bitmap bg1 {
             get {
-                object obj = ResourceManager.GetObject("2", resourceCulture);
+                object obj = ResourceManager.GetObject("bg1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace TownsEBMSystem.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap _21 {
+        internal static System.Drawing.Bitmap bg2 {
             get {
-                object obj = ResourceManager.GetObject("21", resourceCulture);
+                object obj = ResourceManager.GetObject("bg2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,29 @@ namespace TownsEBMSystem.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap _85cccab3gw1etdn3bxisvg20dw0jg1kx {
+        internal static System.Drawing.Bitmap bg3 {
             get {
-                object obj = ResourceManager.GetObject("85cccab3gw1etdn3bxisvg20dw0jg1kx", resourceCulture);
+                object obj = ResourceManager.GetObject("bg3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap bg4 {
+            get {
+                object obj = ResourceManager.GetObject("bg4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap checkbox {
+            get {
+                object obj = ResourceManager.GetObject("checkbox", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +133,39 @@ namespace TownsEBMSystem.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap disconnect {
+            get {
+                object obj = ResourceManager.GetObject("disconnect", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Login {
             get {
                 object obj = ResourceManager.GetObject("Login", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Login1 {
+            get {
+                object obj = ResourceManager.GetObject("Login1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Login2 {
+            get {
+                object obj = ResourceManager.GetObject("Login2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +183,29 @@ namespace TownsEBMSystem.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap offline1 {
+            get {
+                object obj = ResourceManager.GetObject("offline1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap online {
             get {
                 object obj = ResourceManager.GetObject("online", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap online1 {
+            get {
+                object obj = ResourceManager.GetObject("online1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,9 +233,9 @@ namespace TownsEBMSystem.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap timg {
+        internal static System.Drawing.Bitmap 在线__ {
             get {
-                object obj = ResourceManager.GetObject("timg", resourceCulture);
+                object obj = ResourceManager.GetObject("在线..", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,9 +243,9 @@ namespace TownsEBMSystem.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap timg__1_ {
+        internal static System.Drawing.Bitmap 离线__ {
             get {
-                object obj = ResourceManager.GetObject("timg (1)", resourceCulture);
+                object obj = ResourceManager.GetObject("离线..", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,59 +253,9 @@ namespace TownsEBMSystem.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap timg__3_ {
+        internal static System.Drawing.Bitmap 锁定 {
             get {
-                object obj = ResourceManager.GetObject("timg (3)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap timg__3_1 {
-            get {
-                object obj = ResourceManager.GetObject("timg (3)1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap timg__5_ {
-            get {
-                object obj = ResourceManager.GetObject("timg (5)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap timg__6_ {
-            get {
-                object obj = ResourceManager.GetObject("timg (6)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap timg__8_ {
-            get {
-                object obj = ResourceManager.GetObject("timg (8)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap timg__9_ {
-            get {
-                object obj = ResourceManager.GetObject("timg (9)", resourceCulture);
+                object obj = ResourceManager.GetObject("锁定", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

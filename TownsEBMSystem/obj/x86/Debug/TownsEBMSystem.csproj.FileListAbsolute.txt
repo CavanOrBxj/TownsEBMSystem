@@ -100,10 +100,11 @@ D:\GitHub\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\EBMTableLib.xml
 D:\GitHub\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\Newtonsoft.Json.xml
 D:\GitHub\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\System.Net.Http.xml
 D:\GitHub\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\zh-Hans\System.Net.Http.resources.dll
-D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.csprojResolveAssemblyReference.cache
 D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.MainForm.resources
 D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.MessageShowForm.resources
 D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.Properties.Resources.resources
 D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.csproj.GenerateResource.Cache
 D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.exe
 D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.pdb
+D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.FmLogin.resources
+D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.csprojResolveAssemblyReference.cache

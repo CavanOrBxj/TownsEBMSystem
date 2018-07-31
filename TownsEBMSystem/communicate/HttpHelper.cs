@@ -164,8 +164,6 @@ namespace TownsEBMSystem
                         reback = response;
                     }
                     break;
-
-
             }
             return reback;
         }
@@ -178,7 +176,6 @@ namespace TownsEBMSystem
         /// <returns></returns>
         public string SendHttpData(string url,string para)
         {
-           
             string strURL = url;
             System.Net.HttpWebRequest request;
             request = (System.Net.HttpWebRequest)WebRequest.Create(strURL);
@@ -209,6 +206,5 @@ namespace TownsEBMSystem
             myreader.Close();
             return responseText;
         }
-
     }
 }

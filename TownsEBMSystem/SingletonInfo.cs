@@ -17,7 +17,7 @@ namespace TownsEBMSystem
         public string creditCode;
         public List<organizationdata> Organization;
         public List<WhiteListRecord> WhiteListRecordList;
-        public string pid;
+        public string pid;//httpPlayID
         public bool loginstatus;//表示系统有没有登录到县平台
 
         public int SendfaileTime;//心跳发送失败次数 
@@ -66,6 +66,25 @@ namespace TownsEBMSystem
 
 
         public string LocalHost;//本机IP
+
+
+        public string TownHttpPlayID;//在线播放镇广播的ID
+        public string TownTSItemIndexID;//离线播放镇广播的ID
+
+        public string LeftBtn1txt;
+        public string LeftBtn2txt;
+        public string LeftBtn3txt;
+        public string RightBtn1txt;
+        public string RightBtn2txt;
+        public string RightBtn3txt;
+
+        public string logincode;//锁屏界面的解锁密码
+
+        public bool lockstatus;//锁定状态  true为锁定   false为解锁
+
+        public string lockcycle;//未检测到鼠标键盘输入自动锁屏周期
+
+        public string Interstitial_prlId;//插播prlID;
 
         private SingletonInfo()                                                                 
         {
@@ -124,6 +143,21 @@ namespace TownsEBMSystem
 
             dgvMainData = new List<Datagridviewmainitem>();
             LocalHost = "";
+            TownHttpPlayID = "";
+            TownTSItemIndexID = "";
+
+            LeftBtn1txt = "";
+            LeftBtn2txt = "";
+            LeftBtn3txt = "";
+            RightBtn1txt = "";
+            RightBtn2txt = "";
+            RightBtn3txt = "";
+
+            logincode = "";
+            lockstatus = true;
+            lockcycle = "";
+            Interstitial_prlId = "";
+
         }
         public static SingletonInfo GetInstance()
         {

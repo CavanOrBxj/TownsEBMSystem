@@ -53,12 +53,15 @@
             // btn_OK
             // 
             this.btn_OK.BackColor = System.Drawing.Color.Transparent;
-            this.btn_OK.BaseColor = System.Drawing.Color.LightSeaGreen;
+            this.btn_OK.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(64)))), ((int)(((byte)(159)))));
             this.btn_OK.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.btn_OK.DownBack = null;
+            this.btn_OK.FadeGlow = false;
             this.btn_OK.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.btn_OK.ForeColor = System.Drawing.Color.White;
+            this.btn_OK.GlowColor = System.Drawing.Color.Gray;
             this.btn_OK.IsDrawBorder = false;
+            this.btn_OK.IsDrawGlass = false;
             this.btn_OK.Location = new System.Drawing.Point(53, 150);
             this.btn_OK.MouseBack = null;
             this.btn_OK.Name = "btn_OK";
@@ -72,12 +75,14 @@
             // btn_cancle
             // 
             this.btn_cancle.BackColor = System.Drawing.Color.Transparent;
-            this.btn_cancle.BaseColor = System.Drawing.Color.LightSeaGreen;
+            this.btn_cancle.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(64)))), ((int)(((byte)(159)))));
             this.btn_cancle.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.btn_cancle.DownBack = null;
+            this.btn_cancle.FadeGlow = false;
             this.btn_cancle.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.btn_cancle.ForeColor = System.Drawing.Color.White;
             this.btn_cancle.IsDrawBorder = false;
+            this.btn_cancle.IsDrawGlass = false;
             this.btn_cancle.Location = new System.Drawing.Point(286, 150);
             this.btn_cancle.MouseBack = null;
             this.btn_cancle.Name = "btn_cancle";
@@ -90,7 +95,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(64)))), ((int)(((byte)(159)))));
             this.panel1.Controls.Add(this.picClose);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(0, 0);
