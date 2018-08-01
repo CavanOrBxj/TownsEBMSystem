@@ -53,6 +53,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>1.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSkin">
       <HintPath>cskin\CSkin.dll</HintPath>
@@ -198,6 +201,7 @@
     <None Include="ico\在线...png" />
     <None Include="ico\离线...png" />
     <None Include="ico\锁定.png" />
+    <Content Include="1.ico" />
     <Content Include="LogLib\log4net.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
