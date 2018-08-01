@@ -86,6 +86,8 @@ namespace TownsEBMSystem
 
         public string Interstitial_prlId;//插播prlID;
 
+        public string mark;//韩峰那边按钮设置、锁屏周期、锁屏密码有变化 这个值就变化
+
         private SingletonInfo()                                                                 
         {
 
@@ -157,6 +159,8 @@ namespace TownsEBMSystem
             lockstatus = true;
             lockcycle = "";
             Interstitial_prlId = "";
+
+            mark = "";
 
         }
         public static SingletonInfo GetInstance()

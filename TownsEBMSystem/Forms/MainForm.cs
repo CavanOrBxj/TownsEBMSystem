@@ -182,10 +182,6 @@ namespace TownsEBMSystem
                             {
                                 //关
                                 OnlineAllStop();
-                             
-                           
-
-
                                 this.Invoke(new Action(() =>
                                 {
                                     btn_Emergency_Main.Enabled = true;
@@ -196,18 +192,12 @@ namespace TownsEBMSystem
                                     btn_Emergency_Main.Text = "应急广播";
                                     btn_Daily_Main.BaseColor = System.Drawing.Color.DarkGreen;
                                     btn_Emergency_Main.BaseColor = System.Drawing.Color.Maroon;
-
                                 }));
-
-                                   
                             }
                             else
                             {
                                 //开
                                 OnlineAllStart("1");
-
-                               
-
                                 this.Invoke(new Action(() =>
                                 {
                                     btn_Emergency_Main.Enabled = true;
@@ -247,14 +237,11 @@ namespace TownsEBMSystem
                             {
                                 //开启指令
                                 OfflineAllStart("应急");
-
                                 this.Invoke(new Action(() =>
                                 {
                                     btn_Emergency_Main.Enabled = true;
                                     btn_Organization.Enabled = false;
                                     btn_Daily_Main.Enabled = false;
-
-
                                     btn_Daily_Main.Text = "日常广播";
                                     btn_Emergency_Main.Text = "应急停播";
                                     btn_Emergency_Main.BaseColor = System.Drawing.Color.Red;
@@ -404,18 +391,12 @@ namespace TownsEBMSystem
                         }
                         break;
                 }
-
-
-
-
             }
             catch (Exception ex)
             {
 
                 LogHelper.WriteLog(typeof(MainForm), ex.ToString());
             }
-
-
         }
 
         private void InitConfig()
@@ -469,9 +450,6 @@ namespace TownsEBMSystem
                 SingletonInfo.GetInstance().EndtimeDelay = ini.ReadValue("EBM", "EndtimeDelay");
 
                 SingletonInfo.GetInstance().LocalHost = ini.ReadValue("LocalHost", "IP");
-
-
-
                 #region    UI部分
                 SingletonInfo.GetInstance().logincode = cf["LoginCode"].ToString();
                 skinButton1.Text = cf["LeftBtuuon1"].ToString();
@@ -481,6 +459,8 @@ namespace TownsEBMSystem
                 skinButton7.Text = cf["RightBtuuon2"].ToString();
                 skinButton6.Text = cf["RightBtuuon3"].ToString();
                 SingletonInfo.GetInstance().lockcycle = cf["Lockcycle"].ToString();
+
+                SingletonInfo.GetInstance().mark = cf["mark"].ToString();
                 #endregion
             }
             catch (Exception ex)
@@ -724,7 +704,94 @@ namespace TownsEBMSystem
         {
             try
             {
-                Generalresponse heartbeatresponse = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(null, "心跳");
+                HeartBeatResponse heartbeatresponse = (HeartBeatResponse)SingletonInfo.GetInstance().post.PostCommnand(null, "心跳");
+             //   JavaScriptSerializer Serializer = new JavaScriptSerializer();
+                LocalParam param = heartbeatresponse.extend;
+               
+                if (param.mark != SingletonInfo.GetInstance().mark)
+                {
+                    //有变化
+                    SingletonInfo.GetInstance().mark = param.mark;
+
+                    if (SingletonInfo.GetInstance().LeftBtn1txt != param.btn_one)
+                    {
+                        SingletonInfo.GetInstance().LeftBtn1txt = param.btn_one;
+                        cf["LeftBtuuon1"] = param.btn_one;
+                        this.Invoke(new Action(() =>
+                        {
+                            skinButton1.Text = param.btn_one;
+                        }));
+                    }
+
+
+                    if (SingletonInfo.GetInstance().LeftBtn2txt != param.btn_two)
+                    {
+                        SingletonInfo.GetInstance().LeftBtn2txt = param.btn_two;
+                        cf["LeftBtuuon2"] = param.btn_two;
+                        this.Invoke(new Action(() =>
+                        {
+                            skinButton9.Text = param.btn_two;
+                        }));
+                    }
+
+                    if (SingletonInfo.GetInstance().LeftBtn3txt != param.btn_three)
+                    {
+                        SingletonInfo.GetInstance().LeftBtn3txt = param.btn_three;
+                        cf["LeftBtuuon3"] = param.btn_three;
+                        this.Invoke(new Action(() =>
+                        {
+                            skinButton8.Text = param.btn_three;
+                        }));
+                    }
+
+
+                    if (SingletonInfo.GetInstance().RightBtn1txt != param.btn_four)
+                    {
+                        SingletonInfo.GetInstance().RightBtn1txt = param.btn_four;
+                        cf["RightBtuuon1"] = param.btn_four;
+
+                        this.Invoke(new Action(() =>
+                        {
+                            skinButton3.Text = param.btn_four;
+                        }));
+                    }
+
+                    if (SingletonInfo.GetInstance().RightBtn2txt != param.btn_five)
+                    {
+                        SingletonInfo.GetInstance().RightBtn2txt = param.btn_five;
+                        cf["RightBtuuon2"] = param.btn_five;
+                        this.Invoke(new Action(() =>
+                        {
+                            skinButton7.Text = param.btn_five;
+                        }));
+                    }
+
+                    if (SingletonInfo.GetInstance().RightBtn3txt != param.btn_six)
+                    {
+                        SingletonInfo.GetInstance().RightBtn3txt = param.btn_six;
+                        cf["RightBtuuon3"] = param.btn_six;
+                        this.Invoke(new Action(() =>
+                        {
+                            skinButton6.Text = param.btn_six;
+                        }));
+                    }
+                    
+                    if (SingletonInfo.GetInstance().logincode != param.lock_pwd)
+                    {
+                        SingletonInfo.GetInstance().logincode = param.lock_pwd;
+                        cf["LoginCode"] = param.lock_pwd;
+                    }
+
+
+                    if (SingletonInfo.GetInstance().lockcycle != param.lock_cycle)
+                    {
+                        SingletonInfo.GetInstance().lockcycle = param.lock_cycle;
+                        cf["Lockcycle"] = param.lock_cycle;
+
+
+                    }
+
+                }
             }
             catch (Exception ex)
             {
@@ -1044,6 +1111,20 @@ namespace TownsEBMSystem
                 lginfo.username = SingletonInfo.GetInstance().username;
                 lginfo.password = SingletonInfo.GetInstance().password;
                 lginfo.licenseCode = SingletonInfo.GetInstance().licenseCode;
+                lginfo.localParam = new LocalParam();
+
+
+                lginfo.localParam.btn_one = skinButton1.Text.Trim();
+                lginfo.localParam.btn_two = skinButton9.Text.Trim();
+                lginfo.localParam.btn_three = skinButton8.Text.Trim();
+
+                lginfo.localParam.btn_four = skinButton3.Text.Trim();
+                lginfo.localParam.btn_five = skinButton7.Text.Trim();
+                lginfo.localParam.btn_six = skinButton6.Text.Trim();
+
+                lginfo.localParam.lock_pwd = SingletonInfo.GetInstance().logincode;
+                lginfo.localParam.lock_cycle = SingletonInfo.GetInstance().lockcycle;
+
                 if (lginfo != null)
                 {
                     LoginInfoReback reback = (LoginInfoReback)SingletonInfo.GetInstance().post.PostCommnand(lginfo, "登录");
@@ -1121,7 +1202,6 @@ namespace TownsEBMSystem
                             #endregion
 
                         }
-
                     }
                 }
             }
@@ -1167,6 +1247,7 @@ namespace TownsEBMSystem
                         }
                     }
                     #endregion
+
                     ShowtreeViewOrganization(SingletonInfo.GetInstance().Organization);
                     ShowtreeViewOrganization_WhiteList(SingletonInfo.GetInstance().Organization);
                     ShowtreeViewOrganization_RebackCycle(SingletonInfo.GetInstance().Organization);
@@ -1181,6 +1262,26 @@ namespace TownsEBMSystem
             }
         }
 
+
+        //private void SendLabelMessageInfo()
+        //{
+
+        //    LabelInfo labelinfo = new LabelInfo();
+
+        //            this.Invoke(new Action(() =>
+        //                        {
+        //                            labelinfo.Label1txt = skinButton1.Text.Trim();
+        //                            labelinfo.Label9txt = skinButton9.Text.Trim();
+        //                            labelinfo.Label8txt = skinButton8.Text.Trim();
+
+        //                            labelinfo.Label3txt = skinButton3.Text.Trim();
+        //                            labelinfo.Label7txt = skinButton7.Text.Trim();
+        //                            labelinfo.Label6txt = skinButton6.Text.Trim();
+        //                        }));
+
+
+        //            SingletonInfo.GetInstance().post.PostCommnand(labelinfo, "按钮");
+        //}
 
         private GeneralResponse TCPGeneralVolumn(List<organizationdata> organization_List, string volumn)
         {
@@ -3482,6 +3583,15 @@ namespace TownsEBMSystem
                 
                 throw;
             }
+        }
+
+        private void skinButton2_Click(object sender, EventArgs e)
+        {
+            JavaScriptSerializer Serializer = new JavaScriptSerializer();
+            string dada = "{\"btn_one\":\"1\",\"btn_two\":\"2\",\"btn_three\":\"3\",\"btn_four\":\"4\",\"btn_five\":\"5\",\"btn_six\":\"6\",\"lock_pwd\":\"123456\",\"mark\":0}";
+
+
+            LocalParam param = Serializer.Deserialize<LocalParam>(dada);
         }
     }
 }

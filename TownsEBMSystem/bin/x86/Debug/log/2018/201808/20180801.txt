@@ -1,0 +1,400 @@
+
+ 
+记录时间：2018-08-01 16:32:47,154 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：登录到县平台失败！
+ 
+
+ 
+记录时间：2018-08-01 17:19:34,983 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:19:37,914 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:19:40,924 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:19:43,925 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:19:46,935 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:19:49,925 
+线程ID:[11] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:19:52,956 
+线程ID:[11] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:19:55,997 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:19:58,989 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:20:01,981 
+线程ID:[11] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:20:04,992 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:20:07,992 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:20:11,052 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:20:14,022 
+线程ID:[11] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:20:41,216 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:24:06,862 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:24:09,772 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:24:12,833 
+线程ID:[6] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:29:49,320 
+线程ID:[6] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:29:52,251 
+线程ID:[6] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:29:55,243 
+线程ID:[6] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:29:58,283 
+线程ID:[6] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:01,273 
+线程ID:[6] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:04,274 
+线程ID:[6] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:07,294 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:10,284 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:13,284 
+线程ID:[6] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:16,304 
+线程ID:[6] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:19,374 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:22,355 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:25,345 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:28,385 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:31,345 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:34,406 
+线程ID:[6] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:37,396 
+线程ID:[11] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:40,406 
+线程ID:[11] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:43,387 
+线程ID:[11] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:46,427 
+线程ID:[11] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:49,457 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:52,459 
+线程ID:[11] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:55,449 
+线程ID:[6] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:30:58,469 
+线程ID:[6] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:31:01,489 
+线程ID:[11] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:31:04,500 
+线程ID:[11] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:31:07,510 
+线程ID:[11] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:31:10,550 
+线程ID:[11] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:31:13,498 
+线程ID:[11] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:31:16,541 
+线程ID:[6] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：心跳发送失败
+ 
+
+ 
+记录时间：2018-08-01 17:40:12,066 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：登录到县平台失败！
+ 

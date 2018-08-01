@@ -26,6 +26,43 @@ namespace TownsEBMSystem
         /// 授权码MD5加密
         /// </summary>
         public string licenseCodeMD5 { get { return System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(licenseCode, "MD5"); } }
+
+
+        public LocalParam localParam;
+
+
+    }
+
+    /// <summary>
+    /// 本地镇级参数 包括按钮显示 锁屏密码  锁屏周期
+    /// </summary>
+    public class LocalParam
+    {
+        /// <summary>
+        /// 本地按钮显示  新增于20180801
+        /// </summary>
+        public string btn_one { get; set; }
+        public string btn_two { get; set; }
+
+        public string btn_three { get; set; }
+
+        public string btn_four { get; set; }
+
+        public string btn_five { get; set; }
+        public string btn_six { get; set; }
+        /// <summary>
+        /// 当前锁频密码 
+        /// </summary>
+        public string lock_pwd { get; set; }
+        /// <summary>
+        /// 锁频周期
+        /// </summary>
+        public string lock_cycle { get; set; }
+
+        /// <summary>
+        /// 韩峰那边有变化 这个值就变化
+        /// </summary>
+        public string mark { get; set; }
     }
 
     /// <summary>
@@ -50,15 +87,20 @@ namespace TownsEBMSystem
         /// <summary>
         /// 扩展数据
         /// </summary>
-        public extendInfo extend;
+        public extendInfo_login extend;
     }
 
-    public class extendInfo
+    public class extendInfo_login
     {
         /// <summary>
         /// 信任代码  
         /// </summary>
         public string creditCode { get; set; }
+    }
+
+    public class extendInfo
+    {
+        public string extend { get; set; }
     }
 
 
@@ -101,6 +143,32 @@ namespace TownsEBMSystem
     }
 
 
+
+    public class HeartBeatResponse
+    {
+
+        /// <summary>
+        /// 状态码  0：成功 -1：失败
+        /// </summary>
+        public int code { get; set; }
+        /// <summary>
+        /// 返回数据  无数据为null
+        /// </summary>
+        public string data { get; set; }
+
+        /// <summary>
+        /// 提示信息
+        /// </summary>
+        public string msg { get; set; }
+
+
+        /// <summary>
+        /// 扩展数据
+        /// </summary>
+        public LocalParam extend { get; set; }
+    }
+
+
     /// <summary>
     /// 常规回复
     /// </summary>
@@ -125,7 +193,7 @@ namespace TownsEBMSystem
         /// <summary>
         /// 扩展数据
         /// </summary>
-        public extendInfo extend;
+        public extendInfo extend { get; set; }
     }
 
     /// <summary>
@@ -197,5 +265,15 @@ namespace TownsEBMSystem
         public List<string> Id_List { get; set; }
         public string broadcastType { get; set; }
 
+    }
+
+    public class LabelInfo
+    {
+        public string Label1txt { get; set; }
+        public string Label9txt { get; set; }
+        public string Label8txt { get; set; }
+        public string Label3txt { get; set; }
+        public string Label7txt { get; set; }
+        public string Label6txt { get; set; }
     }
 }

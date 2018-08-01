@@ -29,6 +29,24 @@ namespace TownsEBMSystem
                     paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(loginfo.password);
                     paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("licenseCode");
                     paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(loginfo.licenseCodeMD5);
+
+                    paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("btn_one");
+                    paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(loginfo.localParam.btn_one);
+                    paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("btn_two");
+                    paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(loginfo.localParam.btn_two);
+                    paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("btn_three");
+                    paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(loginfo.localParam.btn_three);
+                    paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("btn_four");
+                    paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(loginfo.localParam.btn_four);
+                    paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("btn_five");
+                    paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(loginfo.localParam.btn_five);
+                    paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("btn_six");
+                    paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(loginfo.localParam.btn_six);
+                    paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("lock_pwd");
+                    paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(loginfo.localParam.lock_pwd);
+                    paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("lock_cycle");
+                    paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(loginfo.localParam.lock_cycle);
+
                     strURL = SingletonInfo.GetInstance().HttpServer + "platform/login.htm";
                     sReturnString = SendHttpData(strURL, paraUrlCoded);
 
@@ -124,7 +142,7 @@ namespace TownsEBMSystem
                     sReturnString = SendHttpData(strURL, paraUrlCoded);
                     if (sReturnString != "")
                     {
-                        Generalresponse response = Serializer.Deserialize<Generalresponse>(sReturnString);
+                        HeartBeatResponse response = Serializer.Deserialize<HeartBeatResponse>(sReturnString);
                         reback = response;
                     }
                     break;

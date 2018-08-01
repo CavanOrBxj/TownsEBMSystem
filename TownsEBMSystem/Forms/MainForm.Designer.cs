@@ -619,7 +619,7 @@
             this.skinLabel1.BorderColor = System.Drawing.Color.White;
             this.skinLabel1.Font = new System.Drawing.Font("微软雅黑", 68F);
             this.skinLabel1.ForeColor = System.Drawing.Color.White;
-            this.skinLabel1.Location = new System.Drawing.Point(471, 24);
+            this.skinLabel1.Location = new System.Drawing.Point(471, 104);
             this.skinLabel1.Name = "skinLabel1";
             this.skinLabel1.Size = new System.Drawing.Size(960, 118);
             this.skinLabel1.TabIndex = 103;
@@ -713,7 +713,7 @@
             this.skinTabControl_parameterset.PageTextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.skinTabControl_parameterset.Radius = 14;
             this.skinTabControl_parameterset.SelectedIndex = 5;
-            this.skinTabControl_parameterset.Size = new System.Drawing.Size(0, 0);
+            this.skinTabControl_parameterset.Size = new System.Drawing.Size(300, 160);
             this.skinTabControl_parameterset.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.skinTabControl_parameterset.TabIndex = 94;
             this.skinTabControl_parameterset.Visible = false;
@@ -730,7 +730,7 @@
             this.skinTabPage5.ImageIndex = 15;
             this.skinTabPage5.Location = new System.Drawing.Point(0, 75);
             this.skinTabPage5.Name = "skinTabPage5";
-            this.skinTabPage5.Size = new System.Drawing.Size(0, 0);
+            this.skinTabPage5.Size = new System.Drawing.Size(300, 85);
             this.skinTabPage5.TabIndex = 4;
             this.skinTabPage5.TabItemImage = null;
             this.skinTabPage5.Text = "音量设置";
@@ -818,7 +818,7 @@
             this.skinTabPage2.ImageIndex = 9;
             this.skinTabPage2.Location = new System.Drawing.Point(0, 75);
             this.skinTabPage2.Name = "skinTabPage2";
-            this.skinTabPage2.Size = new System.Drawing.Size(0, 0);
+            this.skinTabPage2.Size = new System.Drawing.Size(300, 85);
             this.skinTabPage2.TabIndex = 0;
             this.skinTabPage2.TabItemImage = null;
             this.skinTabPage2.Text = "白名单";
@@ -1106,7 +1106,7 @@
             this.skinTabPage4.ImageIndex = 8;
             this.skinTabPage4.Location = new System.Drawing.Point(0, 75);
             this.skinTabPage4.Name = "skinTabPage4";
-            this.skinTabPage4.Size = new System.Drawing.Size(0, 0);
+            this.skinTabPage4.Size = new System.Drawing.Size(300, 85);
             this.skinTabPage4.TabIndex = 1;
             this.skinTabPage4.TabItemImage = null;
             this.skinTabPage4.Text = "回传周期";
@@ -1203,7 +1203,7 @@
             this.skinTabPage7.ImageIndex = 3;
             this.skinTabPage7.Location = new System.Drawing.Point(0, 75);
             this.skinTabPage7.Name = "skinTabPage7";
-            this.skinTabPage7.Size = new System.Drawing.Size(0, 0);
+            this.skinTabPage7.Size = new System.Drawing.Size(300, 85);
             this.skinTabPage7.TabIndex = 2;
             this.skinTabPage7.TabItemImage = null;
             this.skinTabPage7.Text = "回传参数";
@@ -1337,7 +1337,7 @@
             this.skinTabPage8.ImageIndex = 6;
             this.skinTabPage8.Location = new System.Drawing.Point(0, 75);
             this.skinTabPage8.Name = "skinTabPage8";
-            this.skinTabPage8.Size = new System.Drawing.Size(0, 0);
+            this.skinTabPage8.Size = new System.Drawing.Size(300, 85);
             this.skinTabPage8.TabIndex = 3;
             this.skinTabPage8.TabItemImage = null;
             this.skinTabPage8.Text = "功放开关";
@@ -1430,7 +1430,7 @@
             this.skinTabPage6.ImageIndex = 14;
             this.skinTabPage6.Location = new System.Drawing.Point(0, 75);
             this.skinTabPage6.Name = "skinTabPage6";
-            this.skinTabPage6.Size = new System.Drawing.Size(0, 0);
+            this.skinTabPage6.Size = new System.Drawing.Size(300, 85);
             this.skinTabPage6.TabIndex = 5;
             this.skinTabPage6.TabItemImage = null;
             this.skinTabPage6.Text = "地图信息";
@@ -1470,7 +1470,7 @@
             this.skinTabControl_Organization.PageTextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.skinTabControl_Organization.Radius = 14;
             this.skinTabControl_Organization.SelectedIndex = 1;
-            this.skinTabControl_Organization.Size = new System.Drawing.Size(0, 0);
+            this.skinTabControl_Organization.Size = new System.Drawing.Size(300, 160);
             this.skinTabControl_Organization.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.skinTabControl_Organization.TabIndex = 85;
             this.skinTabControl_Organization.Visible = false;
@@ -1483,7 +1483,7 @@
             this.skinTabPage3.ImageIndex = 14;
             this.skinTabPage3.Location = new System.Drawing.Point(0, 75);
             this.skinTabPage3.Name = "skinTabPage3";
-            this.skinTabPage3.Size = new System.Drawing.Size(0, 0);
+            this.skinTabPage3.Size = new System.Drawing.Size(300, 85);
             this.skinTabPage3.TabIndex = 2;
             this.skinTabPage3.TabItemImage = null;
             this.skinTabPage3.Text = "地图信息";
@@ -1501,7 +1501,7 @@
             this.skinTabPage1.ImageIndex = 9;
             this.skinTabPage1.Location = new System.Drawing.Point(0, 75);
             this.skinTabPage1.Name = "skinTabPage1";
-            this.skinTabPage1.Size = new System.Drawing.Size(0, 0);
+            this.skinTabPage1.Size = new System.Drawing.Size(300, 85);
             this.skinTabPage1.TabIndex = 0;
             this.skinTabPage1.TabItemImage = null;
             this.skinTabPage1.Text = "区域管理";
@@ -1789,7 +1789,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(80)))), ((int)(((byte)(167)))));
             this.BackgroundImage = global::TownsEBMSystem.Properties.Resources.bg2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1620, 920);
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
             this.Controls.Add(this.pictureBox_Lock);
             this.Controls.Add(this.pictureBox_checkbox);
