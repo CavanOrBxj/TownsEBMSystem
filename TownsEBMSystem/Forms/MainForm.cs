@@ -712,6 +712,7 @@ namespace TownsEBMSystem
                 {
                     //有变化
                     SingletonInfo.GetInstance().mark = param.mark;
+                    cf["mark"] = param.mark;
 
                     if (SingletonInfo.GetInstance().LeftBtn1txt != param.btn_one)
                     {
@@ -1261,27 +1262,6 @@ namespace TownsEBMSystem
 
             }
         }
-
-
-        //private void SendLabelMessageInfo()
-        //{
-
-        //    LabelInfo labelinfo = new LabelInfo();
-
-        //            this.Invoke(new Action(() =>
-        //                        {
-        //                            labelinfo.Label1txt = skinButton1.Text.Trim();
-        //                            labelinfo.Label9txt = skinButton9.Text.Trim();
-        //                            labelinfo.Label8txt = skinButton8.Text.Trim();
-
-        //                            labelinfo.Label3txt = skinButton3.Text.Trim();
-        //                            labelinfo.Label7txt = skinButton7.Text.Trim();
-        //                            labelinfo.Label6txt = skinButton6.Text.Trim();
-        //                        }));
-
-
-        //            SingletonInfo.GetInstance().post.PostCommnand(labelinfo, "按钮");
-        //}
 
         private GeneralResponse TCPGeneralVolumn(List<organizationdata> organization_List, string volumn)
         {
