@@ -107,7 +107,6 @@ D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.csproj.Gene
 D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.exe
 D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.pdb
 D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.FmLogin.resources
-D:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.csprojResolveAssemblyReference.cache
 E:\GitHub\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\TownsEBMSystem.exe.config
 E:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.exe
 E:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.pdb
