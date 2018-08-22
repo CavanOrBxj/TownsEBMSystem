@@ -18,6 +18,7 @@ using EBSignature;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using ControlAstro.Utils;
 
 namespace TownsEBMSystem
 {
@@ -55,7 +56,13 @@ namespace TownsEBMSystem
 
         private EBMIndexGlobal_ _EBMIndexGlobal;
 
+        private EBMConfigureGlobal_ _EBMConfigureGlobal;
+
+
         MessageShowForm MessageShowDlg;
+
+
+        public System.Timers.Timer timer;
 
 
         public EBMStream EbMStream
@@ -107,6 +114,7 @@ namespace TownsEBMSystem
             InitStreamTableNew();
             Gtoken = new object();
             _EBMIndexGlobal = new EBMIndexGlobal_();
+            _EBMConfigureGlobal = new EBMConfigureGlobal_();
             dataDealHelper = new DataDealHelper();
             dataHelper = new DataHelper();
             DataHelper.MyEvent += new DataHelper.MyDelegate(GlobalDataDeal);
@@ -114,6 +122,373 @@ namespace TownsEBMSystem
             this.Load += MainForm_Load;
         }
 
+
+        private void InitTimerServerTimer()
+        {
+            //设置定时间隔(毫秒为单位)
+            int interval = 5000;
+            timer = new System.Timers.Timer(interval);
+            //设置执行一次（false）还是一直执行(true)
+            timer.AutoReset = true;
+            //设置是否执行System.Timers.Timer.Elapsed事件
+            timer.Enabled = true;
+            //绑定Elapsed事件
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(TimerUp);
+        }
+
+        /// <summary>
+        /// Timer类执行定时到点事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TimerUp(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                SingleTimeServerSend(DateTime.Now);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+
+        private void SingleTimeServerSend(DateTime time)
+        {
+            List<TimeService_> listTS = new List<TimeService_>();
+            TimeService_ select = new TimeService_();
+
+            System.Guid guid = new Guid();
+            guid = Guid.NewGuid();
+            select.ItemID = guid.ToString();
+            select.Configure = new EBConfigureTimeService();
+
+            select.Configure.Real_time = time;
+
+            select.GetSystemTime = true;
+            select.SendTick = 60;
+            listTS.Add(select);
+            DealTimeService(listTS);
+
+        }
+
+        private void DealTimeService(List<TimeService_> listTS)
+        {
+            lock (Gtoken)
+            {
+                if (_EBMConfigureGlobal.ListTimeService != null)
+                {
+                    //去同项
+                    foreach (TimeService_ item in listTS)
+                    {
+                        TimeService_ tmp = _EBMConfigureGlobal.ListTimeService.Find(s => s.ItemID.Equals(item.ItemID));
+                        if (tmp != null)
+                        {
+                            _EBMConfigureGlobal.ListTimeService.Remove(tmp);
+                        }
+                    }
+                }
+                else
+                {
+                    _EBMConfigureGlobal.ListTimeService = new List<TimeService_>();
+                }
+
+                //增新项
+                foreach (TimeService_ item in listTS)
+                {
+                    _EBMConfigureGlobal.ListTimeService.Add(item);
+                }
+
+                EbmStream.EB_Configure_Table = GetConfigureTable(ref EB_Configure_Table, false) ? EB_Configure_Table : null;
+
+
+                EbMStream.Initialization();
+            }
+            UpdateDataTextNew((object)3);
+            #region 删除记录 
+            foreach (TimeService_ item in listTS)
+            {
+                _EBMConfigureGlobal.ListTimeService.Remove(item);
+            }
+            #endregion
+        }
+
+
+
+        public bool GetConfigureTable(ref EBConfigureTable oldTable, bool isTimeSend)
+        {
+            try
+            {
+                List<ConfigureCmd> configureCmd = isTimeSend ? GetSendTimeSerConfigureCmd() : GetSendConfigureCmd();
+                if (configureCmd == null || configureCmd.Count == 0)
+                {
+                    if (oldTable != null) oldTable.list_configure_cmd = null;
+                    return false;
+                }
+                if (oldTable == null)
+                {
+                    oldTable = new EBConfigureTable();
+                    oldTable.Table_id = 0xfb;
+                    oldTable.Table_id_extension = 0;
+                }
+                oldTable.list_configure_cmd = configureCmd;
+                oldTable.Repeat_times = 1;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+
+        private List<ConfigureCmd> GetSendTimeSerConfigureCmd()
+        {
+            try
+            {
+                BindingCollection<Configure> TotalConfig_List = GetConfigureCollection(_EBMConfigureGlobal);
+                List<ConfigureCmd> cmd = new List<ConfigureCmd>();
+                foreach (var d in TotalConfig_List)
+                {
+                    //if (d.SendState && d.B_Daily_cmd_tag == Utils.ComboBoxHelper.ConfigureTimeServiceTag)
+                    //{
+                    //    cmd.Add((d as TimeService_).Configure.GetCmd());
+                    //}
+                }
+                return cmd;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
+        private BindingCollection<Configure> GetConfigureCollection(EBMConfigureGlobal_ _EBMConfigureGlobal)
+        {
+            BindingCollection<Configure> TotalConfig_List = new BindingCollection<Configure>();
+
+
+            if (_EBMConfigureGlobal.ListTimeService != null)
+            {
+                foreach (var item in _EBMConfigureGlobal.ListTimeService)
+                {
+                    TotalConfig_List.Add(item);
+                }
+            }
+
+            if (_EBMConfigureGlobal.ListSetAddress != null)
+            {
+                foreach (var item in _EBMConfigureGlobal.ListSetAddress)
+                {
+                    TotalConfig_List.Add(item);
+                }
+            }
+
+            if (_EBMConfigureGlobal.ListWorkMode != null)
+            {
+                foreach (var item in _EBMConfigureGlobal.ListWorkMode)
+                {
+                    TotalConfig_List.Add(item);
+                }
+            }
+
+            if (_EBMConfigureGlobal.ListMainFrequency != null)
+            {
+                foreach (var item in _EBMConfigureGlobal.ListMainFrequency)
+                {
+                    TotalConfig_List.Add(item);
+                }
+            }
+
+            if (_EBMConfigureGlobal.ListReback != null)
+            {
+                foreach (var item in _EBMConfigureGlobal.ListReback)
+                {
+                    TotalConfig_List.Add(item);
+                }
+            }
+
+            if (_EBMConfigureGlobal.ListDefaltVolume != null)
+            {
+                foreach (var item in _EBMConfigureGlobal.ListDefaltVolume)
+                {
+                    TotalConfig_List.Add(item);
+                }
+            }
+
+            if (_EBMConfigureGlobal.ListRebackPeriod != null)
+            {
+                foreach (var item in _EBMConfigureGlobal.ListRebackPeriod)
+                {
+                    TotalConfig_List.Add(item);
+                }
+            }
+
+            if (_EBMConfigureGlobal.ListContentMoniterRetback != null)
+            {
+                foreach (var item in _EBMConfigureGlobal.ListContentMoniterRetback)
+                {
+                    TotalConfig_List.Add(item);
+                }
+            }
+
+            if (_EBMConfigureGlobal.ListContentRealMoniter != null)
+            {
+                foreach (var item in _EBMConfigureGlobal.ListContentRealMoniter)
+                {
+                    TotalConfig_List.Add(item);
+                }
+            }
+
+            if (_EBMConfigureGlobal.ListContentRealMoniterGX != null)
+            {
+                foreach (var item in _EBMConfigureGlobal.ListContentRealMoniterGX)
+                {
+                    TotalConfig_List.Add(item);
+                }
+
+            }
+
+            if (_EBMConfigureGlobal.ListStatusRetback != null)
+            {
+                foreach (var item in _EBMConfigureGlobal.ListStatusRetback)
+                {
+                    TotalConfig_List.Add(item);
+                }
+            }
+
+            if (_EBMConfigureGlobal.ListSoftwareUpGrade != null)
+            {
+                foreach (var item in _EBMConfigureGlobal.ListSoftwareUpGrade)
+                {
+                    TotalConfig_List.Add(item);
+                }
+            }
+
+            if (_EBMConfigureGlobal.ListRdsConfig != null)
+            {
+                foreach (var item in _EBMConfigureGlobal.ListRdsConfig)
+                {
+                    TotalConfig_List.Add(item);
+                }
+            }
+
+            return TotalConfig_List;
+        }
+
+
+        private List<ConfigureCmd> GetSendConfigureCmd()
+        {
+            try
+            {
+                BindingCollection<Configure> TotalConfig_List;
+                TotalConfig_List = GetConfigureCollection(_EBMConfigureGlobal);
+                List<ConfigureCmd> cmd = new List<ConfigureCmd>();
+                foreach (var d in TotalConfig_List)
+                {
+                    switch (d.B_Daily_cmd_tag)
+                    {
+                        case Utils.ComboBoxHelper.ConfigureTimeServiceTag:
+                            cmd.Add((d as TimeService_).Configure.GetCmd());
+                            break;
+                        case Utils.ComboBoxHelper.ConfigureSetAddressTag:
+                            if (SingletonInfo.GetInstance().IsGXProtocol)
+                            {
+
+                                cmd.Add((d as SetAddress_).Configure.GetCmdGX());
+                            }
+                            else
+                            {
+                                cmd.Add((d as SetAddress_).Configure.GetCmd());
+                            }
+
+                            break;
+                        case Utils.ComboBoxHelper.ConfigureWorkModeTag:
+                            if (SingletonInfo.GetInstance().IsGXProtocol)
+                            {
+                                cmd.Add((d as WorkMode_).Configure.GetCmdGX());
+                            }
+                            else
+                            {
+                                cmd.Add((d as WorkMode_).Configure.GetCmd());
+                            }
+
+                            break;
+                        case Utils.ComboBoxHelper.ConfigureMainFrequencyTag:
+                            if (SingletonInfo.GetInstance().IsGXProtocol)
+                            {
+                                cmd.Add((d as MainFrequency_).Configure.GetCmdGX());
+                            }
+                            else
+                            {
+                                cmd.Add((d as MainFrequency_).Configure.GetCmd());
+                            }
+
+                            break;
+                        case Utils.ComboBoxHelper.ConfigureRebackTag:
+                            cmd.Add((d as Reback_).Configure.GetCmd());
+                            break;
+                        case Utils.ComboBoxHelper.ConfigureDefaltVolumeTag:
+
+                            if (SingletonInfo.GetInstance().IsGXProtocol)
+                            {
+                                cmd.Add((d as DefaltVolume_).Configure.GetCmdGX());
+                            }
+                            else
+                            {
+                                cmd.Add((d as DefaltVolume_).Configure.GetCmd());
+                            }
+
+                            break;
+                        case Utils.ComboBoxHelper.ConfigureRebackPeriodTag:
+
+                            if (SingletonInfo.GetInstance().IsGXProtocol)
+                            {
+                                cmd.Add((d as RebackPeriod_).Configure.GetCmdGX());
+                            }
+                            else
+                            {
+                                cmd.Add((d as RebackPeriod_).Configure.GetCmd());
+                            }
+
+                            break;
+                        case Utils.ComboBoxHelper.ConfigureContentMoniterRetbackTag:
+                            cmd.Add((d as ContentMoniterRetback_).Configure.GetCmd());
+                            break;
+                        case Utils.ComboBoxHelper.ConfigureContentRealMoniterTag:
+                            if (SingletonInfo.GetInstance().IsGXProtocol)
+                            {
+                                cmd.Add((d as ContentRealMoniterGX_).Configure.GetCmd());
+
+                            }
+                            else
+                            {
+                                cmd.Add((d as ContentRealMoniter_).Configure.GetCmd());
+                            }
+
+
+                            break;
+                        case Utils.ComboBoxHelper.ConfigureStatusRetbackTag:
+                            cmd.Add((d as StatusRetback_).Configure.GetCmd());
+                            break;
+                        case Utils.ComboBoxHelper.ConfigureSoftwareUpGradeTag:
+                            cmd.Add((d as SoftwareUpGrade_).Configure.GetCmd());
+                            break;
+                        case Utils.ComboBoxHelper.ConfigureRdsConfigTag:
+                            cmd.Add((d as RdsConfig_).Configure.GetCmd());
+                            break;
+                    }
+
+                }
+                return cmd;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
         private void Loginjudge()
         {
@@ -1256,6 +1631,8 @@ namespace TownsEBMSystem
                     ShowtreeViewOrganization_SwitchAmplifier(SingletonInfo.GetInstance().Organization);
                     ShowtreeViewOrganization_volumn(SingletonInfo.GetInstance().Organization);
                     ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
+
+                    InitTimerServerTimer();
                 }
 
                 pictureBox_checkbox.BackgroundImage = imageList1.Images[0];

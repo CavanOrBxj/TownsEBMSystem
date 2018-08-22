@@ -5,12 +5,9 @@ E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\D
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\Geckofx-Core.dll
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\Geckofx-Winforms.dll
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\log4net.dll
-E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\System.Net.Http.dll
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\CSkin.xml
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\Geckofx-Core.pdb
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\Geckofx-Winforms.pdb
-E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\System.Net.Http.xml
-E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\zh-Hans\System.Net.Http.resources.dll
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.MainForm.resources
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.Properties.Resources.resources
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.csproj.GenerateResource.Cache
@@ -86,7 +83,6 @@ E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\D
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\Newtonsoft.Json.xml
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\EBMTableLib.dll
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\EBMTableLib.xml
-E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.csprojResolveAssemblyReference.cache
 D:\GitHub\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\TownsEBMSystem.exe.config
 D:\GitHub\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\TownsEBMSystem.exe
 D:\GitHub\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\TownsEBMSystem.pdb
@@ -125,3 +121,6 @@ E:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.MainForm.re
 E:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.MessageShowForm.resources
 E:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.Properties.Resources.resources
 E:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.csproj.GenerateResource.Cache
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.FmLogin.resources
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.MessageShowForm.resources
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\ControlAstro.dll

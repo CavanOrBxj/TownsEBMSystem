@@ -57,6 +57,9 @@
     <ApplicationIcon>1.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ControlAstro">
+      <HintPath>.\ControlAstro.dll</HintPath>
+    </Reference>
     <Reference Include="CSkin">
       <HintPath>cskin\CSkin.dll</HintPath>
     </Reference>
