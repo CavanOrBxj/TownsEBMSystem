@@ -124,4 +124,7 @@ E:\GitHub\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.csproj.Gene
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.FmLogin.resources
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.MessageShowForm.resources
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\ControlAstro.dll
-E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.csprojResolveAssemblyReference.cache
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\bin\x86\Debug\Geckofx-Core.dll.config
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.csprojAssemblyReference.cache
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.csproj.CoreCompileInputs.cache
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.csproj.CopyComplete
