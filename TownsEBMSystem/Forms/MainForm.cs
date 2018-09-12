@@ -1193,12 +1193,17 @@ namespace TownsEBMSystem
                 pnode.Nodes.Add(node);
             }
         }
-
-        private void ShowskinDataGridView_Main(List<Datagridviewmainitem> dgvMainData)
+        /// <summary>
+        /// 显示列表  
+        /// </summary>
+        /// <param name="dgvMainData"></param>
+        /// <param name="showtype">显示类型 0表示没有广播的显示情况 1表示有广播在播放的显示情况，此时不能勾选操作，只能取消广播</param>
+        private void ShowskinDataGridView_Main(List<Datagridviewmainitem> dgvMainData,int showtype=0)
         {
             this.Invoke(new Action(() =>
             {
                 skinDataGridView_Main.Rows.Clear();
+               
                 foreach (Datagridviewmainitem dataRow in dgvMainData)
                 {
                     DataGridViewRow dgvR = new DataGridViewRow();
@@ -1238,6 +1243,10 @@ namespace TownsEBMSystem
                     dgvR.Height =60;
                     dgvR.Tag = dataRow;
                     skinDataGridView_Main.Rows.Add(dgvR);
+                    if (showtype==1)
+                    {
+                        dgvR.ReadOnly = true;
+                    }
                     Application.DoEvents();    
                 }
                
@@ -3341,7 +3350,7 @@ namespace TownsEBMSystem
                     SingletonInfo.GetInstance().Interstitial_prlId = broadcastrecordresponse.data[0].prlId.ToString();
                 }
             }
-            ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
+            ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData,1);
         }
 
         /// <summary>
@@ -3433,7 +3442,7 @@ namespace TownsEBMSystem
                         }
                     }
                 }
-                ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
+                ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData,1);
             }
         }
 
@@ -3479,7 +3488,7 @@ namespace TownsEBMSystem
                     item.deviceoperate = "1";
                 } 
             }
-            ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
+            ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData,1);
             #endregion
         }
 
@@ -3504,7 +3513,7 @@ namespace TownsEBMSystem
                 item.checkstate = true;
                 item.deviceoperate = "1";
             }
-            ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
+            ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData,1);
             #endregion
         }
         private void OfflineTownStart(object obj)
@@ -3516,7 +3525,7 @@ namespace TownsEBMSystem
             ResourceList.Add(SingletonInfo.GetInstance().Organization[0].resource);
             Dictionary<string, string> dic = TSBroadcastcommand(ResourceList, SingletonInfo.GetInstance().ts_pid, ebm_class);
             SingletonInfo.GetInstance().TownTSItemIndexID = dic[SingletonInfo.GetInstance().Organization[0].resource];
-            ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
+            ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData,1);
 
             #endregion
         }
@@ -3676,6 +3685,8 @@ namespace TownsEBMSystem
                             }
                             btn_Daily_Main.Text = "日常停播";
                             btn_Daily_Main.BaseColor = System.Drawing.Color.Lime;
+                            btn_Emergency_Main.Enabled = false;
+
                         }
                     }
                     else
@@ -3699,6 +3710,7 @@ namespace TownsEBMSystem
 
                             btn_Daily_Main.Text = "日常广播";
                             btn_Daily_Main.BaseColor = System.Drawing.Color.DarkGreen;
+                            btn_Emergency_Main.Enabled = true;
                         }
                     }
                 }
@@ -3782,6 +3794,7 @@ namespace TownsEBMSystem
                         {
                             btn_Emergency_Main.Text = "应急停播";
                             btn_Emergency_Main.BaseColor = System.Drawing.Color.Red;
+                            btn_Daily_Main.Enabled = false;
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
                                 //在线情况
@@ -3804,6 +3817,7 @@ namespace TownsEBMSystem
                         {
                             btn_Emergency_Main.Text = "应急广播";
                             btn_Emergency_Main.BaseColor = System.Drawing.Color.Maroon;
+                            btn_Daily_Main.Enabled = true;
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
                                 //在线情况

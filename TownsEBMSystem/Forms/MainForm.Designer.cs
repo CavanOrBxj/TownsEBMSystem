@@ -619,7 +619,7 @@
             this.skinLabel1.BorderColor = System.Drawing.Color.White;
             this.skinLabel1.Font = new System.Drawing.Font("微软雅黑", 68F);
             this.skinLabel1.ForeColor = System.Drawing.Color.White;
-            this.skinLabel1.Location = new System.Drawing.Point(471, 104);
+            this.skinLabel1.Location = new System.Drawing.Point(472, 96);
             this.skinLabel1.Name = "skinLabel1";
             this.skinLabel1.Size = new System.Drawing.Size(960, 118);
             this.skinLabel1.TabIndex = 103;
@@ -682,12 +682,12 @@
             this.skinTabControl_parameterset.AnimatorType = CCWin.SkinControl.AnimationType.HorizSlide;
             this.skinTabControl_parameterset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(21)))), ((int)(((byte)(20)))));
             this.skinTabControl_parameterset.CloseRect = new System.Drawing.Rectangle(2, 2, 12, 12);
+            this.skinTabControl_parameterset.Controls.Add(this.skinTabPage6);
             this.skinTabControl_parameterset.Controls.Add(this.skinTabPage5);
             this.skinTabControl_parameterset.Controls.Add(this.skinTabPage2);
             this.skinTabControl_parameterset.Controls.Add(this.skinTabPage4);
             this.skinTabControl_parameterset.Controls.Add(this.skinTabPage7);
             this.skinTabControl_parameterset.Controls.Add(this.skinTabPage8);
-            this.skinTabControl_parameterset.Controls.Add(this.skinTabPage6);
             this.skinTabControl_parameterset.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.skinTabControl_parameterset.HeadBack = null;
             this.skinTabControl_parameterset.ImageList = this.imageList2;
