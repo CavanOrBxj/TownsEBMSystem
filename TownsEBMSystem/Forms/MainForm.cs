@@ -3691,6 +3691,7 @@ namespace TownsEBMSystem
                             btn_Daily_Main.Text = "日常停播";
                             btn_Daily_Main.BaseColor = System.Drawing.Color.Lime;
                             btn_Emergency_Main.Enabled = false;
+                            pictureBox_checkbox.Enabled = false;
 
                         }
                     }
@@ -3716,6 +3717,7 @@ namespace TownsEBMSystem
                             btn_Daily_Main.Text = "日常广播";
                             btn_Daily_Main.BaseColor = System.Drawing.Color.DarkGreen;
                             btn_Emergency_Main.Enabled = true;
+                            pictureBox_checkbox.Enabled = true;
                         }
                     }
                 }
@@ -3800,6 +3802,7 @@ namespace TownsEBMSystem
                             btn_Emergency_Main.Text = "应急停播";
                             btn_Emergency_Main.BaseColor = System.Drawing.Color.Red;
                             btn_Daily_Main.Enabled = false;
+                            pictureBox_checkbox.Enabled = false;
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
                                 //在线情况
@@ -3823,6 +3826,7 @@ namespace TownsEBMSystem
                             btn_Emergency_Main.Text = "应急广播";
                             btn_Emergency_Main.BaseColor = System.Drawing.Color.Maroon;
                             btn_Daily_Main.Enabled = true;
+                            pictureBox_checkbox.Enabled = true;
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
                                 //在线情况
