@@ -88,6 +88,8 @@ namespace TownsEBMSystem
 
         public string mark;//韩峰那边按钮设置、锁屏周期、锁屏密码有变化 这个值就变化
 
+        public int TimeServiceInterval;//授时指令周期
+
         private SingletonInfo()                                                                 
         {
 
@@ -161,6 +163,8 @@ namespace TownsEBMSystem
             Interstitial_prlId = "";
 
             mark = "";
+
+            TimeServiceInterval = 0;
 
         }
         public static SingletonInfo GetInstance()

@@ -126,8 +126,8 @@ namespace TownsEBMSystem
         private void InitTimerServerTimer()
         {
             //设置定时间隔(毫秒为单位)
-            int interval = 5000;
-            timer = new System.Timers.Timer(interval);
+          //  int interval = 5000;
+            timer = new System.Timers.Timer(SingletonInfo.GetInstance().TimeServiceInterval*1000*60);
             //设置执行一次（false）还是一直执行(true)
             timer.AutoReset = true;
             //设置是否执行System.Timers.Timer.Elapsed事件
@@ -146,6 +146,7 @@ namespace TownsEBMSystem
             try
             {
                 SingleTimeServerSend(DateTime.Now);
+
             }
             catch (Exception ex)
             {
@@ -836,6 +837,10 @@ namespace TownsEBMSystem
                 SingletonInfo.GetInstance().lockcycle = cf["Lockcycle"].ToString();
 
                 SingletonInfo.GetInstance().mark = cf["mark"].ToString();
+                #endregion
+
+                #region 授时指令周期
+                SingletonInfo.GetInstance().TimeServiceInterval = Convert.ToInt32(ini.ReadValue("Instructions", "TimeServiceInterval")); 
                 #endregion
             }
             catch (Exception ex)
