@@ -1823,6 +1823,10 @@ namespace TownsEBMSystem
                 // tmp.S_EBM_start_time = SingletonInfo.GetInstance().starttime;//
                 tmp.S_EBM_type = "00000";//
                 tmp.List_EBM_resource_code = item.resource;
+
+                LogHelper.WriteLog(typeof(MainForm), "全镇开资源码："+ item.resource);
+
+
                 tmp.BL_details_channel_indicate = "true";
                 tmp.S_details_channel_transport_stream_id = SingletonInfo.GetInstance().S_details_channel_transport_stream_id;
                 tmp.S_details_channel_program_number = SingletonInfo.GetInstance().S_details_channel_program_number;
