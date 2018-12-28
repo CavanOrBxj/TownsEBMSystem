@@ -90,6 +90,11 @@ namespace TownsEBMSystem
 
         public int TimeServiceInterval;//授时指令周期
 
+        public bool IsLogoutWin;//关闭软件时是否退出windwos系统  true表示退出 false表示退出软件不退出windows
+        public string  UpgradeFlag;//升级标志位 1表示现在新的更新包 需要升级当前  0表示不需要升级
+
+        public bool downloading;//是否在下载中  true表示在下载中  false表示不再下载中
+
         private SingletonInfo()                                                                 
         {
 
@@ -163,9 +168,11 @@ namespace TownsEBMSystem
             Interstitial_prlId = "";
 
             mark = "";
-
             TimeServiceInterval = 0;
+            IsLogoutWin = true;
+            UpgradeFlag = "";
 
+            downloading = false;
         }
         public static SingletonInfo GetInstance()
         {

@@ -1,0 +1,2696 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        "EBMTableLib"
+    </assembly>
+    <members>
+        <member name="M:sm3(System.Byte*,System.Int32,System.Byte*)">
+ \brief          Output = SM3( input buffer )
+
+ \param input    buffer holding the  data
+ \param ilen     length of the input data
+ \param output   SM3 checksum result
+
+</member>
+        <member name="M:sm3_finish(sm3_context*,System.Byte*)">
+ \brief          SM3 final digest
+
+ \param ctx      SM3 context
+
+</member>
+        <member name="M:sm3_update(sm3_context*,System.Byte*,System.Int32)">
+ \brief          SM3 process buffer
+
+ \param ctx      SM3 context
+ \param input    buffer holding the  data
+ \param ilen     length of the input data
+
+</member>
+        <member name="M:sm3_starts(sm3_context*)">
+ \brief          SM3 context setup
+
+ \param ctx      context to be initialized
+
+</member>
+        <member name="M:EBSignature.EbmSignature.SM3Hash(System.Byte[],System.Int32,System.Byte[]@,System.Byte[]@)">
+            <summary>
+计算SM3摘要值
+<param name="InputData">输入数据</param><param name="Inlen">输入数据长度</param><param name="OutputHash">输出摘要中间值，数组空间必须至少32字节</param><param name="LastData">剩余的数据，数组空间必须至少64字节</param><returns>返回值，剩余未处理的数据字节数</returns></summary>
+        </member>
+        <member name="M:EBSignature.EbmSignature.AddEBCert(EBSignature.EBCert)">
+            <summary>
+添加证书
+<param name="cert">证书对像</param><returns>返回值，证书索引号</returns></summary>
+        </member>
+        <member name="M:EBSignature.EbmSignature.NewEBCert(System.Int32)">
+            <summary>
+创建新的证书
+<param name="CertType">输入参数，要使用的证书号</param><returns>返回值，新创建的证书对象，包含的密钥对由系统生成</returns></summary>
+        </member>
+        <member name="M:EBSignature.EbmSignature.GetEBCertIndex(System.Byte[])">
+            <summary>
+读取证书
+<param name="certsn">输入参数，证书号</param><returns>返回值，证书索引,未匹配到证书号时返回-1</returns></summary>
+        </member>
+        <member name="M:EBSignature.EbmSignature.GetEBCert(System.Int32)">
+            <summary>
+读取证书
+<param name="CertType">输入参数，要读取的证书索引</param><returns>返回值，证书对象</returns></summary>
+        </member>
+        <member name="M:EBSignature.EbmSignature.EbMsgSignVerifyWithoutUTC(System.Byte[],System.Int32,System.Byte[])">
+            <summary>
+对应急广播消息进行验签,无需UTC时间
+<param name="pdatabuf">输入参数，十六进制原文数据</param><param name="datalen">输入参数，数据长度</param><param name="signature">输入参数，签名数据，格式为： 签名证书号（6byte） 签名数据（64byte）</param><returns>返回值，true：验签成功，false:验签失败</returns></summary>
+        </member>
+        <member name="M:EBSignature.EbmSignature.EbMsgSignVerify(System.Byte[],System.Int32,System.Int32@,System.Byte[])">
+            <summary>
+对应急广播消息进行验签
+<param name="pdatabuf">输入参数，十六进制原文数据</param><param name="datalen">输入参数，数据长度</param><param name="random">输入输出参数，UTC时间或随机数的引用，执行完后会返回签名数据的UTC时间或随机数</param><param name="signature">输入参数，签名数据，格式为：UTC时间（4byte） 签名证书号（6byte） 签名数据（64byte）</param><returns>返回值，true：验签成功，false:验签失败</returns></summary>
+        </member>
+        <member name="M:EBSignature.EbmSignature.EbMsgSignWithoutUTC(System.Byte[],System.Int32,System.Byte[]@,System.Int32)">
+            <summary>
+通用应急广播消息签名,无UTC时间
+<param name="pdatabuf">输入参数，待签名的十六进制数据</param><param name="datalen">输入参数，数据长度</param><param name="signature">输出参数，签名数据（64byte)</param><param name="CertIndex">输入参数，证书索引</param></summary>
+        </member>
+        <member name="M:EBSignature.EbmSignature.EbMsgSign(System.Byte[],System.Int32,System.Int32@,System.Byte[]@,System.Int32)">
+            <summary>
+通用应急广播消息签名，根据索引号签采用对应证书。
+<param name="pdatabuf">输入参数，待签名的十六进制数据</param><param name="datalen">输入参数，数据长度</param><param name="random">输入输出参数，UTC时间或随机数的引用</param><param name="signature">输出参数，签名数据，格式为：UTC时间（4byte） 签名证书号（6byte） 签名数据（64byte）</param><param name="CertIndex">输入参数，证书索引</param></summary>
+        </member>
+        <member name="M:EBSignature.EbmSignature.EbMsgCASign(System.Byte[],System.Int32,System.Int32@,System.Byte[]@)">
+            <summary>
+使用CA证书对应急广播消息进行签名
+<param name="pdatabuf">输入参数，待签名的十六进制数据</param><param name="datalen">输入参数，数据长度</param><param name="random">输出参数，UTC时间或随机数</param><param name="signature">输出参数，签名数据，格式为：UTC时间（4byte） 签名证书号（6byte） 签名数据（64byte）</param></summary>
+        </member>
+        <member name="M:EBSignature.EbmSignature.EbMsgPLSign(System.Byte[],System.Int32,System.Int32@,System.Byte[]@)">
+            <summary>
+使用平台证书对应急广播消息进行签名
+<param name="pdatabuf">输入参数，待签名的十六进制数据</param><param name="datalen">输入参数，数据长度</param><param name="random">输出参数，UTC时间或随机数</param><param name="signature">输出参数，签名数据，格式为：UTC时间（4byte） 签名证书号（6byte） 签名数据（64byte）</param></summary>
+        </member>
+        <member name="F:EBSignature.EbmSignature.SignCounter">
+            <summary>
+签名计数器
+</summary>
+        </member>
+        <member name="F:EBSignature.EbmSignature.CertStore">
+            <summary>
+SM2密钥库
+</summary>
+        </member>
+        <member name="F:EBSignature.EbmSignature.Platform_Sm2Key5">
+            <summary>
+5号平台密钥对
+</summary>
+        </member>
+        <member name="F:EBSignature.EbmSignature.Platform_Sm2Key">
+            <summary>
+平台密钥对
+</summary>
+        </member>
+        <member name="F:EBSignature.EbmSignature.CA_Sm2Key">
+            <summary>
+CA密钥对
+</summary>
+        </member>
+        <member name="T:EBSignature.EbmSignature">
+            <summary>
+应急广P播数字签名类
+</summary>
+        </member>
+        <member name="F:EBSignature.EBCert.PriKey">
+            <summary>
+私钥数据，16进制ASCII字串
+</summary>
+        </member>
+        <member name="F:EBSignature.EBCert.PubKey">
+            <summary>
+公钥数据，16进制ASCII字串
+</summary>
+        </member>
+        <member name="F:EBSignature.EBCert.Cert">
+            <summary>
+证书数据，16进制ASCII字串
+</summary>
+        </member>
+        <member name="F:EBSignature.EBCert.Cert_sn">
+            <summary>
+证书号
+</summary>
+        </member>
+        <member name="T:EBSignature.EBCert">
+            <summary>
+应急广播证书类
+</summary>
+        </member>
+        <member name="T:EBSignature._EBCERTTYPE">
+            <summary>
+内置证书索引
+</summary>
+        </member>
+        <member name="M:ecp_self_test(System.Int32)">
+ \brief          Checkup routine
+
+ \return         0 if successful, or 1 if a test failed
+
+</member>
+        <member name="M:ecp_gen_key(ecp_group_id,ecp_keypair*,=FUNC:System.Int32(System.Void*,System.Byte*,System.UInt32),System.Void*)">
+ \brief           Generate a keypair
+
+ \param grp_id    ECP group identifier
+ \param key       Destination keypair
+ \param f_rng     RNG function
+ \param p_rng     RNG parameter
+
+ \return          0 if successful,
+                  or a POLARSSL_ERR_ECP_XXX or POLARSSL_MPI_XXX error code
+
+</member>
+        <member name="M:ecp_gen_keypair(ecp_group*,mpi*,ecp_point*,=FUNC:System.Int32(System.Void*,System.Byte*,System.UInt32),System.Void*)">
+ \brief           Generate a keypair
+
+ \param grp       ECP group
+ \param d         Destination MPI (secret part)
+ \param Q         Destination point (public part)
+ \param f_rng     RNG function
+ \param p_rng     RNG parameter
+
+ \return          0 if successful,
+                  or a POLARSSL_ERR_ECP_XXX or POLARSSL_MPI_XXX error code
+
+ \note            Uses bare components rather than an ecp_keypair structure
+                  in order to ease use with other structures such as
+                  ecdh_context of ecdsa_context.
+
+</member>
+        <member name="M:ecp_check_privkey(ecp_group!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*)">
+ \brief           Check that an mpi is a valid private key for this curve
+
+ \param grp       Group used
+ \param d         Integer to check
+
+ \return          0 if point is a valid private key,
+                  POLARSSL_ERR_ECP_INVALID_KEY otherwise.
+
+ \note            Uses bare components rather than an ecp_keypair structure
+                  in order to ease use with other structures such as
+                  ecdh_context of ecdsa_context.
+
+</member>
+        <member name="M:ecp_check_pubkey(ecp_group!System.Runtime.CompilerServices.IsConst*,ecp_point!System.Runtime.CompilerServices.IsConst*)">
+ \brief           Check that a point is a valid public key on this curve
+
+ \param grp       Curve/group the point should belong to
+ \param pt        Point to check
+
+ \return          0 if point is a valid public key,
+                  POLARSSL_ERR_ECP_INVALID_KEY otherwise.
+
+ \note            This function only checks the point is non-zero, has valid
+                  coordinates and lies on the curve, but not that it is
+                  indeed a multiple of G. This is additional check is more
+                  expensive, isn't required by standards, and shouldn't be
+                  necessary if the group used has a small cofactor. In
+                  particular, it is useless for the NIST groups which all
+                  have a cofactor of 1.
+
+ \note            Uses bare components rather than an ecp_keypair structure
+                  in order to ease use with other structures such as
+                  ecdh_context of ecdsa_context.
+
+</member>
+        <member name="M:ecp_mul(ecp_group*,ecp_point*,mpi!System.Runtime.CompilerServices.IsConst*,ecp_point!System.Runtime.CompilerServices.IsConst*,=FUNC:System.Int32(System.Void*,System.Byte*,System.UInt32),System.Void*)">
+ \brief           Multiplication by an integer: R = m * P
+                  (Not thread-safe to use same group in multiple threads)
+
+ \param grp       ECP group
+ \param R         Destination point
+ \param m         Integer by which to multiply
+ \param P         Point to multiply
+ \param f_rng     RNG function (see notes)
+ \param p_rng     RNG parameter
+
+ \return          0 if successful,
+                  POLARSSL_ERR_ECP_INVALID_KEY if m is not a valid privkey
+                  or P is not a valid pubkey,
+                  POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+ \note            In order to prevent timing attacks, this function
+                  executes the exact same sequence of (base field)
+                  operations for any valid m. It avoids any if-branch or
+                  array index depending on the value of m.
+
+ \note            If f_rng is not NULL, it is used to randomize intermediate
+                  results in order to prevent potential timing attacks
+                  targeting these results. It is recommended to always
+                  provide a non-NULL f_rng (the overhead is negligible).
+
+</member>
+        <member name="M:ecp_sub(ecp_group!System.Runtime.CompilerServices.IsConst*,ecp_point*,ecp_point!System.Runtime.CompilerServices.IsConst*,ecp_point!System.Runtime.CompilerServices.IsConst*)">
+ \brief           Subtraction: R = P - Q
+
+ \param grp       ECP group
+ \param R         Destination point
+ \param P         Left-hand point
+ \param Q         Right-hand point
+
+ \return          0 if successful,
+                  POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+ \note            This function does not support Montgomery curves, such as
+                  Curve25519.
+
+</member>
+        <member name="M:ecp_add(ecp_group!System.Runtime.CompilerServices.IsConst*,ecp_point*,ecp_point!System.Runtime.CompilerServices.IsConst*,ecp_point!System.Runtime.CompilerServices.IsConst*)">
+ \brief           Addition: R = P + Q
+
+ \param grp       ECP group
+ \param R         Destination point
+ \param P         Left-hand point
+ \param Q         Right-hand point
+
+ \return          0 if successful,
+                  POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+ \note            This function does not support Montgomery curves, such as
+                  Curve25519.
+
+</member>
+        <member name="M:ecp_tls_write_group(ecp_group!System.Runtime.CompilerServices.IsConst*,System.UInt32*,System.Byte*,System.UInt32)">
+ \brief           Write the TLS ECParameters record for a group
+
+ \param grp       ECP group used
+ \param olen      Number of bytes actually written
+ \param buf       Buffer to write to
+ \param blen      Buffer length
+
+ \return          0 if successful,
+                  or POLARSSL_ERR_ECP_BUFFER_TOO_SMALL
+
+</member>
+        <member name="M:ecp_use_known_dp(ecp_group*,ecp_group_id)">
+ \brief           Set a group using well-known domain parameters
+
+ \param grp       Destination group
+ \param index     Index in the list of well-known domain parameters
+
+ \return          O if successful,
+                  POLARSSL_ERR_MPI_XXX if initialization failed
+                  POLARSSL_ERR_ECP_FEATURE_UNAVAILABLE for unkownn groups
+
+ \note            Index should be a value of RFC 4492's enum NamdeCurve,
+                  possibly in the form of a POLARSSL_ECP_DP_XXX macro.
+
+</member>
+        <member name="M:ecp_group_read_string(ecp_group*,System.Int32,System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte!System.Runtime.CompilerServices.IsConst*,System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte!System.Runtime.CompilerServices.IsConst*,System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte!System.Runtime.CompilerServices.IsConst*,System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte!System.Runtime.CompilerServices.IsConst*,System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte!System.Runtime.CompilerServices.IsConst*)">
+ \brief           Import an ECP group from null-terminated ASCII strings
+
+ \param grp       Destination group
+ \param radix     Input numeric base
+ \param p         Prime modulus of the base field
+ \param b         Constant term in the equation
+ \param gx        The generator's X coordinate
+ \param gy        The generator's Y coordinate
+ \param n         The generator's order
+
+ \return          0 if successful, or a POLARSSL_ERR_MPI_XXX error code
+
+ \note            Sets all fields except modp.
+
+</member>
+        <member name="M:ecp_tls_write_point(ecp_group!System.Runtime.CompilerServices.IsConst*,ecp_point!System.Runtime.CompilerServices.IsConst*,System.Int32,System.UInt32*,System.Byte*,System.UInt32)">
+ \brief           Export a point as a TLS ECPoint record
+
+ \param grp       ECP group used
+ \param pt        Point to export
+ \param format    Export format
+ \param olen      length of data written
+ \param buf       Buffer to write to
+ \param blen      Buffer length
+
+ \return          0 if successful,
+                  or POLARSSL_ERR_ECP_BAD_INPUT_DATA
+                  or POLARSSL_ERR_ECP_BUFFER_TOO_SMALL
+
+</member>
+        <member name="M:ecp_tls_read_point(ecp_group!System.Runtime.CompilerServices.IsConst*,ecp_point*,System.Byte!System.Runtime.CompilerServices.IsConst**,System.UInt32)">
+ \brief           Import a point from a TLS ECPoint record
+
+ \param grp       ECP group used
+ \param pt        Destination point
+ \param buf       $(Start of input buffer)
+ \param len       Buffer length
+
+ \return          O if successful,
+                  POLARSSL_ERR_MPI_XXX if initialization failed
+                  POLARSSL_ERR_ECP_BAD_INPUT_DATA if input is invalid
+
+</member>
+        <member name="M:ecp_point_read_binary(ecp_group!System.Runtime.CompilerServices.IsConst*,ecp_point*,System.Byte!System.Runtime.CompilerServices.IsConst*,System.UInt32)">
+ \brief           Import a point from unsigned binary data
+
+ \param grp       Group to which the point should belong
+ \param P         Point to import
+ \param buf       Input buffer
+ \param ilen      Actual length of input
+
+ \return          0 if successful,
+                  POLARSSL_ERR_ECP_BAD_INPUT_DATA if input is invalid,
+                  POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed,
+                  POLARSSL_ERR_ECP_FEATURE_UNAVAILABLE if the point format
+                  is not implemented.
+
+ \note            This function does NOT check that the point actually
+                  belongs to the given group, see ecp_check_pubkey() for
+                  that.
+
+</member>
+        <member name="M:ecp_point_write_binary(ecp_group!System.Runtime.CompilerServices.IsConst*,ecp_point!System.Runtime.CompilerServices.IsConst*,System.Int32,System.UInt32*,System.Byte*,System.UInt32)">
+ \brief           Export a point into unsigned binary data
+
+ \param grp       Group to which the point should belong
+ \param P         Point to export
+ \param format    Point format, should be a POLARSSL_ECP_PF_XXX macro
+ \param olen      Length of the actual output
+ \param buf       Output buffer
+ \param buflen    Length of the output buffer
+
+ \return          0 if successful,
+                  or POLARSSL_ERR_ECP_BAD_INPUT_DATA
+                  or POLARSSL_ERR_ECP_BUFFER_TOO_SMALL
+
+</member>
+        <member name="M:ecp_point_read_string(ecp_point*,System.Int32,System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte!System.Runtime.CompilerServices.IsConst*,System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte!System.Runtime.CompilerServices.IsConst*)">
+ \brief           Import a non-zero point from two ASCII strings
+
+ \param P         Destination point
+ \param radix     Input numeric base
+ \param x         First affine coordinate as a null-terminated string
+ \param y         Second affine coordinate as a null-terminated string
+
+ \return          0 if successful, or a POLARSSL_ERR_MPI_XXX error code
+
+</member>
+        <member name="M:ecp_is_zero(ecp_point*)">
+ \brief           Tell if a point is zero
+
+ \param pt        Point to test
+
+ \return          1 if point is zero, 0 otherwise
+
+</member>
+        <member name="M:ecp_set_zero(ecp_point*)">
+ \brief           Set a point to zero
+
+ \param pt        Destination point
+
+ \return          0 if successful,
+                  POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:ecp_group_copy(ecp_group*,ecp_group!System.Runtime.CompilerServices.IsConst*)">
+ \brief           Copy the contents of a group object
+
+ \param dst       Destination group
+ \param src       Source group
+
+ \return          0 if successful,
+                  POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:ecp_copy(ecp_point*,ecp_point!System.Runtime.CompilerServices.IsConst*)">
+ \brief           Copy the contents of point Q into P
+
+ \param P         Destination point
+ \param Q         Source point
+
+ \return          0 if successful,
+                  POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:ecp_keypair_free(ecp_keypair*)">
+\brief           Free the components of a key pair
+
+</member>
+        <member name="M:ecp_group_free(ecp_group*)">
+\brief           Free the components of an ECP group
+
+</member>
+        <member name="M:ecp_point_free(ecp_point*)">
+\brief           Free the components of a point
+
+</member>
+        <member name="M:ecp_keypair_init(ecp_keypair*)">
+\brief           Initialize a key pair (as an invalid one)
+
+</member>
+        <member name="M:ecp_group_init(ecp_group*)">
+\brief           Initialize a group (to something meaningless)
+
+</member>
+        <member name="M:ecp_point_init(ecp_point*)">
+\brief           Initialize a point (as zero)
+
+</member>
+        <member name="M:ecp_curve_info_from_name(System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte!System.Runtime.CompilerServices.IsConst*)">
+ \brief           Get curve information from a human-readable name
+
+ \param name      The name
+
+ \return          The associated curve information or NULL
+
+</member>
+        <member name="M:ecp_curve_info_from_tls_id(System.UInt16)">
+ \brief           Get curve information from a TLS NamedCurve value
+
+ \param tls_id    A POLARSSL_ECP_DP_XXX value
+
+ \return          The associated curve information or NULL
+
+</member>
+        <member name="M:ecp_curve_info_from_grp_id(ecp_group_id)">
+ \brief           Get curve information from an internal group identifier
+
+ \param grp_id    A POLARSSL_ECP_DP_XXX value
+
+ \return          The associated curve information or NULL
+
+</member>
+        <member name="M:ecp_grp_id_list">
+ \brief           Get the list of supported curves in order of preferrence
+                  (grp_id only)
+
+ \return          A statically allocated array,
+                  terminated with POLARSSL_ECP_DP_NONE.
+
+</member>
+        <member name="M:ecp_curve_list">
+ \name SECTION: Module settings
+
+ The configuration options you can set for this module are in this section.
+ Either change them in config.h or define them on the compiler command line.
+ \{
+
+Maximum size of the groups (that is, of N and P)
+
+ \brief           Get the list of supported curves in order of preferrence
+                  (full information)
+
+ \return          A statically allocated array, the last entry is 0.
+
+</member>
+        <member name="M:mpi_self_test(System.Int32)">
+ \brief          Checkup routine
+
+ \return         0 if successful, or 1 if the test failed
+
+</member>
+        <member name="M:mpi_is_prime(mpi*,=FUNC:System.Int32(System.Void*,System.Byte*,System.UInt32),System.Void*)">
+ \brief          Miller-Rabin primality test
+
+ \param X        MPI to check
+ \param f_rng    RNG function
+ \param p_rng    RNG parameter
+
+ \return         0 if successful (probably prime),
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed,
+                 POLARSSL_ERR_MPI_NOT_ACCEPTABLE if X is not prime
+
+</member>
+        <member name="M:mpi_inv_mod(mpi*,mpi!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*)">
+ * \brief          Modular inverse: X = A^-1 mod N
+ *
+ * \param X        Destination MPI
+ * \param A        Left-hand MPI
+ * \param N        Right-hand MPI
+ *
+ * \return         0 if successful,
+ *                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed,
+ *                 POLARSSL_ERR_MPI_BAD_INPUT_DATA if N is negative or nil
+                   POLARSSL_ERR_MPI_NOT_ACCEPTABLE if A has no inverse mod N
+
+</member>
+        <member name="M:mpi_gcd(mpi*,mpi!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*)">
+ \brief          Greatest common divisor: G = gcd(A, B)
+
+ \param G        Destination MPI
+ \param A        Left-hand MPI
+ \param B        Right-hand MPI
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:mpi_fill_random(mpi*,System.UInt32,=FUNC:System.Int32(System.Void*,System.Byte*,System.UInt32),System.Void*)">
+ \brief          Fill an MPI X with size bytes of random
+
+ \param X        Destination MPI
+ \param size     Size in bytes
+ \param f_rng    RNG function
+ \param p_rng    RNG parameter
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:mpi_exp_mod(mpi*,mpi!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*,mpi*)">
+ \brief          Sliding-window exponentiation: X = A^E mod N
+
+ \param X        Destination MPI
+ \param A        Left-hand MPI
+ \param E        Exponent MPI
+ \param N        Modular MPI
+ \param _RR      Speed-up MPI used for recalculations
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed,
+                 POLARSSL_ERR_MPI_BAD_INPUT_DATA if N is negative or even or
+                 if E is negative
+
+ \note           _RR is used to avoid re-computing R*R mod N across
+                 multiple calls, which speeds up things a bit. It can
+                 be set to NULL if the extra performance is unneeded.
+
+</member>
+        <member name="M:mpi_div_int(mpi*,mpi*,mpi!System.Runtime.CompilerServices.IsConst*,System.Int32)">
+ \brief          Division by int: A = Q * b + R
+
+ \param Q        Destination MPI for the quotient
+ \param R        Destination MPI for the rest value
+ \param A        Left-hand MPI
+ \param b        Integer to divide by
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed,
+                 POLARSSL_ERR_MPI_DIVISION_BY_ZERO if b == 0
+
+ \note           Either Q or R can be NULL.
+
+</member>
+        <member name="M:mpi_div_mpi(mpi*,mpi*,mpi!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*)">
+ \brief          Division by mpi: A = Q * B + R
+
+ \param Q        Destination MPI for the quotient
+ \param R        Destination MPI for the rest value
+ \param A        Left-hand MPI
+ \param B        Right-hand MPI
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed,
+                 POLARSSL_ERR_MPI_DIVISION_BY_ZERO if B == 0
+
+ \note           Either Q or R can be NULL.
+
+</member>
+        <member name="M:mpi_mul_int(mpi*,mpi!System.Runtime.CompilerServices.IsConst*,System.Int32)">
+ \brief          Baseline multiplication: X = A * b
+                 Note: despite the functon signature, b is treated as a
+                 t_uint.  Negative values of b are treated as large positive
+                 values.
+
+ \param X        Destination MPI
+ \param A        Left-hand MPI
+ \param b        The integer value to multiply with
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:mpi_mul_mpi(mpi*,mpi!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*)">
+ \brief          Baseline multiplication: X = A * B
+
+ \param X        Destination MPI
+ \param A        Left-hand MPI
+ \param B        Right-hand MPI
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:mpi_sub_int(mpi*,mpi!System.Runtime.CompilerServices.IsConst*,System.Int32)">
+ \brief          Signed subtraction: X = A - b
+
+ \param X        Destination MPI
+ \param A        Left-hand MPI
+ \param b        The integer value to subtract
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:mpi_add_int(mpi*,mpi!System.Runtime.CompilerServices.IsConst*,System.Int32)">
+ \brief          Signed addition: X = A + b
+
+ \param X        Destination MPI
+ \param A        Left-hand MPI
+ \param b        The integer value to add
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:mpi_sub_mpi(mpi*,mpi!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*)">
+ \brief          Signed subtraction: X = A - B
+
+ \param X        Destination MPI
+ \param A        Left-hand MPI
+ \param B        Right-hand MPI
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:mpi_add_mpi(mpi*,mpi!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*)">
+ \brief          Signed addition: X = A + B
+
+ \param X        Destination MPI
+ \param A        Left-hand MPI
+ \param B        Right-hand MPI
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:mpi_sub_abs(mpi*,mpi!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*)">
+ \brief          Unsigned subtraction: X = |A| - |B|
+
+ \param X        Destination MPI
+ \param A        Left-hand MPI
+ \param B        Right-hand MPI
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_NEGATIVE_VALUE if B is greater than A
+
+</member>
+        <member name="M:mpi_add_abs(mpi*,mpi!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*)">
+ \brief          Unsigned addition: X = |A| + |B|
+
+ \param X        Destination MPI
+ \param A        Left-hand MPI
+ \param B        Right-hand MPI
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:mpi_cmp_int(mpi!System.Runtime.CompilerServices.IsConst*,System.Int32)">
+ \brief          Compare signed values
+
+ \param X        Left-hand MPI
+ \param z        The integer value to compare to
+
+ \return         1 if X is greater than z,
+                -1 if X is lesser  than z or
+                 0 if X is equal to z
+
+</member>
+        <member name="M:mpi_cmp_mpi(mpi!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*)">
+ \brief          Compare signed values
+
+ \param X        Left-hand MPI
+ \param Y        Right-hand MPI
+
+ \return         1 if X is greater than Y,
+                -1 if X is lesser  than Y or
+                 0 if X is equal to Y
+
+</member>
+        <member name="M:mpi_cmp_abs(mpi!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*)">
+ \brief          Compare unsigned values
+
+ \param X        Left-hand MPI
+ \param Y        Right-hand MPI
+
+ \return         1 if |X| is greater than |Y|,
+                -1 if |X| is lesser  than |Y| or
+                 0 if |X| is equal to |Y|
+
+</member>
+        <member name="M:mpi_shift_r(mpi*,System.UInt32)">
+ \brief          Right-shift: X &gt;&gt;= count
+
+ \param X        MPI to shift
+ \param count    Amount to shift
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:mpi_write_binary(mpi!System.Runtime.CompilerServices.IsConst*,System.Byte*,System.UInt32)">
+ \brief          Export X into unsigned binary data, big endian.
+                 Always fills the whole buffer, which will start with zeros
+                 if the number is smaller.
+
+ \param X        Source MPI
+ \param buf      Output buffer
+ \param buflen   Output buffer size
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_BUFFER_TOO_SMALL if buf isn't large enough
+
+</member>
+        <member name="M:mpi_read_binary(mpi*,System.Byte!System.Runtime.CompilerServices.IsConst*,System.UInt32)">
+ \brief          Import X from unsigned binary data, big endian
+
+ \param X        Destination MPI
+ \param buf      Input buffer
+ \param buflen   Input buffer size
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:mpi_write_file(System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*,System.Int32,_iobuf*)">
+ \brief          Write X into an opened file, or stdout if fout is NULL
+
+ \param p        Prefix, can be NULL
+ \param X        Source MPI
+ \param radix    Output numeric base
+ \param fout     Output file handle (can be NULL)
+
+ \return         0 if successful, or a POLARSSL_ERR_MPI_XXX error code
+
+ \note           Set fout == NULL to print X on the console.
+
+</member>
+        <member name="M:mpi_read_file(mpi*,System.Int32,_iobuf*)">
+ \brief          Read X from an opened file
+
+ \param X        Destination MPI
+ \param radix    Input numeric base
+ \param fin      Input file handle
+
+ \return         0 if successful, POLARSSL_ERR_MPI_BUFFER_TOO_SMALL if
+                 the file read buffer is too small or a
+                 POLARSSL_ERR_MPI_XXX error code
+
+</member>
+        <member name="M:mpi_write_string(mpi!System.Runtime.CompilerServices.IsConst*,System.Int32,System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte*,System.UInt32*)">
+ \brief          Export into an ASCII string
+
+ \param X        Source MPI
+ \param radix    Output numeric base
+ \param s        String buffer
+ \param slen     String buffer size
+
+ \return         0 if successful, or a POLARSSL_ERR_MPI_XXX error code.
+                 *slen is always updated to reflect the amount
+                 of data that has (or would have) been written.
+
+ \note           Call this function with *slen = 0 to obtain the
+                 minimum required buffer size in *slen.
+
+</member>
+        <member name="M:mpi_read_string(mpi*,System.Int32,System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte!System.Runtime.CompilerServices.IsConst*)">
+ \brief          Import from an ASCII string
+
+ \param X        Destination MPI
+ \param radix    Input numeric base
+ \param s        Null-terminated string buffer
+
+ \return         0 if successful, or a POLARSSL_ERR_MPI_XXX error code
+
+</member>
+        <member name="M:mpi_size(mpi!System.Runtime.CompilerServices.IsConst*)">
+ \brief          Return the total size in bytes
+
+ \param X        MPI to use
+
+</member>
+        <member name="M:mpi_msb(mpi!System.Runtime.CompilerServices.IsConst*)">
+ \brief          Return the number of bits up to and including the most
+                 significant '1' bit'
+
+ Note: Thus also the one-based index of the most significant '1' bit
+
+ \param X        MPI to use
+
+</member>
+        <member name="M:mpi_lsb(mpi!System.Runtime.CompilerServices.IsConst*)">
+ \brief          Return the number of zero-bits before the least significant
+                 '1' bit
+
+ Note: Thus also the zero-based index of the least significant '1' bit
+
+ \param X        MPI to use
+
+</member>
+        <member name="M:mpi_set_bit(mpi*,System.UInt32,System.Byte)">
+ \brief          Set a bit of X to a specific value of 0 or 1
+
+ \note           Will grow X if necessary to set a bit to 1 in a not yet
+                 existing limb. Will not grow if bit should be set to 0
+
+ \param X        MPI to use
+ \param pos      Zero-based index of the bit in X
+ \param val      The value to set the bit to (0 or 1)
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed,
+                 POLARSSL_ERR_MPI_BAD_INPUT_DATA if val is not 0 or 1
+
+</member>
+        <member name="M:mpi_get_bit(mpi!System.Runtime.CompilerServices.IsConst*,System.UInt32)">
+ \brief          Get a specific bit from X
+
+ \param X        MPI to use
+ \param pos      Zero-based index of the bit in X
+
+ \return         Either a 0 or a 1
+
+</member>
+        <member name="M:mpi_lset(mpi*,System.Int32)">
+ \brief          Set value from integer
+
+ \param X        MPI to set
+ \param z        Value to use
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:mpi_safe_cond_assign(mpi*,mpi!System.Runtime.CompilerServices.IsConst*,System.Byte)">
+ \brief          Safe conditional assignement X = Y if assign is 1
+
+ \param X        MPI to conditionally assign to
+ \param Y        Value to be assigned
+ \param assign   1: perform the assignment, 0: keep X's original value
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed,
+
+ \note           This function is equivalent to
+                      if( assign ) mpi_copy( X, Y );
+                 except that it avoids leaking any information about whether
+                 the assignment was done or not (the above code may leak
+                 information through branch prediction and/or memory access
+                 patterns analysis).
+
+</member>
+        <member name="M:mpi_swap(mpi*,mpi*)">
+ \brief          Swap the contents of X and Y
+
+ \param X        First MPI value
+ \param Y        Second MPI value
+
+</member>
+        <member name="M:mpi_copy(mpi*,mpi!System.Runtime.CompilerServices.IsConst*)">
+ \brief          Copy the contents of Y into X
+
+ \param X        Destination MPI
+ \param Y        Source MPI
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:mpi_shrink(mpi*,System.UInt32)">
+ \brief          Resize down, keeping at least the specified number of limbs
+
+ \param X        MPI to shrink
+ \param nblimbs  The minimum number of limbs to keep
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:mpi_grow(mpi*,System.UInt32)">
+ \brief          Enlarge to the specified number of limbs
+
+ \param X        MPI to grow
+ \param nblimbs  The target number of limbs
+
+ \return         0 if successful,
+                 POLARSSL_ERR_MPI_MALLOC_FAILED if memory allocation failed
+
+</member>
+        <member name="M:mpi_free(mpi*)">
+ \brief          Unallocate one MPI
+
+ \param X        One MPI to unallocate.
+
+</member>
+        <member name="M:mpi_init(mpi*)">
+ \brief           Initialize one MPI
+
+ \param X         One MPI to initialize.
+
+</member>
+        <member name="F:EBMTable.EBIndex.list_ProgramStreamInfo">
+            <summary>
+详情频道节目流信息列表
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndex.DetlChlDescriptor">
+            <summary>
+详情频道描述符,要通过StdDescriptor对像直接赋值
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndex.S_details_channel_PCR_PID">
+            <summary>
+详情频道PCR_PID
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndex.S_details_channel_program_number">
+            <summary>
+节目号
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndex.S_details_channel_transport_stream_id">
+            <summary>
+传输流标识符 0-65535
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndex.S_details_channel_network_id">
+            <summary>
+流原始网络id
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndex.BL_details_channel_indicate">
+            <summary>
+详情频道有无标识
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndex.List_EBM_resource_code">
+            <summary>
+应急广播消息覆盖资源代码，18位数字，请不要使用Add()接口，否则将不能正常生成数据
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndex.S_EBM_level">
+            <summary>
+应急广播消息级别
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndex.S_EBM_class">
+            <summary>
+应急广播消息分类
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndex.S_EBM_type">
+            <summary>
+应急广播消息类别,5个ASCII字符
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndex.S_EBM_end_time">
+            <summary>
+应急广播消息结束时间
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndex.S_EBM_start_time">
+            <summary>
+应急广播消息开始时间
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndex.S_EBM_original_network_id">
+            <summary>
+应急广播原始网络标识符，0-65535
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndex.S_EBM_id">
+            <summary>
+应急广播消息标识符,30位数字
+</summary>
+        </member>
+        <member name="M:EBMTable.EBIndex.Copy">
+            <summary>
+获取当前对像的浅表副本
+</summary>
+        </member>
+        <member name="F:EBMTable.EBIndex.ProtocolGX">
+            <summary>
+广西版TS协议标识
+</summary>
+        </member>
+        <member name="M:EBMTable.EBIndexTable.RecateCount">
+            <summary>
+重复发送计数
+</summary>
+        </member>
+        <member name="M:EBMTable.EBIndexTable.FoceRepeateTable">
+            <summary>
+使下一次Current_Next_Indicate强制生效
+</summary>
+        </member>
+        <member name="M:EBMTable.EBIndexTable.GetEBIndexSectionPackages(System.Int32*)">
+            <summary>
+获取应急广播索引表数据
+<param name="PackageNum">输入输出参数，数据长度指针</param><returns>返回值，二进制分段数据</returns></summary>
+        </member>
+        <member name="M:EBMTable.EBIndexTable.BuildEbIndexSection">
+            <summary>
+创建应急广播索引表数据分段
+</summary>
+        </member>
+        <member name="M:EBMTable.EBIndexTable.GetEbIndexSection(System.Int32@)">
+            <summary>
+获取当前应急广播索引表Section数据 
+<param name="SecnLen">输入输出参数，数据长度指针</param><returns>返回值，二进制分段数据</returns></summary>
+        </member>
+        <member name="M:EBMTable.EBIndexTable.Initialization(StreamConfig*,EBMTable.SignatureCallBackDelegate)">
+            <summary>
+数字签名回调委托,需要签名时必须用相应签名函数进行初始化 
+</summary>
+            <summary>
+初始化函数，必须在设置必要的属性后调用 
+<param name="ts_config">输入参数，TS流配置参数结构体</param><param name="SignatureCallback">输入参数，数字签名回调委托</param><returns /></summary>
+        </member>
+        <member name="P:EBMTable.EBIndexTable.SignRandomOrUTC">
+            <summary>
+签名随机数或UTC时间
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndexTable.Completed">
+            <summary>
+应急广播表是否已经完成发送，为true时表示已经完成发送。
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndexTable.Repeat_count">
+            <summary>
+应急广播表已经发送次数计数。
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndexTable.Repeat_times">
+            <summary>
+应急广播表重复发送的次数，为0表示一直重复发送。设置该属性将引发计数清零，重新开发发送数据
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndexTable.Table_id_extension">
+            <summary>
+扩展子表id 
+</summary>
+        </member>
+        <member name="P:EBMTable.EBIndexTable.Table_id">
+            <summary>
+索引表主表id 
+</summary>
+        </member>
+        <member name="F:EBMTable.EBIndexTable.ListEbIndex">
+            <summary>
+应急广播索引数据列表，基本单位为EBIndex对像
+</summary>
+        </member>
+        <member name="M:EBMTable.EBIndexTable.Copy">
+            <summary>
+获取当前对像的浅表副本
+</summary>
+        </member>
+        <member name="F:EBMTable.EBIndexTable.ProtocolGX">
+            <summary>
+广西版TS协议标识
+</summary>
+        </member>
+        <member name="M:EBMTable.EBMStream.StreamInit">
+            <summary>
+传送流初始化，调用此函数会创建传送流线程，传送流线程只可创建一个
+</summary>
+        </member>
+        <member name="M:EBMTable.EBMStream.StreamDispos">
+            <summary>
+删除传送流，调用此函数会关闭传送流线程
+</summary>
+        </member>
+        <member name="M:EBMTable.EBMStream.SetDataLoad(System.Byte[],System.Int32)">
+            <summary>
+通过此函数可添加自定议TS数据包用于通过TS流发送，注意数据包必须符合ISO13818-1中关于传送流的规范，否则将破坏传送流
+<param name="pLoad">输入参数，待发送二制制数据</param><param name="Len">输入参数，数据度，必须为188的整数倍</param></summary>
+        </member>
+        <member name="M:EBMTable.EBMStream.SetDataLoad(System.Byte*,System.Int32)">
+            <summary>
+通过此函数可添加自定议TS数据包用于通过TS流发送，注意数据包必须符合ISO13818-1中关于传送流的规范，否则将破坏传送流
+<param name="pLoad">输入参数，待发送二制制数据</param><param name="Len">输入参数，数据度，必须为188的整数倍</param></summary>
+        </member>
+        <member name="M:EBMTable.EBMStream.StopStreaming">
+            <summary>
+调用此函数将停止TS流发送
+</summary>
+        </member>
+        <member name="M:EBMTable.EBMStream.StartStreaming">
+            <summary>
+调用此函数将启动TS流发送
+</summary>
+        </member>
+        <member name="M:EBMTable.EBMStream.Initialization">
+            <summary>
+需要在设置各项参数后调用此函数进行对像初始化，创建传送流线程，以便使网络及其它资源可用
+</summary>
+        </member>
+        <member name="F:EBMTable.EBMStream.SignatureCallbackRef">
+            <summary>
+数字签名回调委托,需要签名时必须用相应签名函数进行初始化 
+<param name="pdatabuf">输入参数，待签名的十六进制数据</param><param name="datalen">输入参数，数据长度</param><param name="random">输出参数，UTC时间或随机数</param><param name="signature">输出参数，签名数据</param></summary>
+        </member>
+        <member name="T:EBMTable.EBMStream.SignatureCallBackDelegateRef">
+            <summary>
+数字签名回调委托类型
+<param name="pdatabuf">输入参数，待签名的十六进制数据</param><param name="datalen">输入参数，数据长度</param><param name="random">输出参数，UTC时间或随机数</param><param name="signature">输出参数，签名数据</param></summary>
+        </member>
+        <member name="P:EBMTable.EBMStream.SignRandomOrUTC">
+            <summary>
+签名随机数或UTC时间，当签名组件具有随机数或UTC输出时，可以不对其进行赋值
+</summary>
+        </member>
+        <member name="P:EBMTable.EBMStream.sLocalSockAddress">
+            <summary>
+本地IP地址
+</summary>
+        </member>
+        <member name="P:EBMTable.EBMStream.sDestSockAddress">
+            <summary>
+传送流目标IP地址
+</summary>
+        </member>
+        <member name="P:EBMTable.EBMStream.Stream_BitRate">
+            <summary>
+传送流码率
+</summary>
+        </member>
+        <member name="P:EBMTable.EBMStream.Section_length">
+            <summary>
+分段最大长度
+</summary>
+        </member>
+        <member name="P:EBMTable.EBMStream.PMT_Pid">
+            <summary>
+节目映射表pid
+</summary>
+        </member>
+        <member name="P:EBMTable.EBMStream.Program_id">
+            <summary>
+节目id
+</summary>
+        </member>
+        <member name="P:EBMTable.EBMStream.Stream_id">
+            <summary>
+流id
+</summary>
+        </member>
+        <member name="P:EBMTable.EBMStream.ElementaryPid">
+            <summary>
+基础pid
+</summary>
+        </member>
+        <member name="F:EBMTable.EBMStream.Daily_Broadcast_Table">
+            <summary>
+日常广播指令表数据对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBMStream.EB_Configure_Table">
+            <summary>
+应急广播配置表数据对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBMStream.EB_CertAuth_Table">
+            <summary>
+应急广播证书授权表数据对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBMStream.list_EB_Content_Table">
+            <summary>
+应急广播内容表数据分段列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBMStream.EB_Content_Table">
+            <summary>
+应急广播内容表数据对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBMStream.EB_Index_Table">
+            <summary>
+应急广播索引表数据对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBMStream.Log">
+            <summary>
+日志对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBMStream.DataCallBack">
+            <summary>
+数据回调委托
+</summary>
+        </member>
+        <member name="M:EBMTable.EBMStream.DataStreaming">
+            <summary>
+将当前应急广播索引表Section数据写入低层流传送对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBMStream.ebm_stream">
+            <summary>
+传送流对像指针
+</summary>
+        </member>
+        <member name="F:EBMTable.EBMStream.S_localSockAddress">
+            <summary>
+本地IP地址
+</summary>
+        </member>
+        <member name="F:EBMTable.EBMStream.S_destSockAddress">
+            <summary>
+传送流目标IP地址
+</summary>
+        </member>
+        <member name="M:EBMTable.DailyCmdRdsTransfer.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdRdsTransfer.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdRdsTransfer.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdRdsTransfer.B_Rds_terminal_type">
+            <summary>
+1：应急广播适配器;2：收扩机;	3：音柱;4：应急广播适配器 + 收扩机;	+ 音柱;	4~9：保留
+</summary>
+        </member>
+        <member name="M:EBMTable.DailyCmdOutSwitch.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdOutSwitch.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdOutSwitch.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdOutSwitch.B_Switch_status">
+            <summary>
+1：表示关闭输出 2：表示开启输出
+</summary>
+        </member>
+        <member name="M:EBMTable.DailyCmdPlayCtrl.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdPlayCtrl.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdPlayCtrl.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdPlayCtrl.Volume">
+            <summary>
+音量按百分比形式标识，其中：0x00 ：静音,0xff ：开播，音量不变,0x01 -0x64: 对应音量1% -100%,其它取值无意义
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdPlayCtrl.B_cmd_tag">
+            <summary>
+播放控制指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.DailyCmdPlayCtrl">
+            <summary>
+播放控制指令
+</summary>
+        </member>
+        <member name="M:EBMTable.DailyCmdProgramStop.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdProgramStop.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdProgramStop.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdProgramStop.Program_PID">
+            <summary>
+带有当前音频节目内容的 TS流PID
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdProgramStop.PCR_PID">
+            <summary>
+PCR pid
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdProgramStop.ServiceID">
+            <summary>
+Program service id 
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdProgramStop.TSID">
+            <summary>
+传输流ID
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdProgramStop.NetID">
+            <summary>
+源始网络标识
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdProgramStop.B_cmd_tag">
+            <summary>
+节目停目指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.DailyCmdProgramStop">
+            <summary>
+节目停目指令
+</summary>
+        </member>
+        <member name="M:EBMTable.DailyCmdChangeProgram.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdChangeProgram.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdChangeProgram.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址*/
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdChangeProgram.EndTime">
+            <summary>
+日常广播结束时间
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdChangeProgram.Volume">
+            <summary>
+*音量按百分比形式标识，其中：0x00：静音, 0xff：开播，音量不变，0x01 -0x64：对应音量1% -100%
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdChangeProgram.Priority">
+            <summary>
+节目优先级
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdChangeProgram.Program_PID">
+            <summary>
+带有当前音频节目内容的 TS流PID*/
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdChangeProgram.PCR_PID">
+            <summary>
+PCR pid
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdChangeProgram.ServiceID">
+            <summary>
+Program service id 
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdChangeProgram.TSID">
+            <summary>
+传输流ID
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdChangeProgram.NetID">
+            <summary>
+源始网络标识
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdChangeProgram.B_cmd_tag">
+            <summary>
+节目切播指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.DailyCmdChangeProgram">
+            <summary>
+节目切播指令
+</summary>
+        </member>
+        <member name="M:EBMTable.DailyBroadcastTable.RecateCount">
+            <summary>
+分端重复发送计数
+</summary>
+        </member>
+        <member name="M:EBMTable.DailyBroadcastTable.FoceRepeateTable">
+            <summary>
+使下一次Current_Next_Indicate强制生效
+</summary>
+        </member>
+        <member name="M:EBMTable.DailyBroadcastTable.Initialization(StreamConfig*,EBMTable.SignatureCallBackDelegate)">
+            <summary>
+初始化日常广播指令表
+<param name="ts_config">输入参数，TS流配置参数结构体</param><param name="SignatureCallback">输入参数，数字签名回调委托</param></summary>
+        </member>
+        <member name="M:EBMTable.DailyBroadcastTable.GetDailyBroadcastSection(System.Int32@)">
+            <summary>
+获取日常广播数据分段
+<param name="PackageNum">输入输出参数，数据长度引用</param><returns>返回值，二进制分段数据</returns></summary>
+        </member>
+        <member name="M:EBMTable.DailyBroadcastTable.GetDailyBroadcastSectionPackages(System.Int32*)">
+            <summary>
+获取日常广播指令数据分段
+<param name="PackageNum">输入输出参数，数据长度指针</param><returns>返回值，二进制分段数据</returns></summary>
+        </member>
+        <member name="M:EBMTable.DailyBroadcastTable.BuildDailyBroadcastSection">
+            <summary>
+创建日常广播指令数据分段
+</summary>
+        </member>
+        <member name="P:EBMTable.DailyBroadcastTable.SignRandomOrUTC">
+            <summary>
+签名随机数或UTC时间
+</summary>
+        </member>
+        <member name="P:EBMTable.DailyBroadcastTable.Completed">
+            <summary>
+应急广播表是否已经完成发送，为true时表示已经完成发送。
+</summary>
+        </member>
+        <member name="P:EBMTable.DailyBroadcastTable.Repeat_count">
+            <summary>
+应急广播表已经发送次数计数。
+</summary>
+        </member>
+        <member name="P:EBMTable.DailyBroadcastTable.Repeat_times">
+            <summary>
+应急广播表重复发送的次数，为0表示一直重复发送。设置该属性将引发计数清零，重新开发发送数据
+</summary>
+        </member>
+        <member name="P:EBMTable.DailyBroadcastTable.Table_id_extension">
+            <summary>
+扩展子表id 
+</summary>
+        </member>
+        <member name="P:EBMTable.DailyBroadcastTable.Table_id">
+            <summary>
+索引表主表id 
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyBroadcastTable.list_daily_cmd">
+            <summary>
+日常广播指令数据列表
+</summary>
+        </member>
+        <member name="M:EBMTable.DailyBroadcastTable.Copy">
+            <summary>
+获取当前对像的浅表副本
+</summary>
+        </member>
+        <member name="F:EBMSection.DailyBroadcastSection.Repeat_times">
+            <summary>
+应急广播表重复发送的次数，为0表示一直重复发送。
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureContentMoniterRetbackGX.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentMoniterRetbackGX.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentMoniterRetbackGX.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址*/
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentMoniterRetbackGX.I_Audio_reback_port">
+            <summary>
+服务器端口
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentMoniterRetbackGX.S_Audio_reback_serverip">
+            <summary>
+服务器IP地址
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentMoniterRetbackGX.B_Audio_reback_mod">
+            <summary>
+音频回传方式：1为UDP，2为TCP；
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentMoniterRetbackGX.Start_package_index">
+            <summary>
+起始传输包的序号，终端文件回传过程支持断点续传功能
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentMoniterRetbackGX.S_File_id">
+            <summary>
+要回传的文件名,文件名为：B或S+开始录音日期时间+行政区域编码+终端编号。 B或S为ASCII码，1字节。
+开始录音时间：年月日时分秒其中年为4字节ASCII码，如2014，月日时分秒各为2字节ASCII码，共14位符串。
+行政区域编码：18位字符
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentMoniterRetbackGX.B_cmd_tag">
+            <summary>
+启动内容监测回传指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConfigureContentMoniterRetbackGX">
+            <summary>
+启动内容监测回传指令类
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureSoftwareUpGrade.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSoftwareUpGrade.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSoftwareUpGrade.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址*/
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSoftwareUpGrade.I_DeviceType">
+            <summary>
+设备类型识别码：
+00001：HM1521+DD3000+TC2800_DTMB_音柱_收扩机
+00002：HM1521+DD3000+TC2800_DVB-C_音柱_收扩机
+其它详见设备类型识别码表。
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSoftwareUpGrade.S_OldVersion">
+            <summary>
+旧固件版本号；
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSoftwareUpGrade.B_Mode">
+            <summary>
+升级模式，0表示强制升级，只要版本号不同就升级。
+1表示新版本升级，表示新版本比当前版本高就升级。2表示只有指定版本的旧版固件才做升级
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSoftwareUpGrade.S_NewVersion">
+            <summary>
+新固件版本号；
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSoftwareUpGrade.B_Pid">
+            <summary>
+升级流PID；
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSoftwareUpGrade.B_ILMode">
+            <summary>
+在DVB-C时无意义，在DTMB下，1代表模式1（B=52,M=240）,2代表模式2（B=52,M=720），0为自动.
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSoftwareUpGrade.B_FHMode">
+            <summary>
+在DVB-C时无意义，在DTMB下，1表PN420模式，2表，PN595。3表PN945,0为自动
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSoftwareUpGrade.B_CarrMode">
+            <summary>
+在DVB-C时无意义，在DTMB下，0代表，单载波模式，1代表3780载波模式，其它值为自动。
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSoftwareUpGrade.I_Rate">
+            <summary>
+符号率
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSoftwareUpGrade.I_Freq">
+            <summary>
+载波频率
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSoftwareUpGrade.B_cmd_tag">
+            <summary>
+查询终端工作状态指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConfigureSoftwareUpGrade">
+            <summary>
+终端固件升级
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureStatusRetback.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureStatusRetback.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureStatusRetback.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址*/
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureStatusRetback.list_Parameter_tag">
+            <summary>
+查询终端工作状态参数标签列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureStatusRetback.B_cmd_tag">
+            <summary>
+查询终端工作状态指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConfigureStatusRetback">
+            <summary>
+查询终端工作状态指令类
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureContentRealMoniterGX.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentRealMoniterGX.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentRealMoniterGX.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址*/
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentRealMoniterGX.S_Port">
+            <summary>
+服务器端口
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentRealMoniterGX.S_Server_addr">
+            <summary>
+服务器IP地址
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentRealMoniterGX.Moniter_time_duration">
+            <summary>
+监听时长，32位整数，单位为秒。
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentRealMoniterGX.Retback_mode">
+            <summary>
+回传方式，1:UDP,2:TCP
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentRealMoniterGX.I_Kaiguan">
+            <summary>
+启动回传开关，1为启动回传，2为停止回传
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentRealMoniterGX.B_cmd_tag">
+            <summary>
+启动内容监测实时监听指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConfigureContentRealMoniterGX">
+            <summary>
+启动内容监测实时监听指令类
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureContentRealMoniter.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentRealMoniter.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentRealMoniter.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址*/
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentRealMoniter.S_Server_addr">
+            <summary>
+服务器地址含端口。
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentRealMoniter.Moniter_time_duration">
+            <summary>
+监听时长，32位整数，单位为秒。
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentRealMoniter.Retback_mode">
+            <summary>
+回传方式，1-6：保留；7：使用基于UDP的RTP协议发送；8：使用基于TCP的RTP协议发送；9：使用基于UDP的RTSP协议发送；10：使用基于TCP的RTSP协议发送
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentRealMoniter.S_EBM_id">
+            <summary>
+应急广播事件ID，格式同应急广播消息ID
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentRealMoniter.B_cmd_tag">
+            <summary>
+启动内容监测实时监听指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConfigureContentRealMoniter">
+            <summary>
+启动内容监测实时监听指令类
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureContentMoniterRetback.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentMoniterRetback.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentMoniterRetback.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址*/
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentMoniterRetback.Start_package_index">
+            <summary>
+起始传输包的序号，终端文件回传过程支持断点续传功能
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentMoniterRetback.S_File_id">
+            <summary>
+要回传的文件ID（文件名）
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentMoniterRetback.Retback_mode">
+            <summary>
+回传方式，1：音频数据使用本协议专用格式封装，使用TCP协议发送；2：保留；	3. 保留；4：使用FTP协议发送；5：使用P2P协议发送；
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentMoniterRetback.S_EBM_id">
+            <summary>
+应急广播事件ID，格式同应急广播消息ID
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureContentMoniterRetback.B_cmd_tag">
+            <summary>
+启动内容监测回传指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConfigureContentMoniterRetback">
+            <summary>
+启动内容监测回传指令类
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureStatusRetbackGX.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureStatusRetbackGX.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureStatusRetbackGX.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址*/
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureStatusRetbackGX.I_retback_period">
+            <summary>
+回传周期统一换算为秒
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureStatusRetbackGX.B_Terminal_Retback_Type">
+            <summary>
+查询终端工作状态回传模式：
+1: 收到巡检指令后立刻回传 2：自动周期回传
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureStatusRetbackGX.B_cmd_tag">
+            <summary>
+查询终端工作状态指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConfigureStatusRetbackGX">
+            <summary>
+查询终端工作状态指令类广西版
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureRdsConfig.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureRdsConfig.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureRdsConfig.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureRdsConfig.B_Rds_terminal_type">
+            <summary>
+1：应急广播适配器;2：收扩机;	3：音柱;4：应急广播适配器 + 收扩机;	+ 音柱;	4~9：保留
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureRebackPeriod.GetCmdGX">
+            <summary>
+获取指令的一般形式对像,广西版
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureRebackPeriod.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureRebackPeriod.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureRebackPeriod.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址*/
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureRebackPeriod.reback_period">
+            <summary>
+回传周期统一换算为秒，1天=86400 秒，86400
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureRebackPeriod.B_cmd_tag">
+            <summary>
+设置回传周期指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConfigureRebackPeriod">
+            <summary>
+设置回传周期指令类
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConigureDefaltVolume.GetCmdGX">
+            <summary>
+获取指令的一般形式对像,广西版协议
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConigureDefaltVolume.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConigureDefaltVolume.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConigureDefaltVolume.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址*/
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConigureDefaltVolume.Column">
+            <summary>
+音量按百分比形式标识，其中：0x00 ：静音,0x01 -0x64 对应音量百分比：1-100%
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConigureDefaltVolume.B_cmd_tag">
+            <summary>
+设置默认音量指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConigureDefaltVolume">
+            <summary>
+设置默认音量指令类
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureRebackGX.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureRebackGX.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureRebackGX.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址*/
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureRebackGX.I_reback_port_Backup">
+            <summary>
+备份回传端口
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureRebackGX.I_reback_port">
+            <summary>
+回传端口
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureRebackGX.S_reback_address_backup">
+            <summary>
+备份回传地址，IP地址，或域名
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureRebackGX.S_reback_address">
+            <summary>
+回传地址：电话号码，IP地址(含端口），或域名
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureRebackGX.B_cmd_tag">
+            <summary>
+设置回传指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConfigureRebackGX">
+            <summary>
+设置回传指令类，广西版协议
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureReback.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureReback.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureReback.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址*/
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureReback.S_reback_address">
+            <summary>
+回传地址：电话号码，IP地址(含端口），或域名
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureReback.B_cmd_tag">
+            <summary>
+设置回传指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConfigureReback">
+            <summary>
+设置回传指令类
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureMainFrequency.GetCmdGX">
+            <summary>
+获取指令的一般形式对像,广西版
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureMainFrequency.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureMainFrequency.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureMainFrequency.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址*/
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureMainFrequency.QAM">
+            <summary>
+0:16QAM,1:32QAM,2:64QAM,3:128QAM,4:256QAM
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureMainFrequency.SymbolRate">
+            <summary>
+符号率 (Kbps)
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureMainFrequency.Freq">
+            <summary>
+KHZ,主频率*/
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureMainFrequency.B_cmd_tag">
+            <summary>
+设置主频指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConfigureMainFrequency">
+            <summary>
+设置主频指令类
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureWorkMode.GetCmdGX">
+            <summary>
+获取指令的一般形式对像,广西版
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureWorkMode.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureWorkMode.list_Terminal_Address">
+            <summary>
+要设置的终端编号地址列表
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureWorkMode.B_Address_type">
+            <summary>
+要设置的终端编号地址类型 1: 表示逻辑地址； 2：表示物理地址*/
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureWorkMode.B_cmd_tag">
+            <summary>
+设置工作模式指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConfigureWorkMode">
+            <summary>
+设置工作模式指令类，广西版本
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureSetAddress.GetCmdGX">
+            <summary>
+获取指令的一般形式对像,广西协议
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureSetAddress.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSetAddress.S_Logic_address">
+            <summary>
+逻辑地址
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSetAddress.S_Phisical_address">
+            <summary>
+物理地址
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureSetAddress.B_cmd_tag">
+            <summary>
+设置资源（逻辑）地址指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConfigureSetAddress">
+            <summary>
+设置资源（逻辑）地址指令类，通用版本
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureTimeService.GetCmd">
+            <summary>
+获取指令的一般形式对像
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureTimeService.Real_time">
+            <summary>
+实时时间
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureTimeService.B_cmd_tag">
+            <summary>
+授时指令类型
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConfigureTimeService">
+            <summary>
+授时指令类
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureTable.RecateCount">
+            <summary>
+分端重复发送计数
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureTable.FoceRepeateTable">
+            <summary>
+使下一次Current_Next_Indicate强制生效
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureTable.Initialization(StreamConfig*,EBMTable.SignatureCallBackDelegate)">
+            <summary>
+初始化应急广播配置表
+<param name="ts_config">输入参数，TS流配置参数结构体</param><param name="SignatureCallback">输入参数，数字签名回调委托</param><returns /></summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureTable.GetEBConfigureSection(System.Int32@)">
+            <summary>
+获取应急广播配置表数据
+<param name="PackageNum">输入输出参数，数据长度引用</param><returns>返回值，二进制分段数据</returns></summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureTable.GetEBConfigureSectionPackages(System.Int32*)">
+            <summary>
+获取应急广播配置表数据
+<param name="PackageNum">输入输出参数，数据长度指针</param><returns>返回值，二进制分段数据</returns></summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureTable.BuildEBConfigureSection">
+            <summary>
+创建应急广播配置表数据分段
+</summary>
+        </member>
+        <member name="P:EBMTable.EBConfigureTable.SignRandomOrUTC">
+            <summary>
+签名随机数或UTC时间
+</summary>
+        </member>
+        <member name="P:EBMTable.EBConfigureTable.Completed">
+            <summary>
+应急广播表是否已经完成发送，为true时表示已经完成发送。
+</summary>
+        </member>
+        <member name="P:EBMTable.EBConfigureTable.Repeat_count">
+            <summary>
+应急广播表已经发送次数计数。
+</summary>
+        </member>
+        <member name="P:EBMTable.EBConfigureTable.Repeat_times">
+            <summary>
+应急广播表重复发送的次数，为0表示一直重复发送。设置该属性将引发计数清零，重新开发发送数据
+</summary>
+        </member>
+        <member name="P:EBMTable.EBConfigureTable.Table_id_extension">
+            <summary>
+扩展子表id 
+</summary>
+        </member>
+        <member name="P:EBMTable.EBConfigureTable.Table_id">
+            <summary>
+索引表主表id 
+</summary>
+        </member>
+        <member name="F:EBMTable.EBConfigureTable.list_configure_cmd">
+            <summary>
+应急广播配置指令列表
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureTable.Copy">
+            <summary>
+获取当前对像的浅表副本
+</summary>
+        </member>
+        <member name="F:EBMSection.EBConfigureSection.Repeat_times">
+            <summary>
+应急广播表重复发送的次数，为0表示一直重复发送。
+</summary>
+        </member>
+        <member name="M:EBMTable.EBCertAuthTable.RecateCount">
+            <summary>
+分端重复发送计数
+</summary>
+        </member>
+        <member name="M:EBMTable.EBCertAuthTable.FoceRepeateTable">
+            <summary>
+使下一次Current_Next_Indicate强制生效
+</summary>
+        </member>
+        <member name="M:EBMTable.EBCertAuthTable.Initialization(StreamConfig*,EBMTable.SignatureCallBackDelegate)">
+            <summary>
+初始化应急广播证书授权表
+<param name="ts_config">输入参数，TS流配置参数结构体</param><param name="SignatureCallback">输入参数，数字签名回调委托</param><returns /></summary>
+        </member>
+        <member name="M:EBMTable.EBCertAuthTable.GetEBCertAuthSection(System.Int32@)">
+            <summary>
+获取应急广播证书授权数据分段
+<param name="PackageNum">输入输出参数，数据长度引用</param><returns>返回值，二进制分段数据</returns></summary>
+        </member>
+        <member name="M:EBMTable.EBCertAuthTable.GetEBCertAuthSectionPackages(System.Int32*)">
+            <summary>
+获取应急广播证书授权数据分段
+<param name="PackageNum">输入输出参数，数据长度指针</param><returns>返回值，二进制分段数据</returns></summary>
+        </member>
+        <member name="M:EBMTable.EBCertAuthTable.BuildEBCertAuthSection">
+            <summary>
+创建应急广播证书授权段数据
+</summary>
+        </member>
+        <member name="P:EBMTable.EBCertAuthTable.SignRandomOrUTC">
+            <summary>
+签名随机数或UTC时间
+</summary>
+        </member>
+        <member name="P:EBMTable.EBCertAuthTable.Completed">
+            <summary>
+应急广播表是否已经完成发送，为true时表示已经完成发送。
+</summary>
+        </member>
+        <member name="P:EBMTable.EBCertAuthTable.Repeat_count">
+            <summary>
+应急广播表已经发送次数计数。
+</summary>
+        </member>
+        <member name="P:EBMTable.EBCertAuthTable.Repeat_times">
+            <summary>
+应急广播表重复发送的次数，为0表示一直重复发送。设置该属性将引发计数清零，重新开发发送数据
+</summary>
+        </member>
+        <member name="P:EBMTable.EBCertAuthTable.Table_id_extension">
+            <summary>
+扩展子表id 
+</summary>
+        </member>
+        <member name="P:EBMTable.EBCertAuthTable.Table_id">
+            <summary>
+索引表主表id 
+</summary>
+        </member>
+        <member name="F:EBMTable.EBCertAuthTable.list_Cert_data">
+            <summary>
+当前应急广播证书数据
+</summary>
+        </member>
+        <member name="F:EBMTable.EBCertAuthTable.list_CertAuth_data">
+            <summary>
+当前应急广播证书授权列表数据。
+</summary>
+        </member>
+        <member name="M:EBMTable.EBCertAuthTable.Copy">
+            <summary>
+获取当前对像的浅表副本
+</summary>
+        </member>
+        <member name="F:EBMSection.EBCertAuthSection.Repeat_times">
+            <summary>
+应急广播表重复发送的次数，为0表示一直重复发送。
+</summary>
+        </member>
+        <member name="M:EBMTable.EBContentTable.RecateCount">
+            <summary>
+分端重复发送计数
+</summary>
+        </member>
+        <member name="M:EBMTable.EBContentTable.FoceRepeateTable">
+            <summary>
+使下一次Current_Next_Indicate强制生效
+</summary>
+        </member>
+        <member name="M:EBMTable.EBContentTable.Initialization(StreamConfig*,EBMTable.SignatureCallBackDelegate)">
+            <summary>
+初始化应急广播内容表
+<param name="ts_config">输入参数，TS流配置参数结构体</param><param name="SignatureCallback">输入参数，数字签名回调委托</param><returns /></summary>
+        </member>
+        <member name="M:EBMTable.EBContentTable.GetEBContentSection(System.Int32@)">
+            <summary>
+获取应急广播内容表数据
+<param name="PackageNum">输入输出参数，数据长度引用</param><returns>返回值，二进制分段数据</returns></summary>
+        </member>
+        <member name="M:EBMTable.EBContentTable.GetEBContentSectionPackages(System.Int32*)">
+            <summary>
+获取应急广播内容表数据
+<param name="PackageNum">输入输出参数，数据长度指针</param><returns>返回值，二进制分段数据</returns></summary>
+        </member>
+        <member name="M:EBMTable.EBContentTable.BuildEBContentSection">
+            <summary>
+创建应急广播内容表数据分段
+</summary>
+        </member>
+        <member name="P:EBMTable.EBContentTable.SignRandomOrUTC">
+            <summary>
+签名随机数或UTC时间
+</summary>
+        </member>
+        <member name="P:EBMTable.EBContentTable.Completed">
+            <summary>
+应急广播表是否已经完成发送，为true时表示已经完成发送。
+</summary>
+        </member>
+        <member name="P:EBMTable.EBContentTable.Repeat_count">
+            <summary>
+应急广播表已经发送次数计数。
+</summary>
+        </member>
+        <member name="P:EBMTable.EBContentTable.Repeat_times">
+            <summary>
+应急广播表重复发送的次数，为0表示一直重复发送。设置该属性将引发计数清零，重新开发发送数据
+</summary>
+        </member>
+        <member name="P:EBMTable.EBContentTable.Table_id_extension">
+            <summary>
+扩展子表id 
+</summary>
+        </member>
+        <member name="P:EBMTable.EBContentTable.Table_id">
+            <summary>
+索引表主表id 
+</summary>
+        </member>
+        <member name="M:EBMTable.EBContentTable.Copy">
+            <summary>
+获取当前对像的浅表副本
+</summary>
+        </member>
+        <member name="F:EBMTable.EBContentTable.ProtocolGX">
+            <summary>
+广西版TS协议标识
+</summary>
+        </member>
+        <member name="F:EBMSection.EBContentSection.Repeat_times">
+            <summary>
+应急广播表重复发送的次数，为0表示一直重复发送。
+</summary>
+        </member>
+        <member name="F:EBMTable.StdDescriptor.Br_descriptor">
+            <summary>
+描述符数据
+</summary>
+        </member>
+        <member name="F:EBMTable.StdDescriptor.B_descriptor_tag">
+            <summary>
+描述符标签 
+</summary>
+        </member>
+        <member name="M:EBMTable.Terristrial_delivery_system_descriptor.GetDescriptor">
+            <summary>
+获取标准格式的描述符对象。
+</summary>
+        </member>
+        <member name="F:EBMTable.Terristrial_delivery_system_descriptor.L_Sfn_mfn_flag">
+            <summary>
+单频网/多频网标志，0：单频网；1：多频网
+</summary>
+        </member>
+        <member name="F:EBMTable.Terristrial_delivery_system_descriptor.L_Other_frequency_flag">
+            <summary>
+其它频率标志位，0：未使用其它频率；1：使用了其它频率
+</summary>
+        </member>
+        <member name="F:EBMTable.Terristrial_delivery_system_descriptor.B_Interleaveing_mode">
+            <summary>
+绞织模式，0：绞织模式1；1：绞织模式2
+</summary>
+        </member>
+        <member name="F:EBMTable.Terristrial_delivery_system_descriptor.B_Frame_header_mode">
+            <summary>
+帧头模式，0：帧头模式1，PN相位变化；1：帧头模式1，PN相位不变；2：帧头模式2；3：帧头模式3，PN相位变化；4：帧头模式3，PN相位不变
+</summary>
+        </member>
+        <member name="F:EBMTable.Terristrial_delivery_system_descriptor.B_Number_of_subcarrier">
+            <summary>
+副载波数，1：子载波数量C=1，有双导频；2：子载波数量C=1，无双导频；3：子载波数量C=3780
+</summary>
+        </member>
+        <member name="F:EBMTable.Terristrial_delivery_system_descriptor.B_Modulation">
+            <summary>
+DTMB调制方式，1:4QAM；2:4QAM-NR；3:16QAM；4:32QAM；5:64QAM 
+</summary>
+        </member>
+        <member name="F:EBMTable.Terristrial_delivery_system_descriptor.B_FEC">
+            <summary>
+向前编码纠错参数1：码率为0.4的FEC（7488，3008）；2：码率为0.6的FEC（7488，4512）；3：码率为0.8的FEC（7488，6016）
+</summary>
+        </member>
+        <member name="F:EBMTable.Terristrial_delivery_system_descriptor.D_Centre_frequency">
+            <summary>
+DTMB中心频率,单位为MHz 
+</summary>
+        </member>
+        <member name="F:EBMTable.Terristrial_delivery_system_descriptor.I_descriptor_length">
+            <summary>
+描述符数据长度 
+</summary>
+        </member>
+        <member name="F:EBMTable.Terristrial_delivery_system_descriptor.B_descriptor_tag">
+            <summary>
+描述符标签,字符串类型，用文本表示一个十六进制字节 
+</summary>
+        </member>
+        <member name="T:EBMTable.Terristrial_delivery_system_descriptor">
+            <summary>
+地面数字电视详情频道描述符类
+</summary>
+        </member>
+        <member name="M:EBMTable.Cable_delivery_system_descriptor.GetDescriptor">
+            <summary>
+获取标准格式的描述符对象。
+</summary>
+        </member>
+        <member name="F:EBMTable.Cable_delivery_system_descriptor.B_FEC_inner">
+            <summary>
+向前纠错内码方式，默认为0 
+</summary>
+        </member>
+        <member name="F:EBMTable.Cable_delivery_system_descriptor.D_Symbol_rate">
+            <summary>
+符号率,Mbps 
+</summary>
+        </member>
+        <member name="F:EBMTable.Cable_delivery_system_descriptor.B_Modulation">
+            <summary>
+调制方式，1：16QAM，2：32QAM，3:64QAM，4:128QAM；5:256QAM
+</summary>
+        </member>
+        <member name="F:EBMTable.Cable_delivery_system_descriptor.B_FEC_outer">
+            <summary>
+向前纠错外码方式，默认为0 
+</summary>
+        </member>
+        <member name="F:EBMTable.Cable_delivery_system_descriptor.D_frequency">
+            <summary>
+频率,MHz 
+</summary>
+        </member>
+        <member name="F:EBMTable.Cable_delivery_system_descriptor.B_descriptor_length">
+            <summary>
+描述符数据长度 
+</summary>
+        </member>
+        <member name="F:EBMTable.Cable_delivery_system_descriptor.B_descriptor_tag">
+            <summary>
+描述符标签,字符串类型，用文本表示一个十六进制字节 
+</summary>
+        </member>
+        <member name="F:EBMTable.ProgramStreamInfo.Descriptor2">
+            <summary>
+详情频道2类元素描述符
+</summary>
+        </member>
+        <member name="F:EBMTable.ProgramStreamInfo.S_elementary_PID">
+            <summary>
+详情频道基本PID
+</summary>
+        </member>
+        <member name="T:EBMTable.ConfigureCmd">
+            <summary>
+配置数据类
+</summary>
+            <summary>
+配置数据类
+</summary>
+        </member>
+        <member name="T:EBMTable.AuxiliaryData">
+            <summary>
+辅助数据类
+</summary>
+            <summary>
+辅助数据类
+</summary>
+        </member>
+        <member name="T:EBMTable.MultilangualContent">
+            <summary>
+多语种内容类
+</summary>
+            <summary>
+多语种内容类
+</summary>
+        </member>
+        <member name="T:EBMTable.StdDescriptor">
+            <summary>
+标准描述符结构类
+</summary>
+            <summary>
+2类描述符结构类 
+</summary>
+        </member>
+        <member name="T:EBMTable.DailyBroadcastTable">
+            <summary>
+日常广播指令表类
+</summary>
+            <summary>
+日常广播指令表类
+</summary>
+        </member>
+        <member name="T:EBMTable.EBConfigureTable">
+            <summary>
+应急广播配置表数据类
+</summary>
+            <summary>
+应急广播配置表数据类
+</summary>
+        </member>
+        <member name="T:EBMTable.EBCertAuthTable">
+            <summary>
+应急广播证书授权表类
+</summary>
+            <summary>
+应急广播证书授权表类
+</summary>
+        </member>
+        <member name="T:EBMTable.EBContentTable">
+            <summary>
+应急广播内容表类
+</summary>
+            <summary>
+应急广播内容表类
+</summary>
+        </member>
+        <member name="T:EBMTable.EBMStream">
+            <summary>
+应急广播传送流类
+</summary>
+            <summary>
+应急广播传送流类
+</summary>
+        </member>
+        <member name="T:EBMTable.EBIndexTable">
+            <summary>
+应急广播索引表类
+</summary>
+            <summary>
+应急广播索引表类
+</summary>
+        </member>
+        <member name="T:EBMTable.EBIndex">
+            <summary>
+应急广播索引类
+</summary>
+            <summary>
+应急广播基本索引类
+</summary>
+        </member>
+        <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureWorkMode.B_Terminal_wordmode”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureReback.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRebackGX.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.EBConfigureRdsConfig”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureSoftwareUpGrade.B_ModType”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdOutSwitch”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdOutSwitch.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureWorkMode.B_Terminal_wordmode”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureReback.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRebackGX.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.EBConfigureRdsConfig”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureSoftwareUpGrade.B_ModType”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdOutSwitch”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdOutSwitch.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureWorkMode.B_Terminal_wordmode”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureReback.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRebackGX.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.EBConfigureRdsConfig”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureSoftwareUpGrade.B_ModType”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdOutSwitch”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdOutSwitch.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdOutSwitch”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdOutSwitch.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureWorkMode.B_Terminal_wordmode”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureReback.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRebackGX.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.EBConfigureRdsConfig”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureSoftwareUpGrade.B_ModType”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdOutSwitch”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdOutSwitch.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureWorkMode.B_Terminal_wordmode”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureReback.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRebackGX.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.EBConfigureRdsConfig”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureSoftwareUpGrade.B_ModType”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdOutSwitch”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdOutSwitch.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“D:int16_t”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:mpi_safe_cond_swap(mpi*,mpi*,System.Byte)”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:mpi_shift_l(mpi*,System.UInt32)”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:mpi_mod_mpi(mpi*,mpi!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*)”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:mpi_mod_int(System.UInt32*,mpi!System.Runtime.CompilerServices.IsConst*,System.Int32)”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:mpi_gen_prime(mpi*,System.UInt32,System.Int32,=FUNC:System.Int32(System.Void*,System.Byte*,System.UInt32),System.Void*)”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:ecp_tls_read_group(ecp_group*,System.Byte!System.Runtime.CompilerServices.IsConst**,System.UInt32)”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:EBSignature.EbmSignature.EbMsgSign(System.Byte[],System.Int32,System.Int32@,System.Byte[]@,System.Byte[])”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:EBSignature.EbmSignature.EbMsgSignWithoutUTC(System.Byte[],System.Int32,System.Byte[]@,System.Byte[])”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureWorkMode.B_Terminal_wordmode”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureReback.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRebackGX.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.EBConfigureRdsConfig”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureSoftwareUpGrade.B_ModType”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdOutSwitch”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdOutSwitch.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“D:int16_t”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:mpi_safe_cond_swap(mpi*,mpi*,System.Byte)”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:mpi_shift_l(mpi*,System.UInt32)”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:mpi_mod_mpi(mpi*,mpi!System.Runtime.CompilerServices.IsConst*,mpi!System.Runtime.CompilerServices.IsConst*)”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:mpi_mod_int(System.UInt32*,mpi!System.Runtime.CompilerServices.IsConst*,System.Int32)”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:mpi_gen_prime(mpi*,System.UInt32,System.Int32,=FUNC:System.Int32(System.Void*,System.Byte*,System.UInt32),System.Void*)”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:ecp_tls_read_group(ecp_group*,System.Byte!System.Runtime.CompilerServices.IsConst**,System.UInt32)”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:EBSignature.EbmSignature.EbMsgSign(System.Byte[],System.Int32,System.Int32@,System.Byte[]@,System.Byte[])”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“M:EBSignature.EbmSignature.EbMsgSignWithoutUTC(System.Byte[],System.Int32,System.Byte[]@,System.Byte[])”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
+    </members>
+</doc>

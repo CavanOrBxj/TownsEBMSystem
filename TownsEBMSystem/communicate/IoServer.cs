@@ -307,39 +307,45 @@ namespace TownsEBMSystem
         /// <param name="port">Port where the server will listen for connection requests.</param>
         internal void Start(Int32 port)
         {
-            // 获得主机相关信息
-            IPAddress[] addressList = Dns.GetHostEntry(Environment.MachineName).AddressList;
-
-            //   IPAddress ip = System.Net.IPAddress.Parse(SingletonInfo.GetInstance().LoaclIP);
-
-            IPAddress ip = System.Net.IPAddress.Parse(SingletonInfo.GetInstance().LocalHost);
-            IPEndPoint localEndPoint = new IPEndPoint(ip, port);
-
-            // 创建监听socket
-            this.listenSocket = new Socket(localEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            this.listenSocket.ReceiveBufferSize = this.bufferSize;
-            this.listenSocket.SendBufferSize = this.bufferSize;
-
-            if (localEndPoint.AddressFamily == AddressFamily.InterNetworkV6)
+            try
             {
-                // 配置监听socket为 dual-mode (IPv4 & IPv6) 
-                // 27 is equivalent to IPV6_V6ONLY socket option in the winsock snippet below,
-                this.listenSocket.SetSocketOption(SocketOptionLevel.IPv6, (SocketOptionName)27, false);
-                this.listenSocket.Bind(new IPEndPoint(IPAddress.IPv6Any, localEndPoint.Port));
+                // 获得主机相关信息
+                IPAddress[] addressList = Dns.GetHostEntry(Environment.MachineName).AddressList;
+
+                //   IPAddress ip = System.Net.IPAddress.Parse(SingletonInfo.GetInstance().LoaclIP);
+
+                IPAddress ip = System.Net.IPAddress.Parse(SingletonInfo.GetInstance().LocalHost);
+                IPEndPoint localEndPoint = new IPEndPoint(ip, port);
+
+                // 创建监听socket
+                this.listenSocket = new Socket(localEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                this.listenSocket.ReceiveBufferSize = this.bufferSize;
+                this.listenSocket.SendBufferSize = this.bufferSize;
+
+                if (localEndPoint.AddressFamily == AddressFamily.InterNetworkV6)
+                {
+                    // 配置监听socket为 dual-mode (IPv4 & IPv6) 
+                    // 27 is equivalent to IPV6_V6ONLY socket option in the winsock snippet below,
+                    this.listenSocket.SetSocketOption(SocketOptionLevel.IPv6, (SocketOptionName)27, false);
+                    this.listenSocket.Bind(new IPEndPoint(IPAddress.IPv6Any, localEndPoint.Port));
+                }
+                else
+                {
+                    this.listenSocket.Bind(localEndPoint);
+                }
+
+                // 开始监听
+                this.listenSocket.Listen(this.numConnections);
+
+                // 在监听Socket上投递一个接受请求。
+                this.StartAccept(null);
+
+                // Blocks the current thread to receive incoming messages.
+                mutex.WaitOne();
             }
-            else
+            catch (Exception)
             {
-                this.listenSocket.Bind(localEndPoint);
             }
-
-            // 开始监听
-            this.listenSocket.Listen(this.numConnections);
-
-            // 在监听Socket上投递一个接受请求。
-            this.StartAccept(null);
-
-            // Blocks the current thread to receive incoming messages.
-            mutex.WaitOne();
         }
 
         /// <summary>

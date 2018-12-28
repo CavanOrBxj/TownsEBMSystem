@@ -276,4 +276,11 @@ namespace TownsEBMSystem
         public string Label7txt { get; set; }
         public string Label6txt { get; set; }
     }
+
+
+    public class UpgradInfo
+    {
+        public string fileSize { get; set; }
+        public string version { get; set; }
+    }
 }

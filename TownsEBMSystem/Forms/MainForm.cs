@@ -19,6 +19,7 @@ using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using ControlAstro.Utils;
+using System.Diagnostics;
 
 namespace TownsEBMSystem
 {
@@ -55,16 +56,10 @@ namespace TownsEBMSystem
 
 
         private EBMIndexGlobal_ _EBMIndexGlobal;
-
         private EBMConfigureGlobal_ _EBMConfigureGlobal;
-
-
         MessageShowForm MessageShowDlg;
-
-
+        UpgradeForm upgradeForm;
         public System.Timers.Timer timer;
-
-
         public EBMStream EbMStream
         {
             get { return EbmStream; }
@@ -74,7 +69,7 @@ namespace TownsEBMSystem
         public static Calcle calcel;
         private Object Gtoken = null; //用于锁住
 
-
+        private WebClient downWebClient = new WebClient();
         /***************获取鼠标键盘未操作时间***************************/
         [StructLayout(LayoutKind.Sequential)]
         public struct LASTINPUTINFO
@@ -86,6 +81,8 @@ namespace TownsEBMSystem
         }
         [DllImport("user32.dll")]
         public static extern bool GetLastInputInfo(ref    LASTINPUTINFO plii);
+
+        public int SecondCount = 0;
 
         /***************获取鼠标键盘未操作时间***************************/
         public long getIdleTick()
@@ -154,7 +151,6 @@ namespace TownsEBMSystem
             }
         }
 
-
         private void SingleTimeServerSend(DateTime time)
         {
             List<TimeService_> listTS = new List<TimeService_>();
@@ -215,8 +211,6 @@ namespace TownsEBMSystem
             #endregion
         }
 
-
-
         public bool GetConfigureTable(ref EBConfigureTable oldTable, bool isTimeSend)
         {
             try
@@ -243,7 +237,6 @@ namespace TownsEBMSystem
             }
         }
 
-
         private List<ConfigureCmd> GetSendTimeSerConfigureCmd()
         {
             try
@@ -264,7 +257,6 @@ namespace TownsEBMSystem
                 return null;
             }
         }
-
 
         private BindingCollection<Configure> GetConfigureCollection(EBMConfigureGlobal_ _EBMConfigureGlobal)
         {
@@ -378,7 +370,6 @@ namespace TownsEBMSystem
 
             return TotalConfig_List;
         }
-
 
         private List<ConfigureCmd> GetSendConfigureCmd()
         {
@@ -494,23 +485,91 @@ namespace TownsEBMSystem
         private void Loginjudge()
         {
             FmLogin fmLogin = new FmLogin();
+            SingletonInfo.GetInstance().lockstatus = true;
             fmLogin.Show();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             long i = getIdleTick();
-            long Lockcycle = Convert.ToInt32(SingletonInfo.GetInstance().lockcycle) * 1000*60;
+            long Lockcycle = Convert.ToInt32(SingletonInfo.GetInstance().lockcycle) * 1000 * 60;
             if (i > Lockcycle)//目前判断是30秒就好了。超过一分钟是>=60000。十分钟600000
             {
-               if(!SingletonInfo.GetInstance().lockstatus)
-               {
-                   FmLogin fmLogin = new FmLogin();
-                   fmLogin.Show();
-                   SingletonInfo.GetInstance().lockstatus = true;
-               }
+                if (!SingletonInfo.GetInstance().lockstatus)
+                {
+                    FmLogin fmLogin = new FmLogin();
+                    SingletonInfo.GetInstance().lockstatus = true;
+                    fmLogin.Show();
+                }
+            }
+
+            if (SingletonInfo.GetInstance().UpgradeFlag == "0")
+            {
+                if (SingletonInfo.GetInstance().loginstatus)
+                {
+                    if (SecondCount < 30)
+                    {
+                        SecondCount++;
+                    }
+                    else
+                    {
+                        SecondCount = 0;
+                        //获取版本升级信息
+
+                        UpgradInfo versionsponse;
+                        object pptmp = SingletonInfo.GetInstance().post.PostCommnand(null, "版本信息");
+                        if (pptmp == null)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            versionsponse = (UpgradInfo)pptmp;
+                            string versiontmp = versionsponse.version;
+                            if (versiontmp != Application.ProductVersion && versiontmp != "")
+                            {
+                                bool flag = false;
+                                string path = System.AppDomain.CurrentDomain.BaseDirectory;
+                                DirectoryInfo folder = new DirectoryInfo(path);
+                                foreach (FileInfo file in folder.GetFiles("TownsEBMSystem_V" + versiontmp + ".zip"))
+                                {
+                                    if (file != null)
+                                    {
+                                        flag = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!flag && !SingletonInfo.GetInstance().downloading)
+                                {
+                                    //开始下载文件
+                                    DownloadFile("TownsEBMSystem_V" + versiontmp + ".zip");
+                                    SingletonInfo.GetInstance().downloading = true;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
+
+        /// <summary>
+        /// 下载文件
+        /// </summary>
+        /// <param name="num">下载文件序号</param>
+        private void DownloadFile(string Filename)
+        {
+            try
+            {
+                string strTag = Application.StartupPath + "\\" + Filename;
+                this.downWebClient.DownloadFileAsync(new Uri(SingletonInfo.GetInstance().HttpServer+ "upload/" + Filename), strTag);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -518,6 +577,12 @@ namespace TownsEBMSystem
             pictureBox_Login_Click(null,null);
             ProcessBegin();
             timer1.Enabled = true;
+            timer2.Enabled = true;
+            this.downWebClient.DownloadFileCompleted += delegate (object wcsender, AsyncCompletedEventArgs ex)
+            {
+                SingletonInfo.GetInstance().downloading = false;
+                ini.WriteValue("SystemConfig", "UpgradeFlag","1");
+            };
         }
 
 
@@ -840,8 +905,11 @@ namespace TownsEBMSystem
                 #endregion
 
                 #region 授时指令周期
-                SingletonInfo.GetInstance().TimeServiceInterval = Convert.ToInt32(ini.ReadValue("Instructions", "TimeServiceInterval")); 
+                SingletonInfo.GetInstance().TimeServiceInterval = Convert.ToInt32(ini.ReadValue("Instructions", "TimeServiceInterval"));
                 #endregion
+
+                SingletonInfo.GetInstance().IsLogoutWin = ini.ReadValue("SystemConfig", "LogoutWin") == "1" ? true : false;
+                SingletonInfo.GetInstance().UpgradeFlag = ini.ReadValue("SystemConfig", "UpgradeFlag");
             }
             catch (Exception ex)
             {
@@ -1070,8 +1138,6 @@ namespace TownsEBMSystem
                SingletonInfo.GetInstance().Organization =((organizationInfo)SingletonInfo.GetInstance().post.PostCommnand(null, "获取区域")).data;
                 ShowtreeViewOrganization(SingletonInfo.GetInstance().Organization);
                 ShowtreeViewOrganization_WhiteList(SingletonInfo.GetInstance().Organization);
-
-
             }
             catch (Exception ex)
             {
@@ -2074,9 +2140,31 @@ namespace TownsEBMSystem
                       EbmStream.StopStreaming();
                       IsStartStream = false;
                   }
+                ShutdownWin();
                   Close();
               }
               GC.Collect();
+        }
+
+        private void ShutdownWin()
+        {
+            if (SingletonInfo.GetInstance().IsLogoutWin)
+            {
+                Process process = new Process();
+                process.StartInfo.FileName = "cmd.exe";
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardInput = true;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.CreateNoWindow = true;
+                process.Start();
+                process.StandardInput.WriteLine("shutdown -s -t 1");
+                process.StandardInput.WriteLine("exit");
+              //  Shuttime = System.Int32.Parse(Intime.Text);
+                process.WaitForExit();
+                process.Close();
+
+            }
         }
 
         private void pictureBox_online_Click(object sender, EventArgs e)
@@ -3372,10 +3460,11 @@ namespace TownsEBMSystem
             SendPlayInfo palyinfo = new SendPlayInfo();
             palyinfo.broadcastType = broadcastType;//0：日常  1：应急
             palyinfo.organization_List = SingletonInfo.GetInstance().Organization;
-
+            //Thread.Sleep(2000);
             Generalresponse response = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(palyinfo, "播放");
             if (response.code == 0)
             {
+                Thread.Sleep(5000);
                 broadcastrecord broadcastrecordresponse = (broadcastrecord)SingletonInfo.GetInstance().post.PostCommnand(null, "直播列表");
                 if (broadcastrecordresponse.data.Count > 0)
                 {
@@ -3959,12 +4048,11 @@ namespace TownsEBMSystem
             try
             {
                 FmLogin fmLogin = new FmLogin();
-                fmLogin.Show();
                 SingletonInfo.GetInstance().lockstatus = true;
+                fmLogin.Show();
             }
             catch (Exception)
             {
-                
                 throw;
             }
         }
@@ -3976,6 +4064,40 @@ namespace TownsEBMSystem
 
 
             LocalParam param = Serializer.Deserialize<LocalParam>(dada);
+        }
+
+        private void pictureBox_online_DoubleClick(object sender, EventArgs e)
+        {
+            MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定关闭？" } };
+            MessageShowDlg.ShowDialog();
+            if (MessageShowDlg.IsSure)
+            {
+                ini.WriteValue("EBM", "ebm_id_behind", SingletonInfo.GetInstance().ebm_id_behind);
+                ini.WriteValue("EBM", "ebm_id_count", SingletonInfo.GetInstance().ebm_id_count.ToString());
+                ini.WriteValue("EBM", "input_channel_id", SingletonInfo.GetInstance().input_channel_id);
+                ini.WriteValue("EBM", "IndexItemID", SingletonInfo.GetInstance().IndexItemID.ToString());
+
+
+                TableDataHelper.WriteTable(Enums.TableType.WhiteList, SingletonInfo.GetInstance().WhiteListRecordList);
+                if (EbmStream != null && IsStartStream)
+                {
+                    EbmStream.StopStreaming();
+                    IsStartStream = false;
+                }
+                ShutdownWin();
+                Close();
+            }
+            GC.Collect();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (SingletonInfo.GetInstance().UpgradeFlag == "1")
+            {
+                timer2.Enabled = false;
+                upgradeForm = new UpgradeForm { label1 = { Text = @"软件版本有更新，是否升级？" } };
+                upgradeForm.Show();
+            }
         }
     }
 }
