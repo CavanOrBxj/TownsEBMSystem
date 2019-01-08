@@ -28,6 +28,7 @@ namespace TownsEBMSystem
         public static IConfig cf = ConfigFile.Instanse;
         AutoSizeFormClass asc = new AutoSizeFormClass();
         public static IniFiles ini;
+        public static IniFiles ini2;
         private readonly string xulrunnerPath = Application.StartupPath + "/xulrunner";
         private  string testUrl = "http://192.168.21.105/";
         private Gecko.GeckoWebBrowser Browser;
@@ -847,7 +848,6 @@ namespace TownsEBMSystem
                 SingletonInfo.GetInstance().username = ini.ReadValue("LoginInfo", "username");
                 SingletonInfo.GetInstance().password = ini.ReadValue("LoginInfo", "password");
                 SingletonInfo.GetInstance().licenseCode = ini.ReadValue("LoginInfo", "licenseCode");
-                Pictxt = "测试显示数据，联系人：杭州图南电子股份有限公司";
                 SingletonInfo.GetInstance().HttpServer = ini.ReadValue("HttpURL", "HttpServer");
                 SingletonInfo.GetInstance().pid = ini.ReadValue("PlayInfo", "playPID");
                 SingletonInfo.GetInstance().SendfaileTime = Convert.ToInt32(ini.ReadValue("HeartBeat", "sendfailetimes"));
@@ -886,11 +886,10 @@ namespace TownsEBMSystem
 
 
                 var jo = TableDataHelper.ReadTable(Enums.TableType.WhiteList);
-
                 SingletonInfo.GetInstance().WhiteListRecordList = JsonConvert.DeserializeObject<List<WhiteListRecord>>(jo["0"].ToString());
                 SingletonInfo.GetInstance().EndtimeDelay = ini.ReadValue("EBM", "EndtimeDelay");
-
                 SingletonInfo.GetInstance().LocalHost = ini.ReadValue("LocalHost", "IP");
+
                 #region    UI部分
                 SingletonInfo.GetInstance().logincode = cf["LoginCode"].ToString();
                 skinButton1.Text = cf["LeftBtuuon1"].ToString();
@@ -910,6 +909,7 @@ namespace TownsEBMSystem
 
                 SingletonInfo.GetInstance().IsLogoutWin = ini.ReadValue("SystemConfig", "LogoutWin") == "1" ? true : false;
                 SingletonInfo.GetInstance().UpgradeFlag = ini.ReadValue("SystemConfig", "UpgradeFlag");
+                SingletonInfo.GetInstance().SendCommandMode = ini2.ReadValue("SendCommandMode", "SendCommandMode") =="1"?true:false;
             }
             catch (Exception ex)
             {
@@ -992,6 +992,9 @@ namespace TownsEBMSystem
             {
                 string iniPath = Path.Combine(Application.StartupPath, "TownsEBMSystem.ini");
                 ini = new IniFiles(iniPath);
+
+                string iniPath2 = Path.Combine(Application.StartupPath, "SendCommandMode.ini");
+                ini2 = new IniFiles(iniPath2);
 
 
                 string path = AppDomain.CurrentDomain.BaseDirectory ;

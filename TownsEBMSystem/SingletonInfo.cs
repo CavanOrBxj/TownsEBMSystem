@@ -95,6 +95,10 @@ namespace TownsEBMSystem
 
         public bool downloading;//是否在下载中  true表示在下载中  false表示不再下载中
 
+        public bool SendCommandMode;//正常模式true  离线优先false
+
+
+
         private SingletonInfo()                                                                 
         {
 
@@ -173,6 +177,8 @@ namespace TownsEBMSystem
             UpgradeFlag = "";
 
             downloading = false;
+
+            SendCommandMode = true;
         }
         public static SingletonInfo GetInstance()
         {
