@@ -29,10 +29,10 @@ namespace TownsEBMSystem
         AutoSizeFormClass asc = new AutoSizeFormClass();
         public static IniFiles ini;
         public static IniFiles ini2;
-        private readonly string xulrunnerPath = Application.StartupPath + "/xulrunner";
-        private  string testUrl = "http://192.168.21.105/";
-        private Gecko.GeckoWebBrowser Browser;
-        public string Pictxt;
+      //  private readonly string xulrunnerPath = Application.StartupPath + "/xulrunner";
+       // private  string testUrl = "http://192.168.21.105/";
+      //  private Gecko.GeckoWebBrowser Browser;
+     //   public string Pictxt;
         public static SerialPort ComDevice = new SerialPort();
         public Thread threadHeart;
         System.Timers.Timer t;
@@ -99,8 +99,7 @@ namespace TownsEBMSystem
         {
             InitializeComponent();
             this.ShowInTaskbar = false;
-            
-            Xpcom.Initialize(xulrunnerPath);
+          //  Xpcom.Initialize(xulrunnerPath);
             CheckIniConfig();
             InitConfig();
             InitTCPServer();
@@ -144,11 +143,9 @@ namespace TownsEBMSystem
             try
             {
                 SingleTimeServerSend(DateTime.Now);
-
             }
             catch (Exception ex)
             {
-
             }
         }
 
@@ -586,7 +583,6 @@ namespace TownsEBMSystem
             };
         }
 
-
         private void InitTable()
         {
             EB_Index_Table.Table_id = 0xfd;
@@ -607,7 +603,6 @@ namespace TownsEBMSystem
             #endregion 
         }
 
-
         private void GlobalDataDeal(object obj)
         {
             try
@@ -623,7 +618,17 @@ namespace TownsEBMSystem
                             if (op.ebm_class == "6")
                             {
                                 //关
-                                OnlineAllStop();
+                                if (!SingletonInfo.GetInstance().SendCommandMode)
+                                {
+                                    //离线优先的情况
+                                    OfflineAllStop();
+                                }
+                                else
+                                {
+                                    //正常情况
+                                    OnlineAllStop();
+                                }
+                               
                                 this.Invoke(new Action(() =>
                                 {
                                     btn_Emergency_Main.Enabled = true;
@@ -639,7 +644,17 @@ namespace TownsEBMSystem
                             else
                             {
                                 //开
-                                OnlineAllStart("1");
+                                if (!SingletonInfo.GetInstance().SendCommandMode)
+                                {
+                                    //离线优先
+                                    OfflineAllStart("应急");
+                                }
+                                else
+                                {
+                                    //正常情况
+                                    OnlineAllStart("1");
+                                }
+                              
                                 this.Invoke(new Action(() =>
                                 {
                                     btn_Emergency_Main.Enabled = true;
@@ -917,7 +932,6 @@ namespace TownsEBMSystem
             }
         }
 
-
         /// <summary>
         /// 启动发送
         /// </summary>
@@ -938,7 +952,6 @@ namespace TownsEBMSystem
             {
                 LogHelper.WriteLog(typeof(MainForm), "启动发送失败：" + ex.ToString());
             }
-
         }
 
         public bool InitEBStream()
@@ -1033,7 +1046,6 @@ namespace TownsEBMSystem
             }));
         }
 
-
         private void ShowtreeViewOrganization_WhiteList(List<organizationdata> inputdata)
         {
             this.Invoke(new Action(() =>
@@ -1097,7 +1109,6 @@ namespace TownsEBMSystem
             }));
         }
 
-
         private void ShowtreeViewOrganization_SwitchAmplifier(List<organizationdata> inputdata)
         {
             this.Invoke(new Action(() =>
@@ -1147,7 +1158,6 @@ namespace TownsEBMSystem
                 LogHelper.WriteLog(typeof(MainForm), "区域数据显示失败");
             }
         }
-
 
         private void SendHeartBeat(object sender, System.Timers.ElapsedEventArgs e)
         {
@@ -1267,6 +1277,7 @@ namespace TownsEBMSystem
                 pnode.Nodes.Add(node);
             }
         }
+
         /// <summary>
         /// 显示列表  
         /// </summary>
@@ -1738,14 +1749,11 @@ namespace TownsEBMSystem
             return resopnse;
         }
 
-
-
         private GeneralResponse TCPWhiteListUpdate(WhiteListUpdate whitelist)
         {
             GeneralResponse resopnse = (GeneralResponse)SingletonInfo.GetInstance().tcpsend.SendTCPCommnand(whitelist, 0x0C);
             return resopnse;
         }
-
 
         private GeneralResponse TCPSwitchAmplifier(List<organizationdata> organization_List, string onoff)
         {
@@ -1762,7 +1770,6 @@ namespace TownsEBMSystem
             return resopnse;
         }
 
-
         private GeneralResponse TCPGeneralRebackParam(GeneralRebackParam tt)
         {
            
@@ -1770,14 +1777,12 @@ namespace TownsEBMSystem
             return resopnse;
         }
 
-
         private GeneralResponse TCPRebackPeriod(GeneralRebackCycle tmp)
         {
             
             GeneralResponse resopnse = (GeneralResponse)SingletonInfo.GetInstance().tcpsend.SendTCPCommnand(tmp, 0x0B);
             return resopnse;
         }
-
 
         private OnorOFFResponse TCPBroadcastcommand(List<organizationdata> organization_List,string commandtype,string ebm_class)
         {
@@ -1805,7 +1810,6 @@ namespace TownsEBMSystem
             OnorOFFResponse resopnse = (OnorOFFResponse)SingletonInfo.GetInstance().tcpsend.SendTCPCommnand(tt, 0x04);
             return resopnse;
         }
-
 
         private OnorOFFResponse TCPBroadcastcommand(List<PlayRecord_tcp_ts> organization_List, string commandtype)
         {
@@ -2193,8 +2197,6 @@ namespace TownsEBMSystem
               }
               GC.Collect();
         }
-
-
 
         private OnorOFFResponse SwitchChannel(int channelID)
         {
@@ -2726,7 +2728,6 @@ namespace TownsEBMSystem
 
         }
 
-
         public List<ProgramStreamInfo> GetDataPSI(List<ProgramStreamInfotmp> input)
         {
             List<ProgramStreamInfo> list = new List<ProgramStreamInfo>();
@@ -2818,7 +2819,6 @@ namespace TownsEBMSystem
             return null;
         }
 
-
         public bool GetEBIndexTable(ref EBIndexTable oldTable)
         {
             try
@@ -2834,7 +2834,6 @@ namespace TownsEBMSystem
             }
         }
         
-
         private void btn_AddWhiteList_Click(object sender, EventArgs e)
         {
             try
@@ -2913,12 +2912,8 @@ namespace TownsEBMSystem
             }
             catch (Exception)
             {
-
-
             }
-        }
-
-    
+        } 
 
         private void btn_RebackCycle_Click(object sender, EventArgs e)
         {
@@ -2954,7 +2949,6 @@ namespace TownsEBMSystem
             }
         }
      
-
         private void btn_DelWhiteList_Click(object sender, EventArgs e)
         {
             try
@@ -3015,9 +3009,7 @@ namespace TownsEBMSystem
                 }
             }
             catch (Exception)
-            {
-
-                
+            { 
             }
         }
 
@@ -3065,8 +3057,6 @@ namespace TownsEBMSystem
             }
             catch (Exception)
             {
-
-              
             }
         }
 
@@ -3082,8 +3072,6 @@ namespace TownsEBMSystem
             }
             catch (Exception)
             {
-
-                
             }
         }
 
@@ -3109,8 +3097,6 @@ namespace TownsEBMSystem
             }
             catch (Exception)
             {
-
-              
             }
         }
 
@@ -3134,8 +3120,6 @@ namespace TownsEBMSystem
             }
             catch (Exception)
             {
-
-               
             }
         }
         /// <summary>
@@ -3404,8 +3388,6 @@ namespace TownsEBMSystem
         }
 
 
-
-
         private void OnlineAllStart(object obj)
         {
             string broadcastType = (string)obj;
@@ -3617,6 +3599,7 @@ namespace TownsEBMSystem
             ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData,1);
             #endregion
         }
+
         private void OfflineTownStart(object obj)
         {
             //没有与县平台联通的情况下 全开日常广播
@@ -3630,7 +3613,6 @@ namespace TownsEBMSystem
 
             #endregion
         }
-
 
         private void OnlineAllStop()
         {
@@ -3652,6 +3634,7 @@ namespace TownsEBMSystem
             ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
             
         }
+
         private void OnlineTownStop()
         {
             foreach (var item in SingletonInfo.GetInstance().dgvMainData)
@@ -3688,7 +3671,6 @@ namespace TownsEBMSystem
                 ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
             }
         }
-
 
         private void OfflineAllStop()
         {
@@ -3776,7 +3758,16 @@ namespace TownsEBMSystem
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
                                 //在线情况
-                                OnlineSelectedStart("0");
+                                if (!SingletonInfo.GetInstance().SendCommandMode)
+                                {
+                                    //如果离线模式优先的情况下  新增于20190109
+                                    OfflineSelectedStart("日常");
+                                }
+                                else
+                                {
+                                    //正常模式下
+                                    OnlineSelectedStart("0");
+                                }
                             }
                             else
                             { 
@@ -3802,7 +3793,16 @@ namespace TownsEBMSystem
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
                                 //在线情况
-                                OnlineSelectedStop();
+                                if (!SingletonInfo.GetInstance().SendCommandMode)
+                                {
+                                    //离线模式优先的情况下
+                                    OfflineSelectedStop();
+                                }
+                                else
+                                {
+                                    //正常情况
+                                    OnlineSelectedStop();
+                                }
                             }
                             else
                             {
@@ -3831,13 +3831,25 @@ namespace TownsEBMSystem
                             btn_Daily_Main.BaseColor = System.Drawing.Color.Lime;
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
-                                Thread thread = new Thread(new ParameterizedThreadStart(OnlineTownStart));
-                                thread.IsBackground = true;
-                                thread.Start("0");
-
+                                //在线情况
+                                if (!SingletonInfo.GetInstance().SendCommandMode)
+                                {
+                                    //离线模式优先的情况
+                                    Thread thread = new Thread(new ParameterizedThreadStart(OfflineTownStart));
+                                    thread.IsBackground = true;
+                                    thread.Start("日常");
+                                }
+                                else
+                                {
+                                    //正常情况
+                                    Thread thread = new Thread(new ParameterizedThreadStart(OnlineTownStart));
+                                    thread.IsBackground = true;
+                                    thread.Start("0");
+                                }
                             }
                             else
                             {
+                                //不在线情况
                                 Thread thread = new Thread(new ParameterizedThreadStart(OfflineTownStart));
                                 thread.IsBackground = true;
                                 thread.Start("日常");
@@ -3858,12 +3870,26 @@ namespace TownsEBMSystem
                             btn_Daily_Main.BaseColor = System.Drawing.Color.DarkGreen;
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
-                                Thread thread = new Thread(new ThreadStart(OnlineTownStop));
-                                thread.IsBackground = true;
-                                thread.Start();
+                                //在线情况下 
+                                if (!SingletonInfo.GetInstance().SendCommandMode)
+                                {
+                                    //离线模式优先的情况
+                                    Thread thread = new Thread(new ThreadStart(OfflineTownStop));
+                                    thread.IsBackground = true;
+                                    thread.Start();
+                                }
+                                else
+                                {
+                                    //正常情况
+                                    Thread thread = new Thread(new ThreadStart(OnlineTownStop));
+                                    thread.IsBackground = true;
+                                    thread.Start();
+                                }
+                              
                             }
                             else
                             {
+                                //不在线情况
                                 Thread thread = new Thread(new ThreadStart(OfflineTownStop));
                                 thread.IsBackground = true;
                                 thread.Start();
@@ -3877,7 +3903,6 @@ namespace TownsEBMSystem
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -3902,13 +3927,21 @@ namespace TownsEBMSystem
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
                                 //在线情况
-                                OnlineSelectedStart("1");
+                                if (!SingletonInfo.GetInstance().SendCommandMode)
+                                {
+                                    //离线模式优先的情况下
+                                    OfflineSelectedStart("应急");
+                                }
+                                else
+                                {
+                                    //正常情况
+                                    OnlineSelectedStart("1");
+                                }
                             }
                             else
                             {
                                 //不在线情况
                                 OfflineSelectedStart("应急");
-
                             }
                         }
                     }
@@ -3926,7 +3959,16 @@ namespace TownsEBMSystem
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
                                 //在线情况
-                                OnlineSelectedStop();
+                                if (!SingletonInfo.GetInstance().SendCommandMode)
+                                {
+                                    //离线模式优先的情况
+                                    OfflineSelectedStop();
+                                }
+                                else
+                                {
+                                    //正常情况
+                                    OnlineSelectedStop();
+                                }
                             }
                             else
                             {
@@ -3952,13 +3994,25 @@ namespace TownsEBMSystem
                             btn_Emergency_Main.BaseColor = System.Drawing.Color.Red;
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
-                                Thread thread = new Thread(new ParameterizedThreadStart(OnlineTownStart));
-                                thread.IsBackground = true;
-                                thread.Start("1");
-
+                                //在线情况
+                                if (!SingletonInfo.GetInstance().SendCommandMode)
+                                {
+                                    //离线模式优先的情况
+                                    Thread thread = new Thread(new ParameterizedThreadStart(OfflineTownStart));
+                                    thread.IsBackground = true;
+                                    thread.Start("应急");
+                                }
+                                else
+                                {
+                                    //正常情况
+                                    Thread thread = new Thread(new ParameterizedThreadStart(OnlineTownStart));
+                                    thread.IsBackground = true;
+                                    thread.Start("1");
+                                }
                             }
                             else
                             {
+                                //不在线情况
                                 Thread thread = new Thread(new ParameterizedThreadStart(OfflineTownStart));
                                 thread.IsBackground = true;
                                 thread.Start("应急");
@@ -3966,11 +4020,9 @@ namespace TownsEBMSystem
 
                             btn_Organization.Enabled = false;
                         }
-                       
                     }
                     else
                     {
-
                         MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定关闭所有应急广播？" } };
                         MessageShowDlg.ShowDialog();
                         if (MessageShowDlg.IsSure)
@@ -3981,27 +4033,36 @@ namespace TownsEBMSystem
                             btn_Emergency_Main.BaseColor = System.Drawing.Color.Maroon;
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
-                                Thread thread = new Thread(new ThreadStart(OnlineTownStop));
-                                thread.IsBackground = true;
-                                thread.Start();
+                                //在线情况
+                                if (!SingletonInfo.GetInstance().SendCommandMode)
+                                {
+                                    //离线模式优先的情况
+                                    Thread thread = new Thread(new ThreadStart(OfflineTownStop));
+                                    thread.IsBackground = true;
+                                    thread.Start();
+                                }
+                                else
+                                {
+                                    //正常情况
+                                    Thread thread = new Thread(new ThreadStart(OnlineTownStop));
+                                    thread.IsBackground = true;
+                                    thread.Start();
+                                }
                             }
                             else
                             {
+                                //不在线情况
                                 Thread thread = new Thread(new ThreadStart(OfflineTownStop));
                                 thread.IsBackground = true;
                                 thread.Start();
                             }
-
                             btn_Organization.Enabled = true;
                         }
-
                     }
-
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

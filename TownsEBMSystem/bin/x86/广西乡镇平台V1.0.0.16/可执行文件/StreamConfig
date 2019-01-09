@@ -1,0 +1,10 @@
+﻿{
+  "ElementaryPid": 34,
+  "PMT_Pid": 48,
+  "Program_id": 1,
+  "sDestSockAddress": "192.168.1.111:5004",
+  "Section_length": 4096,
+  "sLocalSockAddress": "127.0.0.1:0",
+  "Stream_BitRate": 11000,
+  "Stream_id": 1
+}

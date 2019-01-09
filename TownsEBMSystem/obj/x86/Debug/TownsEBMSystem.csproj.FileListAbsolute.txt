@@ -143,3 +143,4 @@ E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\D
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.exe
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.pdb
 E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.UpgradeForm.resources
+E:\GitHub\广西乡镇应急广播系统\TownsEBMSystem\TownsEBMSystem\obj\x86\Debug\TownsEBMSystem.csprojAssemblyReference.cache
