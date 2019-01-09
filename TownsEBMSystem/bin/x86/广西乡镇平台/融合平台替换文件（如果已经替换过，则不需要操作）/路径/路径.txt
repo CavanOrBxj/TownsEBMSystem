@@ -1,1 +1,0 @@
-ginkgo\WEB-INF\classes\com\ch\gprs\gx\controller
