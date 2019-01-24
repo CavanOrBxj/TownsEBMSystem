@@ -142,7 +142,7 @@ namespace TownsEBMSystem
         {
             try
             {
-                SingleTimeServerSend(DateTime.Now);
+                SingleTimeServerSend(DateTime.Now.AddMinutes(1));
             }
             catch (Exception ex)
             {
@@ -939,14 +939,32 @@ namespace TownsEBMSystem
         {
             try
             {
-               // InitEBStream();
-                if (EbmStream != null && isInitStream && !IsStartStream && !SingletonInfo.GetInstance().loginstatus)
+                // InitEBStream();
+                if (SingletonInfo.GetInstance().loginstatus)
                 {
-                    //发送数据
-                    EbmStream.StartStreaming();
-                    IsStartStream = true;
-                    SingletonInfo.GetInstance().IsStartSend = true;
+                    if (!SingletonInfo.GetInstance().SendCommandMode)
+                    {
+                        //离线模式优先
+                        if (EbmStream != null && isInitStream && !IsStartStream)
+                        {
+                            //发送数据
+                            EbmStream.StartStreaming();
+                            IsStartStream = true;
+                            SingletonInfo.GetInstance().IsStartSend = true;
+                        }
+                    }
                 }
+                else
+                {
+                    if (EbmStream != null && isInitStream && !IsStartStream)
+                    {
+                        //发送数据
+                        EbmStream.StartStreaming();
+                        IsStartStream = true;
+                        SingletonInfo.GetInstance().IsStartSend = true;
+                    }
+                }
+              
             }
             catch (Exception ex)
             {
@@ -1685,6 +1703,10 @@ namespace TownsEBMSystem
                 if (loginflag)
                 {
                     pictureBox_online.Visible = true;
+                    if (!SingletonInfo.GetInstance().SendCommandMode && SingletonInfo.GetInstance().loginstatus)
+                    {
+                        InitTimerServerTimer();
+                    }
                 }
                 else
                 {
