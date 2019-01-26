@@ -29,10 +29,6 @@ namespace TownsEBMSystem
         AutoSizeFormClass asc = new AutoSizeFormClass();
         public static IniFiles ini;
         public static IniFiles ini2;
-      //  private readonly string xulrunnerPath = Application.StartupPath + "/xulrunner";
-       // private  string testUrl = "http://192.168.21.105/";
-      //  private Gecko.GeckoWebBrowser Browser;
-     //   public string Pictxt;
         public static SerialPort ComDevice = new SerialPort();
         public Thread threadHeart;
         System.Timers.Timer t;
@@ -99,7 +95,6 @@ namespace TownsEBMSystem
         {
             InitializeComponent();
             this.ShowInTaskbar = false;
-          //  Xpcom.Initialize(xulrunnerPath);
             CheckIniConfig();
             InitConfig();
             InitTCPServer();
@@ -124,13 +119,13 @@ namespace TownsEBMSystem
         {
             //设置定时间隔(毫秒为单位)
           //  int interval = 5000;
-            timer = new System.Timers.Timer(SingletonInfo.GetInstance().TimeServiceInterval*1000*60);
+           // timer = new System.Timers.Timer(SingletonInfo.GetInstance().TimeServiceInterval*1000*60);
             //设置执行一次（false）还是一直执行(true)
-            timer.AutoReset = true;
+         //   timer.AutoReset = true;
             //设置是否执行System.Timers.Timer.Elapsed事件
-            timer.Enabled = true;
+        //    timer.Enabled = true;
             //绑定Elapsed事件
-            timer.Elapsed += new System.Timers.ElapsedEventHandler(TimerUp);
+         //   timer.Elapsed += new System.Timers.ElapsedEventHandler(TimerUp);
         }
 
         /// <summary>
@@ -919,7 +914,7 @@ namespace TownsEBMSystem
                 #endregion
 
                 #region 授时指令周期
-                SingletonInfo.GetInstance().TimeServiceInterval = Convert.ToInt32(ini.ReadValue("Instructions", "TimeServiceInterval"));
+              //  SingletonInfo.GetInstance().TimeServiceInterval = Convert.ToInt32(ini.ReadValue("Instructions", "TimeServiceInterval"));
                 #endregion
 
                 SingletonInfo.GetInstance().IsLogoutWin = ini.ReadValue("SystemConfig", "LogoutWin") == "1" ? true : false;
@@ -939,32 +934,30 @@ namespace TownsEBMSystem
         {
             try
             {
-                // InitEBStream();
                 if (SingletonInfo.GetInstance().loginstatus)
                 {
                     if (!SingletonInfo.GetInstance().SendCommandMode)
                     {
                         //离线模式优先
-                        if (EbmStream != null && isInitStream && !IsStartStream)
+                        if (EbmStream != null && isInitStream)
                         {
                             //发送数据
-                            EbmStream.StartStreaming();
-                            IsStartStream = true;
-                            SingletonInfo.GetInstance().IsStartSend = true;
+                           // EbmStream.StartStreaming();//测试放开
+                          //  IsStartStream = true;
+                         //   SingletonInfo.GetInstance().IsStartSend = true;
                         }
                     }
                 }
                 else
                 {
-                    if (EbmStream != null && isInitStream && !IsStartStream)
+                    if (EbmStream != null && isInitStream)
                     {
                         //发送数据
-                        EbmStream.StartStreaming();
-                        IsStartStream = true;
-                        SingletonInfo.GetInstance().IsStartSend = true;
+                      //  EbmStream.StartStreaming();
+                      //  IsStartStream = true;
+                      //  SingletonInfo.GetInstance().IsStartSend = true;
                     }
                 }
-              
             }
             catch (Exception ex)
             {
@@ -976,23 +969,20 @@ namespace TownsEBMSystem
         {
             try
             {
-                JObject jo = TableDataHelper.ReadConfig();
-                if (jo != null)
-                {
-                    EbmStream.ElementaryPid = Convert.ToInt32(jo["ElementaryPid"].ToString());
-                    EbmStream.Stream_id = Convert.ToInt32(jo["Stream_id"].ToString());
-                    EbmStream.Program_id = Convert.ToInt32(jo["Program_id"].ToString());
-                    EbmStream.PMT_Pid = Convert.ToInt32(jo["PMT_Pid"].ToString());
-                    EbmStream.Section_length = Convert.ToInt32(jo["Section_length"].ToString());
-                    EbmStream.sDestSockAddress = jo["sDestSockAddress"].ToString();
-                    EbmStream.sLocalSockAddress = jo["sLocalSockAddress"].ToString();
-                    EbmStream.Stream_BitRate = Convert.ToInt32(jo["Stream_BitRate"].ToString());
-                }
+                EbmStream.ElementaryPid = Convert.ToInt32(ini.ReadValue("TSSendInfo", "ElementaryPid").ToString());
+                EbmStream.Stream_id = Convert.ToInt32(ini.ReadValue("TSSendInfo", "Stream_id").ToString());
+                EbmStream.Program_id = Convert.ToInt32(ini.ReadValue("TSSendInfo", "Program_id").ToString());
+                EbmStream.PMT_Pid = Convert.ToInt32(ini.ReadValue("TSSendInfo", "PMT_Pid").ToString());
+                EbmStream.Section_length = Convert.ToInt32(ini.ReadValue("TSSendInfo", "Section_length").ToString());
+                EbmStream.sDestSockAddress = ini.ReadValue("TSSendInfo", "sDestSockAddress").ToString();
+                EbmStream.sLocalSockAddress = ini.ReadValue("TSSendInfo", "sLocalSockAddress").ToString();
+                EbmStream.Stream_BitRate = Convert.ToInt32(ini.ReadValue("TSSendInfo", "Stream_BitRate").ToString());
                 InitStreamTableNew();
                 return true;
             }
             catch (Exception ex)
             {
+                LogHelper.WriteLog(typeof(MainForm), "TS流参数设置失败！");
                 return false;
             }
         }
@@ -1265,15 +1255,12 @@ namespace TownsEBMSystem
                     {
                         SingletonInfo.GetInstance().lockcycle = param.lock_cycle;
                         cf["Lockcycle"] = param.lock_cycle;
-
-
                     }
 
                 }
             }
             catch (Exception ex)
             {
-
                 LogHelper.WriteLog(typeof(MainForm), "心跳发送失败");
             }
             finally
@@ -1705,7 +1692,7 @@ namespace TownsEBMSystem
                     pictureBox_online.Visible = true;
                     if (!SingletonInfo.GetInstance().SendCommandMode && SingletonInfo.GetInstance().loginstatus)
                     {
-                        InitTimerServerTimer();
+                      //  InitTimerServerTimer();
                     }
                 }
                 else
@@ -1748,7 +1735,7 @@ namespace TownsEBMSystem
                     ShowtreeViewOrganization_volumn(SingletonInfo.GetInstance().Organization);
                     ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
 
-                    InitTimerServerTimer();
+                  //  InitTimerServerTimer();
                 }
 
                 pictureBox_checkbox.BackgroundImage = imageList1.Images[0];
@@ -2196,29 +2183,6 @@ namespace TownsEBMSystem
             }
         }
 
-        private void pictureBox_online_Click(object sender, EventArgs e)
-        {
-
-            MessageShowDlg = new MessageShowForm { label1 = { Text = @"确定关闭？" } };
-            MessageShowDlg.ShowDialog();
-            if (MessageShowDlg.IsSure)
-            {
-                  ini.WriteValue("EBM", "ebm_id_behind", SingletonInfo.GetInstance().ebm_id_behind);
-                  ini.WriteValue("EBM", "ebm_id_count", SingletonInfo.GetInstance().ebm_id_count.ToString());
-                  ini.WriteValue("EBM", "input_channel_id", SingletonInfo.GetInstance().input_channel_id);
-                  ini.WriteValue("EBM", "IndexItemID", SingletonInfo.GetInstance().IndexItemID.ToString());
-
-                  TableDataHelper.WriteTable(Enums.TableType.WhiteList, SingletonInfo.GetInstance().WhiteListRecordList);
-                  if (EbmStream != null && IsStartStream)
-                  {
-                      EbmStream.StopStreaming();
-                      IsStartStream = false;
-                  }
-
-                  Close();
-              }
-              GC.Collect();
-        }
 
         private OnorOFFResponse SwitchChannel(int channelID)
         {
@@ -2581,6 +2545,14 @@ namespace TownsEBMSystem
                 }
                 EbmStream.EB_Index_Table = GetEBIndexTable(ref EB_Index_Table) ? EB_Index_Table : null;
                 EbMStream.Initialization();
+
+                if (SingletonInfo.GetInstance().IsStartSend)
+                {
+                    Thread.Sleep(2000);//测试数据  20190126
+                    EbmStream.StopStreaming();
+                    SingletonInfo.GetInstance().IsStartSend = false;
+                }
+
             }
             //  UpdateDataTextNew((object)1);
             GC.Collect();
@@ -2607,6 +2579,16 @@ namespace TownsEBMSystem
                 }
                 EbmStream.EB_Index_Table = GetEBIndexTable(ref EB_Index_Table) ? EB_Index_Table : null;
                 EbMStream.Initialization();
+
+                #region 判断是否关闭通讯库的流输出
+                if (_EBMIndexGlobal.ListEbIndex.Count == 0 && SingletonInfo.GetInstance().IsStartSend)
+                {
+
+                    Thread.Sleep(2000);//测试数据   20190126
+                    EbmStream.StopStreaming();
+                    SingletonInfo.GetInstance().IsStartSend = false;
+                }
+                #endregion
             }
           //  UpdateDataTextNew((object)1);
             GC.Collect();
@@ -2736,6 +2718,15 @@ namespace TownsEBMSystem
                         _EBMIndexGlobal.ListEbIndex = new List<EBMIndex_>();
                     }
                     _EBMIndexGlobal.ListEbIndex.Add(index);
+
+                    #region 判断是否将TS通讯库的流输出打开
+                    if (_EBMIndexGlobal.ListEbIndex.Count>0 && !SingletonInfo.GetInstance().IsStartSend)
+                    {
+                        EbmStream.StartStreaming();
+                        SingletonInfo.GetInstance().IsStartSend = true;
+                    }
+                    #endregion
+
                     EbmStream.EB_Index_Table = GetEBIndexTable(ref EB_Index_Table) ? EB_Index_Table : null;
                     EbMStream.Initialization();
                 }
@@ -2744,7 +2735,6 @@ namespace TownsEBMSystem
             }
             catch (Exception ex)
             {
-
                 LogHelper.WriteLog(typeof(MainForm), "TS播放/停止指令发送失败");
             }
 
@@ -4142,15 +4132,7 @@ namespace TownsEBMSystem
                 throw;
             }
         }
-
-        private void skinButton2_Click(object sender, EventArgs e)
-        {
-            JavaScriptSerializer Serializer = new JavaScriptSerializer();
-            string dada = "{\"btn_one\":\"1\",\"btn_two\":\"2\",\"btn_three\":\"3\",\"btn_four\":\"4\",\"btn_five\":\"5\",\"btn_six\":\"6\",\"lock_pwd\":\"123456\",\"mark\":0}";
-
-
-            LocalParam param = Serializer.Deserialize<LocalParam>(dada);
-        }
+        
 
         private void pictureBox_online_DoubleClick(object sender, EventArgs e)
         {

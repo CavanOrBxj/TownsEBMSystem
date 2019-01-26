@@ -65,7 +65,12 @@
             this.pictureBox_offline = new System.Windows.Forms.PictureBox();
             this.pictureBox_online = new System.Windows.Forms.PictureBox();
             this.skinTabControl_parameterset = new CCWin.SkinControl.SkinTabControl();
-            this.skinTabPage6 = new CCWin.SkinControl.SkinTabPage();
+            this.skinTabPage4 = new CCWin.SkinControl.SkinTabPage();
+            this.skinLabel7 = new CCWin.SkinControl.SkinLabel();
+            this.txt_RebackCycle = new System.Windows.Forms.TextBox();
+            this.btn_RebackCycle = new CCWin.SkinControl.SkinButton();
+            this.skinLabel4 = new CCWin.SkinControl.SkinLabel();
+            this.treeViewOrganization_RebackCycle = new CCWin.SkinControl.SkinTreeView();
             this.skinTabPage7 = new CCWin.SkinControl.SkinTabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radioBtn_DomainandPort = new System.Windows.Forms.RadioButton();
@@ -102,12 +107,7 @@
             this.skinLabel2 = new CCWin.SkinControl.SkinLabel();
             this.btn_AddWhiteList = new CCWin.SkinControl.SkinButton();
             this.btn_DelWhiteList = new CCWin.SkinControl.SkinButton();
-            this.skinTabPage4 = new CCWin.SkinControl.SkinTabPage();
-            this.skinLabel7 = new CCWin.SkinControl.SkinLabel();
-            this.txt_RebackCycle = new System.Windows.Forms.TextBox();
-            this.btn_RebackCycle = new CCWin.SkinControl.SkinButton();
-            this.skinLabel4 = new CCWin.SkinControl.SkinLabel();
-            this.treeViewOrganization_RebackCycle = new CCWin.SkinControl.SkinTreeView();
+            this.skinTabPage6 = new CCWin.SkinControl.SkinTabPage();
             this.skinTabControl_Organization = new CCWin.SkinControl.SkinTabControl();
             this.skinTabPage3 = new CCWin.SkinControl.SkinTabPage();
             this.skinTabPage1 = new CCWin.SkinControl.SkinTabPage();
@@ -119,17 +119,18 @@
             this.btn_Dailybrd = new CCWin.SkinControl.SkinButton();
             this.pictureBox_Lock = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.skinDataGridView_Main = new TownsEBMSystem.DataGridViewForWs();
             this.RecordSelect = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_checkbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Login)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_offline)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_online)).BeginInit();
             this.skinTabControl_parameterset.SuspendLayout();
+            this.skinTabPage4.SuspendLayout();
             this.skinTabPage7.SuspendLayout();
             this.panel1.SuspendLayout();
             this.skinTabPage8.SuspendLayout();
@@ -137,7 +138,6 @@
             this.skinTabPage5.SuspendLayout();
             this.skinTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_WhiteList)).BeginInit();
-            this.skinTabPage4.SuspendLayout();
             this.skinTabControl_Organization.SuspendLayout();
             this.skinTabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_broadcastrecord)).BeginInit();
@@ -643,7 +643,7 @@
             this.pictureBox_Login.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox_Login.BackgroundImage = global::TownsEBMSystem.Properties.Resources.Login2;
             this.pictureBox_Login.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox_Login.Location = new System.Drawing.Point(153, 26);
+            this.pictureBox_Login.Location = new System.Drawing.Point(154, 26);
             this.pictureBox_Login.Name = "pictureBox_Login";
             this.pictureBox_Login.Size = new System.Drawing.Size(116, 116);
             this.pictureBox_Login.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -655,7 +655,7 @@
             // 
             this.pictureBox_offline.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox_offline.BackgroundImage = global::TownsEBMSystem.Properties.Resources.离线__;
-            this.pictureBox_offline.Location = new System.Drawing.Point(147, 26);
+            this.pictureBox_offline.Location = new System.Drawing.Point(147, 24);
             this.pictureBox_offline.Name = "pictureBox_offline";
             this.pictureBox_offline.Size = new System.Drawing.Size(128, 116);
             this.pictureBox_offline.TabIndex = 106;
@@ -683,12 +683,12 @@
             this.skinTabControl_parameterset.AnimatorType = CCWin.SkinControl.AnimationType.HorizSlide;
             this.skinTabControl_parameterset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(21)))), ((int)(((byte)(20)))));
             this.skinTabControl_parameterset.CloseRect = new System.Drawing.Rectangle(2, 2, 12, 12);
+            this.skinTabControl_parameterset.Controls.Add(this.skinTabPage6);
             this.skinTabControl_parameterset.Controls.Add(this.skinTabPage4);
             this.skinTabControl_parameterset.Controls.Add(this.skinTabPage7);
             this.skinTabControl_parameterset.Controls.Add(this.skinTabPage8);
             this.skinTabControl_parameterset.Controls.Add(this.skinTabPage5);
             this.skinTabControl_parameterset.Controls.Add(this.skinTabPage2);
-            this.skinTabControl_parameterset.Controls.Add(this.skinTabPage6);
             this.skinTabControl_parameterset.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.skinTabControl_parameterset.HeadBack = null;
             this.skinTabControl_parameterset.ImageList = this.imageList2;
@@ -719,18 +719,102 @@
             this.skinTabControl_parameterset.TabIndex = 94;
             this.skinTabControl_parameterset.Visible = false;
             // 
-            // skinTabPage6
+            // skinTabPage4
             // 
-            this.skinTabPage6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(21)))), ((int)(((byte)(20)))));
-            this.skinTabPage6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.skinTabPage6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.skinTabPage6.ImageIndex = 14;
-            this.skinTabPage6.Location = new System.Drawing.Point(0, 75);
-            this.skinTabPage6.Name = "skinTabPage6";
-            this.skinTabPage6.Size = new System.Drawing.Size(300, 85);
-            this.skinTabPage6.TabIndex = 5;
-            this.skinTabPage6.TabItemImage = null;
-            this.skinTabPage6.Text = "地图信息";
+            this.skinTabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(21)))), ((int)(((byte)(20)))));
+            this.skinTabPage4.Controls.Add(this.skinLabel7);
+            this.skinTabPage4.Controls.Add(this.txt_RebackCycle);
+            this.skinTabPage4.Controls.Add(this.btn_RebackCycle);
+            this.skinTabPage4.Controls.Add(this.skinLabel4);
+            this.skinTabPage4.Controls.Add(this.treeViewOrganization_RebackCycle);
+            this.skinTabPage4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.skinTabPage4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.skinTabPage4.ImageIndex = 8;
+            this.skinTabPage4.Location = new System.Drawing.Point(0, 75);
+            this.skinTabPage4.Name = "skinTabPage4";
+            this.skinTabPage4.Size = new System.Drawing.Size(300, 85);
+            this.skinTabPage4.TabIndex = 1;
+            this.skinTabPage4.TabItemImage = null;
+            this.skinTabPage4.Text = "回传周期";
+            // 
+            // skinLabel7
+            // 
+            this.skinLabel7.ArtTextStyle = CCWin.SkinControl.ArtTextStyle.None;
+            this.skinLabel7.AutoSize = true;
+            this.skinLabel7.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel7.BorderColor = System.Drawing.Color.White;
+            this.skinLabel7.Font = new System.Drawing.Font("微软雅黑", 20F);
+            this.skinLabel7.ForeColor = System.Drawing.Color.White;
+            this.skinLabel7.Location = new System.Drawing.Point(834, 72);
+            this.skinLabel7.Name = "skinLabel7";
+            this.skinLabel7.Size = new System.Drawing.Size(42, 35);
+            this.skinLabel7.TabIndex = 68;
+            this.skinLabel7.Text = "秒";
+            // 
+            // txt_RebackCycle
+            // 
+            this.txt_RebackCycle.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold);
+            this.txt_RebackCycle.Location = new System.Drawing.Point(567, 68);
+            this.txt_RebackCycle.MaxLength = 5;
+            this.txt_RebackCycle.Name = "txt_RebackCycle";
+            this.txt_RebackCycle.Size = new System.Drawing.Size(264, 43);
+            this.txt_RebackCycle.TabIndex = 67;
+            // 
+            // btn_RebackCycle
+            // 
+            this.btn_RebackCycle.BackColor = System.Drawing.Color.Transparent;
+            this.btn_RebackCycle.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(26)))), ((int)(((byte)(67)))));
+            this.btn_RebackCycle.BorderColor = System.Drawing.Color.DimGray;
+            this.btn_RebackCycle.ControlState = CCWin.SkinClass.ControlState.Hover;
+            this.btn_RebackCycle.Create = true;
+            this.btn_RebackCycle.DownBack = null;
+            this.btn_RebackCycle.DownBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(26)))), ((int)(((byte)(67)))));
+            this.btn_RebackCycle.Font = new System.Drawing.Font("微软雅黑", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_RebackCycle.ForeColor = System.Drawing.Color.White;
+            this.btn_RebackCycle.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(26)))), ((int)(((byte)(67)))));
+            this.btn_RebackCycle.InnerBorderColor = System.Drawing.Color.Silver;
+            this.btn_RebackCycle.IsDrawBorder = false;
+            this.btn_RebackCycle.Location = new System.Drawing.Point(759, 304);
+            this.btn_RebackCycle.MouseBack = null;
+            this.btn_RebackCycle.MouseBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(80)))), ((int)(((byte)(167)))));
+            this.btn_RebackCycle.Name = "btn_RebackCycle";
+            this.btn_RebackCycle.NormlBack = null;
+            this.btn_RebackCycle.Palace = true;
+            this.btn_RebackCycle.Radius = 14;
+            this.btn_RebackCycle.RoundStyle = CCWin.SkinClass.RoundStyle.All;
+            this.btn_RebackCycle.Size = new System.Drawing.Size(162, 60);
+            this.btn_RebackCycle.TabIndex = 66;
+            this.btn_RebackCycle.Text = "确定";
+            this.btn_RebackCycle.UseCompatibleTextRendering = true;
+            this.btn_RebackCycle.UseVisualStyleBackColor = true;
+            // 
+            // skinLabel4
+            // 
+            this.skinLabel4.ArtTextStyle = CCWin.SkinControl.ArtTextStyle.None;
+            this.skinLabel4.AutoSize = true;
+            this.skinLabel4.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel4.BorderColor = System.Drawing.Color.White;
+            this.skinLabel4.Font = new System.Drawing.Font("微软雅黑", 20F);
+            this.skinLabel4.ForeColor = System.Drawing.Color.White;
+            this.skinLabel4.Location = new System.Drawing.Point(396, 72);
+            this.skinLabel4.Name = "skinLabel4";
+            this.skinLabel4.Size = new System.Drawing.Size(123, 35);
+            this.skinLabel4.TabIndex = 65;
+            this.skinLabel4.Text = "回传周期";
+            // 
+            // treeViewOrganization_RebackCycle
+            // 
+            this.treeViewOrganization_RebackCycle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(21)))), ((int)(((byte)(20)))));
+            this.treeViewOrganization_RebackCycle.BorderColor = System.Drawing.Color.Gainsboro;
+            this.treeViewOrganization_RebackCycle.CheckBoxes = true;
+            this.treeViewOrganization_RebackCycle.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.treeViewOrganization_RebackCycle.ForeColor = System.Drawing.Color.White;
+            this.treeViewOrganization_RebackCycle.LineColor = System.Drawing.Color.White;
+            this.treeViewOrganization_RebackCycle.Location = new System.Drawing.Point(43, 25);
+            this.treeViewOrganization_RebackCycle.Name = "treeViewOrganization_RebackCycle";
+            this.treeViewOrganization_RebackCycle.ShowLines = false;
+            this.treeViewOrganization_RebackCycle.Size = new System.Drawing.Size(280, 439);
+            this.treeViewOrganization_RebackCycle.TabIndex = 62;
             // 
             // skinTabPage7
             // 
@@ -1339,102 +1423,18 @@
             this.btn_DelWhiteList.UseCompatibleTextRendering = true;
             this.btn_DelWhiteList.UseVisualStyleBackColor = true;
             // 
-            // skinTabPage4
+            // skinTabPage6
             // 
-            this.skinTabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(21)))), ((int)(((byte)(20)))));
-            this.skinTabPage4.Controls.Add(this.skinLabel7);
-            this.skinTabPage4.Controls.Add(this.txt_RebackCycle);
-            this.skinTabPage4.Controls.Add(this.btn_RebackCycle);
-            this.skinTabPage4.Controls.Add(this.skinLabel4);
-            this.skinTabPage4.Controls.Add(this.treeViewOrganization_RebackCycle);
-            this.skinTabPage4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.skinTabPage4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.skinTabPage4.ImageIndex = 8;
-            this.skinTabPage4.Location = new System.Drawing.Point(0, 75);
-            this.skinTabPage4.Name = "skinTabPage4";
-            this.skinTabPage4.Size = new System.Drawing.Size(300, 85);
-            this.skinTabPage4.TabIndex = 1;
-            this.skinTabPage4.TabItemImage = null;
-            this.skinTabPage4.Text = "回传周期";
-            // 
-            // skinLabel7
-            // 
-            this.skinLabel7.ArtTextStyle = CCWin.SkinControl.ArtTextStyle.None;
-            this.skinLabel7.AutoSize = true;
-            this.skinLabel7.BackColor = System.Drawing.Color.Transparent;
-            this.skinLabel7.BorderColor = System.Drawing.Color.White;
-            this.skinLabel7.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.skinLabel7.ForeColor = System.Drawing.Color.White;
-            this.skinLabel7.Location = new System.Drawing.Point(834, 72);
-            this.skinLabel7.Name = "skinLabel7";
-            this.skinLabel7.Size = new System.Drawing.Size(42, 35);
-            this.skinLabel7.TabIndex = 68;
-            this.skinLabel7.Text = "秒";
-            // 
-            // txt_RebackCycle
-            // 
-            this.txt_RebackCycle.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold);
-            this.txt_RebackCycle.Location = new System.Drawing.Point(567, 68);
-            this.txt_RebackCycle.MaxLength = 5;
-            this.txt_RebackCycle.Name = "txt_RebackCycle";
-            this.txt_RebackCycle.Size = new System.Drawing.Size(264, 43);
-            this.txt_RebackCycle.TabIndex = 67;
-            // 
-            // btn_RebackCycle
-            // 
-            this.btn_RebackCycle.BackColor = System.Drawing.Color.Transparent;
-            this.btn_RebackCycle.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(26)))), ((int)(((byte)(67)))));
-            this.btn_RebackCycle.BorderColor = System.Drawing.Color.DimGray;
-            this.btn_RebackCycle.ControlState = CCWin.SkinClass.ControlState.Hover;
-            this.btn_RebackCycle.Create = true;
-            this.btn_RebackCycle.DownBack = null;
-            this.btn_RebackCycle.DownBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(26)))), ((int)(((byte)(67)))));
-            this.btn_RebackCycle.Font = new System.Drawing.Font("微软雅黑", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_RebackCycle.ForeColor = System.Drawing.Color.White;
-            this.btn_RebackCycle.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(26)))), ((int)(((byte)(67)))));
-            this.btn_RebackCycle.InnerBorderColor = System.Drawing.Color.Silver;
-            this.btn_RebackCycle.IsDrawBorder = false;
-            this.btn_RebackCycle.Location = new System.Drawing.Point(759, 304);
-            this.btn_RebackCycle.MouseBack = null;
-            this.btn_RebackCycle.MouseBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(80)))), ((int)(((byte)(167)))));
-            this.btn_RebackCycle.Name = "btn_RebackCycle";
-            this.btn_RebackCycle.NormlBack = null;
-            this.btn_RebackCycle.Palace = true;
-            this.btn_RebackCycle.Radius = 14;
-            this.btn_RebackCycle.RoundStyle = CCWin.SkinClass.RoundStyle.All;
-            this.btn_RebackCycle.Size = new System.Drawing.Size(162, 60);
-            this.btn_RebackCycle.TabIndex = 66;
-            this.btn_RebackCycle.Text = "确定";
-            this.btn_RebackCycle.UseCompatibleTextRendering = true;
-            this.btn_RebackCycle.UseVisualStyleBackColor = true;
-            // 
-            // skinLabel4
-            // 
-            this.skinLabel4.ArtTextStyle = CCWin.SkinControl.ArtTextStyle.None;
-            this.skinLabel4.AutoSize = true;
-            this.skinLabel4.BackColor = System.Drawing.Color.Transparent;
-            this.skinLabel4.BorderColor = System.Drawing.Color.White;
-            this.skinLabel4.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.skinLabel4.ForeColor = System.Drawing.Color.White;
-            this.skinLabel4.Location = new System.Drawing.Point(396, 72);
-            this.skinLabel4.Name = "skinLabel4";
-            this.skinLabel4.Size = new System.Drawing.Size(123, 35);
-            this.skinLabel4.TabIndex = 65;
-            this.skinLabel4.Text = "回传周期";
-            // 
-            // treeViewOrganization_RebackCycle
-            // 
-            this.treeViewOrganization_RebackCycle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(21)))), ((int)(((byte)(20)))));
-            this.treeViewOrganization_RebackCycle.BorderColor = System.Drawing.Color.Gainsboro;
-            this.treeViewOrganization_RebackCycle.CheckBoxes = true;
-            this.treeViewOrganization_RebackCycle.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.treeViewOrganization_RebackCycle.ForeColor = System.Drawing.Color.White;
-            this.treeViewOrganization_RebackCycle.LineColor = System.Drawing.Color.White;
-            this.treeViewOrganization_RebackCycle.Location = new System.Drawing.Point(43, 25);
-            this.treeViewOrganization_RebackCycle.Name = "treeViewOrganization_RebackCycle";
-            this.treeViewOrganization_RebackCycle.ShowLines = false;
-            this.treeViewOrganization_RebackCycle.Size = new System.Drawing.Size(280, 439);
-            this.treeViewOrganization_RebackCycle.TabIndex = 62;
+            this.skinTabPage6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(21)))), ((int)(((byte)(20)))));
+            this.skinTabPage6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.skinTabPage6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.skinTabPage6.ImageIndex = 14;
+            this.skinTabPage6.Location = new System.Drawing.Point(0, 75);
+            this.skinTabPage6.Name = "skinTabPage6";
+            this.skinTabPage6.Size = new System.Drawing.Size(300, 85);
+            this.skinTabPage6.TabIndex = 5;
+            this.skinTabPage6.TabItemImage = null;
+            this.skinTabPage6.Text = "地图信息";
             // 
             // skinTabControl_Organization
             // 
@@ -1685,6 +1685,11 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // timer2
+            // 
+            this.timer2.Interval = 1000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // skinDataGridView_Main
             // 
             this.skinDataGridView_Main.AllowUserToAddRows = false;
@@ -1783,11 +1788,6 @@
             this.Column3.ReadOnly = true;
             this.Column3.Width = 240;
             // 
-            // timer2
-            // 
-            this.timer2.Interval = 1000;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1833,6 +1833,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_offline)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_online)).EndInit();
             this.skinTabControl_parameterset.ResumeLayout(false);
+            this.skinTabPage4.ResumeLayout(false);
+            this.skinTabPage4.PerformLayout();
             this.skinTabPage7.ResumeLayout(false);
             this.skinTabPage7.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -1845,8 +1847,6 @@
             this.skinTabPage2.ResumeLayout(false);
             this.skinTabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_WhiteList)).EndInit();
-            this.skinTabPage4.ResumeLayout(false);
-            this.skinTabPage4.PerformLayout();
             this.skinTabControl_Organization.ResumeLayout(false);
             this.skinTabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_broadcastrecord)).EndInit();
