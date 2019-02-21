@@ -1,0 +1,136 @@
+
+ 
+记录时间：2019-01-25 10:41:37,734 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：登录到县平台失败！
+ 
+
+ 
+记录时间：2019-01-25 11:21:19,343 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS流参数设置失败！
+ 
+
+ 
+记录时间：2019-01-25 11:21:52,354 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：登录到县平台失败！
+ 
+
+ 
+记录时间：2019-01-25 11:31:59,988 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS流参数设置失败！
+ 
+
+ 
+记录时间：2019-01-25 11:32:23,903 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：登录到县平台失败！
+ 
+
+ 
+记录时间：2019-01-25 11:41:32,371 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS流参数设置失败！
+ 
+
+ 
+记录时间：2019-01-25 11:42:05,295 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：登录到县平台失败！
+ 
+
+ 
+记录时间：2019-01-25 11:42:41,028 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS流参数设置失败！
+ 
+
+ 
+记录时间：2019-01-25 11:43:13,997 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：登录到县平台失败！
+ 
+
+ 
+记录时间：2019-01-25 11:44:03,702 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS流参数设置失败！
+ 
+
+ 
+记录时间：2019-01-25 11:44:36,581 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：登录到县平台失败！
+ 
+
+ 
+记录时间：2019-01-25 11:45:30,882 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS流参数设置失败！
+ 
+
+ 
+记录时间：2019-01-25 11:46:03,780 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：登录到县平台失败！
+ 
+
+ 
+记录时间：2019-01-25 11:49:16,831 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS流参数设置失败！
+ 
+
+ 
+记录时间：2019-01-25 11:49:49,725 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：登录到县平台失败！
+ 
+
+ 
+记录时间：2019-01-25 14:42:13,736 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：TS流参数设置失败！
+ 
+
+ 
+记录时间：2019-01-25 14:42:46,768 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：TownsEBMSystem.MainForm property: [(null)] - 
+错误描述：登录到县平台失败！
+ 

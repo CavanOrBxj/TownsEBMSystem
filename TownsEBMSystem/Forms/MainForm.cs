@@ -25,6 +25,10 @@ namespace TownsEBMSystem
 {
     public partial class MainForm : Form
     {
+        private readonly string xulrunnerPath = Application.StartupPath + "/xulrunner";
+        private string testUrl = "http://192.168.4.233:8033/";
+        private Gecko.GeckoWebBrowser Browser;
+
         public static IConfig cf = ConfigFile.Instanse;
         AutoSizeFormClass asc = new AutoSizeFormClass();
         public static IniFiles ini;
@@ -94,6 +98,7 @@ namespace TownsEBMSystem
         public MainForm()
         {
             InitializeComponent();
+            Xpcom.Initialize(xulrunnerPath);
             this.ShowInTaskbar = false;
             CheckIniConfig();
             InitConfig();
@@ -1861,7 +1866,8 @@ namespace TownsEBMSystem
                 tmp.S_EBM_class = ebm_class;//
                 string ebm_id_tmp = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
                 tmp.S_EBM_id = ebm_id_tmp.Substring(5, ebm_id_tmp.Length - 5); 
-                tmp.S_EBM_start_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                //应陈良要求 开始时间在当前时间的基础上增加1小时 20190218
+                tmp.S_EBM_start_time = DateTime.Now.AddHours(1).ToString("yyyy-MM-dd HH:mm:ss");
                 int delay = Convert.ToInt32(SingletonInfo.GetInstance().EndtimeDelay);
                 tmp.S_EBM_end_time = DateTime.Now.AddMinutes(delay).ToString("yyyy-MM-dd HH:mm:ss");
                 tmp.S_EBM_level = "2";//
@@ -1897,7 +1903,8 @@ namespace TownsEBMSystem
                 tmp.S_EBM_class = ebm_class;//
                 string ebm_id_tmp = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
                 tmp.S_EBM_id = ebm_id_tmp.Substring(5, ebm_id_tmp.Length - 5);
-                tmp.S_EBM_start_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                //应陈良要求 开始时间在当前时间的基础上增加1小时 20190218
+                tmp.S_EBM_start_time = DateTime.Now.AddHours(1).ToString("yyyy-MM-dd HH:mm:ss");
                 int delay = Convert.ToInt32(SingletonInfo.GetInstance().EndtimeDelay);
                 tmp.S_EBM_end_time = DateTime.Now.AddMinutes(delay).ToString("yyyy-MM-dd HH:mm:ss");
                 tmp.S_EBM_level = "2";//
@@ -3271,8 +3278,6 @@ namespace TownsEBMSystem
                 }
                 #endregion
             }
-           
-        
         }
 
         private void skinDataGridView_Main_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -4165,6 +4170,40 @@ namespace TownsEBMSystem
                 timer2.Enabled = false;
                 upgradeForm = new UpgradeForm { label1 = { Text = @"软件版本有更新，是否升级？" } };
                 upgradeForm.Show();
+            }
+        }
+
+        private void skinButton2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (!panel_map.Visible)
+                {
+                    panel_map.Location = new System.Drawing.Point(453, 214);
+                    panel_map.Size = new System.Drawing.Size(1030, 589);
+                    panel_map.Visible = true;
+
+                    #region  调用火狐浏览器
+                    Browser = new Gecko.GeckoWebBrowser();
+                    Browser.Dock = DockStyle.Fill;
+                    panel_map.Controls.Add(Browser);
+                    panel_map.BringToFront();
+                    LogHelper.WriteLog(typeof(MainForm), "ceeaditcode：" + SingletonInfo.GetInstance().creditCode);
+                    testUrl = SingletonInfo.GetInstance().HttpServer + "/platform/eMap/"+ SingletonInfo.GetInstance().creditCode + "/monitor.htm";
+                    Browser.Navigate(testUrl);
+                    #endregion
+                }
+                else
+                {
+                    panel_map.Location = new System.Drawing.Point(294, 991);
+                    panel_map.Size = new System.Drawing.Size(74, 81);
+                    panel_map.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog(typeof(MainForm), "运行总览打开失败："+ex.Message);
             }
         }
     }
