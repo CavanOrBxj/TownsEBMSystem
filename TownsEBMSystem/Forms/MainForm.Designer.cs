@@ -65,7 +65,11 @@
             this.pictureBox_offline = new System.Windows.Forms.PictureBox();
             this.pictureBox_online = new System.Windows.Forms.PictureBox();
             this.skinTabControl_parameterset = new CCWin.SkinControl.SkinTabControl();
-            this.skinTabPage6 = new CCWin.SkinControl.SkinTabPage();
+            this.skinTabPage5 = new CCWin.SkinControl.SkinTabPage();
+            this.txt_volumn = new System.Windows.Forms.TextBox();
+            this.btn_volumn = new CCWin.SkinControl.SkinButton();
+            this.skinLabel6 = new CCWin.SkinControl.SkinLabel();
+            this.treeViewOrganization_volumn = new CCWin.SkinControl.SkinTreeView();
             this.skinTabPage2 = new CCWin.SkinControl.SkinTabPage();
             this.dgv_WhiteList = new CCWin.SkinControl.SkinDataGridView();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -103,11 +107,7 @@
             this.radioButton_Amplifier_On = new System.Windows.Forms.RadioButton();
             this.btn_SwitchAmplifier = new CCWin.SkinControl.SkinButton();
             this.treeViewOrganization_SwitchAmplifier = new CCWin.SkinControl.SkinTreeView();
-            this.skinTabPage5 = new CCWin.SkinControl.SkinTabPage();
-            this.txt_volumn = new System.Windows.Forms.TextBox();
-            this.btn_volumn = new CCWin.SkinControl.SkinButton();
-            this.skinLabel6 = new CCWin.SkinControl.SkinLabel();
-            this.treeViewOrganization_volumn = new CCWin.SkinControl.SkinTreeView();
+            this.skinTabPage6 = new CCWin.SkinControl.SkinTabPage();
             this.skinTabControl_Organization = new CCWin.SkinControl.SkinTabControl();
             this.skinTabPage3 = new CCWin.SkinControl.SkinTabPage();
             this.skinTabPage1 = new CCWin.SkinControl.SkinTabPage();
@@ -132,6 +132,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_offline)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_online)).BeginInit();
             this.skinTabControl_parameterset.SuspendLayout();
+            this.skinTabPage5.SuspendLayout();
             this.skinTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_WhiteList)).BeginInit();
             this.skinTabPage4.SuspendLayout();
@@ -139,7 +140,6 @@
             this.panel1.SuspendLayout();
             this.skinTabPage8.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.skinTabPage5.SuspendLayout();
             this.skinTabControl_Organization.SuspendLayout();
             this.skinTabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_broadcastrecord)).BeginInit();
@@ -685,12 +685,12 @@
             this.skinTabControl_parameterset.AnimatorType = CCWin.SkinControl.AnimationType.HorizSlide;
             this.skinTabControl_parameterset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(21)))), ((int)(((byte)(20)))));
             this.skinTabControl_parameterset.CloseRect = new System.Drawing.Rectangle(2, 2, 12, 12);
+            this.skinTabControl_parameterset.Controls.Add(this.skinTabPage6);
             this.skinTabControl_parameterset.Controls.Add(this.skinTabPage5);
             this.skinTabControl_parameterset.Controls.Add(this.skinTabPage2);
             this.skinTabControl_parameterset.Controls.Add(this.skinTabPage4);
             this.skinTabControl_parameterset.Controls.Add(this.skinTabPage7);
             this.skinTabControl_parameterset.Controls.Add(this.skinTabPage8);
-            this.skinTabControl_parameterset.Controls.Add(this.skinTabPage6);
             this.skinTabControl_parameterset.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.skinTabControl_parameterset.HeadBack = null;
             this.skinTabControl_parameterset.ImageList = this.imageList2;
@@ -721,18 +721,87 @@
             this.skinTabControl_parameterset.TabIndex = 94;
             this.skinTabControl_parameterset.Visible = false;
             // 
-            // skinTabPage6
+            // skinTabPage5
             // 
-            this.skinTabPage6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(21)))), ((int)(((byte)(20)))));
-            this.skinTabPage6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.skinTabPage6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.skinTabPage6.ImageIndex = 14;
-            this.skinTabPage6.Location = new System.Drawing.Point(0, 75);
-            this.skinTabPage6.Name = "skinTabPage6";
-            this.skinTabPage6.Size = new System.Drawing.Size(300, 85);
-            this.skinTabPage6.TabIndex = 5;
-            this.skinTabPage6.TabItemImage = null;
-            this.skinTabPage6.Text = "地图信息";
+            this.skinTabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(21)))), ((int)(((byte)(20)))));
+            this.skinTabPage5.Controls.Add(this.txt_volumn);
+            this.skinTabPage5.Controls.Add(this.btn_volumn);
+            this.skinTabPage5.Controls.Add(this.skinLabel6);
+            this.skinTabPage5.Controls.Add(this.treeViewOrganization_volumn);
+            this.skinTabPage5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.skinTabPage5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.skinTabPage5.ImageIndex = 15;
+            this.skinTabPage5.Location = new System.Drawing.Point(0, 75);
+            this.skinTabPage5.Name = "skinTabPage5";
+            this.skinTabPage5.Size = new System.Drawing.Size(300, 85);
+            this.skinTabPage5.TabIndex = 4;
+            this.skinTabPage5.TabItemImage = null;
+            this.skinTabPage5.Text = "音量设置";
+            // 
+            // txt_volumn
+            // 
+            this.txt_volumn.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold);
+            this.txt_volumn.Location = new System.Drawing.Point(668, 68);
+            this.txt_volumn.MaxLength = 3;
+            this.txt_volumn.Name = "txt_volumn";
+            this.txt_volumn.Size = new System.Drawing.Size(271, 43);
+            this.txt_volumn.TabIndex = 73;
+            // 
+            // btn_volumn
+            // 
+            this.btn_volumn.BackColor = System.Drawing.Color.Transparent;
+            this.btn_volumn.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(26)))), ((int)(((byte)(67)))));
+            this.btn_volumn.BorderColor = System.Drawing.Color.DimGray;
+            this.btn_volumn.ControlState = CCWin.SkinClass.ControlState.Hover;
+            this.btn_volumn.Create = true;
+            this.btn_volumn.DownBack = null;
+            this.btn_volumn.DownBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(26)))), ((int)(((byte)(67)))));
+            this.btn_volumn.Font = new System.Drawing.Font("微软雅黑", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_volumn.ForeColor = System.Drawing.Color.White;
+            this.btn_volumn.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(26)))), ((int)(((byte)(67)))));
+            this.btn_volumn.InnerBorderColor = System.Drawing.Color.Silver;
+            this.btn_volumn.IsDrawBorder = false;
+            this.btn_volumn.Location = new System.Drawing.Point(759, 304);
+            this.btn_volumn.MouseBack = null;
+            this.btn_volumn.MouseBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(80)))), ((int)(((byte)(167)))));
+            this.btn_volumn.Name = "btn_volumn";
+            this.btn_volumn.NormlBack = null;
+            this.btn_volumn.Palace = true;
+            this.btn_volumn.Radius = 14;
+            this.btn_volumn.RoundStyle = CCWin.SkinClass.RoundStyle.All;
+            this.btn_volumn.Size = new System.Drawing.Size(162, 60);
+            this.btn_volumn.TabIndex = 72;
+            this.btn_volumn.Text = "确定";
+            this.btn_volumn.UseCompatibleTextRendering = true;
+            this.btn_volumn.UseVisualStyleBackColor = true;
+            // 
+            // skinLabel6
+            // 
+            this.skinLabel6.ArtTextStyle = CCWin.SkinControl.ArtTextStyle.None;
+            this.skinLabel6.AutoSize = true;
+            this.skinLabel6.BackColor = System.Drawing.Color.Transparent;
+            this.skinLabel6.BorderColor = System.Drawing.Color.White;
+            this.skinLabel6.Font = new System.Drawing.Font("微软雅黑", 20F);
+            this.skinLabel6.ForeColor = System.Drawing.Color.White;
+            this.skinLabel6.Location = new System.Drawing.Point(396, 72);
+            this.skinLabel6.Name = "skinLabel6";
+            this.skinLabel6.Size = new System.Drawing.Size(199, 35);
+            this.skinLabel6.TabIndex = 71;
+            this.skinLabel6.Text = "音量（0-100）";
+            // 
+            // treeViewOrganization_volumn
+            // 
+            this.treeViewOrganization_volumn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(21)))), ((int)(((byte)(20)))));
+            this.treeViewOrganization_volumn.BorderColor = System.Drawing.Color.Gainsboro;
+            this.treeViewOrganization_volumn.CheckBoxes = true;
+            this.treeViewOrganization_volumn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.treeViewOrganization_volumn.ForeColor = System.Drawing.Color.White;
+            this.treeViewOrganization_volumn.LineColor = System.Drawing.Color.White;
+            this.treeViewOrganization_volumn.Location = new System.Drawing.Point(43, 25);
+            this.treeViewOrganization_volumn.Name = "treeViewOrganization_volumn";
+            this.treeViewOrganization_volumn.ShowLines = false;
+            this.treeViewOrganization_volumn.Size = new System.Drawing.Size(280, 439);
+            this.treeViewOrganization_volumn.TabIndex = 64;
             // 
             // skinTabPage2
             // 
@@ -1356,87 +1425,18 @@
             this.treeViewOrganization_SwitchAmplifier.Size = new System.Drawing.Size(280, 439);
             this.treeViewOrganization_SwitchAmplifier.TabIndex = 63;
             // 
-            // skinTabPage5
+            // skinTabPage6
             // 
-            this.skinTabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(21)))), ((int)(((byte)(20)))));
-            this.skinTabPage5.Controls.Add(this.txt_volumn);
-            this.skinTabPage5.Controls.Add(this.btn_volumn);
-            this.skinTabPage5.Controls.Add(this.skinLabel6);
-            this.skinTabPage5.Controls.Add(this.treeViewOrganization_volumn);
-            this.skinTabPage5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.skinTabPage5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.skinTabPage5.ImageIndex = 15;
-            this.skinTabPage5.Location = new System.Drawing.Point(0, 75);
-            this.skinTabPage5.Name = "skinTabPage5";
-            this.skinTabPage5.Size = new System.Drawing.Size(300, 85);
-            this.skinTabPage5.TabIndex = 4;
-            this.skinTabPage5.TabItemImage = null;
-            this.skinTabPage5.Text = "音量设置";
-            // 
-            // txt_volumn
-            // 
-            this.txt_volumn.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Bold);
-            this.txt_volumn.Location = new System.Drawing.Point(668, 68);
-            this.txt_volumn.MaxLength = 3;
-            this.txt_volumn.Name = "txt_volumn";
-            this.txt_volumn.Size = new System.Drawing.Size(271, 43);
-            this.txt_volumn.TabIndex = 73;
-            // 
-            // btn_volumn
-            // 
-            this.btn_volumn.BackColor = System.Drawing.Color.Transparent;
-            this.btn_volumn.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(26)))), ((int)(((byte)(67)))));
-            this.btn_volumn.BorderColor = System.Drawing.Color.DimGray;
-            this.btn_volumn.ControlState = CCWin.SkinClass.ControlState.Hover;
-            this.btn_volumn.Create = true;
-            this.btn_volumn.DownBack = null;
-            this.btn_volumn.DownBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(26)))), ((int)(((byte)(67)))));
-            this.btn_volumn.Font = new System.Drawing.Font("微软雅黑", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_volumn.ForeColor = System.Drawing.Color.White;
-            this.btn_volumn.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(26)))), ((int)(((byte)(67)))));
-            this.btn_volumn.InnerBorderColor = System.Drawing.Color.Silver;
-            this.btn_volumn.IsDrawBorder = false;
-            this.btn_volumn.Location = new System.Drawing.Point(759, 304);
-            this.btn_volumn.MouseBack = null;
-            this.btn_volumn.MouseBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(80)))), ((int)(((byte)(167)))));
-            this.btn_volumn.Name = "btn_volumn";
-            this.btn_volumn.NormlBack = null;
-            this.btn_volumn.Palace = true;
-            this.btn_volumn.Radius = 14;
-            this.btn_volumn.RoundStyle = CCWin.SkinClass.RoundStyle.All;
-            this.btn_volumn.Size = new System.Drawing.Size(162, 60);
-            this.btn_volumn.TabIndex = 72;
-            this.btn_volumn.Text = "确定";
-            this.btn_volumn.UseCompatibleTextRendering = true;
-            this.btn_volumn.UseVisualStyleBackColor = true;
-            // 
-            // skinLabel6
-            // 
-            this.skinLabel6.ArtTextStyle = CCWin.SkinControl.ArtTextStyle.None;
-            this.skinLabel6.AutoSize = true;
-            this.skinLabel6.BackColor = System.Drawing.Color.Transparent;
-            this.skinLabel6.BorderColor = System.Drawing.Color.White;
-            this.skinLabel6.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.skinLabel6.ForeColor = System.Drawing.Color.White;
-            this.skinLabel6.Location = new System.Drawing.Point(396, 72);
-            this.skinLabel6.Name = "skinLabel6";
-            this.skinLabel6.Size = new System.Drawing.Size(199, 35);
-            this.skinLabel6.TabIndex = 71;
-            this.skinLabel6.Text = "音量（0-100）";
-            // 
-            // treeViewOrganization_volumn
-            // 
-            this.treeViewOrganization_volumn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(21)))), ((int)(((byte)(20)))));
-            this.treeViewOrganization_volumn.BorderColor = System.Drawing.Color.Gainsboro;
-            this.treeViewOrganization_volumn.CheckBoxes = true;
-            this.treeViewOrganization_volumn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.treeViewOrganization_volumn.ForeColor = System.Drawing.Color.White;
-            this.treeViewOrganization_volumn.LineColor = System.Drawing.Color.White;
-            this.treeViewOrganization_volumn.Location = new System.Drawing.Point(43, 25);
-            this.treeViewOrganization_volumn.Name = "treeViewOrganization_volumn";
-            this.treeViewOrganization_volumn.ShowLines = false;
-            this.treeViewOrganization_volumn.Size = new System.Drawing.Size(280, 439);
-            this.treeViewOrganization_volumn.TabIndex = 64;
+            this.skinTabPage6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(21)))), ((int)(((byte)(20)))));
+            this.skinTabPage6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.skinTabPage6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.skinTabPage6.ImageIndex = 14;
+            this.skinTabPage6.Location = new System.Drawing.Point(0, 75);
+            this.skinTabPage6.Name = "skinTabPage6";
+            this.skinTabPage6.Size = new System.Drawing.Size(300, 85);
+            this.skinTabPage6.TabIndex = 5;
+            this.skinTabPage6.TabItemImage = null;
+            this.skinTabPage6.Text = "地图信息";
             // 
             // skinTabControl_Organization
             // 
@@ -1817,6 +1817,7 @@
             this.skinButton2.Text = "运行总览";
             this.skinButton2.UseCompatibleTextRendering = true;
             this.skinButton2.UseVisualStyleBackColor = true;
+            this.skinButton2.Visible = false;
             this.skinButton2.Click += new System.EventHandler(this.skinButton2_Click);
             // 
             // panel_map
@@ -1874,6 +1875,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_offline)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_online)).EndInit();
             this.skinTabControl_parameterset.ResumeLayout(false);
+            this.skinTabPage5.ResumeLayout(false);
+            this.skinTabPage5.PerformLayout();
             this.skinTabPage2.ResumeLayout(false);
             this.skinTabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_WhiteList)).EndInit();
@@ -1886,8 +1889,6 @@
             this.skinTabPage8.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.skinTabPage5.ResumeLayout(false);
-            this.skinTabPage5.PerformLayout();
             this.skinTabControl_Organization.ResumeLayout(false);
             this.skinTabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_broadcastrecord)).EndInit();

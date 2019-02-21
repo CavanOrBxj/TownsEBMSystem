@@ -581,6 +581,11 @@ namespace TownsEBMSystem
                 SingletonInfo.GetInstance().downloading = false;
                 ini.WriteValue("SystemConfig", "UpgradeFlag","1");
             };
+
+            if (SingletonInfo.GetInstance().loginstatus && SingletonInfo.GetInstance().SendCommandMode)
+            {
+                skinButton2.Visible = true;
+            }
         }
 
         private void InitTable()
@@ -1866,8 +1871,8 @@ namespace TownsEBMSystem
                 tmp.S_EBM_class = ebm_class;//
                 string ebm_id_tmp = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
                 tmp.S_EBM_id = ebm_id_tmp.Substring(5, ebm_id_tmp.Length - 5); 
-                //应陈良要求 开始时间在当前时间的基础上增加1小时 20190218
-                tmp.S_EBM_start_time = DateTime.Now.AddHours(1).ToString("yyyy-MM-dd HH:mm:ss");
+                //应陈良要求 开始时间在当前时间的基础上减1小时 20190218
+                tmp.S_EBM_start_time = DateTime.Now.AddHours(-1).ToString("yyyy-MM-dd HH:mm:ss");
                 int delay = Convert.ToInt32(SingletonInfo.GetInstance().EndtimeDelay);
                 tmp.S_EBM_end_time = DateTime.Now.AddMinutes(delay).ToString("yyyy-MM-dd HH:mm:ss");
                 tmp.S_EBM_level = "2";//
@@ -4196,6 +4201,7 @@ namespace TownsEBMSystem
                 }
                 else
                 {
+                    panel_map.Controls.Remove(Browser);
                     panel_map.Location = new System.Drawing.Point(294, 991);
                     panel_map.Size = new System.Drawing.Size(74, 81);
                     panel_map.Visible = false;
