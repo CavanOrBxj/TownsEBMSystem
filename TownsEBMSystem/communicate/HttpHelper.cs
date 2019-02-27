@@ -91,7 +91,8 @@ namespace TownsEBMSystem
                     paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(SingletonInfo.GetInstance().creditCode);
                     strURL = SingletonInfo.GetInstance().HttpServer + "broadcast/program/play.htm";
                     sReturnString = SendHttpData(strURL, paraUrlCoded);
-                    if (sReturnString!="")
+                   // if (sReturnString!="")
+                   if(true)
                     {
                         Generalresponse  response = Serializer.Deserialize<Generalresponse>(sReturnString);
                         reback = response;

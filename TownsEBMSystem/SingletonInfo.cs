@@ -97,7 +97,7 @@ namespace TownsEBMSystem
 
         public bool SendCommandMode;//正常模式true  离线优先false
 
-
+        public bool Daily_Inter_cut_flag;//是否日常同级别插播  true表示是同级日常插播 false表示不是
 
         private SingletonInfo()                                                                 
         {
@@ -174,6 +174,7 @@ namespace TownsEBMSystem
             UpgradeFlag = "";
             downloading = false;
             SendCommandMode = true;
+            Daily_Inter_cut_flag = false;
         }
         public static SingletonInfo GetInstance()
         {

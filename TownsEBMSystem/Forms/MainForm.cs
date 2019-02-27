@@ -2109,7 +2109,7 @@ namespace TownsEBMSystem
             try
             {
                 skinDataGridView_Main.Tag = (bool)true;
-                skinDataGridView_Main.Location = new System.Drawing.Point(453, 214);
+                skinDataGridView_Main.Location = new System.Drawing.Point(443, 214);
                 skinDataGridView_Main.Size = new System.Drawing.Size(1030, 589);
                 skinDataGridView_Main.Visible = true;
                
@@ -3471,16 +3471,22 @@ namespace TownsEBMSystem
             Generalresponse response = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(palyinfo, "播放");
             if (response.code == 0)
             {
-                Thread.Sleep(5000);
+                Thread.Sleep(3000);
                 broadcastrecord broadcastrecordresponse = (broadcastrecord)SingletonInfo.GetInstance().post.PostCommnand(null, "直播列表");
-                if (broadcastrecordresponse.data.Count > 0)
+                if (broadcastrecordresponse != null && broadcastrecordresponse.data.Count > 0)
                 {
                     SingletonInfo.GetInstance().TownHttpPlayID = broadcastrecordresponse.data[0].prlId.ToString();
+                    SingletonInfo.GetInstance().Daily_Inter_cut_flag = false;
+                }
+                else
+                {
+                    // MessageBox.Show("不能进行同级日常插播！");
+                    SingletonInfo.GetInstance().Daily_Inter_cut_flag = true;
+
                 }
             }
           //  ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData);
-
-
+          
         }
 
         /// <summary>
@@ -3491,27 +3497,33 @@ namespace TownsEBMSystem
         {       
             string broadcastType = (string)obj;
 
-            if (broadcastType == "1" && btn_Daily_Main.Text=="日常停播") //应急
+            if (broadcastType == "1") //应急
             {
-                 //先关日常
-
-                List<string> STOP_ID_List = new List<string>();
-                foreach (var item in SingletonInfo.GetInstance().dgvMainData)
-                {
-                    if (item.checkstate && item.deviceoperate=="1" && item.prEvnType=="日常" )
+                //先关日常
+              //  if (btn_Daily_Main.Text == "日常停播")
+               // {
+                    List<string> STOP_ID_List = new List<string>();
+                    foreach (var item in SingletonInfo.GetInstance().dgvMainData)
                     {
-                        STOP_ID_List.Add(item.prlId);
-                        item.deviceoperate = "0";
-                        item.prEvnType = "未播放";
-                        item.prlId = "-1";
+                        if (item.checkstate && item.deviceoperate == "1" && item.prEvnType == "日常")
+                        {
+                            STOP_ID_List.Add(item.prlId);
+                            item.deviceoperate = "0";
+                            item.prEvnType = "未播放";
+                            item.prlId = "-1";
+                        }
                     }
-                }
 
-                if (STOP_ID_List.Count>0)
-                {
-                    Generalresponse stopresponse = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(STOP_ID_List, "停止");
-                    Thread.Sleep(5000);
-                }
+                    if (STOP_ID_List.Count > 0)
+                    {
+                        Generalresponse stopresponse = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(STOP_ID_List, "停止");
+                        Thread.Sleep(4000);
+                    }
+              //  }
+
+                //如果是上级平台开的日常也要关闭
+
+               
                
             }
           
@@ -3529,23 +3541,40 @@ namespace TownsEBMSystem
             if (palyinfo.organization_List.Count>0)
             {
                 Generalresponse response = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(palyinfo, "播放");
-                if (response.code == 0)
+             
+                if (response != null && response.code == 0)
                 {
                     Thread.Sleep(2000);
                     broadcastrecord broadcastrecordresponse = (broadcastrecord)SingletonInfo.GetInstance().post.PostCommnand(null, "直播列表");
-                    if (broadcastrecordresponse.data.Count > 0)
+                    if (broadcastrecordresponse != null && broadcastrecordresponse.data.Count > 0)
                     {
                         foreach (var item in palyinfo.organization_List)
                         {
                             Datagridviewmainitem selected = SingletonInfo.GetInstance().dgvMainData.Find(s => s.areaname.Equals(item.name));
 
                             broadcastrecorddata receiverecord = broadcastrecordresponse.data.Find(s => s.prAreaName.Equals(item.name));
-                            selected.deviceoperate = "1";
-                            selected.prEvnType = receiverecord.prEvnType;
-                            selected.prlId = receiverecord.prlId.ToString();
-
+                            if (receiverecord == null)
+                            {
+                                // MessageBox.Show("不能进行同级日常插播！");
+                                SingletonInfo.GetInstance().Daily_Inter_cut_flag = true;
+                            }
+                            else
+                            {
+                                selected.deviceoperate = "1";
+                                selected.prEvnType = receiverecord.prEvnType;
+                                selected.prlId = receiverecord.prlId.ToString();
+                                SingletonInfo.GetInstance().Daily_Inter_cut_flag = false;
+                            }
                         }
                     }
+                    else
+                    {
+                        SingletonInfo.GetInstance().Daily_Inter_cut_flag = true;
+                    }
+                }
+                else
+                {
+                    SingletonInfo.GetInstance().Daily_Inter_cut_flag = true;
                 }
                 ShowskinDataGridView_Main(SingletonInfo.GetInstance().dgvMainData,1);
             }
@@ -3776,7 +3805,7 @@ namespace TownsEBMSystem
                         MessageShowDlg.ShowDialog();
                         if (MessageShowDlg.IsSure)
                         {
-                            
+                           
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
                                 //在线情况
@@ -3797,10 +3826,20 @@ namespace TownsEBMSystem
                                 OfflineSelectedStart("日常");
                                
                             }
-                            btn_Daily_Main.Text = "日常停播";
-                            btn_Daily_Main.BaseColor = System.Drawing.Color.Lime;
-                            btn_Emergency_Main.Enabled = false;
-                            pictureBox_checkbox.Enabled = false;
+                            if (!SingletonInfo.GetInstance().Daily_Inter_cut_flag)//新加逻辑判断 同级日常插播  20190225
+                            {
+                                btn_Home1.Enabled = false;//新增于20190225
+                                btn_Daily_Main.Text = "日常停播";
+                                btn_Daily_Main.BaseColor = System.Drawing.Color.Lime;
+                                btn_Emergency_Main.Enabled = false;
+                                pictureBox_checkbox.Enabled = false;
+                            }
+                            else
+                            {
+                                MessageBox.Show("当前不能进行该操作！");
+                                SingletonInfo.GetInstance().Daily_Inter_cut_flag = false ;
+                            }
+                           
 
                         }
                     }
@@ -3811,7 +3850,7 @@ namespace TownsEBMSystem
                         MessageShowDlg.ShowDialog();
                         if (MessageShowDlg.IsSure)
                         {
-                       
+                            btn_Home1.Enabled = true;//新增于20190225
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
                                 //在线情况
@@ -3847,10 +3886,7 @@ namespace TownsEBMSystem
                         MessageShowDlg.ShowDialog();
                         if (MessageShowDlg.IsSure)
                         {
-                            btn_Emergency_Main.Enabled = false;
-                            //开
-                            btn_Daily_Main.Text = "日常停播";
-                            btn_Daily_Main.BaseColor = System.Drawing.Color.Lime;
+                           
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
                                 //在线情况
@@ -3876,7 +3912,21 @@ namespace TownsEBMSystem
                                 thread.IsBackground = true;
                                 thread.Start("日常");
                             }
-                            btn_Organization.Enabled = false;
+
+                            Thread.Sleep(10000);
+                            if (!SingletonInfo.GetInstance().Daily_Inter_cut_flag)
+                            {
+                                btn_Organization.Enabled = false;
+                                btn_Emergency_Main.Enabled = false;
+                                //开
+                                btn_Daily_Main.Text = "日常停播";
+                                btn_Daily_Main.BaseColor = System.Drawing.Color.Lime;
+                            }
+                            else
+                            {
+                                MessageBox.Show("当前不能进行该操作！");
+                                SingletonInfo.GetInstance().Daily_Inter_cut_flag = false;
+                            }
                         }
                        
                     }
@@ -3923,7 +3973,7 @@ namespace TownsEBMSystem
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -3942,10 +3992,7 @@ namespace TownsEBMSystem
                         MessageShowDlg.ShowDialog();
                         if (MessageShowDlg.IsSure)
                         {
-                            btn_Emergency_Main.Text = "应急停播";
-                            btn_Emergency_Main.BaseColor = System.Drawing.Color.Red;
-                            btn_Daily_Main.Enabled = false;
-                            pictureBox_checkbox.Enabled = false;
+                            
                             if (SingletonInfo.GetInstance().loginstatus)
                             {
                                 //在线情况
@@ -3965,6 +4012,20 @@ namespace TownsEBMSystem
                                 //不在线情况
                                 OfflineSelectedStart("应急");
                             }
+
+                            if (!SingletonInfo.GetInstance().Daily_Inter_cut_flag)
+                            {
+                                btn_Home1.Enabled = false;//新增于20190225
+                                btn_Emergency_Main.Text = "应急停播";
+                                btn_Emergency_Main.BaseColor = System.Drawing.Color.Red;
+                                btn_Daily_Main.Enabled = false;
+                                pictureBox_checkbox.Enabled = false;
+                            }
+                            else
+                            {
+                                MessageBox.Show("当前不能进行该操作！");
+                                SingletonInfo.GetInstance().Daily_Inter_cut_flag = false;
+                            }
                         }
                     }
                     else
@@ -3974,6 +4035,7 @@ namespace TownsEBMSystem
                         MessageShowDlg.ShowDialog();
                         if (MessageShowDlg.IsSure)
                         {
+                            btn_Home1.Enabled = true;//新增于20190225
                             btn_Emergency_Main.Text = "应急广播";
                             btn_Emergency_Main.BaseColor = System.Drawing.Color.Maroon;
                             btn_Daily_Main.Enabled = true;
@@ -4083,7 +4145,7 @@ namespace TownsEBMSystem
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -4185,7 +4247,7 @@ namespace TownsEBMSystem
 
                 if (!panel_map.Visible)
                 {
-                    panel_map.Location = new System.Drawing.Point(453, 214);
+                    panel_map.Location = new System.Drawing.Point(443, 214);
                     panel_map.Size = new System.Drawing.Size(1030, 589);
                     panel_map.Visible = true;
 

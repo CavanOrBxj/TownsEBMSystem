@@ -11,7 +11,7 @@ namespace TownsEBMSystem
    public  class Calcle
     {
          public delegate void MyDelegate();
-         public event MyDelegate MyEvent;
+        // public event MyDelegate MyEvent;
 
        /// <summary>
        /// 签名函数

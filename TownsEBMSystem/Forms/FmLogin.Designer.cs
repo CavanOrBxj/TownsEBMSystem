@@ -440,7 +440,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::TownsEBMSystem.Properties.Resources.bg4;
-            this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.ClientSize = new System.Drawing.Size(1916, 1076);
             this.ControlBox = false;
             this.Controls.Add(this.Txt_inputdata);
             this.Controls.Add(this.skinLabel1);
