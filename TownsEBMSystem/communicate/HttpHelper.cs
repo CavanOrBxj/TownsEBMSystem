@@ -89,6 +89,12 @@ namespace TownsEBMSystem
 
                     paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("creditCode");
                     paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(SingletonInfo.GetInstance().creditCode);
+
+
+                    paraUrlCoded += "&" + System.Web.HttpUtility.UrlEncode("ebmId");
+                    paraUrlCoded += "=" + System.Web.HttpUtility.UrlEncode(playInfo.ebmid);
+
+
                     strURL = SingletonInfo.GetInstance().HttpServer + "broadcast/program/play.htm";
                     sReturnString = SendHttpData(strURL, paraUrlCoded);
                    // if (sReturnString!="")

@@ -1803,59 +1803,59 @@ namespace TownsEBMSystem
             return resopnse;
         }
 
-        private OnorOFFResponse TCPBroadcastcommand(List<organizationdata> organization_List,string commandtype,string ebm_class)
-        {
-            OnorOFFBroadcast tt = new OnorOFFBroadcast();
-            tt.ebm_class = ebm_class;
-            tt.ebm_id = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
-            SingletonInfo.GetInstance().ebm_id = tt.ebm_id;
-            tt.ebm_level = "2";//2级  重大
-            tt.ebm_type = "00000";
-            tt.end_time = DateTime.Now.AddHours(5).ToString("yyyy-MM-dd HH:mm:ss");
-            SingletonInfo.GetInstance().endtime = tt.end_time;
+        //private OnorOFFResponse TCPBroadcastcommand(List<organizationdata> organization_List,string commandtype,string ebm_class)
+        //{
+        //    OnorOFFBroadcast tt = new OnorOFFBroadcast();
+        //    tt.ebm_class = ebm_class;
+        //    tt.ebm_id = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
+        //    SingletonInfo.GetInstance().ebm_id = tt.ebm_id;
+        //    tt.ebm_level = "2";//2级  重大
+        //    tt.ebm_type = "00000";
+        //    tt.end_time = DateTime.Now.AddHours(5).ToString("yyyy-MM-dd HH:mm:ss");
+        //    SingletonInfo.GetInstance().endtime = tt.end_time;
 
 
-            tt.start_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            SingletonInfo.GetInstance().starttime = tt.start_time;
-            tt.power_switch = commandtype;// 1开播  2停播   3切换通道
-            tt.volume = "80";
-            tt.resource_code_type = "1";
-            tt.resource_codeList = new List<string>();
-            foreach (var item in organization_List)
-            {
-                tt.resource_codeList.Add(item.resource);
-            }
-            tt.input_channel_id = Convert.ToInt32(SingletonInfo.GetInstance().input_channel_id); 
-            OnorOFFResponse resopnse = (OnorOFFResponse)SingletonInfo.GetInstance().tcpsend.SendTCPCommnand(tt, 0x04);
-            return resopnse;
-        }
+        //    tt.start_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        //    SingletonInfo.GetInstance().starttime = tt.start_time;
+        //    tt.power_switch = commandtype;// 1开播  2停播   3切换通道
+        //    tt.volume = "80";
+        //    tt.resource_code_type = "1";
+        //    tt.resource_codeList = new List<string>();
+        //    foreach (var item in organization_List)
+        //    {
+        //        tt.resource_codeList.Add(item.resource);
+        //    }
+        //    tt.input_channel_id = Convert.ToInt32(SingletonInfo.GetInstance().input_channel_id); 
+        //    OnorOFFResponse resopnse = (OnorOFFResponse)SingletonInfo.GetInstance().tcpsend.SendTCPCommnand(tt, 0x04);
+        //    return resopnse;
+        //}
 
-        private OnorOFFResponse TCPBroadcastcommand(List<PlayRecord_tcp_ts> organization_List, string commandtype)
-        {
-            OnorOFFBroadcast tt = new OnorOFFBroadcast();
-            tt.ebm_class = "4";
-            tt.ebm_id = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
-            SingletonInfo.GetInstance().ebm_id = tt.ebm_id;
-            tt.ebm_level = "2";//2级  重大
-            tt.ebm_type = "00000";
-            tt.end_time = DateTime.Now.AddHours(5).ToString("yyyy-MM-dd HH:mm:ss");
-            SingletonInfo.GetInstance().endtime = tt.end_time;
+        //private OnorOFFResponse TCPBroadcastcommand(List<PlayRecord_tcp_ts> organization_List, string commandtype)
+        //{
+        //    OnorOFFBroadcast tt = new OnorOFFBroadcast();
+        //    tt.ebm_class = "4";
+        //    tt.ebm_id = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
+        //    SingletonInfo.GetInstance().ebm_id = tt.ebm_id;
+        //    tt.ebm_level = "2";//2级  重大
+        //    tt.ebm_type = "00000";
+        //    tt.end_time = DateTime.Now.AddHours(5).ToString("yyyy-MM-dd HH:mm:ss");
+        //    SingletonInfo.GetInstance().endtime = tt.end_time;
 
 
-            tt.start_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            SingletonInfo.GetInstance().starttime = tt.start_time;
-            tt.power_switch = commandtype;// 1开播  2停播   3切换通道
-            tt.volume = "80";
-            tt.resource_code_type = "1";
-            tt.resource_codeList = new List<string>();
-            foreach (var item in organization_List)
-            {
-                tt.resource_codeList.Add(item.resource_code);
-            }
-            tt.input_channel_id = Convert.ToInt32(SingletonInfo.GetInstance().input_channel_id);
-            OnorOFFResponse resopnse = (OnorOFFResponse)SingletonInfo.GetInstance().tcpsend.SendTCPCommnand(tt, 0x04);
-            return resopnse;
-        }
+        //    tt.start_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        //    SingletonInfo.GetInstance().starttime = tt.start_time;
+        //    tt.power_switch = commandtype;// 1开播  2停播   3切换通道
+        //    tt.volume = "80";
+        //    tt.resource_code_type = "1";
+        //    tt.resource_codeList = new List<string>();
+        //    foreach (var item in organization_List)
+        //    {
+        //        tt.resource_codeList.Add(item.resource_code);
+        //    }
+        //    tt.input_channel_id = Convert.ToInt32(SingletonInfo.GetInstance().input_channel_id);
+        //    OnorOFFResponse resopnse = (OnorOFFResponse)SingletonInfo.GetInstance().tcpsend.SendTCPCommnand(tt, 0x04);
+        //    return resopnse;
+        //}
 
         private Dictionary<string, string> TSBroadcastcommand(List<string> organization_List, string pid, string ebm_class)
         {
@@ -1870,7 +1870,8 @@ namespace TownsEBMSystem
                 IndexItemIDic.Add(item,tmp.IndexItemID);
                 tmp.S_EBM_class = ebm_class;//
                 string ebm_id_tmp = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
-                tmp.S_EBM_id = ebm_id_tmp.Substring(5, ebm_id_tmp.Length - 5); 
+                // tmp.S_EBM_id = ebm_id_tmp.Substring(5, ebm_id_tmp.Length - 5); 
+                tmp.S_EBM_id = ebm_id_tmp;
                 //应陈良要求 开始时间在当前时间的基础上减1小时 20190218
                 tmp.S_EBM_start_time = DateTime.Now.AddHours(-1).ToString("yyyy-MM-dd HH:mm:ss");
                 int delay = Convert.ToInt32(SingletonInfo.GetInstance().EndtimeDelay);
@@ -1907,7 +1908,8 @@ namespace TownsEBMSystem
                 IndexItemIDList.Add(tmp.IndexItemID);
                 tmp.S_EBM_class = ebm_class;//
                 string ebm_id_tmp = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
-                tmp.S_EBM_id = ebm_id_tmp.Substring(5, ebm_id_tmp.Length - 5);
+                //   tmp.S_EBM_id = ebm_id_tmp.Substring(5, ebm_id_tmp.Length - 5);
+                tmp.S_EBM_id = ebm_id_tmp;
                 //应陈良要求 开始时间在当前时间的基础上增加1小时 20190218
                 tmp.S_EBM_start_time = DateTime.Now.AddHours(1).ToString("yyyy-MM-dd HH:mm:ss");
                 int delay = Convert.ToInt32(SingletonInfo.GetInstance().EndtimeDelay);
@@ -1955,7 +1957,7 @@ namespace TownsEBMSystem
                         palyinfo.organization_List = new List<organizationdata>();
                         palyinfo.organization_List = organization_List;
                         palyinfo.broadcastType = "1";//表示应急
-
+                        palyinfo.ebmid = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
                         Generalresponse response = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(palyinfo, "播放");
                         if (response.code == 0)
                         {
@@ -2039,7 +2041,7 @@ namespace TownsEBMSystem
                         palyinfo.organization_List = new List<organizationdata>();
                         palyinfo.organization_List = organization_List;
                         palyinfo.broadcastType = "0";//1表示应急  0表示日常
-
+                        palyinfo.ebmid = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
                         Generalresponse response = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(palyinfo, "播放");
                         if (response.code == 0)
                         {
@@ -3417,6 +3419,7 @@ namespace TownsEBMSystem
             palyinfo.broadcastType = broadcastType;//0：日常  1：应急
             palyinfo.organization_List = new List<organizationdata>();
             List<string> STOP_ID_List = new List<string>();
+            palyinfo.ebmid = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
             foreach (var item in SingletonInfo.GetInstance().dgvMainData)
             {
                 if (item.deviceoperate == "1")
@@ -3467,6 +3470,7 @@ namespace TownsEBMSystem
             SendPlayInfo palyinfo = new SendPlayInfo();
             palyinfo.broadcastType = broadcastType;//0：日常  1：应急
             palyinfo.organization_List = SingletonInfo.GetInstance().Organization;
+            palyinfo.ebmid = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
             //Thread.Sleep(2000);
             Generalresponse response = (Generalresponse)SingletonInfo.GetInstance().post.PostCommnand(palyinfo, "播放");
             if (response.code == 0)
@@ -3530,7 +3534,7 @@ namespace TownsEBMSystem
             SendPlayInfo palyinfo = new SendPlayInfo();
             palyinfo.broadcastType = broadcastType;//0：日常  1：应急
             palyinfo.organization_List = new List<organizationdata>();
-
+            palyinfo.ebmid = SingletonInfo.GetInstance().tcpsend.CreateEBM_ID();
             foreach (var item in SingletonInfo.GetInstance().dgvMainData)
             {
                 if (item.checkstate && item.deviceoperate=="0"&&item.prEvnType=="未播放")

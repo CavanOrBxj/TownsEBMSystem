@@ -1188,6 +1188,11 @@ Maximum size of the groups (that is, of N and P)
 基础pid
 </summary>
         </member>
+        <member name="P:EBMTable.EBMStream.Version">
+            <summary>
+读取库版本号
+</summary>
+        </member>
         <member name="F:EBMTable.EBMStream.Daily_Broadcast_Table">
             <summary>
 日常广播指令表数据对像
@@ -1338,6 +1343,11 @@ Maximum size of the groups (that is, of N and P)
 带有当前音频节目内容的 TS流PID
 </summary>
         </member>
+        <member name="F:EBMTable.DailyCmdProgramStop.Stream_Type">
+            <summary>
+Stream_Type
+</summary>
+        </member>
         <member name="F:EBMTable.DailyCmdProgramStop.PCR_PID">
             <summary>
 PCR pid
@@ -1356,6 +1366,11 @@ Program service id
         <member name="F:EBMTable.DailyCmdProgramStop.NetID">
             <summary>
 源始网络标识
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdProgramStop.S_cmd_id">
+            <summary>
+指令ID
 </summary>
         </member>
         <member name="F:EBMTable.DailyCmdProgramStop.B_cmd_tag">
@@ -1403,6 +1418,11 @@ Program service id
 带有当前音频节目内容的 TS流PID*/
 </summary>
         </member>
+        <member name="F:EBMTable.DailyCmdChangeProgram.Stream_Type">
+            <summary>
+Stream_Type
+</summary>
+        </member>
         <member name="F:EBMTable.DailyCmdChangeProgram.PCR_PID">
             <summary>
 PCR pid
@@ -1421,6 +1441,11 @@ Program service id
         <member name="F:EBMTable.DailyCmdChangeProgram.NetID">
             <summary>
 源始网络标识
+</summary>
+        </member>
+        <member name="F:EBMTable.DailyCmdChangeProgram.S_cmd_id">
+            <summary>
+指令ID
 </summary>
         </member>
         <member name="F:EBMTable.DailyCmdChangeProgram.B_cmd_tag">
@@ -1501,11 +1526,6 @@ Program service id
         <member name="M:EBMTable.DailyBroadcastTable.Copy">
             <summary>
 获取当前对像的浅表副本
-</summary>
-        </member>
-        <member name="F:EBMSection.DailyBroadcastSection.Repeat_times">
-            <summary>
-应急广播表重复发送的次数，为0表示一直重复发送。
 </summary>
         </member>
         <member name="M:EBMTable.EBConfigureContentMoniterRetbackGX.GetCmd">
@@ -1667,6 +1687,11 @@ Program service id
         <member name="T:EBMTable.EBConfigureStatusRetback">
             <summary>
 查询终端工作状态指令类
+</summary>
+        </member>
+        <member name="M:EBMTable.EBConfigureContentRealMoniterGX.GetCmdTN">
+            <summary>
+获取指令的一般形式对像,图南标准
 </summary>
         </member>
         <member name="M:EBMTable.EBConfigureContentRealMoniterGX.GetCmd">
@@ -2045,6 +2070,12 @@ Program service id
 KHZ,主频率*/
 </summary>
         </member>
+        <member name="F:EBMTable.EBConfigureMainFrequency.B_DTMBorDVB_C">
+            <summary>
+1: DTMB
+2: DVB-C
+</summary>
+        </member>
         <member name="F:EBMTable.EBConfigureMainFrequency.B_cmd_tag">
             <summary>
 设置主频指令类型
@@ -2210,6 +2241,86 @@ KHZ,主频率*/
 应急广播表重复发送的次数，为0表示一直重复发送。
 </summary>
         </member>
+        <member name="M:EBMTable.EBContentTable.RecateCount">
+            <summary>
+分端重复发送计数
+</summary>
+        </member>
+        <member name="M:EBMTable.EBContentTable.FoceRepeateTable">
+            <summary>
+使下一次Current_Next_Indicate强制生效
+</summary>
+        </member>
+        <member name="M:EBMTable.EBContentTable.Initialization(StreamConfig*,EBMTable.SignatureCallBackDelegate)">
+            <summary>
+初始化应急广播内容表
+<param name="ts_config">输入参数，TS流配置参数结构体</param><param name="SignatureCallback">输入参数，数字签名回调委托</param><returns /></summary>
+        </member>
+        <member name="M:EBMTable.EBContentTable.GetEBContentSection(System.Int32@)">
+            <summary>
+获取应急广播内容表数据
+<param name="PackageNum">输入输出参数，数据长度引用</param><returns>返回值，二进制分段数据</returns></summary>
+        </member>
+        <member name="M:EBMTable.EBContentTable.GetEBContentSectionPackages(System.Int32*)">
+            <summary>
+获取应急广播内容表数据
+<param name="PackageNum">输入输出参数，数据长度指针</param><returns>返回值，二进制分段数据</returns></summary>
+        </member>
+        <member name="M:EBMTable.EBContentTable.BuildEBContentSection">
+            <summary>
+创建应急广播内容表数据分段
+</summary>
+        </member>
+        <member name="P:EBMTable.EBContentTable.SignRandomOrUTC">
+            <summary>
+签名随机数或UTC时间
+</summary>
+        </member>
+        <member name="P:EBMTable.EBContentTable.Completed">
+            <summary>
+应急广播表是否已经完成发送，为true时表示已经完成发送。
+</summary>
+        </member>
+        <member name="P:EBMTable.EBContentTable.Repeat_count">
+            <summary>
+应急广播表已经发送次数计数。
+</summary>
+        </member>
+        <member name="P:EBMTable.EBContentTable.Repeat_times">
+            <summary>
+应急广播表重复发送的次数，为0表示一直重复发送。设置该属性将引发计数清零，重新开发发送数据
+</summary>
+        </member>
+        <member name="P:EBMTable.EBContentTable.Table_id_extension">
+            <summary>
+扩展子表id 
+</summary>
+        </member>
+        <member name="P:EBMTable.EBContentTable.Table_id">
+            <summary>
+索引表主表id 
+</summary>
+        </member>
+        <member name="M:EBMTable.EBContentTable.Copy">
+            <summary>
+获取当前对像的浅表副本
+</summary>
+        </member>
+        <member name="F:EBMTable.EBContentTable.ProtocolGX">
+            <summary>
+广西版TS协议标识
+</summary>
+        </member>
+        <member name="F:EBMSection.EBContentSection.Repeat_times">
+            <summary>
+应急广播表重复发送的次数，为0表示一直重复发送。
+</summary>
+        </member>
+        <member name="F:EBMSection.DailyBroadcastSection.Repeat_times">
+            <summary>
+应急广播表重复发送的次数，为0表示一直重复发送。
+</summary>
+        </member>
         <member name="M:EBMTable.EBCertAuthTable.RecateCount">
             <summary>
 分端重复发送计数
@@ -2285,82 +2396,12 @@ KHZ,主频率*/
 获取当前对像的浅表副本
 </summary>
         </member>
-        <member name="F:EBMSection.EBCertAuthSection.Repeat_times">
-            <summary>
-应急广播表重复发送的次数，为0表示一直重复发送。
-</summary>
-        </member>
-        <member name="M:EBMTable.EBContentTable.RecateCount">
-            <summary>
-分端重复发送计数
-</summary>
-        </member>
-        <member name="M:EBMTable.EBContentTable.FoceRepeateTable">
-            <summary>
-使下一次Current_Next_Indicate强制生效
-</summary>
-        </member>
-        <member name="M:EBMTable.EBContentTable.Initialization(StreamConfig*,EBMTable.SignatureCallBackDelegate)">
-            <summary>
-初始化应急广播内容表
-<param name="ts_config">输入参数，TS流配置参数结构体</param><param name="SignatureCallback">输入参数，数字签名回调委托</param><returns /></summary>
-        </member>
-        <member name="M:EBMTable.EBContentTable.GetEBContentSection(System.Int32@)">
-            <summary>
-获取应急广播内容表数据
-<param name="PackageNum">输入输出参数，数据长度引用</param><returns>返回值，二进制分段数据</returns></summary>
-        </member>
-        <member name="M:EBMTable.EBContentTable.GetEBContentSectionPackages(System.Int32*)">
-            <summary>
-获取应急广播内容表数据
-<param name="PackageNum">输入输出参数，数据长度指针</param><returns>返回值，二进制分段数据</returns></summary>
-        </member>
-        <member name="M:EBMTable.EBContentTable.BuildEBContentSection">
-            <summary>
-创建应急广播内容表数据分段
-</summary>
-        </member>
-        <member name="P:EBMTable.EBContentTable.SignRandomOrUTC">
-            <summary>
-签名随机数或UTC时间
-</summary>
-        </member>
-        <member name="P:EBMTable.EBContentTable.Completed">
-            <summary>
-应急广播表是否已经完成发送，为true时表示已经完成发送。
-</summary>
-        </member>
-        <member name="P:EBMTable.EBContentTable.Repeat_count">
-            <summary>
-应急广播表已经发送次数计数。
-</summary>
-        </member>
-        <member name="P:EBMTable.EBContentTable.Repeat_times">
-            <summary>
-应急广播表重复发送的次数，为0表示一直重复发送。设置该属性将引发计数清零，重新开发发送数据
-</summary>
-        </member>
-        <member name="P:EBMTable.EBContentTable.Table_id_extension">
-            <summary>
-扩展子表id 
-</summary>
-        </member>
-        <member name="P:EBMTable.EBContentTable.Table_id">
-            <summary>
-索引表主表id 
-</summary>
-        </member>
-        <member name="M:EBMTable.EBContentTable.Copy">
-            <summary>
-获取当前对像的浅表副本
-</summary>
-        </member>
-        <member name="F:EBMTable.EBContentTable.ProtocolGX">
+        <member name="F:EBMTable.EBCertAuthTable.ProtocolGX">
             <summary>
 广西版TS协议标识
 </summary>
         </member>
-        <member name="F:EBMSection.EBContentSection.Repeat_times">
+        <member name="F:EBMSection.EBCertAuthSection.Repeat_times">
             <summary>
 应急广播表重复发送的次数，为0表示一直重复发送。
 </summary>
@@ -2576,56 +2617,6 @@ DTMB中心频率,单位为MHz
         <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
         <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
         <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureWorkMode.B_Terminal_wordmode”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureReback.B_reback_type”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureRebackGX.B_reback_type”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.EBConfigureRdsConfig”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.B_cmd_tag”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.Br_Rds_data”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureSoftwareUpGrade.B_ModType”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.DailyCmdOutSwitch”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.DailyCmdOutSwitch.B_cmd_tag”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureWorkMode.B_Terminal_wordmode”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureReback.B_reback_type”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureRebackGX.B_reback_type”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.EBConfigureRdsConfig”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.B_cmd_tag”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.Br_Rds_data”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureSoftwareUpGrade.B_ModType”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.DailyCmdOutSwitch”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.DailyCmdOutSwitch.B_cmd_tag”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureWorkMode.B_Terminal_wordmode”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureReback.B_reback_type”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureRebackGX.B_reback_type”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.EBConfigureRdsConfig”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.B_cmd_tag”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.Br_Rds_data”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.EBConfigureSoftwareUpGrade.B_ModType”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.DailyCmdOutSwitch”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.DailyCmdOutSwitch.B_cmd_tag”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.DailyCmdOutSwitch”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.DailyCmdOutSwitch.B_cmd_tag”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
-        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
         <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
         <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
         <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
@@ -2680,6 +2671,21 @@ DTMB中心频率,单位为MHz
         <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
         <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
         <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureWorkMode.B_Terminal_wordmode”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureReback.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRebackGX.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.EBConfigureRdsConfig”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureSoftwareUpGrade.B_ModType”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdOutSwitch”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdOutSwitch.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
         <!-- 丢弃成员“D:int16_t”的格式错误的 XML 文档注释。 -->
         <!-- 丢弃成员“M:mpi_safe_cond_swap(mpi*,mpi*,System.Byte)”的格式错误的 XML 文档注释。 -->
         <!-- 丢弃成员“M:mpi_shift_l(mpi*,System.UInt32)”的格式错误的 XML 文档注释。 -->
@@ -2692,5 +2698,40 @@ DTMB中心频率,单位为MHz
         <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
         <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
         <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdOutSwitch”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdOutSwitch.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureWorkMode.B_Terminal_wordmode”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureReback.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRebackGX.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.EBConfigureRdsConfig”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureSoftwareUpGrade.B_ModType”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdOutSwitch”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdOutSwitch.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DetailChannelDescript”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.ProgramStreamInfo.B_stream_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.Cable_delivery_system_descriptor”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureWorkMode.B_Terminal_wordmode”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureReback.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRebackGX.B_reback_type”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.EBConfigureRdsConfig”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureRdsConfig.Br_Rds_data”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.EBConfigureSoftwareUpGrade.B_ModType”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdOutSwitch”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdOutSwitch.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“T:EBMTable.DailyCmdRdsTransfer”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.B_cmd_tag”的格式错误的 XML 文档注释。 -->
+        <!-- 丢弃成员“F:EBMTable.DailyCmdRdsTransfer.Br_Rds_data”的格式错误的 XML 文档注释。 -->
     </members>
 </doc>

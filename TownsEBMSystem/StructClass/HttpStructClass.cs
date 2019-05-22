@@ -258,6 +258,11 @@ namespace TownsEBMSystem
         public List<organizationdata> organization_List { get; set; }
         public string broadcastType { get; set; }
 
+        /// <summary>
+        /// EBMid 通知上级平台播发的时候必须带上ebmid  20190522修改
+        /// </summary>
+        public string ebmid { get; set; }
+
     }
 
     public class SendPlayInfoNew
